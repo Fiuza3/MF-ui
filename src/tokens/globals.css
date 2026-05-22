@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+:root {
+  --background: #0B0F14;
+  --foreground: #F7FAFC;
+  --card: #0F1520;
+  --card-foreground: #F7FAFC;
+  --popover: #0F1520;
+  --popover-foreground: #F7FAFC;
+  --primary: #3DF2E0;
+  --primary-foreground: #0B0F14;
+  --secondary: #141C26;
+  --secondary-foreground: #F7FAFC;
+  --muted: #141C26;
+  --muted-foreground: #A0AEC0;
+  --accent: #3DF2E0;
+  --accent-foreground: #0B0F14;
+  --destructive: #E40014;
+  --destructive-foreground: #F7FAFC;
+  --border: #1E2A38;
+  --input: #1E2A38;
+  --ring: #3DF2E0;
+  --radius: 0.375rem;
+
+  --cyan: #3DF2E0;
+  --cyan-dim: rgba(61, 242, 224, 0.1);
+  --cyan-glow: rgba(61, 242, 224, 0.25);
+  --gray-text: #A0AEC0;
+  --surface: #0F1520;
+  --surface-raised: #141C26;
+  --line: #1E2A38;
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+  --color-cyan: var(--cyan);
+  --color-cyan-dim: var(--cyan-dim);
+  --color-cyan-glow: var(--cyan-glow);
+  --color-gray-text: var(--gray-text);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-line: var(--line);
+}
