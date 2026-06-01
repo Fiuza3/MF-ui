@@ -16,6 +16,11 @@
       "require": "./dist/tokens/index.js",
       "types": "./dist/tokens/index.d.ts"
     },
+    "./primitivos": {
+      "import": "./dist/primitivos/index.mjs",
+      "require": "./dist/primitivos/index.js",
+      "types": "./dist/primitivos/index.d.ts"
+    },
     "./globals.css": "./src/tokens/globals.css",
     "./utilitarios.css": "./src/tokens/utilitarios.css"
   },
