@@ -16,11 +16,13 @@
       "require": "./dist/tokens/index.js",
       "types": "./dist/tokens/index.d.ts"
     },
-    "./globals.css": "./src/tokens/globals.css"
+    "./globals.css": "./src/tokens/globals.css",
+    "./utilitarios.css": "./src/tokens/utilitarios.css"
   },
   "files": [
     "dist",
-    "src/tokens/globals.css"
+    "src/tokens/globals.css",
+    "src/tokens/utilitarios.css"
   ],
   "scripts": {
     "build": "tsup",
