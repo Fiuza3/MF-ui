@@ -1,4 +1,4 @@
-:root {
+:root, .dark {
   --background: #0B0F14;
   --foreground: #F7FAFC;
   --card: #0F1520;
@@ -29,6 +29,38 @@
   --line: #1E2A38;
 }
 
+/* Tema claro — creme + laranja. VALORES PLACEHOLDER: ajustar no navegador. */
+.light {
+  --background: #F5F0E6;
+  --foreground: #1A1410;
+  --card: #FBF7EF;
+  --card-foreground: #1A1410;
+  --popover: #FBF7EF;
+  --popover-foreground: #1A1410;
+  --primary: #E8722C;
+  --primary-foreground: #FBF7EF;
+  --secondary: #EFE7D6;
+  --secondary-foreground: #1A1410;
+  --muted: #EFE7D6;
+  --muted-foreground: #6B5E4A;
+  --accent: #E8722C;
+  --accent-foreground: #FBF7EF;
+  --destructive: #C2301C;
+  --destructive-foreground: #FBF7EF;
+  --border: #E0D6C4;
+  --input: #E0D6C4;
+  --ring: #E8722C;
+  --radius: 0.375rem;
+
+  --cyan: #E8722C;
+  --cyan-dim: rgba(232, 114, 44, 0.1);
+  --cyan-glow: rgba(232, 114, 44, 0.25);
+  --gray-text: #6B5E4A;
+  --surface: #FBF7EF;
+  --surface-raised: #EFE7D6;
+  --line: #E0D6C4;
+}
+
 @theme inline {
   --font-sans: 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
@@ -36,6 +68,8 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);

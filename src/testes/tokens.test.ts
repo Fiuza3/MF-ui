@@ -1,37 +1,28 @@
-import { describe, expect, it } from "vitest";
-import { cores } from "../tokens/cores";
-import { familias, pesos } from "../tokens/tipografia";
+// @vitest-environment node
+import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
-const HEX = /^#[0-9A-Fa-f]{6}$/;
+const css = readFileSync(
+  fileURLToPath(new URL("../tokens/globals.css", import.meta.url)),
+  "utf8",
+);
 
-describe("cores", () => {
-  it("todos os tokens são strings hex de 6 dígitos", () => {
-    for (const [token, valor] of Object.entries(cores)) {
-      if (!valor.startsWith("rgba")) {
-        expect(valor, `${token} deve ser hex`).toMatch(HEX);
-      }
-    }
+function varsInBlock(selector: string): string[] {
+  const re = new RegExp(`${selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\{([^}]*)\\}`, "m");
+  const body = css.match(re)?.[1] ?? "";
+  return [...body.matchAll(/(--[\w-]+):/g)].map((m) => m[1]).sort();
+}
+
+describe("temas", () => {
+  it("define o bloco escuro padrão e o bloco .light", () => {
+    expect(css).toMatch(/:root,\s*\.dark\s*\{/);
+    expect(css).toMatch(/\.light\s*\{/);
   });
 
-  it("accent é #3DF2E0", () => {
-    expect(cores.accent).toBe("#3DF2E0");
-  });
-
-  it("fundo é #0B0F14", () => {
-    expect(cores.fundo).toBe("#0B0F14");
-  });
-});
-
-describe("tipografia", () => {
-  it("familias.sans existe", () => {
-    expect(familias.sans).toContain("system-ui");
-  });
-
-  it("familias.mono existe", () => {
-    expect(familias.mono).toContain("monospace");
-  });
-
-  it("pesos.bold é 700", () => {
-    expect(pesos.bold).toBe(700);
+  it("escuro e claro têm exatamente as mesmas chaves de variável", () => {
+    const escuro = varsInBlock(":root, .dark");
+    const claro = varsInBlock(".light");
+    expect(claro).toEqual(escuro);
   });
 });
