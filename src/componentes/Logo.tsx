@@ -48,11 +48,21 @@ export function Logo({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <text {...textoBase} x={centro(0)} fillOpacity={opColchetes}>{"<"}</text>
-      <text {...textoBase} x={centro(1)}>M</text>
-      <text {...textoBase} x={centro(2)}>F</text>
-      <text {...textoBase} x={centro(3)} fillOpacity={opColchetes}>{"/"}</text>
-      <text {...textoBase} x={centro(4)} fillOpacity={opColchetes}>{">"}</text>
+      <text {...textoBase} x={centro(0)} fillOpacity={opColchetes}>
+        {"< "}
+      </text>
+      <text {...textoBase} x={centro(1)}>
+        M
+      </text>
+      <text {...textoBase} x={centro(2)}>
+        F
+      </text>
+      <text {...textoBase} x={centro(3)} fillOpacity={opColchetes}>
+        {"/"}
+      </text>
+      <text {...textoBase} x={centro(4)} fillOpacity={opColchetes}>
+        {">"}
+      </text>
     </svg>
   );
 }
