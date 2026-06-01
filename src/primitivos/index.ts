@@ -3,3 +3,7 @@ export {
   Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent,
 } from "./Card";
 export { Badge, badgeVariants } from "./Badge";
+export { Input } from "./Input";
+export { Textarea } from "./Textarea";
+export { Label } from "./Label";
+export { Separator } from "./Separator";
