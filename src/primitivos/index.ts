@@ -7,3 +7,7 @@ export { Input } from "./Input";
 export { Textarea } from "./Textarea";
 export { Label } from "./Label";
 export { Separator } from "./Separator";
+export * from "./Accordion";
+export * from "./Dialog";
+export * from "./Sheet";
+export * from "./Tooltip";

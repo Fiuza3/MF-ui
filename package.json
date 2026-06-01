@@ -38,6 +38,7 @@
     "@radix-ui/react-slot": ">=1.2",
     "@radix-ui/react-tooltip": ">=1.2",
     "framer-motion": ">=11",
+    "lucide-react": ">=0.400",
     "react": ">=19",
     "react-dom": ">=19"
   },
