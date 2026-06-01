@@ -12,3 +12,8 @@ export { Navbar } from "./componentes/Navbar";
 export type { NavbarProps, NavLink } from "./componentes/Navbar";
 export { Footer } from "./componentes/Footer";
 export type { FooterProps, FooterLink } from "./componentes/Footer";
+
+// Primitivos
+export * from "./primitivos";
+export { cn } from "./lib/cn";
+export { motionEase, motionDurations, blinkMs } from "./lib/motion";
