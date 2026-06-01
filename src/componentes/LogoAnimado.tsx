@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { cores } from "../tokens/cores";
 import {
   RATIO_ALTURA_LOGO,
   RATIO_AVANCO_LOGO,
@@ -23,7 +22,7 @@ const SUAVE = [0.16, 1, 0.3, 1] as const;
 
 export function LogoAnimado({
   tamanho = 24,
-  cor = cores.accent,
+  cor = "var(--cyan)",
   opacidadeColchetes,
   compacto = false,
   onClick,
@@ -39,12 +38,14 @@ export function LogoAnimado({
 
   const base = {
     dominantBaseline: "central" as const,
+    textAnchor: "middle" as const,
     fontFamily: familias.mono,
     fontWeight: 700,
     fontSize: tamanho,
     fill: cor,
     y: altura / 2,
   };
+  const centro = (slot: number) => padX + cw * slot + cw / 2;
 
   const entrar = (delay: number) =>
     reduzido
@@ -63,11 +64,13 @@ export function LogoAnimado({
       height={altura}
       style={{ width: "auto", overflow: "visible" }}
       xmlns="http://www.w3.org/2000/svg"
-      className={`transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_rgba(61,242,224,0.6))] ${className ?? ""}`}
+      className={`transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`}
     >
-      <motion.text {...base} {...entrar(0)} x={padX} fillOpacity={opColchetes}>{"<"}</motion.text>
-      <motion.text {...base} {...entrar(0.08)} x={padX + cw}>MF</motion.text>
-      <motion.text {...base} {...entrar(0.16)} x={padX + cw * 3} fillOpacity={opColchetes}>{"/>"}</motion.text>
+      <motion.text {...base} {...entrar(0)} x={centro(0)} fillOpacity={opColchetes}>{"<"}</motion.text>
+      <motion.text {...base} {...entrar(0.08)} x={centro(1)}>M</motion.text>
+      <motion.text {...base} {...entrar(0.1)} x={centro(2)}>F</motion.text>
+      <motion.text {...base} {...entrar(0.16)} x={centro(3)} fillOpacity={opColchetes}>{"/"}</motion.text>
+      <motion.text {...base} {...entrar(0.18)} x={centro(4)} fillOpacity={opColchetes}>{">"}</motion.text>
     </svg>
   );
 

@@ -132,7 +132,7 @@ var RATIO_ALTURA_LOGO = 30 / 22;
 var RATIO_PADDING_LOGO = 1 / 22;
 function Logo({
   tamanho = 24,
-  cor = cores.accent,
+  cor = "var(--cyan)",
   opacidadeColchetes,
   compacto = false,
   className
@@ -144,12 +144,14 @@ function Logo({
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
   const textoBase = {
     dominantBaseline: "central",
+    textAnchor: "middle",
     fontFamily: familias.mono,
     fontWeight: 700,
     fontSize: tamanho,
     fill: cor,
     y: altura / 2
   };
+  const centro = (slot) => padX + cw * slot + cw / 2;
   return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
     "svg",
     {
@@ -161,9 +163,11 @@ function Logo({
       xmlns: "http://www.w3.org/2000/svg",
       className,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: padX, fillOpacity: opColchetes, children: "<" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: padX + cw, children: "MF" }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: padX + cw * 3, fillOpacity: opColchetes, children: "/>" })
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: centro(0), fillOpacity: opColchetes, children: "<" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: centro(1), children: "M" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: centro(2), children: "F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: centro(3), fillOpacity: opColchetes, children: "/" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", { ...textoBase, x: centro(4), fillOpacity: opColchetes, children: ">" })
       ]
     }
   );
@@ -175,7 +179,7 @@ var import_jsx_runtime2 = require("react/jsx-runtime");
 var SUAVE = [0.16, 1, 0.3, 1];
 function LogoAnimado({
   tamanho = 24,
-  cor = cores.accent,
+  cor = "var(--cyan)",
   opacidadeColchetes,
   compacto = false,
   onClick,
@@ -190,12 +194,14 @@ function LogoAnimado({
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
   const base = {
     dominantBaseline: "central",
+    textAnchor: "middle",
     fontFamily: familias.mono,
     fontWeight: 700,
     fontSize: tamanho,
     fill: cor,
     y: altura / 2
   };
+  const centro = (slot) => padX + cw * slot + cw / 2;
   const entrar = (delay) => reduzido ? {} : {
     initial: { opacity: 0, y: 5 },
     animate: { opacity: 1, y: 0 },
@@ -210,11 +216,13 @@ function LogoAnimado({
       height: altura,
       style: { width: "auto", overflow: "visible" },
       xmlns: "http://www.w3.org/2000/svg",
-      className: `transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_rgba(61,242,224,0.6))] ${className ?? ""}`,
+      className: `transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0), x: padX, fillOpacity: opColchetes, children: "<" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.08), x: padX + cw, children: "MF" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.16), x: padX + cw * 3, fillOpacity: opColchetes, children: "/>" })
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0), x: centro(0), fillOpacity: opColchetes, children: "<" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.08), x: centro(1), children: "M" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.1), x: centro(2), children: "F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.16), x: centro(3), fillOpacity: opColchetes, children: "/" }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.18), x: centro(4), fillOpacity: opColchetes, children: ">" })
       ]
     }
   );
