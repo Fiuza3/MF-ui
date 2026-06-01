@@ -17,3 +17,6 @@ export type { FooterProps, FooterLink } from "./componentes/Footer";
 export * from "./primitivos";
 export { cn } from "./lib/cn";
 export { motionEase, motionDurations, blinkMs } from "./lib/motion";
+
+// Blocos
+export * from "./blocos";
