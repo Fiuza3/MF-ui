@@ -18,7 +18,10 @@
     },
     "./globals.css": "./src/tokens/globals.css"
   },
-  "files": ["dist", "src/tokens/globals.css"],
+  "files": [
+    "dist",
+    "src/tokens/globals.css"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -42,5 +45,9 @@
     "tsup": "^8.0.0",
     "typescript": "^5.7.0",
     "vitest": "^4.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.6.0"
   }
 }
