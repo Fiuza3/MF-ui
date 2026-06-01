@@ -1,0 +1,37 @@
+/* src/tokens/utilitarios.css — utilitários genéricos do design system */
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+::selection { background: var(--cyan-glow); color: var(--cyan); }
+
+.noise-bg { position: relative; }
+.noise-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-marquee:hover { animation-play-state: paused; }
+
+.glow-cyan { box-shadow: 0 0 20px var(--cyan-glow), 0 0 60px var(--cyan-dim); }
+.text-glow { text-shadow: 0 0 20px var(--cyan-glow); }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
