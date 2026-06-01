@@ -21,6 +21,11 @@
       "require": "./dist/primitivos/index.js",
       "types": "./dist/primitivos/index.d.ts"
     },
+    "./blocos": {
+      "import": "./dist/blocos/index.mjs",
+      "require": "./dist/blocos/index.js",
+      "types": "./dist/blocos/index.d.ts"
+    },
     "./globals.css": "./src/tokens/globals.css",
     "./utilitarios.css": "./src/tokens/utilitarios.css"
   },
@@ -60,7 +65,7 @@
     "@vitejs/plugin-react": "^6.0.2",
     "framer-motion": "^12.0.0",
     "jsdom": "^29.0.0",
-    "lucide-react": "^1.17.0",
+    "lucide-react": "^0.564.0",
     "react": "^19",
     "react-dom": "^19",
     "tsup": "^8.0.0",
