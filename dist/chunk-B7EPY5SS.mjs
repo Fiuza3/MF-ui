@@ -488,7 +488,7 @@ function PipelineCard({
       viewport: shouldAnimate ? { once: true, margin: "-90px" } : void 0,
       className: `relative grid gap-5 lg:grid-cols-2 ${alignRight ? "" : "lg:[&>*]:col-start-1"}`,
       children: [
-        /* @__PURE__ */ jsx4("div", { className: alignRight ? "lg:col-start-2" : "lg:col-start-1", children: /* @__PURE__ */ jsxs4("div", { className: "group relative overflow-hidden rounded border border-line bg-surface p-6 transition-colors hover:border-cyan/60 lg:p-8", children: [
+        /* @__PURE__ */ jsx4("div", { className: alignRight ? "lg:col-start-2" : "lg:col-start-1", children: /* @__PURE__ */ jsxs4("div", { className: "group relative overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:p-6 lg:p-8", children: [
           /* @__PURE__ */ jsx4(
             "div",
             {
@@ -500,25 +500,25 @@ function PipelineCard({
             }
           ),
           /* @__PURE__ */ jsxs4("div", { className: "relative", children: [
-            /* @__PURE__ */ jsxs4("div", { className: "flex items-start justify-between gap-5", children: [
-              /* @__PURE__ */ jsxs4("div", { children: [
+            /* @__PURE__ */ jsxs4("div", { className: "flex flex-wrap items-start justify-between gap-x-4 gap-y-2", children: [
+              /* @__PURE__ */ jsxs4("div", { className: "min-w-0", children: [
                 /* @__PURE__ */ jsxs4("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
                   "commit ",
                   step.numero
                 ] }),
-                /* @__PURE__ */ jsx4("h3", { className: "mt-4 text-[clamp(1.8rem,4vw,4.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: step.titulo })
+                /* @__PURE__ */ jsx4("h3", { className: "mt-4 text-[clamp(1.6rem,7vw,4.8rem)] font-black leading-[0.95] tracking-tight text-foreground", children: step.titulo })
               ] }),
-              step.duracao && /* @__PURE__ */ jsx4("span", { className: "rounded border border-line px-3 py-1 font-mono text-xs text-gray-text", children: step.duracao })
+              step.duracao && /* @__PURE__ */ jsx4("span", { className: "shrink-0 rounded border border-line px-3 py-1 font-mono text-xs text-gray-text", children: step.duracao })
             ] }),
-            /* @__PURE__ */ jsx4("p", { className: "mt-6 max-w-2xl text-base leading-relaxed text-gray-text", children: step.descricao }),
+            /* @__PURE__ */ jsx4("p", { className: "mt-6 max-w-2xl text-sm leading-relaxed text-gray-text sm:text-base", children: step.descricao }),
             (step.commitLabel || step.commitOutput) && /* @__PURE__ */ jsxs4("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
-              step.commitLabel && /* @__PURE__ */ jsxs4("p", { className: "text-sm text-foreground", children: [
+              step.commitLabel && /* @__PURE__ */ jsxs4("p", { className: "break-words text-sm text-foreground", children: [
                 /* @__PURE__ */ jsx4("span", { className: "text-cyan", children: "$" }),
                 " git commit -m \u201C",
                 step.commitLabel,
                 "\u201D"
               ] }),
-              step.commitOutput && /* @__PURE__ */ jsxs4("p", { className: "mt-2 text-xs text-gray-text", children: [
+              step.commitOutput && /* @__PURE__ */ jsxs4("p", { className: "mt-2 break-words text-xs text-gray-text", children: [
                 /* @__PURE__ */ jsx4("span", { className: "text-cyan/70", children: ">" }),
                 " ",
                 step.commitOutput
@@ -1069,4 +1069,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-DFPWMPLS.mjs.map
+//# sourceMappingURL=chunk-B7EPY5SS.mjs.map
