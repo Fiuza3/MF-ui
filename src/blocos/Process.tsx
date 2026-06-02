@@ -52,7 +52,7 @@ function PipelineCard({
       className={`relative grid gap-5 lg:grid-cols-2 ${alignRight ? "" : "lg:[&>*]:col-start-1"}`}
     >
       <div className={alignRight ? "lg:col-start-2" : "lg:col-start-1"}>
-        <div className="group relative overflow-hidden rounded border border-line bg-surface p-6 transition-colors hover:border-cyan/60 lg:p-8">
+        <div className="group relative overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:p-6 lg:p-8">
           <div
             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             style={{
@@ -63,36 +63,36 @@ function PipelineCard({
           />
 
           <div className="relative">
-            <div className="flex items-start justify-between gap-5">
-              <div>
+            <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+              <div className="min-w-0">
                 <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
                   commit {step.numero}
                 </p>
-                <h3 className="mt-4 text-[clamp(1.8rem,4vw,4.8rem)] font-black leading-[0.9] tracking-tight text-foreground">
+                <h3 className="mt-4 text-[clamp(1.6rem,7vw,4.8rem)] font-black leading-[0.95] tracking-tight text-foreground">
                   {step.titulo}
                 </h3>
               </div>
               {step.duracao && (
-                <span className="rounded border border-line px-3 py-1 font-mono text-xs text-gray-text">
+                <span className="shrink-0 rounded border border-line px-3 py-1 font-mono text-xs text-gray-text">
                   {step.duracao}
                 </span>
               )}
             </div>
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-gray-text">
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-gray-text sm:text-base">
               {step.descricao}
             </p>
 
             {(step.commitLabel || step.commitOutput) && (
               <div className="mt-8 border-t border-line pt-5 font-mono">
                 {step.commitLabel && (
-                  <p className="text-sm text-foreground">
+                  <p className="break-words text-sm text-foreground">
                     <span className="text-cyan">$</span> git commit -m &ldquo;
                     {step.commitLabel}&rdquo;
                   </p>
                 )}
                 {step.commitOutput && (
-                  <p className="mt-2 text-xs text-gray-text">
+                  <p className="mt-2 break-words text-xs text-gray-text">
                     <span className="text-cyan/70">&gt;</span>{" "}
                     {step.commitOutput}
                   </p>

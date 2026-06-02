@@ -7,7 +7,7 @@ import {
   Services,
   Stack,
   Testimonials
-} from "../chunk-DFPWMPLS.mjs";
+} from "../chunk-B7EPY5SS.mjs";
 import "../chunk-TE62FXIV.mjs";
 export {
   About,
