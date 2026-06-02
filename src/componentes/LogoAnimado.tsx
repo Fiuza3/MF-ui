@@ -33,19 +33,18 @@ export function LogoAnimado({
   const cw = tamanho * RATIO_AVANCO_LOGO;
   const altura = tamanho * RATIO_ALTURA_LOGO;
   const padX = tamanho * RATIO_PADDING_LOGO;
-  const larguraTotal = padX + cw * 5;
+  const larguraTotal = padX + cw * 5 + cw * 0.4;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
 
   const base = {
     dominantBaseline: "central" as const,
-    textAnchor: "middle" as const,
     fontFamily: familias.mono,
     fontWeight: 700,
     fontSize: tamanho,
     fill: cor,
     y: altura / 2,
   };
-  const centro = (slot: number) => padX + cw * slot + cw / 2;
+  const slot = (i: number) => padX + cw * i;
 
   const entrar = (delay: number) =>
     reduzido
@@ -66,11 +65,11 @@ export function LogoAnimado({
       xmlns="http://www.w3.org/2000/svg"
       className={`transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`}
     >
-      <motion.text {...base} {...entrar(0)} x={centro(0)} fillOpacity={opColchetes}>{"<"}</motion.text>
-      <motion.text {...base} {...entrar(0.08)} x={centro(1)}>M</motion.text>
-      <motion.text {...base} {...entrar(0.1)} x={centro(2)}>F</motion.text>
-      <motion.text {...base} {...entrar(0.16)} x={centro(3)} fillOpacity={opColchetes}>{"/"}</motion.text>
-      <motion.text {...base} {...entrar(0.18)} x={centro(4)} fillOpacity={opColchetes}>{">"}</motion.text>
+      <motion.text {...base} {...entrar(0)} x={slot(0)} fillOpacity={opColchetes}>{"<"}</motion.text>
+      <motion.text {...base} {...entrar(0.08)} x={slot(1)}>M</motion.text>
+      <motion.text {...base} {...entrar(0.1)} x={slot(2)}>F</motion.text>
+      <motion.text {...base} {...entrar(0.16)} x={slot(3)} fillOpacity={opColchetes}>{"/"}</motion.text>
+      <motion.text {...base} {...entrar(0.18)} x={slot(4)} fillOpacity={opColchetes}>{">"}</motion.text>
     </svg>
   );
 
