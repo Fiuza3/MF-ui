@@ -22,21 +22,20 @@ export function Logo({
   const cw = tamanho * RATIO_AVANCO_LOGO;
   const altura = tamanho * RATIO_ALTURA_LOGO;
   const padX = tamanho * RATIO_PADDING_LOGO;
-  // Slots de avanço: <  M  F  /  >  (cada glifo no seu próprio avanço, sem sobreposição)
-  const larguraTotal = padX + cw * 5;
+  // Cada glifo (< M F / >) alinhado à esquerda em avanços iguais de cw:
+  // mantém <MF/> compacto e equilibrado, sem o F encostar na /.
+  const larguraTotal = padX + cw * 5 + cw * 0.4;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
 
   const textoBase = {
     dominantBaseline: "central" as const,
-    textAnchor: "middle" as const,
     fontFamily: familias.mono,
     fontWeight: 700,
     fontSize: tamanho,
     fill: cor,
     y: altura / 2,
   };
-  // Cada glifo centrado no seu avanço evita sobreposição entre F e /
-  const centro = (slot: number) => padX + cw * slot + cw / 2;
+  const slot = (i: number) => padX + cw * i;
 
   return (
     <svg
@@ -48,21 +47,11 @@ export function Logo({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <text {...textoBase} x={centro(0)} fillOpacity={opColchetes}>
-        {"< "}
-      </text>
-      <text {...textoBase} x={centro(1)}>
-        M
-      </text>
-      <text {...textoBase} x={centro(2)}>
-        F
-      </text>
-      <text {...textoBase} x={centro(3)} fillOpacity={opColchetes}>
-        {"/"}
-      </text>
-      <text {...textoBase} x={centro(4)} fillOpacity={opColchetes}>
-        {">"}
-      </text>
+      <text {...textoBase} x={slot(0)} fillOpacity={opColchetes}>{"<"}</text>
+      <text {...textoBase} x={slot(1)}>M</text>
+      <text {...textoBase} x={slot(2)}>F</text>
+      <text {...textoBase} x={slot(3)} fillOpacity={opColchetes}>{"/"}</text>
+      <text {...textoBase} x={slot(4)} fillOpacity={opColchetes}>{">"}</text>
     </svg>
   );
 }
