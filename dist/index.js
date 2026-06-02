@@ -192,20 +192,12 @@ function LogoAnimado({
   const padX = tamanho * RATIO_PADDING_LOGO;
   const larguraTotal = padX + cw * 5;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
-  const base = {
-    dominantBaseline: "central",
-    fontFamily: familias.mono,
-    fontWeight: 700,
-    fontSize: tamanho,
-    fill: cor,
-    y: altura / 2
-  };
-  const entrar = (delay) => reduzido ? {} : {
+  const entrar = reduzido ? {} : {
     initial: { opacity: 0, y: 5 },
     animate: { opacity: 1, y: 0 },
-    transition: { delay, duration: 0.42, ease: SUAVE }
+    transition: { duration: 0.5, ease: SUAVE }
   };
-  const svg = /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+  const svg = /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
     "svg",
     {
       role: "img",
@@ -215,11 +207,24 @@ function LogoAnimado({
       style: { width: "auto", overflow: "visible" },
       xmlns: "http://www.w3.org/2000/svg",
       className: `transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`,
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0), x: padX, fillOpacity: opColchetes, children: "<" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.08), x: padX + cw, children: "MF" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_framer_motion.motion.text, { ...base, ...entrar(0.16), x: padX + cw * 3, fillOpacity: opColchetes, children: "/>" })
-      ]
+      children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+        import_framer_motion.motion.text,
+        {
+          ...entrar,
+          x: padX,
+          y: altura / 2,
+          dominantBaseline: "central",
+          fontFamily: familias.mono,
+          fontWeight: 700,
+          fontSize: tamanho,
+          fill: cor,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("tspan", { fillOpacity: opColchetes, children: "<" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("tspan", { children: "MF" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("tspan", { fillOpacity: opColchetes, children: "/>" })
+          ]
+        }
+      )
     }
   );
   if (onClick) {

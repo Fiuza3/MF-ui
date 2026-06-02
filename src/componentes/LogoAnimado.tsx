@@ -36,25 +36,16 @@ export function LogoAnimado({
   const larguraTotal = padX + cw * 5;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
 
-  // Três grupos (<  MF  />): MF e /> são cada um um único <text>, então a fonte
-  // cuida do espaçamento natural entre os glifos (M não cola no F, F não na /).
-  const base = {
-    dominantBaseline: "central" as const,
-    fontFamily: familias.mono,
-    fontWeight: 700,
-    fontSize: tamanho,
-    fill: cor,
-    y: altura / 2,
-  };
-
-  const entrar = (delay: number) =>
-    reduzido
-      ? {}
-      : {
-          initial: { opacity: 0, y: 5 },
-          animate: { opacity: 1, y: 0 },
-          transition: { delay, duration: 0.42, ease: SUAVE },
-        };
+  // Um único <text> "<MF/>" (colchetes via <tspan> com opacidade): a fonte cuida
+  // do espaçamento natural entre os glifos, igual ao logo original. Animação de
+  // entrada aplicada ao texto inteiro.
+  const entrar = reduzido
+    ? {}
+    : {
+        initial: { opacity: 0, y: 5 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.5, ease: SUAVE },
+      };
 
   const svg = (
     <svg
@@ -66,9 +57,20 @@ export function LogoAnimado({
       xmlns="http://www.w3.org/2000/svg"
       className={`transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`}
     >
-      <motion.text {...base} {...entrar(0)} x={padX} fillOpacity={opColchetes}>{"<"}</motion.text>
-      <motion.text {...base} {...entrar(0.08)} x={padX + cw}>MF</motion.text>
-      <motion.text {...base} {...entrar(0.16)} x={padX + cw * 3} fillOpacity={opColchetes}>{"/>"}</motion.text>
+      <motion.text
+        {...entrar}
+        x={padX}
+        y={altura / 2}
+        dominantBaseline="central"
+        fontFamily={familias.mono}
+        fontWeight={700}
+        fontSize={tamanho}
+        fill={cor}
+      >
+        <tspan fillOpacity={opColchetes}>{"<"}</tspan>
+        <tspan>MF</tspan>
+        <tspan fillOpacity={opColchetes}>{"/>"}</tspan>
+      </motion.text>
     </svg>
   );
 
