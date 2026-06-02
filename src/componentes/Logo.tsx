@@ -22,20 +22,10 @@ export function Logo({
   const cw = tamanho * RATIO_AVANCO_LOGO;
   const altura = tamanho * RATIO_ALTURA_LOGO;
   const padX = tamanho * RATIO_PADDING_LOGO;
-  // Cada glifo (< M F / >) alinhado à esquerda em avanços iguais de cw:
-  // mantém <MF/> compacto e equilibrado, sem o F encostar na /.
-  const larguraTotal = padX + cw * 5 + cw * 0.4;
+  // Um único <text> "<MF/>": a fonte cuida do espaçamento natural entre os
+  // glifos (como no logo original). Os colchetes ganham opacidade via <tspan>.
+  const larguraTotal = padX + cw * 5;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
-
-  const textoBase = {
-    dominantBaseline: "central" as const,
-    fontFamily: familias.mono,
-    fontWeight: 700,
-    fontSize: tamanho,
-    fill: cor,
-    y: altura / 2,
-  };
-  const slot = (i: number) => padX + cw * i;
 
   return (
     <svg
@@ -47,11 +37,19 @@ export function Logo({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <text {...textoBase} x={slot(0)} fillOpacity={opColchetes}>{"<"}</text>
-      <text {...textoBase} x={slot(1)}>M</text>
-      <text {...textoBase} x={slot(2)}>F</text>
-      <text {...textoBase} x={slot(3)} fillOpacity={opColchetes}>{"/"}</text>
-      <text {...textoBase} x={slot(4)} fillOpacity={opColchetes}>{">"}</text>
+      <text
+        x={padX}
+        y={altura / 2}
+        dominantBaseline="central"
+        fontFamily={familias.mono}
+        fontWeight={700}
+        fontSize={tamanho}
+        fill={cor}
+      >
+        <tspan fillOpacity={opColchetes}>{"<"}</tspan>
+        <tspan>MF</tspan>
+        <tspan fillOpacity={opColchetes}>{"/>"}</tspan>
+      </text>
     </svg>
   );
 }

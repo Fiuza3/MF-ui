@@ -12,6 +12,11 @@ import {
   motionEase
 } from "./chunk-DFPWMPLS.mjs";
 import {
+  cores,
+  familias,
+  pesos
+} from "./chunk-Z5TNI3SI.mjs";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -57,11 +62,6 @@ import {
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
-import {
-  cores,
-  familias,
-  pesos
-} from "./chunk-Z5TNI3SI.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -78,18 +78,9 @@ function Logo({
   const cw = tamanho * RATIO_AVANCO_LOGO;
   const altura = tamanho * RATIO_ALTURA_LOGO;
   const padX = tamanho * RATIO_PADDING_LOGO;
-  const larguraTotal = padX + cw * 5 + cw * 0.4;
+  const larguraTotal = padX + cw * 5;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
-  const textoBase = {
-    dominantBaseline: "central",
-    fontFamily: familias.mono,
-    fontWeight: 700,
-    fontSize: tamanho,
-    fill: cor,
-    y: altura / 2
-  };
-  const slot = (i) => padX + cw * i;
-  return /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsx(
     "svg",
     {
       role: "img",
@@ -99,13 +90,23 @@ function Logo({
       style: { width: "auto", overflow: "visible" },
       xmlns: "http://www.w3.org/2000/svg",
       className,
-      children: [
-        /* @__PURE__ */ jsx("text", { ...textoBase, x: slot(0), fillOpacity: opColchetes, children: "<" }),
-        /* @__PURE__ */ jsx("text", { ...textoBase, x: slot(1), children: "M" }),
-        /* @__PURE__ */ jsx("text", { ...textoBase, x: slot(2), children: "F" }),
-        /* @__PURE__ */ jsx("text", { ...textoBase, x: slot(3), fillOpacity: opColchetes, children: "/" }),
-        /* @__PURE__ */ jsx("text", { ...textoBase, x: slot(4), fillOpacity: opColchetes, children: ">" })
-      ]
+      children: /* @__PURE__ */ jsxs(
+        "text",
+        {
+          x: padX,
+          y: altura / 2,
+          dominantBaseline: "central",
+          fontFamily: familias.mono,
+          fontWeight: 700,
+          fontSize: tamanho,
+          fill: cor,
+          children: [
+            /* @__PURE__ */ jsx("tspan", { fillOpacity: opColchetes, children: "<" }),
+            /* @__PURE__ */ jsx("tspan", { children: "MF" }),
+            /* @__PURE__ */ jsx("tspan", { fillOpacity: opColchetes, children: "/>" })
+          ]
+        }
+      )
     }
   );
 }
@@ -127,7 +128,7 @@ function LogoAnimado({
   const cw = tamanho * RATIO_AVANCO_LOGO;
   const altura = tamanho * RATIO_ALTURA_LOGO;
   const padX = tamanho * RATIO_PADDING_LOGO;
-  const larguraTotal = padX + cw * 5 + cw * 0.4;
+  const larguraTotal = padX + cw * 5;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
   const base = {
     dominantBaseline: "central",
@@ -137,7 +138,6 @@ function LogoAnimado({
     fill: cor,
     y: altura / 2
   };
-  const slot = (i) => padX + cw * i;
   const entrar = (delay) => reduzido ? {} : {
     initial: { opacity: 0, y: 5 },
     animate: { opacity: 1, y: 0 },
@@ -154,11 +154,9 @@ function LogoAnimado({
       xmlns: "http://www.w3.org/2000/svg",
       className: `transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`,
       children: [
-        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0), x: slot(0), fillOpacity: opColchetes, children: "<" }),
-        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0.08), x: slot(1), children: "M" }),
-        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0.1), x: slot(2), children: "F" }),
-        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0.16), x: slot(3), fillOpacity: opColchetes, children: "/" }),
-        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0.18), x: slot(4), fillOpacity: opColchetes, children: ">" })
+        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0), x: padX, fillOpacity: opColchetes, children: "<" }),
+        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0.08), x: padX + cw, children: "MF" }),
+        /* @__PURE__ */ jsx2(motion.text, { ...base, ...entrar(0.16), x: padX + cw * 3, fillOpacity: opColchetes, children: "/>" })
       ]
     }
   );
