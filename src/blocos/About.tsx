@@ -23,7 +23,7 @@ export function About({
     <section
       id="sobre"
       aria-label="Sobre"
-      className="relative overflow-hidden py-24 lg:py-40"
+      className="relative overflow-hidden py-16 lg:py-24"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" />
 
