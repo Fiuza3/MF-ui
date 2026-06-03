@@ -935,13 +935,11 @@ function Contact({
               whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
               transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-              className: "mb-16 grid gap-8 lg:grid-cols-[0.8fr_1.7fr]",
+              className: "mb-12 max-w-2xl",
               children: [
-                /* @__PURE__ */ jsx8("p", { className: "font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ jsx8("span", { lang: "en", children: eyebrow }) }),
-                /* @__PURE__ */ jsxs8("div", { children: [
-                  /* @__PURE__ */ jsx8("h2", { className: "max-w-6xl text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-                  /* @__PURE__ */ jsx8("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
-                ] })
+                /* @__PURE__ */ jsx8("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ jsx8("span", { lang: "en", children: eyebrow }) }),
+                /* @__PURE__ */ jsx8("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
+                /* @__PURE__ */ jsx8("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
               ]
             }
           ),
@@ -1023,4 +1021,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-NAQFZDQM.mjs.map
+//# sourceMappingURL=chunk-CYBMNBY6.mjs.map
