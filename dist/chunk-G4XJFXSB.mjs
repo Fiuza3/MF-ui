@@ -102,7 +102,7 @@ function Hero({
               transition: shouldAnimate ? { delay: 0.5, duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
               className: "mt-16 grid grid-cols-2 gap-5 border-t border-line pt-6 sm:grid-cols-4 lg:mt-24",
               children: stats.map((stat) => /* @__PURE__ */ jsxs("div", { children: [
-                /* @__PURE__ */ jsx("p", { className: "font-mono text-3xl font-black text-foreground sm:text-4xl", children: stat.value }),
+                /* @__PURE__ */ jsx("div", { className: "font-mono text-3xl font-black text-foreground sm:text-4xl", children: stat.value }),
                 /* @__PURE__ */ jsx("p", { className: "mt-2 text-xs uppercase tracking-[0.18em] text-gray-text", children: stat.label })
               ] }, stat.label))
             }
@@ -440,7 +440,7 @@ function Projects({
               children: loopedProjects.map((project, index) => /* @__PURE__ */ jsx3(
                 "div",
                 {
-                  "aria-hidden": index >= projects.length ? "true" : void 0,
+                  "aria-hidden": index >= projects.length ? true : void 0,
                   children: /* @__PURE__ */ jsx3(
                     ProjectFrame,
                     {
@@ -620,13 +620,11 @@ function Stack({ eyebrow, titulo, descricao, grupos }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-16 grid gap-8 lg:grid-cols-[0.8fr_1.7fr]",
+            className: "mb-16 max-w-2xl",
             children: [
-              /* @__PURE__ */ jsx5("p", { className: "font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ jsxs5("div", { children: [
-                /* @__PURE__ */ jsx5("h2", { className: "max-w-6xl text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-                /* @__PURE__ */ jsx5("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
-              ] })
+              /* @__PURE__ */ jsx5("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx5("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx5("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
@@ -1075,4 +1073,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-B7EPY5SS.mjs.map
+//# sourceMappingURL=chunk-G4XJFXSB.mjs.map
