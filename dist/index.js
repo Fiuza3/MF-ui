@@ -1519,7 +1519,6 @@ function Projects({
 }
 
 // src/blocos/Process.tsx
-var import_react3 = require("react");
 var import_framer_motion6 = require("framer-motion");
 var import_jsx_runtime19 = require("react/jsx-runtime");
 function PipelineCard({
@@ -1527,78 +1526,55 @@ function PipelineCard({
   index
 }) {
   const shouldAnimate = !(0, import_framer_motion6.useReducedMotion)();
-  const alignRight = index % 2 === 1;
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
     import_framer_motion6.motion.article,
     {
-      initial: shouldAnimate ? { opacity: 0, y: 34, clipPath: "inset(18% 0 0 0)" } : {},
-      whileInView: shouldAnimate ? { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" } : {},
-      transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
-      viewport: shouldAnimate ? { once: true, margin: "-90px" } : void 0,
-      className: `relative grid gap-5 lg:grid-cols-2 ${alignRight ? "" : "lg:[&>*]:col-start-1"}`,
+      initial: shouldAnimate ? { opacity: 0, y: 24 } : {},
+      whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
+      transition: shouldAnimate ? { delay: index * 0.06, duration: 0.55, ease: motionEase.expoOut } : { duration: 0 },
+      viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
+      className: "group relative flex h-full flex-col overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 lg:p-6",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: alignRight ? "lg:col-start-2" : "lg:col-start-1", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "group relative overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 lg:p-6", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
-            "div",
-            {
-              className: "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100",
-              style: {
-                background: "radial-gradient(circle at 0% 0%, rgba(61,242,224,0.08), transparent 48%)"
-              },
-              "aria-hidden": "true"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "relative", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "flex flex-wrap items-start justify-between gap-x-4 gap-y-2", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "min-w-0", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
-                  "commit ",
-                  step.numero
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h3", { className: "mt-4 text-[clamp(1.6rem,7vw,4.8rem)] font-black leading-[0.95] tracking-tight text-foreground", children: step.titulo })
-              ] }),
-              step.duracao && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "shrink-0 rounded border border-line px-3 py-1 font-mono text-xs text-gray-text", children: step.duracao })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mt-6 max-w-2xl text-sm leading-relaxed text-gray-text sm:text-base", children: step.descricao }),
-            (step.commitLabel || step.commitOutput) && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "mt-5 border-t border-line pt-4 font-mono", children: [
-              step.commitLabel && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "break-words text-sm text-foreground", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-cyan", children: "$" }),
-                " git commit -m \u201C",
-                step.commitLabel,
-                "\u201D"
-              ] }),
-              step.commitOutput && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "mt-2 break-words text-xs text-gray-text", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-cyan/70", children: ">" }),
-                " ",
-                step.commitOutput
-              ] })
-            ] })
-          ] })
-        ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
           "div",
           {
-            "aria-hidden": "true",
-            className: "absolute top-8 hidden h-4 w-4 rounded-full border border-cyan bg-background shadow-[0_0_28px_rgba(61,242,224,0.35)] lg:left-1/2 lg:block lg:-translate-x-1/2"
+            className: "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+            style: {
+              background: "radial-gradient(circle at 0% 0%, rgba(61,242,224,0.07), transparent 52%)"
+            },
+            "aria-hidden": "true"
           }
-        )
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "relative flex h-full flex-col", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "flex items-start justify-between gap-3", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: step.numero }),
+            step.duracao && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "shrink-0 rounded border border-line px-2 py-0.5 font-mono text-[10px] text-gray-text", children: step.duracao })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h3", { className: "mt-3 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.05] tracking-tight text-foreground", children: step.titulo }),
+          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mt-3 flex-1 text-sm leading-relaxed text-gray-text", children: step.descricao }),
+          (step.commitLabel || step.commitOutput) && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "mt-4 border-t border-line pt-3 font-mono", children: [
+            step.commitLabel && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "truncate text-xs text-foreground", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-cyan", children: "$" }),
+              " ",
+              step.commitLabel
+            ] }),
+            step.commitOutput && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "mt-1 truncate text-[11px] text-gray-text", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-cyan/60", children: ">" }),
+              " ",
+              step.commitOutput
+            ] })
+          ] })
+        ] })
       ]
     }
   );
 }
 function Process({ eyebrow, titulo, descricao, steps }) {
   const shouldAnimate = !(0, import_framer_motion6.useReducedMotion)();
-  const sectionRef = (0, import_react3.useRef)(null);
-  const { scrollYProgress } = (0, import_framer_motion6.useScroll)({
-    target: sectionRef,
-    offset: ["start 70%", "end 70%"]
-  });
-  const lineScale = (0, import_framer_motion6.useTransform)(scrollYProgress, [0, 1], [0, 1]);
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
     "section",
     {
       id: "processo",
-      ref: sectionRef,
       "aria-label": "Processo de trabalho",
       className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
@@ -1609,44 +1585,27 @@ function Process({ eyebrow, titulo, descricao, steps }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-12 max-w-2xl",
+            className: "mb-10 max-w-2xl",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
               /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mt-5 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "process-pipeline relative", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
-            "div",
-            {
-              "aria-hidden": "true",
-              className: "absolute left-0 top-0 hidden h-full w-px bg-line lg:left-1/2 lg:block lg:-translate-x-1/2"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
-            import_framer_motion6.motion.div,
-            {
-              "aria-hidden": "true",
-              className: "absolute left-0 top-0 hidden h-full w-px origin-top bg-cyan lg:left-1/2 lg:block lg:-translate-x-1/2",
-              style: { scaleY: shouldAnimate ? lineScale : 1 }
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "grid gap-5 lg:gap-7", children: steps.map((step, index) => /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(PipelineCard, { step, index }, step.numero)) })
-        ] })
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5", children: steps.map((step, index) => /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(PipelineCard, { step, index }, step.numero)) })
       ] })
     }
   );
 }
 
 // src/blocos/Stack.tsx
-var import_react4 = require("react");
+var import_react3 = require("react");
 var import_framer_motion7 = require("framer-motion");
 var import_jsx_runtime20 = require("react/jsx-runtime");
 function Stack({ eyebrow, titulo, descricao, grupos }) {
   const shouldAnimate = !(0, import_framer_motion7.useReducedMotion)();
-  const [active, setActive] = (0, import_react4.useState)(grupos[0]);
+  const [active, setActive] = (0, import_react3.useState)(grupos[0]);
   return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
     "section",
     {
@@ -1776,7 +1735,7 @@ function Stack({ eyebrow, titulo, descricao, grupos }) {
 }
 
 // src/blocos/Testimonials.tsx
-var import_react5 = require("react");
+var import_react4 = require("react");
 var import_framer_motion8 = require("framer-motion");
 var import_jsx_runtime21 = require("react/jsx-runtime");
 var AUTOPLAY_MS = 5e3;
@@ -1785,17 +1744,17 @@ function Testimonials({
   titulo,
   depoimentos
 }) {
-  const [current, setCurrent] = (0, import_react5.useState)(0);
-  const [paused, setPaused] = (0, import_react5.useState)(false);
-  const [userPaused, setUserPaused] = (0, import_react5.useState)(false);
-  const timerRef = (0, import_react5.useRef)(null);
-  const next = (0, import_react5.useCallback)(() => {
+  const [current, setCurrent] = (0, import_react4.useState)(0);
+  const [paused, setPaused] = (0, import_react4.useState)(false);
+  const [userPaused, setUserPaused] = (0, import_react4.useState)(false);
+  const timerRef = (0, import_react4.useRef)(null);
+  const next = (0, import_react4.useCallback)(() => {
     setCurrent((c) => (c + 1) % depoimentos.length);
   }, [depoimentos.length]);
-  const prev = (0, import_react5.useCallback)(() => {
+  const prev = (0, import_react4.useCallback)(() => {
     setCurrent((c) => (c - 1 + depoimentos.length) % depoimentos.length);
   }, [depoimentos.length]);
-  (0, import_react5.useEffect)(() => {
+  (0, import_react4.useEffect)(() => {
     if (paused || userPaused) return;
     timerRef.current = setInterval(next, AUTOPLAY_MS);
     return () => {

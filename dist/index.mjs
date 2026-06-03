@@ -10,7 +10,7 @@ import {
   blinkMs,
   motionDurations,
   motionEase
-} from "./chunk-GML2U3UG.mjs";
+} from "./chunk-NAQFZDQM.mjs";
 import {
   cores,
   familias,
