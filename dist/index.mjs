@@ -10,7 +10,7 @@ import {
   blinkMs,
   motionDurations,
   motionEase
-} from "./chunk-G4XJFXSB.mjs";
+} from "./chunk-FGEV7R2Y.mjs";
 import {
   Accordion,
   AccordionContent,

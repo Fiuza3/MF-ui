@@ -282,19 +282,17 @@ export function Projects({
               : { duration: 0 }
           }
           viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-16 grid gap-8 lg:grid-cols-[0.8fr_1.7fr]"
+          className="mb-16 max-w-2xl"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.34em] text-cyan">
+          <p className="mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
           </p>
-          <div>
-            <h2 className="max-w-6xl text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground">
-              {titulo}
-            </h2>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-text">
-              {descricao}
-            </p>
-          </div>
+          <h2 className="text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground">
+            {titulo}
+          </h2>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-text">
+            {descricao}
+          </p>
         </motion.div>
       </div>
 

@@ -209,13 +209,11 @@ function Services({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.68, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
-            className: "mb-14 grid gap-8 lg:mb-20 lg:grid-cols-[0.9fr_1.4fr]",
+            className: "mb-14 max-w-2xl lg:mb-20",
             children: [
-              /* @__PURE__ */ jsx2("p", { className: "font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ jsxs2("div", { children: [
-                /* @__PURE__ */ jsx2("h2", { className: "max-w-5xl text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-                /* @__PURE__ */ jsx2("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
-              ] })
+              /* @__PURE__ */ jsx2("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx2("h2", { className: "text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx2("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
@@ -421,13 +419,11 @@ function Projects({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-16 grid gap-8 lg:grid-cols-[0.8fr_1.7fr]",
+            className: "mb-16 max-w-2xl",
             children: [
-              /* @__PURE__ */ jsx3("p", { className: "font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ jsxs3("div", { children: [
-                /* @__PURE__ */ jsx3("h2", { className: "max-w-6xl text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-                /* @__PURE__ */ jsx3("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
-              ] })
+              /* @__PURE__ */ jsx3("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx3("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx3("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ) }),
@@ -566,13 +562,11 @@ function Process({ eyebrow, titulo, descricao, steps }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-20 grid gap-8 lg:grid-cols-[0.8fr_1.7fr]",
+            className: "mb-20 max-w-2xl",
             children: [
-              /* @__PURE__ */ jsx4("p", { className: "font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ jsxs4("div", { children: [
-                /* @__PURE__ */ jsx4("h2", { className: "max-w-6xl text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-                /* @__PURE__ */ jsx4("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
-              ] })
+              /* @__PURE__ */ jsx4("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx4("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx4("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
@@ -1073,4 +1067,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-G4XJFXSB.mjs.map
+//# sourceMappingURL=chunk-FGEV7R2Y.mjs.map

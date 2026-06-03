@@ -126,19 +126,17 @@ export function Services({
               : { duration: 0 }
           }
           viewport={shouldAnimate ? { once: true, margin: "-60px" } : undefined}
-          className="mb-14 grid gap-8 lg:mb-20 lg:grid-cols-[0.9fr_1.4fr]"
+          className="mb-14 max-w-2xl lg:mb-20"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.34em] text-cyan">
+          <p className="mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
           </p>
-          <div>
-            <h2 className="max-w-5xl text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground">
-              {titulo}
-            </h2>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-text">
-              {descricao}
-            </p>
-          </div>
+          <h2 className="text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground">
+            {titulo}
+          </h2>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-text">
+            {descricao}
+          </p>
         </motion.div>
 
         <div className="grid auto-rows-fr gap-6 lg:grid-cols-3">
