@@ -52,7 +52,7 @@ function PipelineCard({
       className={`relative grid gap-5 lg:grid-cols-2 ${alignRight ? "" : "lg:[&>*]:col-start-1"}`}
     >
       <div className={alignRight ? "lg:col-start-2" : "lg:col-start-1"}>
-        <div className="group relative overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:p-6 lg:p-8">
+        <div className="group relative overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 lg:p-6">
           <div
             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             style={{
@@ -84,7 +84,7 @@ function PipelineCard({
             </p>
 
             {(step.commitLabel || step.commitOutput) && (
-              <div className="mt-8 border-t border-line pt-5 font-mono">
+              <div className="mt-5 border-t border-line pt-4 font-mono">
                 {step.commitLabel && (
                   <p className="break-words text-sm text-foreground">
                     <span className="text-cyan">$</span> git commit -m &ldquo;
@@ -125,7 +125,7 @@ export function Process({ eyebrow, titulo, descricao, steps }: ProcessProps) {
       id="processo"
       ref={sectionRef}
       aria-label="Processo de trabalho"
-      className="relative overflow-hidden border-t border-line py-24 lg:py-40"
+      className="relative overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <motion.div
@@ -137,7 +137,7 @@ export function Process({ eyebrow, titulo, descricao, steps }: ProcessProps) {
               : { duration: 0 }
           }
           viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-20 max-w-2xl"
+          className="mb-12 max-w-2xl"
         >
           <p className="mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
@@ -161,7 +161,7 @@ export function Process({ eyebrow, titulo, descricao, steps }: ProcessProps) {
             style={{ scaleY: shouldAnimate ? lineScale : 1 }}
           />
 
-          <div className="grid gap-8 lg:gap-12">
+          <div className="grid gap-5 lg:gap-7">
             {steps.map((step, index) => (
               <PipelineCard key={step.numero} step={step} index={index} />
             ))}

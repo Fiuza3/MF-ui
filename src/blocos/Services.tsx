@@ -43,11 +43,8 @@ function ServiceCard({
       }
       viewport={shouldAnimate ? { once: true, margin: "-70px" } : undefined}
       className={cn(
-        "group relative min-h-[320px] overflow-hidden rounded border border-line bg-surface p-6 transition-colors duration-300 hover:border-cyan/60 sm:min-h-[360px] lg:p-8",
+        "group relative min-h-[220px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 sm:min-h-[260px] lg:p-6",
         isWide && "lg:col-span-2",
-        isTall && "lg:row-span-2",
-        index === 0 && "lg:-translate-y-10",
-        index === 3 && "lg:translate-y-10",
       )}
     >
       <div
@@ -114,7 +111,7 @@ export function Services({
     <section
       id="servicos"
       aria-label="Serviços"
-      className="overflow-hidden border-t border-line py-24 lg:py-40"
+      className="overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <motion.div
@@ -126,7 +123,7 @@ export function Services({
               : { duration: 0 }
           }
           viewport={shouldAnimate ? { once: true, margin: "-60px" } : undefined}
-          className="mb-14 max-w-2xl lg:mb-20"
+          className="mb-10 max-w-2xl lg:mb-14"
         >
           <p className="mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
@@ -139,7 +136,7 @@ export function Services({
           </p>
         </motion.div>
 
-        <div className="grid auto-rows-fr gap-6 lg:grid-cols-3">
+        <div className="grid gap-4 lg:grid-cols-3">
           {services.map((service, i) => (
             <ServiceCard key={service.id} service={service} index={i} />
           ))}

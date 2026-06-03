@@ -30,7 +30,7 @@ export function Stack({ eyebrow, titulo, descricao, grupos }: StackProps) {
     <section
       id="stack"
       aria-label="Mapa técnico da stack"
-      className="relative overflow-hidden border-t border-line py-24 lg:py-40"
+      className="relative overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <motion.div

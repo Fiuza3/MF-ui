@@ -10,7 +10,12 @@ import {
   blinkMs,
   motionDurations,
   motionEase
-} from "./chunk-FGEV7R2Y.mjs";
+} from "./chunk-GML2U3UG.mjs";
+import {
+  cores,
+  familias,
+  pesos
+} from "./chunk-Z5TNI3SI.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -57,11 +62,6 @@ import {
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
-import {
-  cores,
-  familias,
-  pesos
-} from "./chunk-Z5TNI3SI.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";

@@ -1181,11 +1181,8 @@ function ServiceCard({
       transition: shouldAnimate ? { delay: index * 0.08, duration: 0.64, ease: motionEase.expoOut } : { duration: 0 },
       viewport: shouldAnimate ? { once: true, margin: "-70px" } : void 0,
       className: cn(
-        "group relative min-h-[320px] overflow-hidden rounded border border-line bg-surface p-6 transition-colors duration-300 hover:border-cyan/60 sm:min-h-[360px] lg:p-8",
-        isWide && "lg:col-span-2",
-        isTall && "lg:row-span-2",
-        index === 0 && "lg:-translate-y-10",
-        index === 3 && "lg:translate-y-10"
+        "group relative min-h-[220px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 sm:min-h-[260px] lg:p-6",
+        isWide && "lg:col-span-2"
       ),
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
@@ -1250,7 +1247,7 @@ function Services({
     {
       id: "servicos",
       "aria-label": "Servi\xE7os",
-      className: "overflow-hidden border-t border-line py-24 lg:py-40",
+      className: "overflow-hidden border-t border-line py-16 lg:py-24",
       children: /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
         /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
           import_framer_motion4.motion.div,
@@ -1259,7 +1256,7 @@ function Services({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.68, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
-            className: "mb-14 max-w-2xl lg:mb-20",
+            className: "mb-10 max-w-2xl lg:mb-14",
             children: [
               /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
               /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("h2", { className: "text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
@@ -1267,7 +1264,7 @@ function Services({
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "grid auto-rows-fr gap-6 lg:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(ServiceCard, { service, index: i }, service.id)) })
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "grid gap-4 lg:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(ServiceCard, { service, index: i }, service.id)) })
       ] })
     }
   );
@@ -1460,7 +1457,7 @@ function Projects({
     {
       id: "projetos",
       "aria-label": "Projetos",
-      className: "relative overflow-hidden border-t border-line py-24 lg:py-40",
+      className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
           import_framer_motion5.motion.div,
@@ -1540,7 +1537,7 @@ function PipelineCard({
       viewport: shouldAnimate ? { once: true, margin: "-90px" } : void 0,
       className: `relative grid gap-5 lg:grid-cols-2 ${alignRight ? "" : "lg:[&>*]:col-start-1"}`,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: alignRight ? "lg:col-start-2" : "lg:col-start-1", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "group relative overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:p-6 lg:p-8", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: alignRight ? "lg:col-start-2" : "lg:col-start-1", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "group relative overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 lg:p-6", children: [
           /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
             "div",
             {
@@ -1563,7 +1560,7 @@ function PipelineCard({
               step.duracao && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "shrink-0 rounded border border-line px-3 py-1 font-mono text-xs text-gray-text", children: step.duracao })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mt-6 max-w-2xl text-sm leading-relaxed text-gray-text sm:text-base", children: step.descricao }),
-            (step.commitLabel || step.commitOutput) && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
+            (step.commitLabel || step.commitOutput) && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "mt-5 border-t border-line pt-4 font-mono", children: [
               step.commitLabel && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "break-words text-sm text-foreground", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-cyan", children: "$" }),
                 " git commit -m \u201C",
@@ -1603,7 +1600,7 @@ function Process({ eyebrow, titulo, descricao, steps }) {
       id: "processo",
       ref: sectionRef,
       "aria-label": "Processo de trabalho",
-      className: "relative overflow-hidden border-t border-line py-24 lg:py-40",
+      className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
         /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
           import_framer_motion6.motion.div,
@@ -1612,7 +1609,7 @@ function Process({ eyebrow, titulo, descricao, steps }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-20 max-w-2xl",
+            className: "mb-12 max-w-2xl",
             children: [
               /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
               /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
@@ -1636,7 +1633,7 @@ function Process({ eyebrow, titulo, descricao, steps }) {
               style: { scaleY: shouldAnimate ? lineScale : 1 }
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "grid gap-8 lg:gap-12", children: steps.map((step, index) => /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(PipelineCard, { step, index }, step.numero)) })
+          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "grid gap-5 lg:gap-7", children: steps.map((step, index) => /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(PipelineCard, { step, index }, step.numero)) })
         ] })
       ] })
     }
@@ -1655,7 +1652,7 @@ function Stack({ eyebrow, titulo, descricao, grupos }) {
     {
       id: "stack",
       "aria-label": "Mapa t\xE9cnico da stack",
-      className: "relative overflow-hidden border-t border-line py-24 lg:py-40",
+      className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
         /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
           import_framer_motion7.motion.div,
@@ -1951,7 +1948,7 @@ function About({
     {
       id: "sobre",
       "aria-label": "Sobre",
-      className: "relative overflow-hidden py-24 lg:py-40",
+      className: "relative overflow-hidden py-16 lg:py-24",
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
         /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
@@ -2018,7 +2015,7 @@ function Contact({
     {
       id: "contato",
       "aria-label": "Iniciar projeto",
-      className: "relative overflow-hidden border-t border-line py-24 lg:py-40",
+      className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
         /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [

@@ -27,7 +27,7 @@ export function Contact({
     <section
       id="contato"
       aria-label="Iniciar projeto"
-      className="relative overflow-hidden border-t border-line py-24 lg:py-40"
+      className="relative overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" />
 
