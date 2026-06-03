@@ -42,15 +42,17 @@ export function Stack({ eyebrow, titulo, descricao, grupos }: StackProps) {
               : { duration: 0 }
           }
           viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-16 max-w-2xl"
+          className="mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2"
         >
-          <p className="mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
-            {eyebrow}
-          </p>
-          <h2 className="text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground">
-            {titulo}
-          </h2>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-text">
+          <div>
+            <p className="mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
+              {eyebrow}
+            </p>
+            <h2 className="text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground">
+              {titulo}
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-relaxed text-gray-text lg:pb-2">
             {descricao}
           </p>
         </motion.div>
