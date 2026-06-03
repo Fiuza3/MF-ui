@@ -121,8 +121,6 @@ function ServiceCard({
   index
 }) {
   const shouldAnimate = !useReducedMotion2();
-  const isWide = service.id === "apis";
-  const isTall = service.id === "web-apps";
   return /* @__PURE__ */ jsxs2(
     motion2.article,
     {
@@ -130,10 +128,7 @@ function ServiceCard({
       whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
       transition: shouldAnimate ? { delay: index * 0.08, duration: 0.64, ease: motionEase.expoOut } : { duration: 0 },
       viewport: shouldAnimate ? { once: true, margin: "-70px" } : void 0,
-      className: cn(
-        "group relative min-h-[220px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 sm:min-h-[260px] lg:p-6",
-        isWide && "lg:col-span-2"
-      ),
+      className: "group relative min-h-[200px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 lg:p-6",
       children: [
         /* @__PURE__ */ jsx2(
           "div",
@@ -198,7 +193,7 @@ function Services({
       id: "servicos",
       "aria-label": "Servi\xE7os",
       className: "overflow-hidden border-t border-line py-16 lg:py-24",
-      children: /* @__PURE__ */ jsxs2("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
+      children: /* @__PURE__ */ jsxs2("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-16", children: [
         /* @__PURE__ */ jsxs2(
           motion2.div,
           {
@@ -206,17 +201,15 @@ function Services({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.68, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
-            className: "mb-8 grid items-end gap-6 lg:mb-10 lg:grid-cols-2",
+            className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ jsxs2("div", { children: [
-                /* @__PURE__ */ jsx2("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ jsx2("h2", { className: "text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ jsx2("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ jsx2("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx2("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx2("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
-        /* @__PURE__ */ jsx2("div", { className: "grid gap-4 lg:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ jsx2(ServiceCard, { service, index: i }, service.id)) })
+        /* @__PURE__ */ jsx2("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ jsx2(ServiceCard, { service, index: i }, service.id)) })
       ] })
     }
   );
@@ -344,7 +337,7 @@ function ProjectFrame({
         ease: motionEase.expoOut
       } : { duration: 0 },
       viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-      className: "project-frame group flex min-h-[540px] w-[86vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[74vw] lg:w-[72vw] lg:p-8 xl:w-[64vw] 2xl:w-[54vw]",
+      className: "project-frame group flex min-h-[540px] w-[88vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[76vw] lg:w-[56vw] lg:p-8 xl:w-[52vw] 2xl:w-[44vw]",
       children: [
         /* @__PURE__ */ jsxs3("div", { className: "grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-start", children: [
           /* @__PURE__ */ jsxs3("div", { children: [
@@ -418,13 +411,11 @@ function Projects({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
+            className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ jsxs3("div", { children: [
-                /* @__PURE__ */ jsx3("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ jsx3("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ jsx3("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ jsx3("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx3("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx3("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ) }),
@@ -432,7 +423,7 @@ function Projects({
           /* @__PURE__ */ jsx3(
             "div",
             {
-              className: "project-carousel-track flex w-max gap-6 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14",
+              className: "project-carousel-track flex w-max gap-4 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14",
               "aria-label": "Sequencia de cases",
               children: loopedProjects.map((project, index) => /* @__PURE__ */ jsx3(
                 "div",
@@ -539,13 +530,11 @@ function Process({ eyebrow, titulo, descricao, steps }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-8 grid items-end gap-6 lg:mb-10 lg:grid-cols-2",
+            className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ jsxs4("div", { children: [
-                /* @__PURE__ */ jsx4("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ jsx4("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ jsx4("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ jsx4("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx4("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx4("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
@@ -576,13 +565,11 @@ function Stack({ eyebrow, titulo, descricao, grupos }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
+            className: "mb-10 lg:mb-12",
             children: [
-              /* @__PURE__ */ jsxs5("div", { children: [
-                /* @__PURE__ */ jsx5("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ jsx5("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ jsx5("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ jsx5("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ jsx5("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ jsx5("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
@@ -878,7 +865,7 @@ function About({
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
               children: [
                 /* @__PURE__ */ jsx7("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ jsx7("h2", { className: "max-w-6xl text-[clamp(2.25rem,7vw,7.4rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
+                /* @__PURE__ */ jsx7("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
                 /* @__PURE__ */ jsx7("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ jsx7(
                   motion7.div,
                   {
@@ -943,13 +930,11 @@ function Contact({
               whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
               transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-              className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
+              className: "mb-10 lg:mb-12",
               children: [
-                /* @__PURE__ */ jsxs8("div", { children: [
-                  /* @__PURE__ */ jsx8("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ jsx8("span", { lang: "en", children: eyebrow }) }),
-                  /* @__PURE__ */ jsx8("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-                ] }),
-                /* @__PURE__ */ jsx8("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+                /* @__PURE__ */ jsx8("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ jsx8("span", { lang: "en", children: eyebrow }) }),
+                /* @__PURE__ */ jsx8("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+                /* @__PURE__ */ jsx8("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
               ]
             }
           ),
@@ -1031,4 +1016,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-T42UMEAB.mjs.map
+//# sourceMappingURL=chunk-5NESKQON.mjs.map

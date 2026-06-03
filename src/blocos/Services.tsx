@@ -3,7 +3,6 @@
 import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { motionEase } from "../lib/motion";
-import { cn } from "../lib/cn";
 
 export type ServiceItem = {
   id: string;
@@ -29,8 +28,6 @@ function ServiceCard({
   index: number;
 }) {
   const shouldAnimate = !useReducedMotion();
-  const isWide = service.id === "apis";
-  const isTall = service.id === "web-apps";
 
   return (
     <motion.article
@@ -42,10 +39,7 @@ function ServiceCard({
           : { duration: 0 }
       }
       viewport={shouldAnimate ? { once: true, margin: "-70px" } : undefined}
-      className={cn(
-        "group relative min-h-[220px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 sm:min-h-[260px] lg:p-6",
-        isWide && "lg:col-span-2",
-      )}
+      className="group relative min-h-[200px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 lg:p-6"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -113,7 +107,7 @@ export function Services({
       aria-label="Serviços"
       className="overflow-hidden border-t border-line py-16 lg:py-24"
     >
-      <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
+      <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-16">
         <motion.div
           initial={shouldAnimate ? { opacity: 0, y: 22 } : {}}
           whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
@@ -123,22 +117,14 @@ export function Services({
               : { duration: 0 }
           }
           viewport={shouldAnimate ? { once: true, margin: "-60px" } : undefined}
-          className="mb-8 grid items-end gap-6 lg:mb-10 lg:grid-cols-2"
+          className="mb-8 lg:mb-10"
         >
-          <div>
-            <p className="mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
-              {eyebrow}
-            </p>
-            <h2 className="text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground">
-              {titulo}
-            </h2>
-          </div>
-          <p className="max-w-xl text-base leading-relaxed text-gray-text lg:pb-2">
-            {descricao}
-          </p>
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
+          <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground">{titulo}</h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{descricao}</p>
         </motion.div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {services.map((service, i) => (
             <ServiceCard key={service.id} service={service} index={i} />
           ))}

@@ -138,23 +138,12 @@ function Hero({
 
 // src/blocos/Services.tsx
 var import_framer_motion2 = require("framer-motion");
-
-// src/lib/cn.ts
-var import_clsx = require("clsx");
-var import_tailwind_merge = require("tailwind-merge");
-function cn(...inputs) {
-  return (0, import_tailwind_merge.twMerge)((0, import_clsx.clsx)(inputs));
-}
-
-// src/blocos/Services.tsx
 var import_jsx_runtime2 = require("react/jsx-runtime");
 function ServiceCard({
   service,
   index
 }) {
   const shouldAnimate = !(0, import_framer_motion2.useReducedMotion)();
-  const isWide = service.id === "apis";
-  const isTall = service.id === "web-apps";
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
     import_framer_motion2.motion.article,
     {
@@ -162,10 +151,7 @@ function ServiceCard({
       whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
       transition: shouldAnimate ? { delay: index * 0.08, duration: 0.64, ease: motionEase.expoOut } : { duration: 0 },
       viewport: shouldAnimate ? { once: true, margin: "-70px" } : void 0,
-      className: cn(
-        "group relative min-h-[220px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 sm:min-h-[260px] lg:p-6",
-        isWide && "lg:col-span-2"
-      ),
+      className: "group relative min-h-[200px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 lg:p-6",
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
           "div",
@@ -230,7 +216,7 @@ function Services({
       id: "servicos",
       "aria-label": "Servi\xE7os",
       className: "overflow-hidden border-t border-line py-16 lg:py-24",
-      children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
+      children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-16", children: [
         /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
           import_framer_motion2.motion.div,
           {
@@ -238,17 +224,15 @@ function Services({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.68, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
-            className: "mb-8 grid items-end gap-6 lg:mb-10 lg:grid-cols-2",
+            className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h2", { className: "text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "grid gap-4 lg:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ServiceCard, { service, index: i }, service.id)) })
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ServiceCard, { service, index: i }, service.id)) })
       ] })
     }
   );
@@ -376,7 +360,7 @@ function ProjectFrame({
         ease: motionEase.expoOut
       } : { duration: 0 },
       viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-      className: "project-frame group flex min-h-[540px] w-[86vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[74vw] lg:w-[72vw] lg:p-8 xl:w-[64vw] 2xl:w-[54vw]",
+      className: "project-frame group flex min-h-[540px] w-[88vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[76vw] lg:w-[56vw] lg:p-8 xl:w-[52vw] 2xl:w-[44vw]",
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-start", children: [
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
@@ -450,13 +434,11 @@ function Projects({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
+            className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ) }),
@@ -464,7 +446,7 @@ function Projects({
           /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
             "div",
             {
-              className: "project-carousel-track flex w-max gap-6 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14",
+              className: "project-carousel-track flex w-max gap-4 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14",
               "aria-label": "Sequencia de cases",
               children: loopedProjects.map((project, index) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                 "div",
@@ -571,13 +553,11 @@ function Process({ eyebrow, titulo, descricao, steps }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-8 grid items-end gap-6 lg:mb-10 lg:grid-cols-2",
+            className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
@@ -590,6 +570,15 @@ function Process({ eyebrow, titulo, descricao, steps }) {
 // src/blocos/Stack.tsx
 var import_react2 = require("react");
 var import_framer_motion5 = require("framer-motion");
+
+// src/lib/cn.ts
+var import_clsx = require("clsx");
+var import_tailwind_merge = require("tailwind-merge");
+function cn(...inputs) {
+  return (0, import_tailwind_merge.twMerge)((0, import_clsx.clsx)(inputs));
+}
+
+// src/blocos/Stack.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
 function Stack({ eyebrow, titulo, descricao, grupos }) {
   const shouldAnimate = !(0, import_framer_motion5.useReducedMotion)();
@@ -608,13 +597,11 @@ function Stack({ eyebrow, titulo, descricao, grupos }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
+            className: "mb-10 lg:mb-12",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
             ]
           }
         ),
@@ -910,7 +897,7 @@ function About({
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { className: "max-w-6xl text-[clamp(2.25rem,7vw,7.4rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
                   import_framer_motion7.motion.div,
                   {
@@ -975,13 +962,11 @@ function Contact({
               whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
               transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-              className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
+              className: "mb-10 lg:mb-12",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { lang: "en", children: eyebrow }) }),
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
-                ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { lang: "en", children: eyebrow }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h2", { className: "text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground", children: titulo }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: descricao })
               ]
             }
           ),
