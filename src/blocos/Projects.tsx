@@ -304,12 +304,16 @@ export function Projects({
           aria-label="Sequencia de cases"
         >
           {loopedProjects.map((project, index) => (
-            <ProjectFrame
+            <div
               key={`${project.titulo}-${index}`}
-              project={project}
-              index={index % projects.length}
-              onOpen={setSelected}
-            />
+              aria-hidden={index >= projects.length ? true : undefined}
+            >
+              <ProjectFrame
+                project={project}
+                index={index % projects.length}
+                onOpen={setSelected}
+              />
+            </div>
           ))}
         </div>
 

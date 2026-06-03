@@ -438,11 +438,17 @@ function Projects({
               className: "project-carousel-track flex w-max gap-6 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14",
               "aria-label": "Sequencia de cases",
               children: loopedProjects.map((project, index) => /* @__PURE__ */ jsx3(
-                ProjectFrame,
+                "div",
                 {
-                  project,
-                  index: index % projects.length,
-                  onOpen: setSelected
+                  "aria-hidden": index >= projects.length ? "true" : void 0,
+                  children: /* @__PURE__ */ jsx3(
+                    ProjectFrame,
+                    {
+                      project,
+                      index: index % projects.length,
+                      onOpen: setSelected
+                    }
+                  )
                 },
                 `${project.titulo}-${index}`
               ))
