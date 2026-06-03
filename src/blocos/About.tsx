@@ -45,7 +45,7 @@ export function About({
               {eyebrow}
             </p>
 
-            <h2 className="max-w-6xl text-[clamp(2.25rem,7vw,7.4rem)] font-black leading-[0.94] tracking-tight text-foreground">
+            <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.94] tracking-tight text-foreground">
               {titulo}
             </h2>
 

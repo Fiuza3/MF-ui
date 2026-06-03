@@ -188,7 +188,7 @@ function ProjectFrame({
           : { duration: 0 }
       }
       viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-      className="project-frame group flex min-h-[540px] w-[86vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[74vw] lg:w-[72vw] lg:p-8 xl:w-[64vw] 2xl:w-[54vw]"
+      className="project-frame group flex min-h-[540px] w-[88vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[76vw] lg:w-[56vw] lg:p-8 xl:w-[52vw] 2xl:w-[44vw]"
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-start">
         <div>
@@ -282,25 +282,17 @@ export function Projects({
               : { duration: 0 }
           }
           viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2"
+          className="mb-8 lg:mb-10"
         >
-          <div>
-            <p className="mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
-              {eyebrow}
-            </p>
-            <h2 className="text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground">
-              {titulo}
-            </h2>
-          </div>
-          <p className="max-w-xl text-base leading-relaxed text-gray-text lg:pb-2">
-            {descricao}
-          </p>
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
+          <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground">{titulo}</h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{descricao}</p>
         </motion.div>
       </div>
 
       <div className="project-carousel relative overflow-hidden">
         <div
-          className="project-carousel-track flex w-max gap-6 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14"
+          className="project-carousel-track flex w-max gap-4 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14"
           aria-label="Sequencia de cases"
         >
           {loopedProjects.map((project, index) => (
