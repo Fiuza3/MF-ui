@@ -238,11 +238,13 @@ function Services({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.68, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
-            className: "mb-10 max-w-2xl lg:mb-14",
+            className: "mb-8 grid items-end gap-6 lg:mb-10 lg:grid-cols-2",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h2", { className: "text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h2", { className: "text-[clamp(2.25rem,6vw,6.6rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
             ]
           }
         ),
@@ -448,11 +450,13 @@ function Projects({
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-16 max-w-2xl",
+            className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
             ]
           }
         ) }),
@@ -567,11 +571,13 @@ function Process({ eyebrow, titulo, descricao, steps }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-10 max-w-2xl",
+            className: "mb-8 grid items-end gap-6 lg:mb-10 lg:grid-cols-2",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mt-5 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
             ]
           }
         ),
@@ -602,11 +608,13 @@ function Stack({ eyebrow, titulo, descricao, grupos }) {
             whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
             transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-            className: "mb-16 max-w-2xl",
+            className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
             ]
           }
         ),
@@ -967,11 +975,13 @@ function Contact({
               whileInView: shouldAnimate ? { opacity: 1, y: 0 } : {},
               transition: shouldAnimate ? { duration: 0.7, ease: motionEase.expoOut } : { duration: 0 },
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
-              className: "mb-12 max-w-2xl",
+              className: "mb-10 grid items-end gap-6 lg:mb-12 lg:grid-cols-2",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mb-8 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { lang: "en", children: eyebrow }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: descricao })
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mb-6 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { lang: "en", children: eyebrow }) }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h2", { className: "text-[clamp(2.3rem,7vw,7.8rem)] font-black leading-[0.94] tracking-tight text-foreground", children: titulo })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "max-w-xl text-base leading-relaxed text-gray-text lg:pb-2", children: descricao })
               ]
             }
           ),
