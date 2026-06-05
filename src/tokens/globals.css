@@ -62,8 +62,11 @@
 }
 
 @theme inline {
+  /* — Fontes — */
   --font-sans: 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+
+  /* — Cores semânticas — */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -83,10 +86,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 2px);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 4px);
-  --radius-xl: calc(var(--radius) + 8px);
   --color-cyan: var(--cyan);
   --color-cyan-dim: var(--cyan-dim);
   --color-cyan-glow: var(--cyan-glow);
@@ -94,4 +93,58 @@
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
   --color-line: var(--line);
+
+  /* — Radius — */
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* — Spacing (base 4px, 20 passos) — */
+  --spacing-1:  4px;
+  --spacing-2:  8px;
+  --spacing-3:  12px;
+  --spacing-4:  16px;
+  --spacing-5:  20px;
+  --spacing-6:  24px;
+  --spacing-7:  28px;
+  --spacing-8:  32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+
+  /* — Tipografia Display/Heading — fluída (clamp) — */
+  --text-display: clamp(3.5rem, 9vw, 9.5rem);
+  --text-h1:      clamp(2.2rem, 5vw, 5.8rem);
+  --text-h2:      clamp(1.6rem, 3vw, 3.5rem);
+  --text-h3:      clamp(1.25rem, 2vw, 1.75rem);
+
+  /* — Tipografia Body/UI — fixa (interfaces não devem ser fluídas) — */
+  --text-body:    1rem;
+  --text-body-lg: 1.125rem;
+  --text-small:   0.875rem;
+  --text-label:   0.75rem;
+  --text-mono:    0.75rem;
+  --text-mono-lg: 1rem;
+
+  /* — Line heights — */
+  --leading-tight:  0.88;
+  --leading-snug:   0.96;
+  --leading-normal: 1.6;
+
+  /* — Letter spacing — */
+  --tracking-wide:   0.18em;
+  --tracking-wider:  0.28em;
+  --tracking-widest: 0.34em;
+
+  /* — Shadows / Elevation (oklch — W3C 2025) — */
+  --shadow-sm:   0 1px 3px oklch(0 0 0 / 0.3);
+  --shadow-md:   0 4px 16px oklch(0 0 0 / 0.4);
+  --shadow-lg:   0 8px 32px oklch(0 0 0 / 0.5);
+  --shadow-glow: 0 0 20px var(--cyan-glow), 0 0 60px var(--cyan-dim);
 }
