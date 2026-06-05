@@ -6,10 +6,10 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { motionEase } from "../lib/motion";
 
 export type ProjectItem = {
-  titulo: string;
-  descricao?: string;
+  title: string;
+  description?: string;
   tags?: string[];
-  slotMockup?: React.ReactNode;
+  mockup?: React.ReactNode;
   href?: string;
   /** optional metadata shown in cards */
   ano?: number;
@@ -20,14 +20,14 @@ export type ProjectItem = {
 
 export type ProjectsProps = {
   eyebrow: string;
-  titulo: React.ReactNode;
-  descricao: React.ReactNode;
+  title: React.ReactNode;
+  description: React.ReactNode;
   projects: ProjectItem[];
 };
 
 interface ModalProject {
-  titulo: string;
-  descricao?: string;
+  title: string;
+  description?: string;
   tags?: string[];
   ano?: number;
   metrica?: string;
@@ -96,7 +96,7 @@ function ProjectModal({
           className="relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8"
           role="dialog"
           aria-modal="true"
-          aria-label={`Case tecnico: ${project.titulo}`}
+          aria-label={`Case tecnico: ${project.title}`}
         >
           <button
             ref={closeRef}
@@ -112,11 +112,11 @@ function ProjectModal({
             case.log{project.ano ? ` / ${project.ano}` : ""}
           </p>
           <h3 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl">
-            {project.titulo}
+            {project.title}
           </h3>
-          {project.descricao && (
+          {project.description && (
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-text">
-              {project.descricao}
+              {project.description}
             </p>
           )}
 
@@ -197,21 +197,21 @@ function ProjectFrame({
             {project.ano ? ` / ${project.ano}` : ""}
           </p>
           <h3 className="mt-5 max-w-2xl text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.88] tracking-tight text-foreground">
-            {project.titulo}
+            {project.title}
           </h3>
-          {project.descricao && (
+          {project.description && (
             <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-text">
-              {project.descricao}
+              {project.description}
             </p>
           )}
         </div>
 
-        {project.slotMockup && (
+        {project.mockup && (
           <div
             className="project-mockup relative overflow-hidden rounded border border-line bg-background/70 p-4"
             aria-hidden="true"
           >
-            {project.slotMockup}
+            {project.mockup}
           </div>
         )}
       </div>
@@ -258,8 +258,8 @@ function ProjectFrame({
 
 export function Projects({
   eyebrow,
-  titulo,
-  descricao,
+  title,
+  description,
   projects,
 }: ProjectsProps) {
   const shouldAnimate = !useReducedMotion();
@@ -285,8 +285,8 @@ export function Projects({
           className="mb-8 lg:mb-10"
         >
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
-          <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground">{titulo}</h2>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{descricao}</p>
+          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">{title}</h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </motion.div>
       </div>
 
@@ -295,18 +295,22 @@ export function Projects({
           className="project-carousel-track flex w-max gap-4 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14"
           aria-label="Sequencia de cases"
         >
-          {loopedProjects.map((project, index) => (
-            <div
-              key={`${project.titulo}-${index}`}
-              aria-hidden={index >= projects.length ? true : undefined}
-            >
-              <ProjectFrame
-                project={project}
-                index={index % projects.length}
-                onOpen={setSelected}
-              />
-            </div>
-          ))}
+          {loopedProjects.map((project, index) => {
+            const isClone = index >= projects.length;
+            return (
+              <div
+                key={`${project.title}-${index}`}
+                data-testid={isClone ? "project-clone" : "project-item"}
+                {...(isClone ? { inert: true } : {})}
+              >
+                <ProjectFrame
+                  project={project}
+                  index={index % projects.length}
+                  onOpen={setSelected}
+                />
+              </div>
+            );
+          })}
         </div>
 
         <div
