@@ -12,7 +12,7 @@ if (typeof window !== "undefined" && !window.IntersectionObserver) {
     configurable: true,
     value: IntersectionObserverMock,
   });
-  Object.defineProperty(global, "IntersectionObserver", {
+  Object.defineProperty(globalThis, "IntersectionObserver", {
     writable: true,
     configurable: true,
     value: IntersectionObserverMock,

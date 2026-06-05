@@ -6,8 +6,6 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     dedupe: ["react", "react-dom", "framer-motion"],
-    // Resolve a partir do próprio node_modules do mf-ui (symlinks do pnpm, sem hash)
-    // para evitar duplicação de instâncias do React vindas do workspace do site.
     alias: {
       "framer-motion": path.resolve("./node_modules/framer-motion"),
       react: path.resolve("./node_modules/react"),
@@ -18,5 +16,8 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./src/testes/setup.ts"],
     globals: true,
+    typecheck: {
+      tsconfig: "./tsconfig.test.json",
+    },
   },
 });
