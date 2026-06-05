@@ -26,3 +26,21 @@ describe("temas", () => {
     expect(claro).toEqual(escuro);
   });
 });
+
+describe("tokens de escala", () => {
+  it("globals.css contém --spacing-4", () => {
+    expect(css).toContain("--spacing-4");
+  });
+
+  it("globals.css contém --text-h1", () => {
+    expect(css).toContain("--text-h1");
+  });
+
+  it("globals.css contém --shadow-md", () => {
+    expect(css).toContain("--shadow-md");
+  });
+
+  it("globals.css contém --radius-lg", () => {
+    expect(css).toContain("--radius-lg");
+  });
+});
