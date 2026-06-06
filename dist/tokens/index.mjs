@@ -1,11 +1,23 @@
 import {
+  blinkMs,
   cores,
+  duration,
+  ease,
+  fadeIn,
+  fadeUp,
   familias,
-  pesos
-} from "../chunk-Z5TNI3SI.mjs";
+  pesos,
+  scaleIn
+} from "../chunk-BQZFF264.mjs";
 export {
+  blinkMs,
   cores,
+  duration,
+  ease,
+  fadeIn,
+  fadeUp,
   familias,
-  pesos
+  pesos,
+  scaleIn
 };
 //# sourceMappingURL=index.mjs.map
