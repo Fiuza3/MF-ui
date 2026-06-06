@@ -11,3 +11,4 @@ export * from "./Accordion";
 export * from "./Dialog";
 export * from "./Sheet";
 export * from "./Tooltip";
+export * from "./Select";
