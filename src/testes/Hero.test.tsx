@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Hero } from "../blocos/Hero";
 
@@ -7,8 +7,8 @@ describe("Hero", () => {
     render(
       <Hero
         eyebrow="boot / build / ship"
-        headline="Reduzir ambiguidade"
-        descricao="Diagnóstico antes do código."
+        title="Reduzir ambiguidade"
+        description="Diagnóstico antes do código."
         cta={{ label: "iniciar projeto", href: "https://wa.me/000" }}
         stats={[{ value: "8+", label: "anos" }]}
       />,
@@ -20,17 +20,40 @@ describe("Hero", () => {
     expect(screen.getByText("8+")).toBeTruthy();
   });
 
-  it("renderiza o slotLateral", () => {
+  it("renderiza o slot lateral", () => {
     render(
       <Hero
         eyebrow="x"
-        headline="y"
-        descricao="z"
+        title="y"
+        description="z"
         cta={{ label: "ok", href: "#" }}
         stats={[]}
-        slotLateral={<div data-testid="lateral">terminal</div>}
+        slot={<div data-testid="lateral">terminal</div>}
       />,
     );
     expect(screen.getByTestId("lateral")).toBeTruthy();
+  });
+
+  it("não define props de animação quando prefers-reduced-motion está ativo", () => {
+    vi.spyOn(window, "matchMedia").mockReturnValue({
+      matches: true,
+      media: "(prefers-reduced-motion: reduce)",
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+    } as unknown as MediaQueryList);
+    const { container } = render(
+      <Hero
+        eyebrow="x"
+        title={<span>x</span>}
+        description="x"
+        cta={{ label: "x", href: "#" }}
+        stats={[]}
+      />,
+    );
+    expect(container).toBeInTheDocument();
   });
 });

@@ -11,22 +11,22 @@ export type HeroStat = {
 
 export type HeroProps = {
   eyebrow: string;
-  headline: React.ReactNode;
-  descricao: React.ReactNode;
+  title: React.ReactNode;
+  description: React.ReactNode;
   cta: { label: string; href: string };
   stats: HeroStat[];
-  slotLateral?: React.ReactNode;
-  slotLateralLabel?: string;
+  slot?: React.ReactNode;
+  slotLabel?: string;
 };
 
 export function Hero({
   eyebrow,
-  headline,
-  descricao,
+  title,
+  description,
   cta,
   stats,
-  slotLateral,
-  slotLateralLabel = "live process",
+  slot,
+  slotLabel = "live process",
 }: HeroProps) {
   const shouldAnimate = !useReducedMotion();
 
@@ -52,7 +52,7 @@ export function Hero({
               {eyebrow}
             </motion.p>
 
-            {headline}
+            {title}
 
             <motion.div
               initial={shouldAnimate ? { opacity: 0, y: 20 } : {}}
@@ -61,7 +61,7 @@ export function Hero({
               className="mt-8 flex max-w-5xl flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"
             >
               <p className="max-w-2xl text-base leading-relaxed text-gray-text sm:text-lg">
-                {descricao}
+                {description}
               </p>
 
               <a
@@ -76,7 +76,7 @@ export function Hero({
             </motion.div>
           </div>
 
-          {slotLateral && (
+          {slot && (
             <motion.div
               initial={shouldAnimate ? { opacity: 0, y: 36, rotate: -1.5 } : {}}
               animate={shouldAnimate ? { opacity: 1, y: 0, rotate: 0 } : {}}
@@ -84,9 +84,9 @@ export function Hero({
               className="relative lg:translate-y-16"
             >
               <div className="absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block">
-                {slotLateralLabel}
+                {slotLabel}
               </div>
-              {slotLateral}
+              {slot}
             </motion.div>
           )}
         </div>
