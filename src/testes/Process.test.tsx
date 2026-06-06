@@ -6,14 +6,14 @@ describe("Process", () => {
   const steps = [
     {
       numero: "00",
-      titulo: "Diagnóstico",
-      descricao: "Reunião de 60 min para entender o problema real.",
+      title: "Diagnóstico",
+      description: "Reunião de 60 min para entender o problema real.",
       duracao: "1 semana",
     },
     {
       numero: "01",
-      titulo: "Proposta técnica",
-      descricao: "Documento com escopo e critérios de aceite.",
+      title: "Proposta técnica",
+      description: "Documento com escopo e critérios de aceite.",
       duracao: "3 dias",
     },
   ];
@@ -22,8 +22,8 @@ describe("Process", () => {
     render(
       <Process
         eyebrow="// execution pipeline"
-        titulo={<>Processo como pipeline.</>}
-        descricao="Cinco etapas com saída verificável."
+        title={<>Processo como pipeline.</>}
+        description="Cinco etapas com saída verificável."
         steps={steps}
       />,
     );
