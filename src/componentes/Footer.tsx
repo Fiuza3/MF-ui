@@ -42,6 +42,7 @@ export function Footer({
             </div>
             <p
               aria-hidden="true"
+              role="presentation"
               className="select-none font-mono text-[clamp(5rem,24vw,24rem)] font-black leading-[0.76] tracking-tighter text-[var(--cyan)]/10"
             >
               {"<MF/>"}
