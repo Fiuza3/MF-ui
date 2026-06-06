@@ -1,37 +1,3 @@
-"use strict";
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/tokens/index.ts
-var tokens_exports = {};
-__export(tokens_exports, {
-  blinkMs: () => blinkMs,
-  cores: () => cores,
-  duration: () => duration,
-  ease: () => ease,
-  fadeIn: () => fadeIn,
-  fadeUp: () => fadeUp,
-  familias: () => familias,
-  pesos: () => pesos,
-  scaleIn: () => scaleIn
-});
-module.exports = __toCommonJS(tokens_exports);
-
 // src/tokens/cores.ts
 var cores = {
   fundo: "#0B0F14",
@@ -93,16 +59,16 @@ var scaleIn = (delay = 0) => ({
   animate: { opacity: 1, scale: 1 },
   transition: { delay, duration: duration.fast, ease: ease.powerOut }
 });
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  blinkMs,
+
+export {
   cores,
-  duration,
-  ease,
-  fadeIn,
-  fadeUp,
   familias,
   pesos,
+  duration,
+  blinkMs,
+  ease,
+  fadeUp,
+  fadeIn,
   scaleIn
-});
-//# sourceMappingURL=index.js.map
+};
+//# sourceMappingURL=chunk-BQZFF264.mjs.map

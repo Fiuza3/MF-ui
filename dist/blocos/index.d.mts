@@ -7,17 +7,17 @@ type HeroStat = {
 };
 type HeroProps = {
     eyebrow: string;
-    headline: React.ReactNode;
-    descricao: React.ReactNode;
+    title: React.ReactNode;
+    description: React.ReactNode;
     cta: {
         label: string;
         href: string;
     };
     stats: HeroStat[];
-    slotLateral?: React.ReactNode;
-    slotLateralLabel?: string;
+    slot?: React.ReactNode;
+    slotLabel?: string;
 };
-declare function Hero({ eyebrow, headline, descricao, cta, stats, slotLateral, slotLateralLabel, }: HeroProps): react_jsx_runtime.JSX.Element;
+declare function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel, }: HeroProps): react_jsx_runtime.JSX.Element;
 
 type ServiceItem = {
     id: string;
@@ -29,17 +29,17 @@ type ServiceItem = {
 };
 type ServicesProps = {
     eyebrow: string;
-    titulo: React.ReactNode;
-    descricao: React.ReactNode;
+    title: React.ReactNode;
+    description: React.ReactNode;
     services: ServiceItem[];
 };
-declare function Services({ eyebrow, titulo, descricao, services, }: ServicesProps): react_jsx_runtime.JSX.Element;
+declare function Services({ eyebrow, title, description, services, }: ServicesProps): react_jsx_runtime.JSX.Element;
 
 type ProjectItem = {
-    titulo: string;
-    descricao?: string;
+    title: string;
+    description?: string;
     tags?: string[];
-    slotMockup?: React.ReactNode;
+    mockup?: React.ReactNode;
     href?: string;
     /** optional metadata shown in cards */
     ano?: number;
@@ -49,27 +49,27 @@ type ProjectItem = {
 };
 type ProjectsProps = {
     eyebrow: string;
-    titulo: React.ReactNode;
-    descricao: React.ReactNode;
+    title: React.ReactNode;
+    description: React.ReactNode;
     projects: ProjectItem[];
 };
-declare function Projects({ eyebrow, titulo, descricao, projects, }: ProjectsProps): react_jsx_runtime.JSX.Element;
+declare function Projects({ eyebrow, title, description, projects, }: ProjectsProps): react_jsx_runtime.JSX.Element;
 
 type ProcessStep = {
     numero: string;
-    titulo: string;
-    descricao: string;
+    title: string;
+    description: string;
     duracao?: string;
     commitLabel?: string;
     commitOutput?: string;
 };
 type ProcessProps = {
     eyebrow: string;
-    titulo: React.ReactNode;
-    descricao: React.ReactNode;
+    title: React.ReactNode;
+    description: React.ReactNode;
     steps: ProcessStep[];
 };
-declare function Process({ eyebrow, titulo, descricao, steps }: ProcessProps): react_jsx_runtime.JSX.Element;
+declare function Process({ eyebrow, title, description, steps }: ProcessProps): react_jsx_runtime.JSX.Element;
 
 type StackGrupo = {
     categoria: string;
@@ -77,15 +77,15 @@ type StackGrupo = {
     /** optional sub-label shown as a CLI command in the detail panel */
     comando?: string;
     /** optional description shown in the detail panel */
-    descricao?: string;
+    description?: string;
 };
 type StackProps = {
     eyebrow: string;
-    titulo: React.ReactNode;
-    descricao: React.ReactNode;
+    title: React.ReactNode;
+    description: React.ReactNode;
     grupos: StackGrupo[];
 };
-declare function Stack({ eyebrow, titulo, descricao, grupos }: StackProps): react_jsx_runtime.JSX.Element;
+declare function Stack({ eyebrow, title, description, grupos }: StackProps): react_jsx_runtime.JSX.Element;
 
 type Depoimento = {
     texto: string;
@@ -95,23 +95,23 @@ type Depoimento = {
 };
 type TestimonialsProps = {
     eyebrow: string;
-    titulo: React.ReactNode;
+    title: React.ReactNode;
     depoimentos: Depoimento[];
 };
-declare function Testimonials({ eyebrow, titulo, depoimentos, }: TestimonialsProps): react_jsx_runtime.JSX.Element;
+declare function Testimonials({ eyebrow, title, depoimentos, }: TestimonialsProps): react_jsx_runtime.JSX.Element;
 
 type AboutProps = {
     eyebrow: string;
-    titulo: React.ReactNode;
+    title: React.ReactNode;
     paragrafos: React.ReactNode[];
     slotLateral?: React.ReactNode;
 };
-declare function About({ eyebrow, titulo, paragrafos, slotLateral, }: AboutProps): react_jsx_runtime.JSX.Element;
+declare function About({ eyebrow, title, paragrafos, slotLateral, }: AboutProps): react_jsx_runtime.JSX.Element;
 
 type ContactProps = {
     eyebrow: string;
-    titulo: React.ReactNode;
-    descricao: React.ReactNode;
+    title: React.ReactNode;
+    description: React.ReactNode;
     cta: {
         label: string;
         href: string;
@@ -119,6 +119,6 @@ type ContactProps = {
     email?: string;
     slotFormulario?: React.ReactNode;
 };
-declare function Contact({ eyebrow, titulo, descricao, cta, email, slotFormulario, }: ContactProps): react_jsx_runtime.JSX.Element;
+declare function Contact({ eyebrow, title, description, cta, email, slotFormulario, }: ContactProps): react_jsx_runtime.JSX.Element;
 
 export { About, type AboutProps, Contact, type ContactProps, type Depoimento, Hero, type HeroProps, type HeroStat, Process, type ProcessProps, type ProcessStep, type ProjectItem, Projects, type ProjectsProps, type ServiceItem, Services, type ServicesProps, Stack, type StackGrupo, type StackProps, Testimonials, type TestimonialsProps };

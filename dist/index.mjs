@@ -6,11 +6,8 @@ import {
   Projects,
   Services,
   Stack,
-  Testimonials,
-  blinkMs,
-  motionDurations,
-  motionEase
-} from "./chunk-5NESKQON.mjs";
+  Testimonials
+} from "./chunk-BIU3JRL5.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -53,15 +50,18 @@ import {
   TooltipTrigger,
   badgeVariants,
   buttonVariants
-} from "./chunk-I4NYC33I.mjs";
+} from "./chunk-S7PZPAES.mjs";
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
 import {
+  blinkMs,
   cores,
+  duration,
+  ease,
   familias,
   pesos
-} from "./chunk-Z5TNI3SI.mjs";
+} from "./chunk-BQZFF264.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -170,7 +170,7 @@ function LogoAnimado({
       "button",
       {
         type: "button",
-        "aria-label": label,
+        "aria-label": `${label} \u2014 MF Desenvolvimento`,
         onClick,
         className: "group inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
         children: [
@@ -331,6 +331,7 @@ function Footer({
               "p",
               {
                 "aria-hidden": "true",
+                role: "presentation",
                 className: "select-none font-mono text-[clamp(5rem,24vw,24rem)] font-black leading-[0.76] tracking-tighter text-[var(--cyan)]/10",
                 children: "<MF/>"
               }
@@ -445,8 +446,8 @@ export {
   cn,
   cores,
   familias,
-  motionDurations,
-  motionEase,
+  duration as motionDurations,
+  ease as motionEase,
   pesos
 };
 //# sourceMappingURL=index.mjs.map

@@ -1,4 +1,4 @@
-export { Cores, cores, familias, pesos } from './tokens/index.mjs';
+export { C as Cores, b as blinkMs, c as cores, f as familias, d as motionDurations, e as motionEase, p as pesos } from './ease-D34LFq0Y.mjs';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, Label, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants } from './primitivos/index.mjs';
 import { ClassValue } from 'clsx';
@@ -63,16 +63,4 @@ declare function Footer({ links, email, localizacao, nomeEmpresa, onLogoClick, }
 
 declare function cn(...inputs: ClassValue[]): string;
 
-declare const motionDurations: {
-    readonly micro: 0.24;
-    readonly reveal: 0.64;
-    readonly section: 0.9;
-};
-declare const motionEase: {
-    readonly expoOut: readonly [0.16, 1, 0.3, 1];
-    readonly powerOut: readonly [0.22, 1, 0.36, 1];
-    readonly softInOut: readonly [0.65, 0, 0.35, 1];
-};
-declare const blinkMs = 530;
-
-export { Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, blinkMs, cn, motionDurations, motionEase };
+export { Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, cn };
