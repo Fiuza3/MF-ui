@@ -25,8 +25,8 @@ describe("Services", () => {
     render(
       <Services
         eyebrow="// build modules"
-        titulo={<>Serviços como sistemas.</>}
-        descricao="Cada frente tem uma função clara."
+        title={<>Serviços como sistemas.</>}
+        description="Cada frente tem uma função clara."
         services={services}
       />,
     );
@@ -40,8 +40,8 @@ describe("Services", () => {
     render(
       <Services
         eyebrow="// build modules"
-        titulo="Serviços"
-        descricao="Desc"
+        title="Serviços"
+        description="Desc"
         services={services}
       />,
     );

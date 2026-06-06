@@ -12,17 +12,17 @@ export type StackGrupo = {
   /** optional sub-label shown as a CLI command in the detail panel */
   comando?: string;
   /** optional description shown in the detail panel */
-  descricao?: string;
+  description?: string;
 };
 
 export type StackProps = {
   eyebrow: string;
-  titulo: React.ReactNode;
-  descricao: React.ReactNode;
+  title: React.ReactNode;
+  description: React.ReactNode;
   grupos: StackGrupo[];
 };
 
-export function Stack({ eyebrow, titulo, descricao, grupos }: StackProps) {
+export function Stack({ eyebrow, title, description, grupos }: StackProps) {
   const shouldAnimate = !useReducedMotion();
   const [active, setActive] = useState(grupos[0]);
 
@@ -47,11 +47,11 @@ export function Stack({ eyebrow, titulo, descricao, grupos }: StackProps) {
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
           </p>
-          <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground">
-            {titulo}
+          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+            {title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
-            {descricao}
+            {description}
           </p>
         </motion.div>
 
@@ -151,9 +151,9 @@ export function Stack({ eyebrow, titulo, descricao, grupos }: StackProps) {
                   </span>
                 </div>
 
-                {active.descricao && (
+                {active.description && (
                   <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-text">
-                    {active.descricao}
+                    {active.description}
                   </p>
                 )}
 

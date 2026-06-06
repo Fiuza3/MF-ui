@@ -6,8 +6,8 @@ import { motionEase } from "../lib/motion";
 
 export type ProcessStep = {
   numero: string;
-  titulo: string;
-  descricao: string;
+  title: string;
+  description: string;
   duracao?: string;
   commitLabel?: string;
   commitOutput?: string;
@@ -15,8 +15,8 @@ export type ProcessStep = {
 
 export type ProcessProps = {
   eyebrow: string;
-  titulo: React.ReactNode;
-  descricao: React.ReactNode;
+  title: React.ReactNode;
+  description: React.ReactNode;
   steps: ProcessStep[];
 };
 
@@ -63,11 +63,11 @@ function PipelineCard({
         </div>
 
         <h3 className="mt-3 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.05] tracking-tight text-foreground">
-          {step.titulo}
+          {step.title}
         </h3>
 
         <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-text">
-          {step.descricao}
+          {step.description}
         </p>
 
         {(step.commitLabel || step.commitOutput) && (
@@ -91,7 +91,7 @@ function PipelineCard({
   );
 }
 
-export function Process({ eyebrow, titulo, descricao, steps }: ProcessProps) {
+export function Process({ eyebrow, title, description, steps }: ProcessProps) {
   const shouldAnimate = !useReducedMotion();
 
   return (
@@ -115,11 +115,11 @@ export function Process({ eyebrow, titulo, descricao, steps }: ProcessProps) {
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
           </p>
-          <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground">
-            {titulo}
+          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+            {title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
-            {descricao}
+            {description}
           </p>
         </motion.div>
 

@@ -15,8 +15,8 @@ export type ServiceItem = {
 
 export type ServicesProps = {
   eyebrow: string;
-  titulo: React.ReactNode;
-  descricao: React.ReactNode;
+  title: React.ReactNode;
+  description: React.ReactNode;
   services: ServiceItem[];
 };
 
@@ -95,8 +95,8 @@ function ServiceCard({
 
 export function Services({
   eyebrow,
-  titulo,
-  descricao,
+  title,
+  description,
   services,
 }: ServicesProps) {
   const shouldAnimate = !useReducedMotion();
@@ -120,8 +120,8 @@ export function Services({
           className="mb-8 lg:mb-10"
         >
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
-          <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground">{titulo}</h2>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{descricao}</p>
+          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">{title}</h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </motion.div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
