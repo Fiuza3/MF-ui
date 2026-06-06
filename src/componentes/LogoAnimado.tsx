@@ -78,7 +78,7 @@ export function LogoAnimado({
     return (
       <button
         type="button"
-        aria-label={label}
+        aria-label={`${label} — MF Desenvolvimento`}
         onClick={onClick}
         className="group inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
       >
