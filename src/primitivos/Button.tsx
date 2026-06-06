@@ -36,6 +36,8 @@ const buttonVariants = cva(
   },
 )
 
+export type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>['variant']>
+
 function Button({
   className,
   variant,
