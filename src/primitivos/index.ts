@@ -12,3 +12,4 @@ export * from "./Dialog";
 export * from "./Sheet";
 export * from "./Tooltip";
 export * from "./Select";
+export * from "./Checkbox";
