@@ -7,8 +7,8 @@ describe("Stack", () => {
     render(
       <Stack
         eyebrow="// architecture map"
-        titulo={<>Stack como decisão.</>}
-        descricao="Tecnologia entra quando reduz risco."
+        title={<>Stack como decisão.</>}
+        description="Tecnologia entra quando reduz risco."
         grupos={[{ categoria: "Frontend", itens: ["React"] }]}
       />,
     );

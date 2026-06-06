@@ -7,7 +7,7 @@ describe("Testimonials", () => {
     render(
       <Testimonials
         eyebrow="// depoimentos"
-        titulo={<>O que dizem quem já trabalhou comigo.</>}
+        title={<>O que dizem quem já trabalhou comigo.</>}
         depoimentos={[
           {
             texto: "Marcus entregou a API fiscal em 6 semanas.",
