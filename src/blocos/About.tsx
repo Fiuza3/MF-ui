@@ -6,14 +6,14 @@ import { motionEase } from "../lib/motion";
 
 export type AboutProps = {
   eyebrow: string;
-  titulo: React.ReactNode;
+  title: React.ReactNode;
   paragrafos: React.ReactNode[];
   slotLateral?: React.ReactNode;
 };
 
 export function About({
   eyebrow,
-  titulo,
+  title,
   paragrafos,
   slotLateral,
 }: AboutProps) {
@@ -45,8 +45,8 @@ export function About({
               {eyebrow}
             </p>
 
-            <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.94] tracking-tight text-foreground">
-              {titulo}
+            <h2 className="text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground">
+              {title}
             </h2>
 
             <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">

@@ -7,7 +7,7 @@ describe("About", () => {
     render(
       <About
         eyebrow="// diagnóstico antes do código"
-        titulo={<>Eu não começo pelo código.</>}
+        title={<>Eu não começo pelo código.</>}
         paragrafos={[
           <p key="p1">
             Antes da primeira linha, eu entendo produto e regra de negócio.
@@ -28,7 +28,7 @@ describe("About", () => {
     render(
       <About
         eyebrow="x"
-        titulo="Titulo"
+        title="Titulo"
         paragrafos={["Paragrafo"]}
         slotLateral={<div data-testid="lateral-about">terminal</div>}
       />,
