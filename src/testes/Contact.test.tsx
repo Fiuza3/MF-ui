@@ -7,8 +7,8 @@ describe("Contact", () => {
     render(
       <Contact
         eyebrow="// start project"
-        titulo={<>Não preencha formulário.</>}
-        descricao="Quatro respostas bastam."
+        title={<>Não preencha formulário.</>}
+        description="Quatro respostas bastam."
         cta={{ label: "WhatsApp direto", href: "https://wa.me/5500000000000" }}
       />,
     );

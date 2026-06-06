@@ -15,13 +15,13 @@ export type Depoimento = {
 
 export type TestimonialsProps = {
   eyebrow: string;
-  titulo: React.ReactNode;
+  title: React.ReactNode;
   depoimentos: Depoimento[];
 };
 
 export function Testimonials({
   eyebrow,
-  titulo,
+  title,
   depoimentos,
 }: TestimonialsProps) {
   const [current, setCurrent] = useState(0);
@@ -68,7 +68,7 @@ export function Testimonials({
             {eyebrow}
           </p>
           <h2 className="text-3xl font-bold text-balance lg:text-4xl">
-            {titulo}
+            {title}
           </h2>
         </motion.div>
 

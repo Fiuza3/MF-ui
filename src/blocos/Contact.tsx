@@ -6,8 +6,8 @@ import { motionEase } from "../lib/motion";
 
 export type ContactProps = {
   eyebrow: string;
-  titulo: React.ReactNode;
-  descricao: React.ReactNode;
+  title: React.ReactNode;
+  description: React.ReactNode;
   cta: { label: string; href: string };
   email?: string;
   slotFormulario?: React.ReactNode;
@@ -15,8 +15,8 @@ export type ContactProps = {
 
 export function Contact({
   eyebrow,
-  titulo,
-  descricao,
+  title,
+  description,
   cta,
   email,
   slotFormulario,
@@ -46,11 +46,11 @@ export function Contact({
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             <span lang="en">{eyebrow}</span>
           </p>
-          <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] font-black leading-[0.96] tracking-tight text-foreground">
-            {titulo}
+          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+            {title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
-            {descricao}
+            {description}
           </p>
         </motion.div>
 
