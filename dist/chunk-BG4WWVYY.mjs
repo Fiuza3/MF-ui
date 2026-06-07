@@ -600,6 +600,381 @@ function TooltipContent({
   ) });
 }
 
+// src/primitivos/Select.tsx
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { CheckIcon, ChevronDownIcon as ChevronDownIcon2, ChevronUpIcon } from "lucide-react";
+import { jsx as jsx12, jsxs as jsxs5 } from "react/jsx-runtime";
+function Select({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(SelectPrimitive.Root, { "data-slot": "select", ...props });
+}
+function SelectGroup({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(SelectPrimitive.Group, { "data-slot": "select-group", ...props });
+}
+function SelectValue({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
+}
+function SelectTrigger({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs5(
+    SelectPrimitive.Trigger,
+    {
+      "data-slot": "select-trigger",
+      className: cn(
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:ring-destructive/40 flex h-9 w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+        className
+      ),
+      ...props,
+      children: [
+        children,
+        /* @__PURE__ */ jsx12(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ jsx12(ChevronDownIcon2, { className: "size-4 opacity-50 shrink-0" }) })
+      ]
+    }
+  );
+}
+function SelectScrollUpButton({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(
+    SelectPrimitive.ScrollUpButton,
+    {
+      "data-slot": "select-scroll-up-button",
+      className: cn("flex cursor-default items-center justify-center py-1", className),
+      ...props,
+      children: /* @__PURE__ */ jsx12(ChevronUpIcon, { className: "size-4" })
+    }
+  );
+}
+function SelectScrollDownButton({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(
+    SelectPrimitive.ScrollDownButton,
+    {
+      "data-slot": "select-scroll-down-button",
+      className: cn("flex cursor-default items-center justify-center py-1", className),
+      ...props,
+      children: /* @__PURE__ */ jsx12(ChevronDownIcon2, { className: "size-4" })
+    }
+  );
+}
+function SelectContent({
+  className,
+  children,
+  position = "popper",
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(SelectPrimitive.Portal, { children: /* @__PURE__ */ jsxs5(
+    SelectPrimitive.Content,
+    {
+      "data-slot": "select-content",
+      className: cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md",
+        position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+        className
+      ),
+      position,
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx12(SelectScrollUpButton, {}),
+        /* @__PURE__ */ jsx12(
+          SelectPrimitive.Viewport,
+          {
+            className: cn(
+              "p-1",
+              position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+            ),
+            children
+          }
+        ),
+        /* @__PURE__ */ jsx12(SelectScrollDownButton, {})
+      ]
+    }
+  ) });
+}
+function SelectLabel({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(
+    SelectPrimitive.Label,
+    {
+      "data-slot": "select-label",
+      className: cn("text-muted-foreground px-2 py-1.5 text-xs", className),
+      ...props
+    }
+  );
+}
+function SelectItem({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs5(
+    SelectPrimitive.Item,
+    {
+      "data-slot": "select-item",
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        className
+      ),
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx12("span", { className: "absolute right-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ jsx12(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx12(CheckIcon, { className: "size-4" }) }) }),
+        /* @__PURE__ */ jsx12(SelectPrimitive.ItemText, { children })
+      ]
+    }
+  );
+}
+function SelectSeparator({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx12(
+    SelectPrimitive.Separator,
+    {
+      "data-slot": "select-separator",
+      className: cn("bg-border pointer-events-none -mx-1 my-1 h-px", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Checkbox.tsx
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import { CheckIcon as CheckIcon2 } from "lucide-react";
+import { jsx as jsx13 } from "react/jsx-runtime";
+function Checkbox({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx13(
+    CheckboxPrimitive.Root,
+    {
+      "data-slot": "checkbox",
+      className: cn(
+        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      ),
+      ...props,
+      children: /* @__PURE__ */ jsx13(
+        CheckboxPrimitive.Indicator,
+        {
+          "data-slot": "checkbox-indicator",
+          className: "flex items-center justify-center text-current transition-none",
+          children: /* @__PURE__ */ jsx13(CheckIcon2, { className: "size-3.5" })
+        }
+      )
+    }
+  );
+}
+
+// src/primitivos/Switch.tsx
+import * as SwitchPrimitive from "@radix-ui/react-switch";
+import { jsx as jsx14 } from "react/jsx-runtime";
+function Switch({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx14(
+    SwitchPrimitive.Root,
+    {
+      "data-slot": "switch",
+      className: cn(
+        "peer focus-visible:border-ring focus-visible:ring-ring/50 dark:focus-visible:ring-ring/20 inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80",
+        className
+      ),
+      ...props,
+      children: /* @__PURE__ */ jsx14(
+        SwitchPrimitive.Thumb,
+        {
+          "data-slot": "switch-thumb",
+          className: cn(
+            "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"
+          )
+        }
+      )
+    }
+  );
+}
+
+// src/primitivos/Tabs.tsx
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { jsx as jsx15 } from "react/jsx-runtime";
+function Tabs({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx15(
+    TabsPrimitive.Root,
+    {
+      "data-slot": "tabs",
+      className: cn("flex flex-col gap-2", className),
+      ...props
+    }
+  );
+}
+function TabsList({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx15(
+    TabsPrimitive.List,
+    {
+      "data-slot": "tabs-list",
+      className: cn(
+        "bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-1",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TabsTrigger({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx15(
+    TabsPrimitive.Trigger,
+    {
+      "data-slot": "tabs-trigger",
+      className: cn(
+        "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TabsContent({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx15(
+    TabsPrimitive.Content,
+    {
+      "data-slot": "tabs-content",
+      className: cn("flex-1 outline-none", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Skeleton.tsx
+import { jsx as jsx16 } from "react/jsx-runtime";
+function Skeleton({ className, ...props }) {
+  return /* @__PURE__ */ jsx16(
+    "div",
+    {
+      "data-slot": "skeleton",
+      className: cn("bg-accent/10 animate-pulse rounded-md", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Table.tsx
+import { jsx as jsx17 } from "react/jsx-runtime";
+function Table({ className, ...props }) {
+  return /* @__PURE__ */ jsx17("div", { "data-slot": "table-wrapper", className: "relative w-full overflow-x-auto", children: /* @__PURE__ */ jsx17(
+    "table",
+    {
+      "data-slot": "table",
+      className: cn("w-full caption-bottom text-sm", className),
+      ...props
+    }
+  ) });
+}
+function TableHeader({ className, ...props }) {
+  return /* @__PURE__ */ jsx17(
+    "thead",
+    {
+      "data-slot": "table-header",
+      className: cn("[&_tr]:border-b", className),
+      ...props
+    }
+  );
+}
+function TableBody({ className, ...props }) {
+  return /* @__PURE__ */ jsx17(
+    "tbody",
+    {
+      "data-slot": "table-body",
+      className: cn("[&_tr:last-child]:border-0", className),
+      ...props
+    }
+  );
+}
+function TableFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsx17(
+    "tfoot",
+    {
+      "data-slot": "table-footer",
+      className: cn("bg-muted/50 border-t font-medium [&>tr]:last:border-b-0", className),
+      ...props
+    }
+  );
+}
+function TableRow({ className, ...props }) {
+  return /* @__PURE__ */ jsx17(
+    "tr",
+    {
+      "data-slot": "table-row",
+      className: cn(
+        "border-b border-border hover:bg-surface-raised/50 data-[state=selected]:bg-muted transition-colors",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableHead({ className, ...props }) {
+  return /* @__PURE__ */ jsx17(
+    "th",
+    {
+      "data-slot": "table-head",
+      className: cn(
+        "text-muted-foreground h-10 px-3 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableCell({ className, ...props }) {
+  return /* @__PURE__ */ jsx17(
+    "td",
+    {
+      "data-slot": "table-cell",
+      className: cn(
+        "px-3 py-3 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableCaption({ className, ...props }) {
+  return /* @__PURE__ */ jsx17(
+    "caption",
+    {
+      "data-slot": "table-caption",
+      className: cn("text-muted-foreground mt-4 text-sm", className),
+      ...props
+    }
+  );
+}
+
 export {
   buttonVariants,
   Button,
@@ -641,6 +1016,31 @@ export {
   TooltipProvider,
   Tooltip,
   TooltipTrigger,
-  TooltipContent
+  TooltipContent,
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  Checkbox,
+  Switch,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Skeleton,
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableCaption
 };
-//# sourceMappingURL=chunk-S7PZPAES.mjs.map
+//# sourceMappingURL=chunk-BG4WWVYY.mjs.map
