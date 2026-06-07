@@ -44,6 +44,7 @@ __export(index_exports, {
   CardFooter: () => CardFooter,
   CardHeader: () => CardHeader,
   CardTitle: () => CardTitle,
+  Checkbox: () => Checkbox,
   Contact: () => Contact,
   Dialog: () => Dialog,
   DialogClose: () => DialogClose,
@@ -67,6 +68,16 @@ __export(index_exports, {
   RATIO_ALTURA_LOGO: () => RATIO_ALTURA_LOGO,
   RATIO_AVANCO_LOGO: () => RATIO_AVANCO_LOGO,
   RATIO_PADDING_LOGO: () => RATIO_PADDING_LOGO,
+  Select: () => Select,
+  SelectContent: () => SelectContent,
+  SelectGroup: () => SelectGroup,
+  SelectItem: () => SelectItem,
+  SelectLabel: () => SelectLabel,
+  SelectScrollDownButton: () => SelectScrollDownButton,
+  SelectScrollUpButton: () => SelectScrollUpButton,
+  SelectSeparator: () => SelectSeparator,
+  SelectTrigger: () => SelectTrigger,
+  SelectValue: () => SelectValue,
   Separator: () => Separator,
   Services: () => Services,
   Sheet: () => Sheet,
@@ -77,7 +88,21 @@ __export(index_exports, {
   SheetHeader: () => SheetHeader,
   SheetTitle: () => SheetTitle,
   SheetTrigger: () => SheetTrigger,
+  Skeleton: () => Skeleton,
   Stack: () => Stack,
+  Switch: () => Switch,
+  Table: () => Table,
+  TableBody: () => TableBody,
+  TableCaption: () => TableCaption,
+  TableCell: () => TableCell,
+  TableFooter: () => TableFooter,
+  TableHead: () => TableHead,
+  TableHeader: () => TableHeader,
+  TableRow: () => TableRow,
+  Tabs: () => Tabs,
+  TabsContent: () => TabsContent,
+  TabsList: () => TabsList,
+  TabsTrigger: () => TabsTrigger,
   Testimonials: () => Testimonials,
   Textarea: () => Textarea,
   Tooltip: () => Tooltip,
@@ -1055,6 +1080,381 @@ function TooltipContent({
   ) });
 }
 
+// src/primitivos/Select.tsx
+var SelectPrimitive = __toESM(require("@radix-ui/react-select"));
+var import_lucide_react4 = require("lucide-react");
+var import_jsx_runtime16 = require("react/jsx-runtime");
+function Select({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectPrimitive.Root, { "data-slot": "select", ...props });
+}
+function SelectGroup({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectPrimitive.Group, { "data-slot": "select-group", ...props });
+}
+function SelectValue({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
+}
+function SelectTrigger({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+    SelectPrimitive.Trigger,
+    {
+      "data-slot": "select-trigger",
+      className: cn(
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:ring-destructive/40 flex h-9 w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+        className
+      ),
+      ...props,
+      children: [
+        children,
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react4.ChevronDownIcon, { className: "size-4 opacity-50 shrink-0" }) })
+      ]
+    }
+  );
+}
+function SelectScrollUpButton({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    SelectPrimitive.ScrollUpButton,
+    {
+      "data-slot": "select-scroll-up-button",
+      className: cn("flex cursor-default items-center justify-center py-1", className),
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react4.ChevronUpIcon, { className: "size-4" })
+    }
+  );
+}
+function SelectScrollDownButton({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    SelectPrimitive.ScrollDownButton,
+    {
+      "data-slot": "select-scroll-down-button",
+      className: cn("flex cursor-default items-center justify-center py-1", className),
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react4.ChevronDownIcon, { className: "size-4" })
+    }
+  );
+}
+function SelectContent({
+  className,
+  children,
+  position = "popper",
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+    SelectPrimitive.Content,
+    {
+      "data-slot": "select-content",
+      className: cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md",
+        position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+        className
+      ),
+      position,
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectScrollUpButton, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          SelectPrimitive.Viewport,
+          {
+            className: cn(
+              "p-1",
+              position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+            ),
+            children
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectScrollDownButton, {})
+      ]
+    }
+  ) });
+}
+function SelectLabel({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    SelectPrimitive.Label,
+    {
+      "data-slot": "select-label",
+      className: cn("text-muted-foreground px-2 py-1.5 text-xs", className),
+      ...props
+    }
+  );
+}
+function SelectItem({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+    SelectPrimitive.Item,
+    {
+      "data-slot": "select-item",
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        className
+      ),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "absolute right-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react4.CheckIcon, { className: "size-4" }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SelectPrimitive.ItemText, { children })
+      ]
+    }
+  );
+}
+function SelectSeparator({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    SelectPrimitive.Separator,
+    {
+      "data-slot": "select-separator",
+      className: cn("bg-border pointer-events-none -mx-1 my-1 h-px", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Checkbox.tsx
+var CheckboxPrimitive = __toESM(require("@radix-ui/react-checkbox"));
+var import_lucide_react5 = require("lucide-react");
+var import_jsx_runtime17 = require("react/jsx-runtime");
+function Checkbox({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+    CheckboxPrimitive.Root,
+    {
+      "data-slot": "checkbox",
+      className: cn(
+        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      ),
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+        CheckboxPrimitive.Indicator,
+        {
+          "data-slot": "checkbox-indicator",
+          className: "flex items-center justify-center text-current transition-none",
+          children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_lucide_react5.CheckIcon, { className: "size-3.5" })
+        }
+      )
+    }
+  );
+}
+
+// src/primitivos/Switch.tsx
+var SwitchPrimitive = __toESM(require("@radix-ui/react-switch"));
+var import_jsx_runtime18 = require("react/jsx-runtime");
+function Switch({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+    SwitchPrimitive.Root,
+    {
+      "data-slot": "switch",
+      className: cn(
+        "peer focus-visible:border-ring focus-visible:ring-ring/50 dark:focus-visible:ring-ring/20 inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80",
+        className
+      ),
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+        SwitchPrimitive.Thumb,
+        {
+          "data-slot": "switch-thumb",
+          className: cn(
+            "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"
+          )
+        }
+      )
+    }
+  );
+}
+
+// src/primitivos/Tabs.tsx
+var TabsPrimitive = __toESM(require("@radix-ui/react-tabs"));
+var import_jsx_runtime19 = require("react/jsx-runtime");
+function Tabs({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    TabsPrimitive.Root,
+    {
+      "data-slot": "tabs",
+      className: cn("flex flex-col gap-2", className),
+      ...props
+    }
+  );
+}
+function TabsList({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    TabsPrimitive.List,
+    {
+      "data-slot": "tabs-list",
+      className: cn(
+        "bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-1",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TabsTrigger({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    TabsPrimitive.Trigger,
+    {
+      "data-slot": "tabs-trigger",
+      className: cn(
+        "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TabsContent({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    TabsPrimitive.Content,
+    {
+      "data-slot": "tabs-content",
+      className: cn("flex-1 outline-none", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Skeleton.tsx
+var import_jsx_runtime20 = require("react/jsx-runtime");
+function Skeleton({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    "div",
+    {
+      "data-slot": "skeleton",
+      className: cn("bg-accent/10 animate-pulse rounded-md", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Table.tsx
+var import_jsx_runtime21 = require("react/jsx-runtime");
+function Table({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { "data-slot": "table-wrapper", className: "relative w-full overflow-x-auto", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "table",
+    {
+      "data-slot": "table",
+      className: cn("w-full caption-bottom text-sm", className),
+      ...props
+    }
+  ) });
+}
+function TableHeader({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "thead",
+    {
+      "data-slot": "table-header",
+      className: cn("[&_tr]:border-b", className),
+      ...props
+    }
+  );
+}
+function TableBody({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "tbody",
+    {
+      "data-slot": "table-body",
+      className: cn("[&_tr:last-child]:border-0", className),
+      ...props
+    }
+  );
+}
+function TableFooter({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "tfoot",
+    {
+      "data-slot": "table-footer",
+      className: cn("bg-muted/50 border-t font-medium [&>tr]:last:border-b-0", className),
+      ...props
+    }
+  );
+}
+function TableRow({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "tr",
+    {
+      "data-slot": "table-row",
+      className: cn(
+        "border-b border-border hover:bg-surface-raised/50 data-[state=selected]:bg-muted transition-colors",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableHead({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "th",
+    {
+      "data-slot": "table-head",
+      className: cn(
+        "text-muted-foreground h-10 px-3 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableCell({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "td",
+    {
+      "data-slot": "table-cell",
+      className: cn(
+        "px-3 py-3 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableCaption({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "caption",
+    {
+      "data-slot": "table-caption",
+      className: cn("text-muted-foreground mt-4 text-sm", className),
+      ...props
+    }
+  );
+}
+
 // src/tokens/duration.ts
 var duration = {
   micro: 0.15,
@@ -1073,7 +1473,7 @@ var ease = {
 
 // src/blocos/Hero.tsx
 var import_framer_motion3 = require("framer-motion");
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime22 = require("react/jsx-runtime");
 function Hero({
   eyebrow,
   title,
@@ -1084,20 +1484,20 @@ function Hero({
   slotLabel = "live process"
 }) {
   const shouldAnimate = !(0, import_framer_motion3.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
     "section",
     {
       id: "hero",
       "aria-label": "Introdu\xE7\xE3o",
       className: "hero-shell relative flex min-h-[100svh] overflow-hidden border-b border-line",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "hero-noise", "aria-hidden": "true" }),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "hero-radial", "aria-hidden": "true" }),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "hero-scanline", "aria-hidden": "true" }),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "relative z-10 flex w-full flex-col justify-between px-5 pb-8 pt-28 sm:px-8 lg:px-10 lg:pt-32 2xl:px-14", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "grid flex-1 items-start gap-10 lg:grid-cols-[minmax(0,1.58fr)_minmax(380px,0.92fr)] lg:gap-14 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.9fr)]", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "relative", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "hero-noise", "aria-hidden": "true" }),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "hero-radial", "aria-hidden": "true" }),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "hero-scanline", "aria-hidden": "true" }),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "relative z-10 flex w-full flex-col justify-between px-5 pb-8 pt-28 sm:px-8 lg:px-10 lg:pt-32 2xl:px-14", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "grid flex-1 items-start gap-10 lg:grid-cols-[minmax(0,1.58fr)_minmax(380px,0.92fr)] lg:gap-14 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.9fr)]", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "relative", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
                 import_framer_motion3.motion.p,
                 {
                   initial: shouldAnimate ? { opacity: 0, y: 12 } : {},
@@ -1108,7 +1508,7 @@ function Hero({
                 }
               ),
               title,
-              /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+              /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
                 import_framer_motion3.motion.div,
                 {
                   initial: shouldAnimate ? { opacity: 0, y: 20 } : {},
@@ -1116,8 +1516,8 @@ function Hero({
                   transition: shouldAnimate ? { delay: 0.3, duration: 0.7, ease: ease.expoOut } : { duration: 0 },
                   className: "mt-8 flex max-w-5xl flex-col gap-5 sm:flex-row sm:items-end sm:justify-between",
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "max-w-2xl text-base leading-relaxed text-gray-text sm:text-lg", children: description }),
-                    /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+                    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "max-w-2xl text-base leading-relaxed text-gray-text sm:text-lg", children: description }),
+                    /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
                       "a",
                       {
                         href: cta.href,
@@ -1126,7 +1526,7 @@ function Hero({
                         className: "group inline-flex w-fit items-center gap-3 rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
                         children: [
                           cta.label,
-                          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan", "aria-hidden": "true" })
+                          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan", "aria-hidden": "true" })
                         ]
                       }
                     )
@@ -1134,7 +1534,7 @@ function Hero({
                 }
               )
             ] }),
-            slot && /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+            slot && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
               import_framer_motion3.motion.div,
               {
                 initial: shouldAnimate ? { opacity: 0, y: 36, rotate: -1.5 } : {},
@@ -1142,22 +1542,22 @@ function Hero({
                 transition: shouldAnimate ? { delay: 0.56, duration: 0.9, ease: ease.expoOut } : { duration: 0 },
                 className: "relative lg:translate-y-16",
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block", children: slotLabel }),
+                  /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block", children: slotLabel }),
                   slot
                 ]
               }
             )
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
             import_framer_motion3.motion.div,
             {
               initial: shouldAnimate ? { opacity: 0, y: 20 } : {},
               animate: shouldAnimate ? { opacity: 1, y: 0 } : {},
               transition: shouldAnimate ? { delay: 0.5, duration: 0.7, ease: ease.expoOut } : { duration: 0 },
               className: "mt-16 grid grid-cols-2 gap-5 border-t border-line pt-6 sm:grid-cols-4 lg:mt-24",
-              children: stats.map((stat) => /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "font-mono text-3xl font-black text-foreground sm:text-4xl", children: stat.value }),
-                /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "mt-2 text-xs uppercase tracking-[0.18em] text-gray-text", children: stat.label })
+              children: stats.map((stat) => /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-mono text-3xl font-black text-foreground sm:text-4xl", children: stat.value }),
+                /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "mt-2 text-xs uppercase tracking-[0.18em] text-gray-text", children: stat.label })
               ] }, stat.label))
             }
           )
@@ -1169,13 +1569,13 @@ function Hero({
 
 // src/blocos/Services.tsx
 var import_framer_motion4 = require("framer-motion");
-var import_jsx_runtime17 = require("react/jsx-runtime");
+var import_jsx_runtime23 = require("react/jsx-runtime");
 function ServiceCard({
   service,
   index
 }) {
   const shouldAnimate = !(0, import_framer_motion4.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
     import_framer_motion4.motion.article,
     {
       initial: shouldAnimate ? { opacity: 0, y: 28 } : {},
@@ -1184,7 +1584,7 @@ function ServiceCard({
       viewport: shouldAnimate ? { once: true, margin: "-70px" } : void 0,
       className: "group relative min-h-[200px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 lg:p-6",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
           "div",
           {
             className: "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100",
@@ -1194,27 +1594,27 @@ function ServiceCard({
             "aria-hidden": "true"
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "relative flex h-full flex-col justify-between gap-8", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "flex items-center justify-between gap-4", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "font-mono text-xs text-cyan", children: service.tag }),
-              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "font-mono text-[10px] uppercase tracking-[0.22em] text-gray-text", children: service.id })
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "relative flex h-full flex-col justify-between gap-8", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "flex items-center justify-between gap-4", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "font-mono text-xs text-cyan", children: service.tag }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "font-mono text-[10px] uppercase tracking-[0.22em] text-gray-text", children: service.id })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("h3", { className: "mt-5 text-[clamp(1.6rem,3vw,3.2rem)] font-black leading-none tracking-tight text-foreground", children: service.title }),
-            /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("p", { className: "mt-4 max-w-2xl text-sm leading-relaxed text-gray-text lg:text-base", children: service.description })
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("h3", { className: "mt-5 text-[clamp(1.6rem,3vw,3.2rem)] font-black leading-none tracking-tight text-foreground", children: service.title }),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-4 max-w-2xl text-sm leading-relaxed text-gray-text lg:text-base", children: service.description })
           ] }),
           service.motif,
-          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
             "ul",
             {
               className: "grid gap-2 sm:grid-cols-2",
               "aria-label": `Itens de ${service.title}`,
-              children: service.items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+              children: service.items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
                 "li",
                 {
                   className: "flex items-start gap-2 text-sm text-gray-text",
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+                    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
                       "span",
                       {
                         className: "mt-0.5 font-mono text-cyan",
@@ -1241,14 +1641,14 @@ function Services({
   services
 }) {
   const shouldAnimate = !(0, import_framer_motion4.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
     "section",
     {
       id: "servicos",
       "aria-label": "Servi\xE7os",
       className: "overflow-hidden border-t border-line py-16 lg:py-24",
-      children: /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-16", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-16", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
           import_framer_motion4.motion.div,
           {
             initial: shouldAnimate ? { opacity: 0, y: 22 } : {},
@@ -1257,13 +1657,13 @@ function Services({
             viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
             className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
-              /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(ServiceCard, { service, index: i }, service.id)) })
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(ServiceCard, { service, index: i }, service.id)) })
       ] })
     }
   );
@@ -1272,7 +1672,7 @@ function Services({
 // src/blocos/Projects.tsx
 var import_react2 = require("react");
 var import_framer_motion5 = require("framer-motion");
-var import_jsx_runtime18 = require("react/jsx-runtime");
+var import_jsx_runtime24 = require("react/jsx-runtime");
 function ProjectModal({
   project,
   onClose
@@ -1302,7 +1702,7 @@ function ProjectModal({
     window.setTimeout(() => closeRef.current?.focus(), 30);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_framer_motion5.AnimatePresence, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_framer_motion5.AnimatePresence, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
     import_framer_motion5.motion.div,
     {
       initial: { opacity: 0 },
@@ -1311,14 +1711,14 @@ function ProjectModal({
       className: "fixed inset-0 z-[80] flex items-center justify-center p-5",
       onMouseDown: onClose,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
           "div",
           {
             className: "absolute inset-0 bg-background/85 backdrop-blur-md",
             "aria-hidden": "true"
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
           import_framer_motion5.motion.div,
           {
             ref: dialogRef,
@@ -1332,7 +1732,7 @@ function ProjectModal({
             "aria-modal": "true",
             "aria-label": `Case tecnico: ${project.title}`,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
                 "button",
                 {
                   ref: closeRef,
@@ -1340,26 +1740,26 @@ function ProjectModal({
                   onClick: onClose,
                   "aria-label": "Fechar case",
                   className: "absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
-                  children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { "aria-hidden": "true", children: "\u2715" })
+                  children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { "aria-hidden": "true", children: "\u2715" })
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
                 "case.log",
                 project.ano ? ` / ${project.ano}` : ""
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("h3", { className: "mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl", children: project.title }),
-              project.description && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "mt-5 max-w-2xl text-base leading-relaxed text-gray-text", children: project.description }),
-              (project.metrica || project.resultado) && /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "mt-8 grid gap-4 sm:grid-cols-2", children: [
-                project.metrica && /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "mt-3 font-mono text-xl text-cyan", children: project.metrica })
+              /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h3", { className: "mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl", children: project.title }),
+              project.description && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mt-5 max-w-2xl text-base leading-relaxed text-gray-text", children: project.description }),
+              (project.metrica || project.resultado) && /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mt-8 grid gap-4 sm:grid-cols-2", children: [
+                project.metrica && /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mt-3 font-mono text-xl text-cyan", children: project.metrica })
                 ] }),
-                project.resultado && /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "resultado" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "mt-3 text-sm leading-relaxed text-foreground", children: project.resultado })
+                project.resultado && /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "resultado" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mt-3 text-sm leading-relaxed text-foreground", children: project.resultado })
                 ] })
               ] }),
-              project.tags && project.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "mt-6 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+              project.tags && project.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "mt-6 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
                 "span",
                 {
                   className: "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text",
@@ -1380,7 +1780,7 @@ function ProjectFrame({
   onOpen
 }) {
   const shouldAnimate = !(0, import_framer_motion5.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
     import_framer_motion5.motion.article,
     {
       initial: shouldAnimate ? { opacity: 0, y: 32 } : {},
@@ -1393,17 +1793,17 @@ function ProjectFrame({
       viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
       className: "project-frame group flex min-h-[540px] w-[88vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[76vw] lg:w-[56vw] lg:p-8 xl:w-[52vw] 2xl:w-[44vw]",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-start", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-start", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
               "frame ",
               String(index + 1).padStart(2, "0"),
               project.ano ? ` / ${project.ano}` : ""
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("h3", { className: "mt-5 max-w-2xl text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.88] tracking-tight text-foreground", children: project.title }),
-            project.description && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: project.description })
+            /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h3", { className: "mt-5 max-w-2xl text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.88] tracking-tight text-foreground", children: project.title }),
+            project.description && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mt-6 max-w-xl text-base leading-relaxed text-gray-text", children: project.description })
           ] }),
-          project.mockup && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+          project.mockup && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
             "div",
             {
               className: "project-mockup relative overflow-hidden rounded border border-line bg-background/70 p-4",
@@ -1412,14 +1812,14 @@ function ProjectFrame({
             }
           )
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "mt-8 grid gap-5 border-t border-line pt-6 md:grid-cols-[0.9fr_1fr_auto] md:items-end", children: [
-          project.metrica && /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica forte" }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "mt-2 font-mono text-xl text-cyan lg:text-2xl", children: project.metrica })
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mt-8 grid gap-5 border-t border-line pt-6 md:grid-cols-[0.9fr_1fr_auto] md:items-end", children: [
+          project.metrica && /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica forte" }),
+            /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mt-2 font-mono text-xl text-cyan lg:text-2xl", children: project.metrica })
           ] }),
-          project.tags && project.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "stack" }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "mt-2 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+          project.tags && project.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "stack" }),
+            /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "mt-2 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
               "span",
               {
                 className: "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text",
@@ -1428,7 +1828,7 @@ function ProjectFrame({
               tag
             )) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
             "button",
             {
               type: "button",
@@ -1451,14 +1851,14 @@ function Projects({
   const shouldAnimate = !(0, import_framer_motion5.useReducedMotion)();
   const [selected, setSelected] = (0, import_react2.useState)(null);
   const loopedProjects = [...projects, ...projects];
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
     "section",
     {
       id: "projetos",
       "aria-label": "Projetos",
       className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
           import_framer_motion5.motion.div,
           {
             initial: shouldAnimate ? { opacity: 0, y: 24 } : {},
@@ -1467,26 +1867,26 @@ function Projects({
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
             className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
-              /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
+              /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+              /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
             ]
           }
         ) }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "project-carousel relative overflow-hidden", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "project-carousel relative overflow-hidden", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
             "div",
             {
               className: "project-carousel-track flex w-max gap-4 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14",
               "aria-label": "Sequencia de cases",
               children: loopedProjects.map((project, index) => {
                 const isClone = index >= projects.length;
-                return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+                return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
                   "div",
                   {
                     "data-testid": isClone ? "project-clone" : "project-item",
                     ...isClone ? { inert: true } : {},
-                    children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+                    children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
                       ProjectFrame,
                       {
                         project,
@@ -1500,14 +1900,14 @@ function Projects({
               })
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
             "div",
             {
               "aria-hidden": "true",
               className: "pointer-events-none absolute inset-y-0 left-0 hidden w-32 bg-gradient-to-r from-background to-transparent lg:block"
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
             "div",
             {
               "aria-hidden": "true",
@@ -1515,7 +1915,7 @@ function Projects({
             }
           )
         ] }),
-        selected && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ProjectModal, { project: selected, onClose: () => setSelected(null) })
+        selected && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(ProjectModal, { project: selected, onClose: () => setSelected(null) })
       ]
     }
   );
@@ -1523,13 +1923,13 @@ function Projects({
 
 // src/blocos/Process.tsx
 var import_framer_motion6 = require("framer-motion");
-var import_jsx_runtime19 = require("react/jsx-runtime");
+var import_jsx_runtime25 = require("react/jsx-runtime");
 function PipelineCard({
   step,
   index
 }) {
   const shouldAnimate = !(0, import_framer_motion6.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
     import_framer_motion6.motion.article,
     {
       initial: shouldAnimate ? { opacity: 0, y: 24 } : {},
@@ -1538,7 +1938,7 @@ function PipelineCard({
       viewport: shouldAnimate ? { once: true, margin: "-60px" } : void 0,
       className: "group relative flex h-full flex-col overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 lg:p-6",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
           "div",
           {
             className: "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100",
@@ -1548,21 +1948,21 @@ function PipelineCard({
             "aria-hidden": "true"
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "relative flex h-full flex-col", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "flex items-start justify-between gap-3", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: step.numero }),
-            step.duracao && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "shrink-0 rounded border border-line px-2 py-0.5 font-mono text-[10px] text-gray-text", children: step.duracao })
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "relative flex h-full flex-col", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "flex items-start justify-between gap-3", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: step.numero }),
+            step.duracao && /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("span", { className: "shrink-0 rounded border border-line px-2 py-0.5 font-mono text-[10px] text-gray-text", children: step.duracao })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h3", { className: "mt-3 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.05] tracking-tight text-foreground", children: step.title }),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mt-3 flex-1 text-sm leading-relaxed text-gray-text", children: step.description }),
-          (step.commitLabel || step.commitOutput) && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "mt-4 border-t border-line pt-3 font-mono", children: [
-            step.commitLabel && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "truncate text-xs text-foreground", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-cyan", children: "$" }),
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("h3", { className: "mt-3 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.05] tracking-tight text-foreground", children: step.title }),
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("p", { className: "mt-3 flex-1 text-sm leading-relaxed text-gray-text", children: step.description }),
+          (step.commitLabel || step.commitOutput) && /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "mt-4 border-t border-line pt-3 font-mono", children: [
+            step.commitLabel && /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("p", { className: "truncate text-xs text-foreground", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("span", { className: "text-cyan", children: "$" }),
               " ",
               step.commitLabel
             ] }),
-            step.commitOutput && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("p", { className: "mt-1 truncate text-[11px] text-gray-text", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-cyan/60", children: ">" }),
+            step.commitOutput && /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("p", { className: "mt-1 truncate text-[11px] text-gray-text", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("span", { className: "text-cyan/60", children: ">" }),
               " ",
               step.commitOutput
             ] })
@@ -1574,14 +1974,14 @@ function PipelineCard({
 }
 function Process({ eyebrow, title, description, steps }) {
   const shouldAnimate = !(0, import_framer_motion6.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
     "section",
     {
       id: "processo",
       "aria-label": "Processo de trabalho",
       className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
-      children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
           import_framer_motion6.motion.div,
           {
             initial: shouldAnimate ? { opacity: 0, y: 24 } : {},
@@ -1590,13 +1990,13 @@ function Process({ eyebrow, title, description, steps }) {
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
             className: "mb-8 lg:mb-10",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5", children: steps.map((step, index) => /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(PipelineCard, { step, index }, step.numero)) })
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5", children: steps.map((step, index) => /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(PipelineCard, { step, index }, step.numero)) })
       ] })
     }
   );
@@ -1605,18 +2005,18 @@ function Process({ eyebrow, title, description, steps }) {
 // src/blocos/Stack.tsx
 var import_react3 = require("react");
 var import_framer_motion7 = require("framer-motion");
-var import_jsx_runtime20 = require("react/jsx-runtime");
+var import_jsx_runtime26 = require("react/jsx-runtime");
 function Stack({ eyebrow, title, description, grupos }) {
   const shouldAnimate = !(0, import_framer_motion7.useReducedMotion)();
   const [active, setActive] = (0, import_react3.useState)(grupos[0]);
-  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
     "section",
     {
       id: "stack",
       "aria-label": "Mapa t\xE9cnico da stack",
       className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
-      children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(
           import_framer_motion7.motion.div,
           {
             initial: shouldAnimate ? { opacity: 0, y: 24 } : {},
@@ -1625,16 +2025,16 @@ function Stack({ eyebrow, title, description, grupos }) {
             viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
             className: "mb-10 lg:mb-12",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
-              /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
+              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "grid gap-6 lg:grid-cols-[1fr_1.15fr] xl:grid-cols-[0.95fr_1.25fr]", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "grid gap-3", children: grupos.map((grupo, index) => {
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "grid gap-6 lg:grid-cols-[1fr_1.15fr] xl:grid-cols-[0.95fr_1.25fr]", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "grid gap-3", children: grupos.map((grupo, index) => {
             const selected = active.categoria === grupo.categoria;
-            return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
+            return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(
               import_framer_motion7.motion.button,
               {
                 type: "button",
@@ -1654,7 +2054,7 @@ function Stack({ eyebrow, title, description, grupos }) {
                   selected ? "border-cyan bg-cyan/10" : "border-line bg-surface hover:border-cyan/50"
                 ),
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
                     "span",
                     {
                       className: cn(
@@ -1664,9 +2064,9 @@ function Stack({ eyebrow, title, description, grupos }) {
                       children: String(index + 1).padStart(2, "0")
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("span", { children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "block text-2xl font-black tracking-tight text-foreground", children: grupo.categoria }),
-                    grupo.comando && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("span", { className: "mt-2 block font-mono text-xs text-gray-text", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("span", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "block text-2xl font-black tracking-tight text-foreground", children: grupo.categoria }),
+                    grupo.comando && /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("span", { className: "mt-2 block font-mono text-xs text-gray-text", children: [
                       "$ ",
                       grupo.comando
                     ] })
@@ -1676,7 +2076,7 @@ function Stack({ eyebrow, title, description, grupos }) {
               grupo.categoria
             );
           }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "rounded border border-line bg-surface p-5 lg:p-8", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_framer_motion7.AnimatePresence, { mode: "wait", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "rounded border border-line bg-surface p-5 lg:p-8", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(import_framer_motion7.AnimatePresence, { mode: "wait", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(
             import_framer_motion7.motion.div,
             {
               initial: shouldAnimate ? { opacity: 0, y: 18, filter: "blur(8px)" } : {},
@@ -1684,18 +2084,18 @@ function Stack({ eyebrow, title, description, grupos }) {
               exit: shouldAnimate ? { opacity: 0, y: -14, filter: "blur(8px)" } : {},
               transition: shouldAnimate ? { duration: 0.28, ease: ease.powerOut } : { duration: 0 },
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "flex items-start justify-between gap-6", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "flex items-start justify-between gap-6", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
                       "layer / ",
                       active.categoria.toLowerCase()
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h3", { className: "mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: active.categoria })
+                    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h3", { className: "mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: active.categoria })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: "active" })
+                  /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: "active" })
                 ] }),
-                active.description && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: active.description }),
-                /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3", children: active.itens.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
+                active.description && /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: active.description }),
+                /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3", children: active.itens.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(
                   import_framer_motion7.motion.div,
                   {
                     initial: shouldAnimate ? { opacity: 0, y: 10 } : {},
@@ -1703,8 +2103,8 @@ function Stack({ eyebrow, title, description, grupos }) {
                     transition: shouldAnimate ? { delay: index * 0.04, duration: 0.25 } : { duration: 0 },
                     className: "group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60",
                     children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "relative z-10 text-sm text-foreground", children: item }),
-                      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+                      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "relative z-10 text-sm text-foreground", children: item }),
+                      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
                         "span",
                         {
                           className: "stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100",
@@ -1715,15 +2115,15 @@ function Stack({ eyebrow, title, description, grupos }) {
                   },
                   item
                 )) }),
-                active.comando && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("p", { className: "text-sm text-foreground", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "text-cyan", children: "$" }),
+                active.comando && /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("p", { className: "text-sm text-foreground", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "text-cyan", children: "$" }),
                     " explain --when-to-use",
                     " ",
                     active.categoria.toLowerCase()
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "text-cyan/70", children: ">" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "text-cyan/70", children: ">" }),
                     " uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
                   ] })
                 ] })
@@ -1740,7 +2140,7 @@ function Stack({ eyebrow, title, description, grupos }) {
 // src/blocos/Testimonials.tsx
 var import_react4 = require("react");
 var import_framer_motion8 = require("framer-motion");
-var import_jsx_runtime21 = require("react/jsx-runtime");
+var import_jsx_runtime27 = require("react/jsx-runtime");
 var AUTOPLAY_MS = 5e3;
 function Testimonials({
   eyebrow,
@@ -1768,14 +2168,14 @@ function Testimonials({
     };
   }, [paused, userPaused, next]);
   const t = depoimentos[current];
-  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
     "section",
     {
       id: "depoimentos",
       "aria-label": "Depoimentos de clientes",
       className: "py-32 border-t border-line",
-      children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
           import_framer_motion8.motion.div,
           {
             initial: { opacity: 0, y: 20 },
@@ -1784,12 +2184,12 @@ function Testimonials({
             viewport: { once: true, margin: "-60px" },
             className: "mb-16",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("p", { className: "font-mono text-sm text-cyan tracking-widest uppercase mb-4", children: eyebrow }),
-              /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("h2", { className: "text-3xl font-bold text-balance lg:text-4xl", children: title })
+              /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { className: "font-mono text-sm text-cyan tracking-widest uppercase mb-4", children: eyebrow }),
+              /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("h2", { className: "text-3xl font-bold text-balance lg:text-4xl", children: title })
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
           "div",
           {
             role: "region",
@@ -1799,7 +2199,7 @@ function Testimonials({
             onMouseLeave: () => setPaused(false),
             className: "relative",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { "aria-live": "polite", "aria-atomic": "true", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(import_framer_motion8.AnimatePresence, { mode: "wait", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
+              /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { "aria-live": "polite", "aria-atomic": "true", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(import_framer_motion8.AnimatePresence, { mode: "wait", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
                 import_framer_motion8.motion.blockquote,
                 {
                   initial: { opacity: 0, y: 16 },
@@ -1808,7 +2208,7 @@ function Testimonials({
                   transition: { duration: 0.4 },
                   className: "rounded border border-line bg-surface p-10 lg:p-14",
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+                    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
                       "span",
                       {
                         "aria-hidden": "true",
@@ -1816,9 +2216,9 @@ function Testimonials({
                         children: "\u201C"
                       }
                     ),
-                    /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("p", { className: "mt-2 max-w-6xl text-lg leading-relaxed text-foreground lg:text-xl", children: t.texto }),
-                    /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("footer", { className: "mt-8 flex items-center gap-4", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+                    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { className: "mt-2 max-w-6xl text-lg leading-relaxed text-foreground lg:text-xl", children: t.texto }),
+                    /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("footer", { className: "mt-8 flex items-center gap-4", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
                         "div",
                         {
                           "aria-hidden": "true",
@@ -1826,35 +2226,35 @@ function Testimonials({
                           children: t.autor.charAt(0)
                         }
                       ),
-                      /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("cite", { className: "not-italic font-semibold text-foreground", children: t.autor }),
-                        (t.papel || t.empresa) && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("p", { className: "text-sm text-gray-text", children: [t.papel, t.empresa].filter(Boolean).join(" \xB7 ") })
+                      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("cite", { className: "not-italic font-semibold text-foreground", children: t.autor }),
+                        (t.papel || t.empresa) && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { className: "text-sm text-gray-text", children: [t.papel, t.empresa].filter(Boolean).join(" \xB7 ") })
                       ] })
                     ] })
                   ]
                 },
                 `${t.autor}-${current}`
               ) }) }),
-              /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "mt-6 flex items-center gap-4", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mt-6 flex items-center gap-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
                   "button",
                   {
                     onClick: prev,
                     "aria-label": "Depoimento anterior",
                     className: "flex h-11 w-11 items-center justify-center rounded border border-line text-gray-text hover:border-cyan hover:text-cyan transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
-                    children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("span", { "aria-hidden": "true", children: "\u2039" })
+                    children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { "aria-hidden": "true", children: "\u2039" })
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
                   "button",
                   {
                     onClick: next,
                     "aria-label": "Pr\xF3ximo depoimento",
                     className: "flex h-11 w-11 items-center justify-center rounded border border-line text-gray-text hover:border-cyan hover:text-cyan transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
-                    children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("span", { "aria-hidden": "true", children: "\u203A" })
+                    children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { "aria-hidden": "true", children: "\u203A" })
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "flex gap-1.5", role: "tablist", "aria-label": "Navegar depoimentos", children: depoimentos.map((_, i) => /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "flex gap-1.5", role: "tablist", "aria-label": "Navegar depoimentos", children: depoimentos.map((_, i) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
                   "button",
                   {
                     role: "tab",
@@ -1862,7 +2262,7 @@ function Testimonials({
                     "aria-label": `Ir para depoimento ${i + 1}`,
                     onClick: () => setCurrent(i),
                     className: "h-11 w-11 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 rounded",
-                    children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+                    children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
                       "span",
                       {
                         className: `block rounded-full transition-all duration-300 ${i === current ? "h-1 w-6 bg-cyan" : "h-1.5 w-1.5 bg-line hover:bg-gray-text"}`
@@ -1871,16 +2271,16 @@ function Testimonials({
                   },
                   i
                 )) }),
-                /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
                   "button",
                   {
                     onClick: () => setUserPaused((p) => !p),
                     "aria-label": userPaused ? "Retomar apresenta\xE7\xE3o" : "Pausar apresenta\xE7\xE3o",
                     className: "flex h-11 w-11 items-center justify-center rounded border border-line text-gray-text hover:border-cyan hover:text-cyan transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
-                    children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("span", { "aria-hidden": "true", children: userPaused ? "\u25B6" : "\u23F8" })
+                    children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { "aria-hidden": "true", children: userPaused ? "\u25B6" : "\u23F8" })
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("span", { className: "ml-auto font-mono text-xs text-gray-text", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: "ml-auto font-mono text-xs text-gray-text", children: [
                   String(current + 1).padStart(2, "0"),
                   " /",
                   " ",
@@ -1897,7 +2297,7 @@ function Testimonials({
 
 // src/blocos/About.tsx
 var import_framer_motion9 = require("framer-motion");
-var import_jsx_runtime22 = require("react/jsx-runtime");
+var import_jsx_runtime28 = require("react/jsx-runtime");
 function About({
   eyebrow,
   title,
@@ -1905,16 +2305,16 @@ function About({
   slotLateral
 }) {
   const shouldAnimate = !(0, import_framer_motion9.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
     "section",
     {
       id: "sobre",
       "aria-label": "Sobre",
       className: "relative overflow-hidden py-16 lg:py-24",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
             import_framer_motion9.motion.div,
             {
               initial: shouldAnimate ? { opacity: 0, y: 28 } : {},
@@ -1922,9 +2322,9 @@ function About({
               transition: shouldAnimate ? { duration: 0.74, ease: ease.expoOut } : { duration: 0 },
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-                /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
-                /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
                   import_framer_motion9.motion.div,
                   {
                     initial: shouldAnimate ? { opacity: 0, y: 18 } : {},
@@ -1943,7 +2343,7 @@ function About({
               ]
             }
           ),
-          slotLateral && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+          slotLateral && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
             import_framer_motion9.motion.aside,
             {
               initial: shouldAnimate ? { opacity: 0, y: 40 } : {},
@@ -1962,7 +2362,7 @@ function About({
 
 // src/blocos/Contact.tsx
 var import_framer_motion10 = require("framer-motion");
-var import_jsx_runtime23 = require("react/jsx-runtime");
+var import_jsx_runtime29 = require("react/jsx-runtime");
 function Contact({
   eyebrow,
   title,
@@ -1972,16 +2372,16 @@ function Contact({
   slotFormulario
 }) {
   const shouldAnimate = !(0, import_framer_motion10.useReducedMotion)();
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
     "section",
     {
       id: "contato",
       "aria-label": "Iniciar projeto",
       className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
             import_framer_motion10.motion.div,
             {
               initial: shouldAnimate ? { opacity: 0, y: 24 } : {},
@@ -1990,14 +2390,14 @@ function Contact({
               viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
               className: "mb-10 lg:mb-12",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { lang: "en", children: eyebrow }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
-                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
+                /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { lang: "en", children: eyebrow }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+                /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
               ]
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "grid gap-10 lg:grid-cols-[0.72fr_1.55fr] lg:items-start 2xl:grid-cols-[0.58fr_1.7fr]", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "grid gap-10 lg:grid-cols-[0.72fr_1.55fr] lg:items-start 2xl:grid-cols-[0.58fr_1.7fr]", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
               import_framer_motion10.motion.div,
               {
                 initial: shouldAnimate ? { opacity: 0, y: 28 } : {},
@@ -2006,7 +2406,7 @@ function Contact({
                 viewport: shouldAnimate ? { once: true, margin: "-80px" } : void 0,
                 className: "grid gap-4",
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+                  /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
                     "a",
                     {
                       href: cta.href,
@@ -2014,37 +2414,37 @@ function Contact({
                       rel: "noopener noreferrer",
                       className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
                       children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "flex h-11 w-11 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { "aria-hidden": "true", children: "\u{1F4AC}" }) }),
-                        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
-                          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "font-mono text-sm text-foreground", children: cta.label }),
-                          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: "para quando o escopo j\xE1 est\xE1 claro" })
+                        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "flex h-11 w-11 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { "aria-hidden": "true", children: "\u{1F4AC}" }) }),
+                        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "font-mono text-sm text-foreground", children: cta.label }),
+                          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: "para quando o escopo j\xE1 est\xE1 claro" })
                         ] })
                       ]
                     }
                   ),
-                  email && /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+                  email && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
                     "a",
                     {
                       href: `mailto:${email}`,
                       className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
                       children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "flex h-11 w-11 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { "aria-hidden": "true", children: "\u2709" }) }),
-                        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
-                          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "font-mono text-sm text-foreground", children: email }),
-                          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: "para materiais e projetos maiores" })
+                        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "flex h-11 w-11 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { "aria-hidden": "true", children: "\u2709" }) }),
+                        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "font-mono text-sm text-foreground", children: email }),
+                          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: "para materiais e projetos maiores" })
                         ] })
                       ]
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "rounded border border-line bg-surface p-5 font-mono", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "contract mode" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-4 text-sm text-foreground", children: "PJ / NFS-e / remoto" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: "O objetivo \xE9 sair da primeira conversa com risco, escopo e pr\xF3ximo passo claros." })
+                  /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "rounded border border-line bg-surface p-5 font-mono", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "contract mode" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-4 text-sm text-foreground", children: "PJ / NFS-e / remoto" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: "O objetivo \xE9 sair da primeira conversa com risco, escopo e pr\xF3ximo passo claros." })
                   ] })
                 ]
               }
             ),
-            slotFormulario && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+            slotFormulario && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
               import_framer_motion10.motion.div,
               {
                 initial: shouldAnimate ? { opacity: 0, y: 36 } : {},
@@ -2076,6 +2476,7 @@ function Contact({
   CardFooter,
   CardHeader,
   CardTitle,
+  Checkbox,
   Contact,
   Dialog,
   DialogClose,
@@ -2099,6 +2500,16 @@ function Contact({
   RATIO_ALTURA_LOGO,
   RATIO_AVANCO_LOGO,
   RATIO_PADDING_LOGO,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
   Separator,
   Services,
   Sheet,
@@ -2109,7 +2520,21 @@ function Contact({
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  Skeleton,
   Stack,
+  Switch,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
   Testimonials,
   Textarea,
   Tooltip,

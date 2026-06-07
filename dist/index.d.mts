@@ -1,6 +1,6 @@
 export { C as Cores, b as blinkMs, c as cores, f as familias, d as motionDurations, e as motionEase, p as pesos } from './ease-D34LFq0Y.mjs';
 import * as react_jsx_runtime from 'react/jsx-runtime';
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, Label, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants } from './primitivos/index.mjs';
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, Label, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants } from './primitivos/index.mjs';
 import { ClassValue } from 'clsx';
 export { About, AboutProps, Contact, ContactProps, Depoimento, Hero, HeroProps, HeroStat, Process, ProcessProps, ProcessStep, ProjectItem, Projects, ProjectsProps, ServiceItem, Services, ServicesProps, Stack, StackGrupo, StackProps, Testimonials, TestimonialsProps } from './blocos/index.mjs';
 import 'class-variance-authority/types';
@@ -11,6 +11,10 @@ import '@radix-ui/react-separator';
 import '@radix-ui/react-accordion';
 import '@radix-ui/react-dialog';
 import '@radix-ui/react-tooltip';
+import '@radix-ui/react-select';
+import '@radix-ui/react-checkbox';
+import '@radix-ui/react-switch';
+import '@radix-ui/react-tabs';
 
 type LogoProps = {
     tamanho?: number;
