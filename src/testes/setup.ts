@@ -36,3 +36,11 @@ if (typeof window !== "undefined" && !window.IntersectionObserver) {
     value: IntersectionObserverMock,
   });
 }
+
+// jsdom does not implement the Pointer Capture API — needed by Radix primitives
+// (Toast, DropdownMenu, Select) that call it on swipe/dismiss gestures.
+if (typeof window !== "undefined" && !Element.prototype.hasPointerCapture) {
+  Element.prototype.hasPointerCapture = () => false;
+  Element.prototype.setPointerCapture = () => {};
+  Element.prototype.releasePointerCapture = () => {};
+}

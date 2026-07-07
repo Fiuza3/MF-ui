@@ -11,6 +11,8 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import * as ToastPrimitive from '@radix-ui/react-toast';
 
 declare const buttonVariants: (props?: ({
     variant?: "link" | "outline" | "default" | "destructive" | "secondary" | "ghost" | null | undefined;
@@ -108,4 +110,81 @@ declare function TableHead({ className, ...props }: React.ComponentProps<'th'>):
 declare function TableCell({ className, ...props }: React.ComponentProps<'td'>): react_jsx_runtime.JSX.Element;
 declare function TableCaption({ className, ...props }: React.ComponentProps<'caption'>): react_jsx_runtime.JSX.Element;
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, Label, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants };
+declare function Pagination({ className, ...props }: React.ComponentProps<'nav'>): react_jsx_runtime.JSX.Element;
+declare function PaginationContent({ className, ...props }: React.ComponentProps<'ul'>): react_jsx_runtime.JSX.Element;
+declare function PaginationItem({ ...props }: React.ComponentProps<'li'>): react_jsx_runtime.JSX.Element;
+type PaginationLinkProps = {
+    isActive?: boolean;
+} & React.ComponentProps<'button'>;
+declare function PaginationLink({ className, isActive, ...props }: PaginationLinkProps): react_jsx_runtime.JSX.Element;
+declare function PaginationPrevious({ className, ...props }: React.ComponentProps<'button'>): react_jsx_runtime.JSX.Element;
+declare function PaginationNext({ className, ...props }: React.ComponentProps<'button'>): react_jsx_runtime.JSX.Element;
+declare function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>): react_jsx_runtime.JSX.Element;
+type PaginationControlProps = {
+    page: number;
+    totalPages: number;
+    onPageChange: (page: number) => void;
+    className?: string;
+};
+/** Paginação completa e controlada — usada diretamente ou via DataTable. */
+declare function PaginationControl({ page, totalPages, onPageChange, className }: PaginationControlProps): react_jsx_runtime.JSX.Element | null;
+
+declare function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuTrigger({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuPortal({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Portal>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuGroup({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Group>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuContent({ className, sideOffset, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Content>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuItem({ className, inset, variant, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
+    inset?: boolean;
+    variant?: 'default' | 'destructive';
+}): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuCheckboxItem({ className, children, checked, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuRadioGroup({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuRadioItem({ className, children, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuLabel({ className, inset, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Label> & {
+    inset?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSeparator({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Separator>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<'span'>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSub({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Sub>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSubTrigger({ className, inset, children, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
+    inset?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSubContent({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>): react_jsx_runtime.JSX.Element;
+
+declare function ToastProvider({ ...props }: React.ComponentProps<typeof ToastPrimitive.Provider>): react_jsx_runtime.JSX.Element;
+declare function ToastViewport({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Viewport>): react_jsx_runtime.JSX.Element;
+declare const toastVariants: (props?: ({
+    variant?: "default" | "destructive" | "success" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+declare function ToastRoot({ className, variant, ...props }: React.ComponentProps<typeof ToastPrimitive.Root> & VariantProps<typeof toastVariants>): react_jsx_runtime.JSX.Element;
+declare function ToastTitle({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Title>): react_jsx_runtime.JSX.Element;
+declare function ToastDescription({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Description>): react_jsx_runtime.JSX.Element;
+declare function ToastAction({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Action>): react_jsx_runtime.JSX.Element;
+declare function ToastClose({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Close>): react_jsx_runtime.JSX.Element;
+type ToastVariant = NonNullable<VariantProps<typeof toastVariants>['variant']>;
+type ToastData = {
+    id: string;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    variant?: ToastVariant;
+    duration?: number;
+    action?: {
+        label: string;
+        onClick: () => void;
+    };
+};
+type ToastInput = Omit<ToastData, 'id'>;
+type ToastContextValue = {
+    toasts: ToastData[];
+    toast: (data: ToastInput) => string;
+    dismiss: (id: string) => void;
+};
+/** Provider da fila de toasts — envolve a árvore da aplicação uma única vez. */
+declare function ToastComponentProvider({ children }: {
+    children: React.ReactNode;
+}): react_jsx_runtime.JSX.Element;
+/** Hook de acesso à fila de toasts — precisa estar dentro de `<ToastComponentProvider>`. */
+declare function useToast(): ToastContextValue;
+
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, type PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastRoot as Toast, ToastAction, ToastClose, ToastComponentProvider, type ToastData, ToastDescription, ToastProvider, ToastTitle, type ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast };

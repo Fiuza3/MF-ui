@@ -54,8 +54,31 @@ __export(primitivos_exports, {
   DialogPortal: () => DialogPortal,
   DialogTitle: () => DialogTitle,
   DialogTrigger: () => DialogTrigger,
+  DropdownMenu: () => DropdownMenu,
+  DropdownMenuCheckboxItem: () => DropdownMenuCheckboxItem,
+  DropdownMenuContent: () => DropdownMenuContent,
+  DropdownMenuGroup: () => DropdownMenuGroup,
+  DropdownMenuItem: () => DropdownMenuItem,
+  DropdownMenuLabel: () => DropdownMenuLabel,
+  DropdownMenuPortal: () => DropdownMenuPortal,
+  DropdownMenuRadioGroup: () => DropdownMenuRadioGroup,
+  DropdownMenuRadioItem: () => DropdownMenuRadioItem,
+  DropdownMenuSeparator: () => DropdownMenuSeparator,
+  DropdownMenuShortcut: () => DropdownMenuShortcut,
+  DropdownMenuSub: () => DropdownMenuSub,
+  DropdownMenuSubContent: () => DropdownMenuSubContent,
+  DropdownMenuSubTrigger: () => DropdownMenuSubTrigger,
+  DropdownMenuTrigger: () => DropdownMenuTrigger,
   Input: () => Input,
   Label: () => Label,
+  Pagination: () => Pagination,
+  PaginationContent: () => PaginationContent,
+  PaginationControl: () => PaginationControl,
+  PaginationEllipsis: () => PaginationEllipsis,
+  PaginationItem: () => PaginationItem,
+  PaginationLink: () => PaginationLink,
+  PaginationNext: () => PaginationNext,
+  PaginationPrevious: () => PaginationPrevious,
   Select: () => Select,
   SelectContent: () => SelectContent,
   SelectGroup: () => SelectGroup,
@@ -90,12 +113,22 @@ __export(primitivos_exports, {
   TabsList: () => TabsList,
   TabsTrigger: () => TabsTrigger,
   Textarea: () => Textarea,
+  Toast: () => ToastRoot,
+  ToastAction: () => ToastAction,
+  ToastClose: () => ToastClose,
+  ToastComponentProvider: () => ToastComponentProvider,
+  ToastDescription: () => ToastDescription,
+  ToastProvider: () => ToastProvider,
+  ToastTitle: () => ToastTitle,
+  ToastViewport: () => ToastViewport,
   Tooltip: () => Tooltip,
   TooltipContent: () => TooltipContent,
   TooltipProvider: () => TooltipProvider,
   TooltipTrigger: () => TooltipTrigger,
   badgeVariants: () => badgeVariants,
-  buttonVariants: () => buttonVariants
+  buttonVariants: () => buttonVariants,
+  toastVariants: () => toastVariants,
+  useToast: () => useToast
 });
 module.exports = __toCommonJS(primitivos_exports);
 
@@ -1080,6 +1113,487 @@ function TableCaption({ className, ...props }) {
     }
   );
 }
+
+// src/primitivos/Pagination.tsx
+var import_lucide_react6 = require("lucide-react");
+var import_jsx_runtime18 = require("react/jsx-runtime");
+function Pagination({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+    "nav",
+    {
+      "aria-label": "Pagina\xE7\xE3o",
+      "data-slot": "pagination",
+      className: cn("mx-auto flex w-full justify-center", className),
+      ...props
+    }
+  );
+}
+function PaginationContent({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+    "ul",
+    {
+      "data-slot": "pagination-content",
+      className: cn("flex flex-row items-center gap-1", className),
+      ...props
+    }
+  );
+}
+function PaginationItem({ ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("li", { "data-slot": "pagination-item", ...props });
+}
+function PaginationLink({ className, isActive, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+    "button",
+    {
+      type: "button",
+      "aria-current": isActive ? "page" : void 0,
+      "data-slot": "pagination-link",
+      "data-active": isActive,
+      className: cn(
+        "inline-flex size-9 items-center justify-center rounded-md text-sm font-medium transition-colors",
+        "hover:bg-accent hover:text-accent-foreground",
+        "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "disabled:pointer-events-none disabled:opacity-50",
+        isActive && "bg-primary text-primary-foreground hover:bg-primary/90",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function PaginationPrevious({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+    PaginationLink,
+    {
+      "aria-label": "P\xE1gina anterior",
+      className: cn("gap-1 px-2.5", className),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_lucide_react6.ChevronLeftIcon, { className: "size-4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: "hidden sm:inline", children: "Anterior" })
+      ]
+    }
+  );
+}
+function PaginationNext({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+    PaginationLink,
+    {
+      "aria-label": "Pr\xF3xima p\xE1gina",
+      className: cn("gap-1 px-2.5", className),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: "hidden sm:inline", children: "Pr\xF3xima" }),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_lucide_react6.ChevronRightIcon, { className: "size-4" })
+      ]
+    }
+  );
+}
+function PaginationEllipsis({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+    "span",
+    {
+      "aria-hidden": "true",
+      "data-slot": "pagination-ellipsis",
+      className: cn("flex size-9 items-center justify-center", className),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_lucide_react6.MoreHorizontalIcon, { className: "size-4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: "sr-only", children: "Mais p\xE1ginas" })
+      ]
+    }
+  );
+}
+function gerarPaginasVisiveis(paginaAtual, totalPaginas) {
+  const MAX_VISIVEIS = 7;
+  if (totalPaginas <= MAX_VISIVEIS) {
+    return Array.from({ length: totalPaginas }, (_, i) => i + 1);
+  }
+  const paginas = [1];
+  const inicio = Math.max(2, paginaAtual - 1);
+  const fim = Math.min(totalPaginas - 1, paginaAtual + 1);
+  if (inicio > 2) paginas.push("ellipsis");
+  for (let p = inicio; p <= fim; p++) paginas.push(p);
+  if (fim < totalPaginas - 1) paginas.push("ellipsis");
+  paginas.push(totalPaginas);
+  return paginas;
+}
+function PaginationControl({ page, totalPages, onPageChange, className }) {
+  if (totalPages <= 1) return null;
+  const paginasVisiveis = gerarPaginasVisiveis(page, totalPages);
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Pagination, { className, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(PaginationContent, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+      PaginationPrevious,
+      {
+        disabled: page <= 1,
+        onClick: () => onPageChange(page - 1)
+      }
+    ) }),
+    paginasVisiveis.map(
+      (p, index) => p === "ellipsis" ? /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationEllipsis, {}) }, `ellipsis-${index}`) : /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationLink, { isActive: p === page, onClick: () => onPageChange(p), children: p }) }, p)
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+      PaginationNext,
+      {
+        disabled: page >= totalPages,
+        onClick: () => onPageChange(page + 1)
+      }
+    ) })
+  ] }) });
+}
+
+// src/primitivos/DropdownMenu.tsx
+var DropdownMenuPrimitive = __toESM(require("@radix-ui/react-dropdown-menu"));
+var import_lucide_react7 = require("lucide-react");
+var import_jsx_runtime19 = require("react/jsx-runtime");
+function DropdownMenu({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Root, { "data-slot": "dropdown-menu", ...props });
+}
+function DropdownMenuTrigger({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Trigger, { "data-slot": "dropdown-menu-trigger", ...props });
+}
+function DropdownMenuPortal({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Portal, { "data-slot": "dropdown-menu-portal", ...props });
+}
+function DropdownMenuGroup({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Group, { "data-slot": "dropdown-menu-group", ...props });
+}
+function DropdownMenuContent({
+  className,
+  sideOffset = 4,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Content,
+    {
+      "data-slot": "dropdown-menu-content",
+      sideOffset,
+      className: cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md",
+        className
+      ),
+      ...props
+    }
+  ) });
+}
+function DropdownMenuItem({
+  className,
+  inset,
+  variant = "default",
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Item,
+    {
+      "data-slot": "dropdown-menu-item",
+      "data-inset": inset,
+      "data-variant": variant,
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function DropdownMenuCheckboxItem({
+  className,
+  children,
+  checked,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
+    DropdownMenuPrimitive.CheckboxItem,
+    {
+      "data-slot": "dropdown-menu-checkbox-item",
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      checked,
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_lucide_react7.CheckIcon, { className: "size-4" }) }) }),
+        children
+      ]
+    }
+  );
+}
+function DropdownMenuRadioGroup({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.RadioGroup, { "data-slot": "dropdown-menu-radio-group", ...props });
+}
+function DropdownMenuRadioItem({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
+    DropdownMenuPrimitive.RadioItem,
+    {
+      "data-slot": "dropdown-menu-radio-item",
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_lucide_react7.CircleIcon, { className: "size-2 fill-current" }) }) }),
+        children
+      ]
+    }
+  );
+}
+function DropdownMenuLabel({
+  className,
+  inset,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Label,
+    {
+      "data-slot": "dropdown-menu-label",
+      "data-inset": inset,
+      className: cn("px-2 py-1.5 text-sm font-medium data-[inset]:pl-8", className),
+      ...props
+    }
+  );
+}
+function DropdownMenuSeparator({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Separator,
+    {
+      "data-slot": "dropdown-menu-separator",
+      className: cn("bg-border -mx-1 my-1 h-px", className),
+      ...props
+    }
+  );
+}
+function DropdownMenuShortcut({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    "span",
+    {
+      "data-slot": "dropdown-menu-shortcut",
+      className: cn("text-muted-foreground ml-auto text-xs tracking-widest", className),
+      ...props
+    }
+  );
+}
+function DropdownMenuSub({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Sub, { "data-slot": "dropdown-menu-sub", ...props });
+}
+function DropdownMenuSubTrigger({
+  className,
+  inset,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(
+    DropdownMenuPrimitive.SubTrigger,
+    {
+      "data-slot": "dropdown-menu-sub-trigger",
+      "data-inset": inset,
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground flex cursor-default items-center rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[inset]:pl-8",
+        className
+      ),
+      ...props,
+      children: [
+        children,
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_lucide_react7.ChevronRightIcon, { className: "ml-auto size-4" })
+      ]
+    }
+  );
+}
+function DropdownMenuSubContent({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.SubContent,
+    {
+      "data-slot": "dropdown-menu-sub-content",
+      className: cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden rounded-md border p-1 shadow-lg",
+        className
+      ),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Toast.tsx
+var React = __toESM(require("react"));
+var ToastPrimitive = __toESM(require("@radix-ui/react-toast"));
+var import_class_variance_authority3 = require("class-variance-authority");
+var import_lucide_react8 = require("lucide-react");
+var import_jsx_runtime20 = require("react/jsx-runtime");
+function ToastProvider({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastPrimitive.Provider, { "data-slot": "toast-provider", ...props });
+}
+function ToastViewport({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    ToastPrimitive.Viewport,
+    {
+      "data-slot": "toast-viewport",
+      className: cn(
+        "fixed top-0 z-100 flex max-h-screen w-full flex-col-reverse p-4 sm:top-auto sm:right-0 sm:bottom-0 sm:flex-col md:max-w-[420px]",
+        className
+      ),
+      ...props
+    }
+  );
+}
+var toastVariants = (0, import_class_variance_authority3.cva)(
+  "data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-(--radix-toast-swipe-end-x) data-[swipe=move]:translate-x-(--radix-toast-swipe-move-x) data-[swipe=move]:transition-none group relative pointer-events-auto flex w-full items-center justify-between gap-3 overflow-hidden rounded-md border p-4 shadow-lg transition-all data-[swipe=end]:animate-out data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:animate-in data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+  {
+    variants: {
+      variant: {
+        default: "bg-popover text-popover-foreground border-border",
+        success: "bg-popover text-popover-foreground border-primary/40",
+        destructive: "bg-destructive text-white border-destructive"
+      }
+    },
+    defaultVariants: {
+      variant: "default"
+    }
+  }
+);
+function ToastRoot({
+  className,
+  variant,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    ToastPrimitive.Root,
+    {
+      "data-slot": "toast",
+      className: cn(toastVariants({ variant }), className),
+      ...props
+    }
+  );
+}
+function ToastTitle({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    ToastPrimitive.Title,
+    {
+      "data-slot": "toast-title",
+      className: cn("text-sm font-semibold", className),
+      ...props
+    }
+  );
+}
+function ToastDescription({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    ToastPrimitive.Description,
+    {
+      "data-slot": "toast-description",
+      className: cn("text-muted-foreground text-sm", className),
+      ...props
+    }
+  );
+}
+function ToastAction({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    ToastPrimitive.Action,
+    {
+      "data-slot": "toast-action",
+      className: cn(
+        "shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function ToastClose({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    ToastPrimitive.Close,
+    {
+      "data-slot": "toast-close",
+      "aria-label": "Fechar",
+      className: cn(
+        "shrink-0 rounded-md p-1 text-foreground/60 opacity-0 transition-opacity hover:text-foreground focus-visible:opacity-100 focus-visible:outline-none group-hover:opacity-100",
+        className
+      ),
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_lucide_react8.XIcon, { className: "size-4" })
+    }
+  );
+}
+var ToastContext = React.createContext(null);
+var toastSeq = 0;
+function gerarToastId() {
+  toastSeq += 1;
+  return `toast-${toastSeq}-${Date.now()}`;
+}
+function ToastComponentProvider({ children }) {
+  const [toasts, setToasts] = React.useState([]);
+  const dismiss = React.useCallback((id) => {
+    setToasts((atual) => atual.filter((t) => t.id !== id));
+  }, []);
+  const toast = React.useCallback((data) => {
+    const id = gerarToastId();
+    setToasts((atual) => [...atual, { ...data, id }]);
+    return id;
+  }, []);
+  const value = React.useMemo(() => ({ toasts, toast, dismiss }), [toasts, toast, dismiss]);
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastContext.Provider, { value, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(ToastProvider, { children: [
+    children,
+    toasts.map((t) => /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
+      ToastRoot,
+      {
+        variant: t.variant,
+        duration: t.duration ?? 5e3,
+        onOpenChange: (open) => {
+          if (!open) dismiss(t.id);
+        },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "flex flex-col gap-1", children: [
+            t.title && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastTitle, { children: t.title }),
+            t.description && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastDescription, { children: t.description })
+          ] }),
+          t.action && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastAction, { altText: t.action.label, onClick: t.action.onClick, children: t.action.label }),
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastClose, {})
+        ]
+      },
+      t.id
+    )),
+    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastViewport, {})
+  ] }) });
+}
+function useToast() {
+  const context = React.useContext(ToastContext);
+  if (!context) {
+    throw new Error("useToast deve ser usado dentro de <ToastComponentProvider>");
+  }
+  return context;
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Accordion,
@@ -1106,8 +1620,31 @@ function TableCaption({ className, ...props }) {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
   Input,
   Label,
+  Pagination,
+  PaginationContent,
+  PaginationControl,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
   Select,
   SelectContent,
   SelectGroup,
@@ -1142,11 +1679,21 @@ function TableCaption({ className, ...props }) {
   TabsList,
   TabsTrigger,
   Textarea,
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastComponentProvider,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
   badgeVariants,
-  buttonVariants
+  buttonVariants,
+  toastVariants,
+  useToast
 });
 //# sourceMappingURL=index.js.map
