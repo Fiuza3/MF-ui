@@ -1,3 +1,5 @@
+'use client'
+
 import {
   About,
   Contact,
@@ -16,7 +18,7 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-CIMG5ERE.mjs";
+} from "./chunk-GKB6KWDD.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -119,7 +121,7 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-3TQ34CQF.mjs";
+} from "./chunk-UJHI3XUF.mjs";
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";

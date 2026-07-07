@@ -1,3 +1,5 @@
+'use client'
+
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
@@ -435,4 +437,4 @@ export {
   PaginationEllipsis,
   PaginationControl
 };
-//# sourceMappingURL=chunk-3TQ34CQF.mjs.map
+//# sourceMappingURL=chunk-UJHI3XUF.mjs.map

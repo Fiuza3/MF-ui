@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Button,
   Card,
@@ -12,7 +14,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "./chunk-3TQ34CQF.mjs";
+} from "./chunk-UJHI3XUF.mjs";
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
@@ -215,4 +217,4 @@ export {
   FormField,
   CopyField
 };
-//# sourceMappingURL=chunk-CIMG5ERE.mjs.map
+//# sourceMappingURL=chunk-GKB6KWDD.mjs.map
