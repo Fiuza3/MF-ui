@@ -17,3 +17,6 @@ export * from "./Switch";
 export * from "./Tabs";
 export * from "./Skeleton";
 export * from "./Table";
+export * from "./Pagination";
+export * from "./DropdownMenu";
+export * from "./Toast";

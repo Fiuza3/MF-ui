@@ -20,3 +20,6 @@ export { motionEase, motionDurations, blinkMs } from "./lib/motion";
 
 // Blocos
 export * from "./blocos";
+
+// Blocos App (genéricos, para painéis internos de aplicações)
+export * from "./blocos-app";
