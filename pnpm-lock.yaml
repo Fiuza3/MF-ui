@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  esbuild-plugin-preserve-directives@0.0.11:
+    hash: 490704a274af66d468ec7d8387341614a96195b77515d8622a9bbcefaf3d3279
+    path: patches/esbuild-plugin-preserve-directives@0.0.11.patch
+
 importers:
 
   .:
@@ -51,6 +56,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.0.2
         version: 6.0.2(vite@8.0.14(@types/node@25.9.1)(esbuild@0.27.7))
+      esbuild-plugin-preserve-directives:
+        specifier: ^0.0.11
+        version: 0.0.11(patch_hash=490704a274af66d468ec7d8387341614a96195b77515d8622a9bbcefaf3d3279)(esbuild@0.27.7)
       framer-motion:
         specifier: ^12.0.0
         version: 12.40.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -1149,6 +1157,12 @@ packages:
 
   es-module-lexer@2.1.0:
     resolution: {integrity: sha512-n27zTYMjYu1aj4MjCWzSP7G9r75utsaoc8m61weK+W8JMBGGQybd43GstCXZ3WNmSFtGT9wi59qQTW6mhTR5LQ==}
+
+  esbuild-plugin-preserve-directives@0.0.11:
+    resolution: {integrity: sha512-OolFhx1h/1ADEEoPjVi0hYWru1pTZBHki7XozawYVkhRhO63mwZT6isLylbwPs7dJ72doVQJGHCT2I1l9z8DcA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      esbuild: ^0.21.0
 
   esbuild@0.27.7:
     resolution: {integrity: sha512-IxpibTjyVnmrIQo5aqNpCgoACA/dTKLTlhMHihVHhdkxKyPO1uBBthumT0rdHmcsk9uMonIWS0m4FljWzILh3w==}
@@ -2529,6 +2543,10 @@ snapshots:
   entities@8.0.0: {}
 
   es-module-lexer@2.1.0: {}
+
+  esbuild-plugin-preserve-directives@0.0.11(patch_hash=490704a274af66d468ec7d8387341614a96195b77515d8622a9bbcefaf3d3279)(esbuild@0.27.7):
+    dependencies:
+      esbuild: 0.27.7
 
   esbuild@0.27.7:
     optionalDependencies:

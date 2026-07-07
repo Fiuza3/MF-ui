@@ -1,0 +1,60 @@
+diff --git a/dist/index.js b/dist/index.js
+index 6a4c488a36a0918b5c851ff29aa450d1cae75634..205b5bc2436ad41c8b921e8fa143f849d27857bf 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -36,7 +36,7 @@ module.exports = __toCommonJS(src_exports);
+ var import_promises = __toESM(require("node:fs/promises"));
+ var import_node_path = __toESM(require("node:path"));
+ function getRelativePath(targetPath) {
+-  return import_node_path.default.relative(process.cwd(), targetPath);
++  return import_node_path.default.relative(process.cwd(), targetPath).split(import_node_path.default.sep).join("/");
+ }
+ function preserveDirectivesPlugin(options) {
+   const { directives, exclude, include } = options;
+@@ -90,7 +90,15 @@ function preserveDirectivesPlugin(options) {
+             }
+           }
+           if (relevantDirectives.size > 0) {
+-            const directiveString = Array.from(relevantDirectives).join("\n") + "\n\n";
++            const seenDirectiveValues = /* @__PURE__ */ new Set();
++            const uniqueDirectiveLines = [];
++            for (const line of relevantDirectives) {
++              const directiveValue = line.trim().replace(/;$/, "").replace(/^["'`]|["'`]$/g, "");
++              if (seenDirectiveValues.has(directiveValue)) continue;
++              seenDirectiveValues.add(directiveValue);
++              uniqueDirectiveLines.push(`'${directiveValue}'`);
++            }
++            const directiveString = uniqueDirectiveLines.join("\n") + "\n\n";
+             file.contents = Buffer.from(directiveString + file.text);
+           }
+         }
+diff --git a/dist/index.mjs b/dist/index.mjs
+index c4646a88a6348fcc58f1a08486cd659c247552e7..b16cfe3233446bb6e505906ec78a9e3fcbd2a97b 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -2,7 +2,7 @@
+ import fs from "node:fs/promises";
+ import path from "node:path";
+ function getRelativePath(targetPath) {
+-  return path.relative(process.cwd(), targetPath);
++  return path.relative(process.cwd(), targetPath).split(path.sep).join("/");
+ }
+ function preserveDirectivesPlugin(options) {
+   const { directives, exclude, include } = options;
+@@ -56,7 +56,15 @@ function preserveDirectivesPlugin(options) {
+             }
+           }
+           if (relevantDirectives.size > 0) {
+-            const directiveString = Array.from(relevantDirectives).join("\n") + "\n\n";
++            const seenDirectiveValues = /* @__PURE__ */ new Set();
++            const uniqueDirectiveLines = [];
++            for (const line of relevantDirectives) {
++              const directiveValue = line.trim().replace(/;$/, "").replace(/^["'`]|["'`]$/g, "");
++              if (seenDirectiveValues.has(directiveValue)) continue;
++              seenDirectiveValues.add(directiveValue);
++              uniqueDirectiveLines.push(`'${directiveValue}'`);
++            }
++            const directiveString = uniqueDirectiveLines.join("\n") + "\n\n";
+             file.contents = Buffer.from(directiveString + file.text);
+           }
+         }
