@@ -62,7 +62,7 @@ export function LogoAnimado({
         x={padX}
         y={altura / 2}
         dominantBaseline="central"
-        fontFamily={familias.mono}
+        fontFamily={familias.logo}
         fontWeight={700}
         fontSize={tamanho}
         fill={cor}

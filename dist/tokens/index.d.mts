@@ -1,4 +1,4 @@
-export { C as Cores, b as blinkMs, c as cores, d as duration, e as ease, f as familias, p as pesos } from '../ease-D34LFq0Y.mjs';
+export { C as Cores, b as blinkMs, c as cores, d as duration, e as ease, f as familias, p as pesos } from '../ease-DdsuDCkg.mjs';
 
 declare const fadeUp: (delay?: number) => {
     initial: {

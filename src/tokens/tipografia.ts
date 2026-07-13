@@ -1,6 +1,7 @@
 export const familias = {
   sans: "var(--fonte-sans), system-ui, -apple-system, sans-serif",
   mono: "var(--fonte-mono), ui-monospace, SFMono-Regular, Menlo, monospace",
+  logo: "'MF Logo Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
 } as const;
 
 export const pesos = {

@@ -183,7 +183,8 @@ var cores = {
 // src/tokens/tipografia.ts
 var familias = {
   sans: "var(--fonte-sans), system-ui, -apple-system, sans-serif",
-  mono: "var(--fonte-mono), ui-monospace, SFMono-Regular, Menlo, monospace"
+  mono: "var(--fonte-mono), ui-monospace, SFMono-Regular, Menlo, monospace",
+  logo: "'MF Logo Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
 };
 var pesos = {
   regular: 400,
@@ -225,7 +226,7 @@ function Logo({
           x: padX,
           y: altura / 2,
           dominantBaseline: "central",
-          fontFamily: familias.mono,
+          fontFamily: familias.logo,
           fontWeight: 700,
           fontSize: tamanho,
           fill: cor,
@@ -281,7 +282,7 @@ function LogoAnimado({
           x: padX,
           y: altura / 2,
           dominantBaseline: "central",
-          fontFamily: familias.mono,
+          fontFamily: familias.logo,
           fontWeight: 700,
           fontSize: tamanho,
           fill: cor,
