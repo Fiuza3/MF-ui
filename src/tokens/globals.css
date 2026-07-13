@@ -1,3 +1,14 @@
+/* Fonte do logo <MF/> — subset de Geist Mono 700 (8 glifos, ~1KB) embutido
+   para o logo renderizar IDÊNTICO em todo consumer, sem depender de fontes
+   carregadas pelo app nem do sistema operacional do visitante. */
+@font-face {
+  font-family: "MF Logo Mono";
+  src: url(data:font/woff2;base64,d09GMgABAAAAAASIABAAAAAACLQAAAQsAAGzMwAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIByBBAZgP1NUQVREAGwRCAqFZIQzATYCJAMcCxoABCAFhBQHIAwHG9UGCB6FTdludExAUubla5OGG8Hzdb1f5w7y0j2x8UF5Ra6C/vm59v6JIerbiRgiMnbi/1CNFjpJI1TTRCUU8Ub/D3IW/uOYr29rHQ4rxYdYkRh1HqVD6QKK/kneWObWcMb28OFk6TgshkREfZ49lkANkIRQEQKZ9vKh6TObuoCnDAUARunJiFEYv/cO0xGIh9WJa9MPDYTIqffwUpAKBAghqWoLIdQJ1YIQ6imr89TtEyQWDdVXQmTuJJuAvEXqS2cqpDM7EWAeD46NxDEVpID6FH842cqllia4MshC6W/7F5QnxxYCUuv0KjrjiDXcNDfQ/ccetptvGgF7HEyFUBmkrDEE0Sk9jZKQojxanVw3zZH/geZYVgNNJWJKBtHSs2tGiVoo4L2F4nPvedtTxSPFjcXFxdmC+rkhChoh1EBroAnwEtEBgDKP4U2iti4JkSf2qrVs2KRMRB6PxUuNYcdBbZnSNtFrK1gZO6Y/G8ztPctWd299+mmc8NmqVRsvZmc+3X7ly2f5WZ9w/CV5DhffnJ355oMd86uf/3jlWW89FNH18O2Of2JFJaa75SkOnxg+/hjd3acvdmyV1p31WZzwaXbm2x87/pN3VkTM9m3tOmVr8/51MUP3f5zttiqma+d2zIqlmPm2aCfjQRnbcQfGlHt7oVURhKt6BeIN60UxeOWNDy8fv98ZP3Q/pjQP7LDTQanh5qvXH/hCT524/tUTG5YGr8V3+ZAlJcQ00trT2Jiw13XYKQN7P7b5rHoNWw4fGZ4OTfvPm3/bsOWubSeNeh9136LRtCfndE7ZpVz9cPfOh2YpvmnftgPFJfeeVMqtF64wmxzD9cRqawuxZkc5aixZrz/81uCgkI9d0NHRMsuLp+TaFYpdm2Dikr3nZD/v/GO/p/4/p4MOm9p9Z2avFkKv/ZUTih1PLM5/5cTtO5yw3Yp9km/XH98mYRxzzh0DtpRj3n75sjdfFkGSDFINvqz1S7seWhyNj3uPoTd8I8iWLUdb5TGe14ymh8BbTk2aGt1b5dHhuL8E4qFh595VabMpQft/XYn5Cd+vvnMV4Icjq+TWAcXuSZH+QFUCwUcypNUQXpFgugGVSPFvKI01ohZBqUixnu3Dp0h2dohSMwyzSaB5uTOVRJkP3EqPFprbpyUNPUkrGe2JVtY90CraRndqVdeYyINALcZoBXgRopWJjendlBPEummwqAWT/Lx8phUSExKTKtTlINxOBzemnuLUNpOwAKlpTjWZMc3nKSdBAREq+QTSPWqKGonk5aftZ4wj0LAw0iy3STS3kMiC+tXxwCKmESfUV62hboacWAd9t9eMEMokEYKCkJBGjw4WTTQs4wZ1qXhAo0Jx93BfUe3Hagojy42BXvkN/59mWIhLvWmUED9aByyMEsEEihv6dtIfj2L3l88BAAA=) format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
 :root, .dark {
   --background: #0B0F14;
   --foreground: #F7FAFC;

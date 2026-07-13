@@ -18,6 +18,7 @@ type Cores = typeof cores;
 declare const familias: {
     readonly sans: "var(--fonte-sans), system-ui, -apple-system, sans-serif";
     readonly mono: "var(--fonte-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
+    readonly logo: "'MF Logo Mono', ui-monospace, SFMono-Regular, Menlo, monospace";
 };
 declare const pesos: {
     readonly regular: 400;

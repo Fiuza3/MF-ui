@@ -9,7 +9,7 @@ import {
   Services,
   Stack,
   Testimonials
-} from "./chunk-BIU3JRL5.mjs";
+} from "./chunk-BDFSNVED.mjs";
 import {
   AppShell,
   CopyField,
@@ -132,7 +132,7 @@ import {
   ease,
   familias,
   pesos
-} from "./chunk-BQZFF264.mjs";
+} from "./chunk-NPQCGWPS.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -167,7 +167,7 @@ function Logo({
           x: padX,
           y: altura / 2,
           dominantBaseline: "central",
-          fontFamily: familias.mono,
+          fontFamily: familias.logo,
           fontWeight: 700,
           fontSize: tamanho,
           fill: cor,
@@ -223,7 +223,7 @@ function LogoAnimado({
           x: padX,
           y: altura / 2,
           dominantBaseline: "central",
-          fontFamily: familias.mono,
+          fontFamily: familias.logo,
           fontWeight: 700,
           fontSize: tamanho,
           fill: cor,

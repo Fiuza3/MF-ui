@@ -18,7 +18,8 @@ var cores = {
 // src/tokens/tipografia.ts
 var familias = {
   sans: "var(--fonte-sans), system-ui, -apple-system, sans-serif",
-  mono: "var(--fonte-mono), ui-monospace, SFMono-Regular, Menlo, monospace"
+  mono: "var(--fonte-mono), ui-monospace, SFMono-Regular, Menlo, monospace",
+  logo: "'MF Logo Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
 };
 var pesos = {
   regular: 400,
@@ -71,4 +72,4 @@ export {
   fadeIn,
   scaleIn
 };
-//# sourceMappingURL=chunk-BQZFF264.mjs.map
+//# sourceMappingURL=chunk-NPQCGWPS.mjs.map
