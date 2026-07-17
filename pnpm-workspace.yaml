@@ -1,2 +1,4 @@
 patchedDependencies:
   esbuild-plugin-preserve-directives@0.0.11: patches/esbuild-plugin-preserve-directives@0.0.11.patch
+allowBuilds:
+  esbuild: true

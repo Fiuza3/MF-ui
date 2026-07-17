@@ -1,9 +1,11 @@
+'use client'
+
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
 import {
   ease
-} from "./chunk-BQZFF264.mjs";
+} from "./chunk-NTBTS2RU.mjs";
 
 // src/blocos/Hero.tsx
 import { motion, useReducedMotion } from "framer-motion";
@@ -1005,4 +1007,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-BIU3JRL5.mjs.map
+//# sourceMappingURL=chunk-ZYFDVAUW.mjs.map

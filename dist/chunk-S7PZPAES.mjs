@@ -1,3 +1,5 @@
+'use client'
+
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
