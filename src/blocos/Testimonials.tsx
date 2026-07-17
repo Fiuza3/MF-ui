@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "../componentes/Reveal";
 
 const AUTOPLAY_MS = 5000;
 
@@ -57,20 +57,14 @@ export function Testimonials({
       className="py-32 border-t border-line"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: "-60px" }}
-          className="mb-16"
-        >
+        <Reveal margin="-60px" className="mb-16">
           <p className="font-mono text-sm text-cyan tracking-widest uppercase mb-4">
             {eyebrow}
           </p>
           <h2 className="text-3xl font-bold text-balance lg:text-4xl">
             {title}
           </h2>
-        </motion.div>
+        </Reveal>
 
         <div
           role="region"
@@ -81,46 +75,41 @@ export function Testimonials({
           className="relative"
         >
           <div aria-live="polite" aria-atomic="true">
-            <AnimatePresence mode="wait">
-              <motion.blockquote
-                key={`${t.autor}-${current}`}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.4 }}
-                className="rounded border border-line bg-surface p-10 lg:p-14"
+            <Reveal
+              key={`${t.autor}-${current}`}
+              as="blockquote"
+              className="rounded border border-line bg-surface p-10 lg:p-14"
+            >
+              <span
+                aria-hidden="true"
+                className="font-mono text-6xl text-cyan opacity-20 leading-none select-none"
               >
-                <span
+                &ldquo;
+              </span>
+
+              <p className="mt-2 max-w-6xl text-lg leading-relaxed text-foreground lg:text-xl">
+                {t.texto}
+              </p>
+
+              <footer className="mt-8 flex items-center gap-4">
+                <div
                   aria-hidden="true"
-                  className="font-mono text-6xl text-cyan opacity-20 leading-none select-none"
+                  className="flex h-10 w-10 items-center justify-center rounded border border-line bg-surface-raised font-mono text-sm font-bold text-cyan"
                 >
-                  &ldquo;
-                </span>
-
-                <p className="mt-2 max-w-6xl text-lg leading-relaxed text-foreground lg:text-xl">
-                  {t.texto}
-                </p>
-
-                <footer className="mt-8 flex items-center gap-4">
-                  <div
-                    aria-hidden="true"
-                    className="flex h-10 w-10 items-center justify-center rounded border border-line bg-surface-raised font-mono text-sm font-bold text-cyan"
-                  >
-                    {t.autor.charAt(0)}
-                  </div>
-                  <div>
-                    <cite className="not-italic font-semibold text-foreground">
-                      {t.autor}
-                    </cite>
-                    {(t.papel || t.empresa) && (
-                      <p className="text-sm text-gray-text">
-                        {[t.papel, t.empresa].filter(Boolean).join(" · ")}
-                      </p>
-                    )}
-                  </div>
-                </footer>
-              </motion.blockquote>
-            </AnimatePresence>
+                  {t.autor.charAt(0)}
+                </div>
+                <div>
+                  <cite className="not-italic font-semibold text-foreground">
+                    {t.autor}
+                  </cite>
+                  {(t.papel || t.empresa) && (
+                    <p className="text-sm text-gray-text">
+                      {[t.papel, t.empresa].filter(Boolean).join(" · ")}
+                    </p>
+                  )}
+                </div>
+              </footer>
+            </Reveal>
           </div>
 
           <div className="mt-6 flex items-center gap-4">
