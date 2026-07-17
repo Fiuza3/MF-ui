@@ -11,6 +11,7 @@ export type FooterProps = {
   links?: FooterLink[];
   email?: string;
   localizacao?: string;
+  cnpj?: string;
   nomeEmpresa?: string;
   onLogoClick?: () => void;
 };
@@ -19,6 +20,7 @@ export function Footer({
   links = [],
   email,
   localizacao,
+  cnpj,
   nomeEmpresa = "MF Desenvolvimento",
   onLogoClick,
 }: FooterProps) {
@@ -50,7 +52,7 @@ export function Footer({
           </div>
 
           <div className="grid gap-8 font-mono">
-            {(email || localizacao) && (
+            {(email || localizacao || cnpj) && (
               <div className="rounded border border-[var(--line)] bg-[var(--surface)] p-5">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--gray-text)]">runtime summary</p>
                 <div className="mt-5 grid gap-3 text-sm">
@@ -58,6 +60,12 @@ export function Footer({
                     <p className="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2">
                       <span className="text-[var(--gray-text)]">location</span>
                       <span className="text-[var(--foreground)]">{localizacao}</span>
+                    </p>
+                  )}
+                  {cnpj && (
+                    <p className="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2">
+                      <span className="text-[var(--gray-text)]">cnpj</span>
+                      <span className="text-[var(--foreground)]">{cnpj}</span>
                     </p>
                   )}
                   {email && (
