@@ -57,4 +57,19 @@ describe("Projects", () => {
     const items = screen.getAllByTestId("project-item");
     items.forEach((wrapper) => expect(wrapper).not.toHaveAttribute("inert"));
   });
+
+  it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
+    const { container } = render(
+      <Projects
+        eyebrow="// shipped work"
+        title={<>Cases.</>}
+        description="Cada projeto mostra um recorte."
+        projects={projects}
+      />,
+    );
+    const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter((el) =>
+      (el.getAttribute("style") ?? "").includes("opacity:0")
+    );
+    expect(escondidos).toHaveLength(0);
+  });
 });

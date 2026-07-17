@@ -1,9 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { motionEase } from "../lib/motion";
+import { useState, useEffect, useRef } from "react";
+import { Reveal } from "../componentes/Reveal";
 
 export type ProjectItem = {
   title: string;
@@ -74,92 +73,83 @@ function ProjectModal({
   }, [onClose]);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[80] flex items-center justify-center p-5"
-        onMouseDown={onClose}
+    <div
+      className="mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5"
+      onMouseDown={onClose}
+    >
+      <div
+        className="absolute inset-0 bg-background/85 backdrop-blur-md"
+        aria-hidden="true"
+      />
+      <div
+        ref={dialogRef}
+        onMouseDown={(event) => event.stopPropagation()}
+        className="mf-entrada mf-entrada-up relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Case tecnico: ${project.title}`}
       >
-        <div
-          className="absolute inset-0 bg-background/85 backdrop-blur-md"
-          aria-hidden="true"
-        />
-        <motion.div
-          ref={dialogRef}
-          initial={{ opacity: 0, y: 24, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 24, scale: 0.96 }}
-          transition={{ duration: 0.28 }}
-          onMouseDown={(event) => event.stopPropagation()}
-          className="relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Case tecnico: ${project.title}`}
+        <button
+          ref={closeRef}
+          type="button"
+          onClick={onClose}
+          aria-label="Fechar case"
+          className="absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
         >
-          <button
-            ref={closeRef}
-            type="button"
-            onClick={onClose}
-            aria-label="Fechar case"
-            className="absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
-          >
-            <span aria-hidden="true">✕</span>
-          </button>
+          <span aria-hidden="true">✕</span>
+        </button>
 
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
-            case.log{project.ano ? ` / ${project.ano}` : ""}
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
+          case.log{project.ano ? ` / ${project.ano}` : ""}
+        </p>
+        <h3 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl">
+          {project.title}
+        </h3>
+        {project.description && (
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-text">
+            {project.description}
           </p>
-          <h3 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl">
-            {project.title}
-          </h3>
-          {project.description && (
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-text">
-              {project.description}
-            </p>
-          )}
+        )}
 
-          {(project.metrica || project.resultado) && (
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {project.metrica && (
-                <div className="rounded border border-line bg-background/50 p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
-                    metrica
-                  </p>
-                  <p className="mt-3 font-mono text-xl text-cyan">
-                    {project.metrica}
-                  </p>
-                </div>
-              )}
-              {project.resultado && (
-                <div className="rounded border border-line bg-background/50 p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
-                    resultado
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-foreground">
-                    {project.resultado}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
+        {(project.metrica || project.resultado) && (
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {project.metrica && (
+              <div className="rounded border border-line bg-background/50 p-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
+                  metrica
+                </p>
+                <p className="mt-3 font-mono text-xl text-cyan">
+                  {project.metrica}
+                </p>
+              </div>
+            )}
+            {project.resultado && (
+              <div className="rounded border border-line bg-background/50 p-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
+                  resultado
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground">
+                  {project.resultado}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
 
-          {project.tags && project.tags.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded border border-line px-2 py-1 font-mono text-xs text-gray-text"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        {project.tags && project.tags.length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded border border-line px-2 py-1 font-mono text-xs text-gray-text"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -172,22 +162,11 @@ function ProjectFrame({
   index: number;
   onOpen: (project: ProjectItem) => void;
 }) {
-  const shouldAnimate = !useReducedMotion();
-
   return (
-    <motion.article
-      initial={shouldAnimate ? { opacity: 0, y: 32 } : {}}
-      whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-      transition={
-        shouldAnimate
-          ? {
-              duration: 0.64,
-              delay: index * 0.06,
-              ease: motionEase.expoOut,
-            }
-          : { duration: 0 }
-      }
-      viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
+    <Reveal
+      as="article"
+      margin="-80px"
+      delayMs={index * 60}
       className="project-frame group flex min-h-[540px] w-[88vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[76vw] lg:w-[56vw] lg:p-8 xl:w-[52vw] 2xl:w-[44vw]"
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-start">
@@ -252,7 +231,7 @@ function ProjectFrame({
           abrir case
         </button>
       </div>
-    </motion.article>
+    </Reveal>
   );
 }
 
@@ -262,7 +241,6 @@ export function Projects({
   description,
   projects,
 }: ProjectsProps) {
-  const shouldAnimate = !useReducedMotion();
   const [selected, setSelected] = useState<ProjectItem | null>(null);
   const loopedProjects = [...projects, ...projects];
 
@@ -273,21 +251,11 @@ export function Projects({
       className="relative overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
-        <motion.div
-          initial={shouldAnimate ? { opacity: 0, y: 24 } : {}}
-          whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-          transition={
-            shouldAnimate
-              ? { duration: 0.7, ease: motionEase.expoOut }
-              : { duration: 0 }
-          }
-          viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-8 lg:mb-10"
-        >
+        <Reveal margin="-80px" className="mb-8 lg:mb-10">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
           <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">{title}</h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
-        </motion.div>
+        </Reveal>
       </div>
 
       <div className="project-carousel relative overflow-hidden">
