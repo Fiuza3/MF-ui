@@ -56,10 +56,11 @@ type FooterProps = {
     links?: FooterLink[];
     email?: string;
     localizacao?: string;
+    cnpj?: string;
     nomeEmpresa?: string;
     onLogoClick?: () => void;
 };
-declare function Footer({ links, email, localizacao, nomeEmpresa, onLogoClick, }: FooterProps): react_jsx_runtime.JSX.Element;
+declare function Footer({ links, email, localizacao, cnpj, nomeEmpresa, onLogoClick, }: FooterProps): react_jsx_runtime.JSX.Element;
 
 declare function cn(...inputs: ClassValue[]): string;
 
