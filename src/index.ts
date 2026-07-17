@@ -12,6 +12,8 @@ export { Navbar } from "./componentes/Navbar";
 export type { NavbarProps, NavLink } from "./componentes/Navbar";
 export { Footer } from "./componentes/Footer";
 export type { FooterProps, FooterLink } from "./componentes/Footer";
+export { Reveal } from "./componentes/Reveal";
+export type { RevealProps } from "./componentes/Reveal";
 
 // Primitivos
 export * from "./primitivos";
