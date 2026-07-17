@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { motionEase } from "../lib/motion";
+import { Reveal } from "../componentes/Reveal";
 
 export type ProcessStep = {
   numero: string;
@@ -27,18 +26,11 @@ function PipelineCard({
   step: ProcessStep;
   index: number;
 }) {
-  const shouldAnimate = !useReducedMotion();
-
   return (
-    <motion.article
-      initial={shouldAnimate ? { opacity: 0, y: 24 } : {}}
-      whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-      transition={
-        shouldAnimate
-          ? { delay: index * 0.06, duration: 0.55, ease: motionEase.expoOut }
-          : { duration: 0 }
-      }
-      viewport={shouldAnimate ? { once: true, margin: "-60px" } : undefined}
+    <Reveal
+      as="article"
+      margin="-60px"
+      delayMs={index * 60}
       className="group relative flex h-full flex-col overflow-hidden rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 lg:p-6"
     >
       <div
@@ -87,13 +79,11 @@ function PipelineCard({
           </div>
         )}
       </div>
-    </motion.article>
+    </Reveal>
   );
 }
 
 export function Process({ eyebrow, title, description, steps }: ProcessProps) {
-  const shouldAnimate = !useReducedMotion();
-
   return (
     <section
       id="processo"
@@ -101,17 +91,7 @@ export function Process({ eyebrow, title, description, steps }: ProcessProps) {
       className="relative overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
-        <motion.div
-          initial={shouldAnimate ? { opacity: 0, y: 24 } : {}}
-          whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-          transition={
-            shouldAnimate
-              ? { duration: 0.7, ease: motionEase.expoOut }
-              : { duration: 0 }
-          }
-          viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-8 lg:mb-10"
-        >
+        <Reveal margin="-80px" className="mb-8 lg:mb-10">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
           </p>
@@ -121,7 +101,7 @@ export function Process({ eyebrow, title, description, steps }: ProcessProps) {
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
             {description}
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {steps.map((step, index) => (

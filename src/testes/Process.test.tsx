@@ -31,4 +31,20 @@ describe("Process", () => {
     expect(screen.getByText("Diagnóstico")).toBeTruthy();
     expect(screen.getByText("Proposta técnica")).toBeTruthy();
   });
+
+  it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
+    const { container } = render(
+      <Process
+        eyebrow="// execution pipeline"
+        title={<>Processo como pipeline.</>}
+        description="Cinco etapas com saída verificável."
+        steps={steps}
+      />,
+    );
+
+    const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter((el) =>
+      (el.getAttribute("style") ?? "").includes("opacity:0")
+    );
+    expect(escondidos).toHaveLength(0);
+  });
 });
