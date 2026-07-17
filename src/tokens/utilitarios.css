@@ -35,3 +35,69 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
 }
+
+/* Motion CSS-first: entrada anima por keyframe (compositor, sem JS).
+   O estado inicial escondido vive DENTRO do keyframe — se a animação
+   não rodar (browser antigo, reduced motion), o elemento fica visível. */
+:root {
+  --mf-ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --mf-dur-entrada: 600ms;
+  --mf-dur-entrada-lenta: 900ms;
+}
+
+@keyframes mf-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mf-fade-up-suave {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mf-fade-left {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mf-fade-scale {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+.mf-entrada-up { --mf-entrada-anim: mf-fade-up; }
+.mf-entrada-up-suave { --mf-entrada-anim: mf-fade-up-suave; }
+.mf-entrada-left { --mf-entrada-anim: mf-fade-left; }
+.mf-entrada-scale { --mf-entrada-anim: mf-fade-scale; }
+
+.mf-entrada {
+  animation: var(--mf-entrada-anim, mf-fade-up) var(--mf-dur-entrada)
+    var(--mf-ease-expo-out) var(--mf-entrada-delay, 0ms) both;
+}
+
+/* Reveal por scroll: as classes só são aplicadas pelo Reveal.tsx DEPOIS
+   do mount — nunca no HTML do servidor. */
+.mf-reveal-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.mf-reveal-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--mf-dur-entrada) var(--mf-ease-expo-out)
+      var(--mf-entrada-delay, 0ms),
+    transform var(--mf-dur-entrada) var(--mf-ease-expo-out)
+      var(--mf-entrada-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mf-entrada {
+    animation: none;
+  }
+
+  .mf-reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}
