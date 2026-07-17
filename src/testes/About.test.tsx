@@ -35,4 +35,19 @@ describe("About", () => {
     );
     expect(screen.getByTestId("lateral-about")).toBeTruthy();
   });
+
+  it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
+    const { container } = render(
+      <About
+        eyebrow="x"
+        title="Titulo"
+        paragrafos={["Paragrafo 1", "Paragrafo 2"]}
+        slotLateral={<div data-testid="lateral-about">terminal</div>}
+      />,
+    );
+    const escondidos = Array.from(
+      container.querySelectorAll<HTMLElement>("[style]"),
+    ).filter((el) => /opacity:\s*0\b/.test(el.getAttribute("style") ?? ""));
+    expect(escondidos).toHaveLength(0);
+  });
 });

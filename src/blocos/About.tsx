@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { motionEase } from "../lib/motion";
+import { Reveal } from "../componentes/Reveal";
 
 export type AboutProps = {
   eyebrow: string;
@@ -17,8 +16,6 @@ export function About({
   paragrafos,
   slotLateral,
 }: AboutProps) {
-  const shouldAnimate = !useReducedMotion();
-
   return (
     <section
       id="sobre"
@@ -29,18 +26,7 @@ export function About({
 
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]">
-          <motion.div
-            initial={shouldAnimate ? { opacity: 0, y: 28 } : {}}
-            whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-            transition={
-              shouldAnimate
-                ? { duration: 0.74, ease: motionEase.expoOut }
-                : { duration: 0 }
-            }
-            viewport={
-              shouldAnimate ? { once: true, margin: "-80px" } : undefined
-            }
-          >
+          <Reveal as="div" margin="-80px">
             <p className="mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
               {eyebrow}
             </p>
@@ -51,50 +37,28 @@ export function About({
 
             <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
               {paragrafos.map((paragrafo, index) => (
-                <motion.div
+                <Reveal
                   key={index}
-                  initial={
-                    shouldAnimate ? { opacity: 0, y: 18 } : {}
-                  }
-                  whileInView={
-                    shouldAnimate ? { opacity: 1, y: 0 } : {}
-                  }
-                  transition={
-                    shouldAnimate
-                      ? {
-                          delay: index * 0.06,
-                          duration: 0.48,
-                          ease: motionEase.powerOut,
-                        }
-                      : { duration: 0 }
-                  }
-                  viewport={
-                    shouldAnimate ? { once: true, margin: "-80px" } : undefined
-                  }
+                  as="div"
+                  margin="-80px"
+                  delayMs={index * 60}
                   className="text-base leading-relaxed text-gray-text lg:text-lg"
                 >
                   {paragrafo}
-                </motion.div>
+                </Reveal>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
 
           {slotLateral && (
-            <motion.aside
-              initial={shouldAnimate ? { opacity: 0, y: 40 } : {}}
-              whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-              transition={
-                shouldAnimate
-                  ? { delay: 0.12, duration: 0.74, ease: motionEase.expoOut }
-                  : { duration: 0 }
-              }
-              viewport={
-                shouldAnimate ? { once: true, margin: "-80px" } : undefined
-              }
+            <Reveal
+              as="aside"
+              margin="-80px"
+              delayMs={120}
               className="rounded border border-line bg-surface font-mono lg:sticky lg:top-28"
             >
               {slotLateral}
-            </motion.aside>
+            </Reveal>
           )}
         </div>
       </div>
