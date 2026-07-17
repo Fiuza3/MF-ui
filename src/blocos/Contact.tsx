@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { motionEase } from "../lib/motion";
+import { Reveal } from "../componentes/Reveal";
 
 export type ContactProps = {
   eyebrow: string;
@@ -21,8 +20,6 @@ export function Contact({
   email,
   slotFormulario,
 }: ContactProps) {
-  const shouldAnimate = !useReducedMotion();
-
   return (
     <section
       id="contato"
@@ -32,17 +29,7 @@ export function Contact({
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" />
 
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
-        <motion.div
-          initial={shouldAnimate ? { opacity: 0, y: 24 } : {}}
-          whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-          transition={
-            shouldAnimate
-              ? { duration: 0.7, ease: motionEase.expoOut }
-              : { duration: 0 }
-          }
-          viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-10 lg:mb-12"
-        >
+        <Reveal as="div" margin="-80px" className="mb-10 lg:mb-12">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             <span lang="en">{eyebrow}</span>
           </p>
@@ -52,22 +39,10 @@ export function Contact({
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
             {description}
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.55fr] lg:items-start 2xl:grid-cols-[0.58fr_1.7fr]">
-          <motion.div
-            initial={shouldAnimate ? { opacity: 0, y: 28 } : {}}
-            whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-            transition={
-              shouldAnimate
-                ? { duration: 0.64, ease: motionEase.expoOut }
-                : { duration: 0 }
-            }
-            viewport={
-              shouldAnimate ? { once: true, margin: "-80px" } : undefined
-            }
-            className="grid gap-4"
-          >
+          <Reveal as="div" margin="-80px" className="grid gap-4">
             <a
               href={cta.href}
               target="_blank"
@@ -112,23 +87,12 @@ export function Contact({
                 próximo passo claros.
               </p>
             </div>
-          </motion.div>
+          </Reveal>
 
           {slotFormulario && (
-            <motion.div
-              initial={shouldAnimate ? { opacity: 0, y: 36 } : {}}
-              whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-              transition={
-                shouldAnimate
-                  ? { delay: 0.08, duration: 0.7, ease: motionEase.expoOut }
-                  : { duration: 0 }
-              }
-              viewport={
-                shouldAnimate ? { once: true, margin: "-80px" } : undefined
-              }
-            >
+            <Reveal as="div" margin="-80px" delayMs={80}>
               {slotFormulario}
-            </motion.div>
+            </Reveal>
           )}
         </div>
       </div>

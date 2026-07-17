@@ -16,4 +16,22 @@ describe("Contact", () => {
     expect(screen.getByText("Não preencha formulário.")).toBeTruthy();
     expect(screen.getByRole("link", { name: /WhatsApp direto/i })).toBeTruthy();
   });
+
+  it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
+    const { container } = render(
+      <Contact
+        eyebrow="// start project"
+        title={<>Não preencha formulário.</>}
+        description="Quatro respostas bastam."
+        cta={{ label: "WhatsApp direto", href: "https://wa.me/5500000000000" }}
+        email="contato@exemplo.com"
+        slotFormulario={<div>formulario</div>}
+      />,
+    );
+
+    const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter(
+      (el) => el.style.opacity === "0"
+    );
+    expect(escondidos).toHaveLength(0);
+  });
 });
