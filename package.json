@@ -1,6 +1,6 @@
 {
   "name": "@mf/ui",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Design system compartilhado da MF Desenvolvimento",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

@@ -437,6 +437,7 @@ function Footer({
   links = [],
   email,
   localizacao,
+  cnpj,
   nomeEmpresa = "MF Desenvolvimento",
   onLogoClick
 }) {
@@ -468,12 +469,16 @@ function Footer({
             )
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "grid gap-8 font-mono", children: [
-            (email || localizacao) && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "rounded border border-[var(--line)] bg-[var(--surface)] p-5", children: [
+            (email || localizacao || cnpj) && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "rounded border border-[var(--line)] bg-[var(--surface)] p-5", children: [
               /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "text-[10px] uppercase tracking-[0.28em] text-[var(--gray-text)]", children: "runtime summary" }),
               /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "mt-5 grid gap-3 text-sm", children: [
                 localizacao && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-[var(--gray-text)]", children: "location" }),
                   /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-[var(--foreground)]", children: localizacao })
+                ] }),
+                cnpj && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-[var(--gray-text)]", children: "cnpj" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-[var(--foreground)]", children: cnpj })
                 ] }),
                 email && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "flex items-center justify-between gap-4", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-[var(--gray-text)]", children: "contact" }),
