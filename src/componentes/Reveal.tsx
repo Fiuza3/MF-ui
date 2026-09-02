@@ -4,6 +4,7 @@ import * as React from "react";
 
 export type RevealProps = {
   as?: keyof React.JSX.IntrinsicElements;
+  variant?: "up" | "left";
   delayMs?: number;
   margin?: string;
   className?: string;
@@ -15,6 +16,7 @@ export type RevealProps = {
    do efeito pos-mount. */
 export function Reveal({
   as = "div",
+  variant = "up",
   delayMs = 0,
   margin = "-70px",
   className,
@@ -45,8 +47,9 @@ export function Reveal({
   }, [margin]);
 
   const Tag = as as React.ElementType;
+  const escondido = variant === "left" ? "mf-reveal-hidden-left" : "mf-reveal-hidden";
   const revealClass =
-    state === "hidden" ? "mf-reveal-hidden" : state === "visible" ? "mf-reveal-visible" : "";
+    state === "hidden" ? escondido : state === "visible" ? "mf-reveal-visible" : "";
 
   return (
     <Tag

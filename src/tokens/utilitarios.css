@@ -82,6 +82,11 @@
   transform: translateY(24px);
 }
 
+.mf-reveal-hidden-left {
+  opacity: 0;
+  transform: translateX(-18px);
+}
+
 .mf-reveal-visible {
   opacity: 1;
   transform: none;
@@ -96,7 +101,8 @@
     animation: none;
   }
 
-  .mf-reveal-hidden {
+  .mf-reveal-hidden,
+  .mf-reveal-hidden-left {
     opacity: 1;
     transform: none;
   }

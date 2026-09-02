@@ -41,4 +41,13 @@ describe("Reveal", () => {
     render(<Reveal as="article">conteudo</Reveal>);
     expect(screen.getByText("conteudo").tagName).toBe("ARTICLE");
   });
+
+  it("na variante left esconde no eixo horizontal", () => {
+    render(<Reveal variant="left">conteudo</Reveal>);
+    const el = screen.getByText("conteudo");
+    expect(el.className).toContain("mf-reveal-hidden-left");
+    act(() => observerCallback?.([{ isIntersecting: true }]));
+    expect(el.className).toContain("mf-reveal-visible");
+    expect(el.className).not.toContain("mf-reveal-hidden");
+  });
 });
