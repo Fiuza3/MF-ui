@@ -60,6 +60,11 @@
   to { opacity: 1; transform: none; }
 }
 
+@keyframes mf-fade-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: none; }
+}
+
 @keyframes mf-fade-scale {
   from { opacity: 0; transform: translateY(24px) scale(0.96); }
   to { opacity: 1; transform: none; }
@@ -69,6 +74,7 @@
 .mf-entrada-up-suave { --mf-entrada-anim: mf-fade-up-suave; }
 .mf-entrada-left { --mf-entrada-anim: mf-fade-left; }
 .mf-entrada-scale { --mf-entrada-anim: mf-fade-scale; }
+.mf-entrada-down { --mf-entrada-anim: mf-fade-down; }
 
 .mf-entrada {
   animation: var(--mf-entrada-anim, mf-fade-up) var(--mf-dur-entrada)
