@@ -18,7 +18,7 @@ if (typeof window !== "undefined" && !window.matchMedia) {
   });
 }
 
-// Mock IntersectionObserver for components that use framer-motion whileInView
+// Mock IntersectionObserver for components that use Reveal
 if (typeof window !== "undefined" && !window.IntersectionObserver) {
   class IntersectionObserverMock {
     observe() {}

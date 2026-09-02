@@ -8,7 +8,7 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ["react", "react-dom", "framer-motion"],
+  external: ["react", "react-dom"],
   // metafile melhora a precisão do preserveDirectivesPlugin ao mapear input -> output chunk
   metafile: true,
   esbuildPlugins: [
