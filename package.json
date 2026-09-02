@@ -2,6 +2,13 @@
   "name": "@mf/ui",
   "version": "2.4.0",
   "description": "Design system compartilhado da MF Desenvolvimento",
+  "author": "Marcus Fiuza <devfiuza@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fiuza3/mf-ui.git"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
