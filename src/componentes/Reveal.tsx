@@ -9,7 +9,7 @@ export type RevealProps = {
   margin?: string;
   className?: string;
   children: React.ReactNode;
-} & Omit<React.HTMLAttributes<HTMLElement>, "className" | "children">;
+} & Omit<React.ButtonHTMLAttributes<HTMLElement>, "className" | "children">;
 
 /* O servidor renderiza SEM classe de escondido — se o JS nunca rodar,
    o conteudo continua visivel. Esconder e responsabilidade exclusiva

@@ -16,4 +16,22 @@ describe("Stack", () => {
     expect(screen.getAllByText("Frontend").length).toBeGreaterThan(0);
     expect(screen.getByText("React")).toBeTruthy();
   });
+
+  it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
+    const { container } = render(
+      <Stack
+        eyebrow="// architecture map"
+        title={<>Stack como decisão.</>}
+        description="Tecnologia entra quando reduz risco."
+        grupos={[
+          { categoria: "Frontend", itens: ["React", "Next"] },
+          { categoria: "Backend", itens: ["Node"] },
+        ]}
+      />,
+    );
+    const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter((el) =>
+      /opacity:\s*0\s*(;|$)/.test(el.getAttribute("style") ?? ""),
+    );
+    expect(escondidos).toHaveLength(0);
+  });
 });

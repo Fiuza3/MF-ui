@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { motionEase } from "../lib/motion";
+import { Reveal } from "../componentes/Reveal";
 import { cn } from "../lib/cn";
 
 export type StackGrupo = {
@@ -23,7 +22,6 @@ export type StackProps = {
 };
 
 export function Stack({ eyebrow, title, description, grupos }: StackProps) {
-  const shouldAnimate = !useReducedMotion();
   const [active, setActive] = useState(grupos[0]);
 
   return (
@@ -33,17 +31,7 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
       className="relative overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
-        <motion.div
-          initial={shouldAnimate ? { opacity: 0, y: 24 } : {}}
-          whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-          transition={
-            shouldAnimate
-              ? { duration: 0.7, ease: motionEase.expoOut }
-              : { duration: 0 }
-          }
-          viewport={shouldAnimate ? { once: true, margin: "-80px" } : undefined}
-          className="mb-10 lg:mb-12"
-        >
+        <Reveal margin="-80px" className="mb-10 lg:mb-12">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             {eyebrow}
           </p>
@@ -53,30 +41,20 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
             {description}
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr] xl:grid-cols-[0.95fr_1.25fr]">
           <div className="grid gap-3">
             {grupos.map((grupo, index) => {
               const selected = active.categoria === grupo.categoria;
               return (
-                <motion.button
+                <Reveal
                   key={grupo.categoria}
+                  as="button"
+                  variant="left"
+                  margin="-80px"
+                  delayMs={index * 50}
                   type="button"
-                  initial={shouldAnimate ? { opacity: 0, x: -18 } : {}}
-                  whileInView={shouldAnimate ? { opacity: 1, x: 0 } : {}}
-                  transition={
-                    shouldAnimate
-                      ? {
-                          delay: index * 0.05,
-                          duration: 0.48,
-                          ease: motionEase.expoOut,
-                        }
-                      : { duration: 0 }
-                  }
-                  viewport={
-                    shouldAnimate ? { once: true, margin: "-80px" } : undefined
-                  }
                   onClick={() => setActive(grupo)}
                   onMouseEnter={() => setActive(grupo)}
                   aria-pressed={selected}
@@ -107,36 +85,16 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
                       </span>
                     )}
                   </span>
-                </motion.button>
+                </Reveal>
               );
             })}
           </div>
 
           <div className="rounded border border-line bg-surface p-5 lg:p-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active.categoria}
-                initial={
-                  shouldAnimate
-                    ? { opacity: 0, y: 18, filter: "blur(8px)" }
-                    : {}
-                }
-                animate={
-                  shouldAnimate
-                    ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                    : {}
-                }
-                exit={
-                  shouldAnimate
-                    ? { opacity: 0, y: -14, filter: "blur(8px)" }
-                    : {}
-                }
-                transition={
-                  shouldAnimate
-                    ? { duration: 0.28, ease: motionEase.powerOut }
-                    : { duration: 0 }
-                }
-              >
+            <div
+              key={active.categoria}
+              className="mf-entrada mf-entrada-up-suave"
+            >
                 <div className="flex items-start justify-between gap-6">
                   <div>
                     <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
@@ -159,16 +117,14 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
 
                 <div className="stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                   {active.itens.map((item, index) => (
-                    <motion.div
+                    <div
                       key={item}
-                      initial={shouldAnimate ? { opacity: 0, y: 10 } : {}}
-                      animate={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-                      transition={
-                        shouldAnimate
-                          ? { delay: index * 0.04, duration: 0.25 }
-                          : { duration: 0 }
+                      style={
+                        {
+                          "--mf-entrada-delay": `${index * 40}ms`,
+                        } as React.CSSProperties
                       }
-                      className="group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60"
+                      className="mf-entrada mf-entrada-up-suave group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60"
                     >
                       <span className="relative z-10 text-sm text-foreground">
                         {item}
@@ -177,7 +133,7 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
                         className="stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100"
                         aria-hidden="true"
                       />
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
 
@@ -194,8 +150,7 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
                     </p>
                   </div>
                 )}
-              </motion.div>
-            </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>
