@@ -47,4 +47,19 @@ describe("Services", () => {
     );
     expect(screen.getByTestId("m")).toBeTruthy();
   });
+
+  it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
+    const { container } = render(
+      <Services
+        eyebrow="// build modules"
+        title={<>Serviços como sistemas.</>}
+        description="Cada frente tem uma função clara."
+        services={services}
+      />,
+    );
+    const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter((el) =>
+      /opacity:\s*0\s*(;|$)/.test(el.getAttribute("style") ?? "")
+    );
+    expect(escondidos).toHaveLength(0);
+  });
 });

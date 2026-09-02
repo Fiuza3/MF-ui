@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { motionEase } from "../lib/motion";
+import { Reveal } from "../componentes/Reveal";
 
 export type ServiceItem = {
   id: string;
@@ -27,18 +26,11 @@ function ServiceCard({
   service: ServiceItem;
   index: number;
 }) {
-  const shouldAnimate = !useReducedMotion();
-
   return (
-    <motion.article
-      initial={shouldAnimate ? { opacity: 0, y: 28 } : {}}
-      whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-      transition={
-        shouldAnimate
-          ? { delay: index * 0.08, duration: 0.64, ease: motionEase.expoOut }
-          : { duration: 0 }
-      }
-      viewport={shouldAnimate ? { once: true, margin: "-70px" } : undefined}
+    <Reveal
+      as="article"
+      margin="-70px"
+      delayMs={index * 80}
       className="group relative min-h-[200px] overflow-hidden rounded border border-line bg-surface p-5 transition-colors duration-300 hover:border-cyan/60 lg:p-6"
     >
       <div
@@ -89,7 +81,7 @@ function ServiceCard({
           ))}
         </ul>
       </div>
-    </motion.article>
+    </Reveal>
   );
 }
 
@@ -99,8 +91,6 @@ export function Services({
   description,
   services,
 }: ServicesProps) {
-  const shouldAnimate = !useReducedMotion();
-
   return (
     <section
       id="servicos"
@@ -108,21 +98,11 @@ export function Services({
       className="overflow-hidden border-t border-line py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-16">
-        <motion.div
-          initial={shouldAnimate ? { opacity: 0, y: 22 } : {}}
-          whileInView={shouldAnimate ? { opacity: 1, y: 0 } : {}}
-          transition={
-            shouldAnimate
-              ? { duration: 0.68, ease: motionEase.expoOut }
-              : { duration: 0 }
-          }
-          viewport={shouldAnimate ? { once: true, margin: "-60px" } : undefined}
-          className="mb-8 lg:mb-10"
-        >
+        <Reveal margin="-60px" className="mb-8 lg:mb-10">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
           <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">{title}</h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {services.map((service, i) => (
