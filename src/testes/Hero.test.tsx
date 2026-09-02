@@ -56,4 +56,21 @@ describe("Hero", () => {
     );
     expect(container).toBeInTheDocument();
   });
+
+  it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
+    const { container } = render(
+      <Hero
+        eyebrow="boot / build / ship"
+        title="Reduzir ambiguidade"
+        description="Diagnóstico antes do código."
+        cta={{ label: "iniciar projeto", href: "https://wa.me/000" }}
+        stats={[{ value: "8+", label: "anos" }]}
+        slot={<div data-testid="lateral">terminal</div>}
+      />,
+    );
+    const escondidos = Array.from(container.querySelectorAll<HTMLElement>("[style]")).filter((el) =>
+      /opacity:\s*0(?:[;)]|$)/.test(el.getAttribute("style") ?? ""),
+    );
+    expect(escondidos).toHaveLength(0);
+  });
 });
