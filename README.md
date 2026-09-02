@@ -6,7 +6,7 @@ extraídos do site MF Desenvolvimento.
 ## Instalação
 
 ```bash
-pnpm add github:Fiuza3/mf-ui#v1.0.0
+pnpm add github:Fiuza3/mf-ui#v2.4.0
 ```
 
 Peer dependencies (instale no projeto consumidor): `react`, `react-dom`,
@@ -32,8 +32,9 @@ Exports granulares:
 | Subpath | Conteúdo |
 |---|---|
 | `@mf/ui` | tudo (tokens TS, primitivos, blocos, marca, `cn`, motion) |
-| `@mf/ui/primitivos` | Button, Card, Badge, Input, Textarea, Label, Separator, Accordion, Dialog, Sheet, Tooltip |
+| `@mf/ui/primitivos` | Button, Card, Badge, Input, Textarea, Label, Separator, Accordion, Dialog, Sheet, Tooltip, Select, Checkbox, Switch, Tabs, Skeleton, Table, Pagination, DropdownMenu, Toast |
 | `@mf/ui/blocos` | Hero, Services, Projects, Process, Stack, Testimonials, About, Contact |
+| `@mf/ui/blocos-app` | AppShell, DataTable, StatCard, EmptyState, PageHeader, FormField, CopyField |
 | `@mf/ui/tokens` | `cores`, `familias`, `pesos` (sem React) |
 | `@mf/ui/globals.css` | variáveis de tema + `@theme inline` |
 | `@mf/ui/utilitarios.css` | utilitários CSS genéricos |
@@ -46,11 +47,11 @@ subcomponentes específicos de nenhum projeto. Exemplo:
 ```tsx
 <Hero
   eyebrow="boot / build / ship"
-  headline={<MinhaHeadline />}
-  descricao="Diagnóstico antes do código."
+  title={<MinhaHeadline />}
+  description="Diagnóstico antes do código."
   cta={{ label: "iniciar projeto", href: "https://wa.me/..." }}
   stats={[{ value: "8+", label: "anos" }]}
-  slotLateral={<MeuTerminal />}
+  slot={<MeuTerminal />}
 />
 ```
 
@@ -67,14 +68,14 @@ variáveis CSS trocam de valor; nenhum componente precisa de mudança.
 
 - **Editar o DS vendo num projeto:** use `pnpm link` local apontando para esta pasta
   (no projeto consumidor: `pnpm link ../mf-ui`).
-- **Produção / outros projetos:** use a dep `github:` com uma tag (`#v1.x.x`).
+- **Produção / outros projetos:** use a dep `github:` com uma tag (`#v2.x.x`).
 - Após mudanças: `pnpm build` (regenera `dist/`, que **é versionado** no git),
   `pnpm test`, commit, e crie uma nova tag.
 
 ```bash
 pnpm build && pnpm test
 git add dist && git commit -m "..."
-git tag v1.x.x && git push origin master v1.x.x
+git tag v2.x.x && git push origin master v2.x.x
 ```
 
 ### Nota sobre Next.js + Turbopack no Windows
