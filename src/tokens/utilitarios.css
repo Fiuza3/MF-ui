@@ -45,6 +45,11 @@
   --mf-dur-entrada-lenta: 900ms;
 }
 
+@keyframes mf-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @keyframes mf-fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }
@@ -75,6 +80,7 @@
 .mf-entrada-left { --mf-entrada-anim: mf-fade-left; }
 .mf-entrada-scale { --mf-entrada-anim: mf-fade-scale; }
 .mf-entrada-down { --mf-entrada-anim: mf-fade-down; }
+.mf-entrada-fade { --mf-entrada-anim: mf-fade; }
 
 .mf-entrada {
   animation: var(--mf-entrada-anim, mf-fade-up) var(--mf-dur-entrada)

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import {
   RATIO_ALTURA_LOGO,
   RATIO_AVANCO_LOGO,
@@ -18,8 +17,6 @@ export type LogoAnimadoProps = {
   className?: string;
 };
 
-const SUAVE = [0.16, 1, 0.3, 1] as const;
-
 export function LogoAnimado({
   tamanho = 24,
   cor = "var(--cyan)",
@@ -29,7 +26,6 @@ export function LogoAnimado({
   label = "MF Desenvolvimento",
   className,
 }: LogoAnimadoProps) {
-  const reduzido = useReducedMotion();
   const cw = tamanho * RATIO_AVANCO_LOGO;
   const altura = tamanho * RATIO_ALTURA_LOGO;
   const padX = tamanho * RATIO_PADDING_LOGO;
@@ -37,16 +33,7 @@ export function LogoAnimado({
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
 
   // Um único <text> "<MF/>" (colchetes via <tspan> com opacidade): a fonte cuida
-  // do espaçamento natural entre os glifos, igual ao logo original. Animação de
-  // entrada aplicada ao texto inteiro.
-  const entrar = reduzido
-    ? {}
-    : {
-        initial: { opacity: 0, y: 5 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.5, ease: SUAVE },
-      };
-
+  // do espaçamento natural entre os glifos, igual ao logo original.
   const svg = (
     <svg
       role="img"
@@ -57,8 +44,8 @@ export function LogoAnimado({
       xmlns="http://www.w3.org/2000/svg"
       className={`transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`}
     >
-      <motion.text
-        {...entrar}
+      <text
+        className="mf-entrada mf-entrada-fade"
         x={padX}
         y={altura / 2}
         dominantBaseline="central"
@@ -70,7 +57,7 @@ export function LogoAnimado({
         <tspan fillOpacity={opColchetes}>{"<"}</tspan>
         <tspan>MF</tspan>
         <tspan fillOpacity={opColchetes}>{"/>"}</tspan>
-      </motion.text>
+      </text>
     </svg>
   );
 

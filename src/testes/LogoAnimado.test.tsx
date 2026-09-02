@@ -16,4 +16,13 @@ describe("LogoAnimado", () => {
       }),
     ).toBeInTheDocument();
   });
+
+  it("nao esconde o texto do logo no primeiro paint", () => {
+    const { container } = render(<LogoAnimado />);
+    const texto = container.querySelector("text");
+
+    expect(texto).not.toBeNull();
+    expect(texto?.getAttribute("opacity")).not.toBe("0");
+    expect(/opacity:\s*0\s*(;|$)/.test(texto?.getAttribute("style") ?? "")).toBe(false);
+  });
 });
