@@ -1,4 +1,4 @@
-export { C as Cores, b as blinkMs, c as cores, f as familias, d as motionDurations, e as motionEase, p as pesos } from './ease-DdsuDCkg.js';
+export { Cores, NomeDeCor, NomeDeCurva, NomeDeDuracao, cores, curvas, duracoes, familias, pesos, tokensDeCor, tokensDeMotion } from './tokens/index.js';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React from 'react';
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toast, ToastAction, ToastClose, ToastComponentProvider, ToastData, ToastDescription, ToastProvider, ToastTitle, ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast } from './primitivos/index.js';
@@ -87,7 +87,7 @@ type NodeNetworkProps = {
     /** Velocidade dos nós. Padrão: 0.45. */
     speed?: number;
     /**
-     * Cor das linhas e nós. Por padrão lê o token `--cyan` em runtime,
+     * Cor das linhas e nós. Por padrão lê o token `--primary` em runtime,
      * acompanhando tema claro/escuro automaticamente.
      */
     color?: string;
@@ -101,4 +101,26 @@ declare function NodeNetwork({ count, maxDistance, speed, color, className, }: N
 
 declare function cn(...inputs: ClassValue[]): string;
 
-export { Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, NodeNetwork, type NodeNetworkProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn };
+/**
+ * Leitura de token de design em runtime.
+ *
+ * Os valores dos tokens vivem em `globals.css` e trocam com o tema. Em CSS
+ * isso e resolvido por `var(--token)`. Em JavaScript nao existe equivalente
+ * estatico: uma constante em TS congela um dos temas e passa a mentir assim
+ * que o outro entra. Por isso, quando um valor precisa chegar a uma API que
+ * nao entende `var()` — canvas, WebGL, uma lib de grafico — ele e lido do
+ * elemento, ja resolvido pelo navegador e ja correto para o tema ativo.
+ */
+/**
+ * Le uma custom property resolvida a partir de `el`.
+ *
+ * @param el       elemento de onde herdar o tema (normalmente o proprio no).
+ * @param token    nome da custom property, com os dois hifens: `"--primary"`.
+ * @param fallback valor usado quando o token nao esta definido — por exemplo
+ *                 antes do CSS carregar, ou em ambiente de teste. O padrao e
+ *                 a cor de texto computada do elemento, que sempre existe e
+ *                 acompanha o tema; se nem ela existir, `"transparent"`.
+ */
+declare function lerToken(el: Element, token: string, fallback?: string): string;
+
+export { Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, NodeNetwork, type NodeNetworkProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn, lerToken };

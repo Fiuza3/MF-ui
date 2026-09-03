@@ -1,6 +1,17 @@
 'use client'
 
 import {
+  About,
+  Contact,
+  Hero,
+  Process,
+  Projects,
+  Reveal,
+  Services,
+  Stack,
+  Testimonials
+} from "./chunk-7WG3BK7Z.mjs";
+import {
   AppShell,
   CopyField,
   DataTable,
@@ -9,6 +20,15 @@ import {
   PageHeader,
   StatCard
 } from "./chunk-Y7TXQSF4.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-3YMTV7XD.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -113,27 +133,8 @@ import {
   buttonVariants
 } from "./chunk-W74KDTUE.mjs";
 import {
-  About,
-  Contact,
-  Hero,
-  Process,
-  Projects,
-  Reveal,
-  Services,
-  Stack,
-  Testimonials
-} from "./chunk-7WG3BK7Z.mjs";
-import {
   cn
 } from "./chunk-TE62FXIV.mjs";
-import {
-  blinkMs,
-  cores,
-  duration,
-  ease,
-  familias,
-  pesos
-} from "./chunk-J7WEEPNT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -459,11 +460,20 @@ function Footer({
 
 // src/componentes/NodeNetwork.tsx
 import * as React from "react";
+
+// src/lib/token.ts
+function lerToken(el, token, fallback) {
+  const estilo = getComputedStyle(el);
+  const valor = estilo.getPropertyValue(token).trim();
+  if (valor) return valor;
+  if (fallback) return fallback;
+  return estilo.color?.trim() || "transparent";
+}
+
+// src/componentes/NodeNetwork.tsx
 import { jsx as jsx5 } from "react/jsx-runtime";
 function lerCor(el, override) {
-  if (override) return override;
-  const cyan = getComputedStyle(el).getPropertyValue("--cyan").trim();
-  return cyan || "#3DF2E0";
+  return override ?? lerToken(el, tokensDeCor.primaria);
 }
 function NodeNetwork({
   count = 52,
@@ -701,15 +711,17 @@ export {
   TooltipProvider,
   TooltipTrigger,
   badgeVariants,
-  blinkMs,
   buttonVariants,
   cn,
   cores,
+  curvas,
+  duracoes,
   familias,
-  duration as motionDurations,
-  ease as motionEase,
+  lerToken,
   pesos,
   toastVariants,
+  tokensDeCor,
+  tokensDeMotion,
   useToast
 };
 //# sourceMappingURL=index.mjs.map

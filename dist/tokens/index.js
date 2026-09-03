@@ -20,34 +20,48 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/tokens/index.ts
 var tokens_exports = {};
 __export(tokens_exports, {
-  blinkMs: () => blinkMs,
   cores: () => cores,
-  duration: () => duration,
-  ease: () => ease,
-  fadeIn: () => fadeIn,
-  fadeUp: () => fadeUp,
+  curvas: () => curvas,
+  duracoes: () => duracoes,
   familias: () => familias,
   pesos: () => pesos,
-  scaleIn: () => scaleIn
+  tokensDeCor: () => tokensDeCor,
+  tokensDeMotion: () => tokensDeMotion
 });
 module.exports = __toCommonJS(tokens_exports);
 
 // src/tokens/cores.ts
-var cores = {
-  fundo: "#0B0F14",
-  superficie: "#141C26",
-  superficieElevada: "#0F1520",
-  borda: "#1E2A38",
-  bordaForte: "#2A3B4D",
-  textoPrimario: "#F7FAFC",
-  textoSecundario: "#A0AEC0",
-  textoSutil: "#5C6B7E",
-  accent: "#3DF2E0",
-  accentForte: "#5DF5E6",
-  accentSutil: "rgba(61,242,224,0.1)",
-  alerta: "#FFBD2E",
-  erro: "#E40014"
+var NOMES = {
+  fundo: "--background",
+  texto: "--foreground",
+  superficie: "--card",
+  superficieTexto: "--card-foreground",
+  superficieElevada: "--surface-raised",
+  flutuante: "--popover",
+  flutuanteTexto: "--popover-foreground",
+  primaria: "--primary",
+  primariaTexto: "--primary-foreground",
+  primariaHover: "--primary-hover",
+  primariaSutil: "--cyan-dim",
+  secundaria: "--secondary",
+  secundariaTexto: "--secondary-foreground",
+  neutra: "--muted",
+  neutraTexto: "--muted-foreground",
+  textoSutil: "--subtle-foreground",
+  destaque: "--accent",
+  destaqueTexto: "--accent-foreground",
+  alerta: "--warning",
+  alertaTexto: "--warning-foreground",
+  erro: "--destructive",
+  erroTexto: "--destructive-foreground",
+  borda: "--border",
+  bordaCampo: "--input",
+  foco: "--ring"
 };
+var tokensDeCor = NOMES;
+var cores = Object.fromEntries(
+  Object.entries(NOMES).map(([chave, prop]) => [chave, `var(${prop})`])
+);
 
 // src/tokens/tipografia.ts
 var familias = {
@@ -62,48 +76,33 @@ var pesos = {
   bold: 700
 };
 
-// src/tokens/duration.ts
-var duration = {
-  micro: 0.15,
-  fast: 0.24,
-  reveal: 0.64,
-  section: 0.9
-};
-var blinkMs = 530;
-
-// src/tokens/ease.ts
-var ease = {
-  expoOut: [0.16, 1, 0.3, 1],
-  powerOut: [0.22, 1, 0.36, 1],
-  softInOut: [0.65, 0, 0.35, 1]
-};
-
 // src/tokens/motion.ts
-var fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: duration.reveal, ease: ease.expoOut }
-});
-var fadeIn = (delay = 0) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { delay, duration: duration.reveal, ease: ease.expoOut }
-});
-var scaleIn = (delay = 0) => ({
-  initial: { opacity: 0, scale: 0.96 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { delay, duration: duration.fast, ease: ease.powerOut }
-});
+var DURACOES = {
+  micro: "--mf-duration-micro",
+  rapida: "--mf-duration-fast",
+  entrada: "--mf-duration-reveal",
+  secao: "--mf-duration-section"
+};
+var CURVAS = {
+  expo: "--mf-ease-expo",
+  power: "--mf-ease-power",
+  suave: "--mf-ease-soft"
+};
+var tokensDeMotion = { duracoes: DURACOES, curvas: CURVAS };
+var duracoes = Object.fromEntries(
+  Object.entries(DURACOES).map(([chave, prop]) => [chave, `var(${prop})`])
+);
+var curvas = Object.fromEntries(
+  Object.entries(CURVAS).map(([chave, prop]) => [chave, `var(${prop})`])
+);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  blinkMs,
   cores,
-  duration,
-  ease,
-  fadeIn,
-  fadeUp,
+  curvas,
+  duracoes,
   familias,
   pesos,
-  scaleIn
+  tokensDeCor,
+  tokensDeMotion
 });
 //# sourceMappingURL=index.js.map

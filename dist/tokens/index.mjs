@@ -1,23 +1,19 @@
 import {
-  blinkMs,
   cores,
-  duration,
-  ease,
-  fadeIn,
-  fadeUp,
+  curvas,
+  duracoes,
   familias,
   pesos,
-  scaleIn
-} from "../chunk-J7WEEPNT.mjs";
+  tokensDeCor,
+  tokensDeMotion
+} from "../chunk-3YMTV7XD.mjs";
 export {
-  blinkMs,
   cores,
-  duration,
-  ease,
-  fadeIn,
-  fadeUp,
+  curvas,
+  duracoes,
   familias,
   pesos,
-  scaleIn
+  tokensDeCor,
+  tokensDeMotion
 };
 //# sourceMappingURL=index.mjs.map
