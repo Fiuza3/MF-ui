@@ -14,6 +14,8 @@ export { Footer } from "./componentes/Footer";
 export type { FooterProps, FooterLink } from "./componentes/Footer";
 export { Reveal } from "./componentes/Reveal";
 export type { RevealProps } from "./componentes/Reveal";
+export { NodeNetwork } from "./componentes/NodeNetwork";
+export type { NodeNetworkProps } from "./componentes/NodeNetwork";
 
 // Primitivos
 export * from "./primitivos";
