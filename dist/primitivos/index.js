@@ -245,23 +245,13 @@ function CardAction({ className, ...props }) {
     "div",
     {
       "data-slot": "card-action",
-      className: cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      ),
+      className: cn("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className),
       ...props
     }
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-    "div",
-    {
-      "data-slot": "card-content",
-      className: cn("px-6", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
 }
 function CardFooter({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
@@ -301,14 +291,7 @@ function Badge({
   ...props
 }) {
   const Comp = asChild ? import_react_slot2.Slot : "span";
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
-    Comp,
-    {
-      "data-slot": "badge",
-      className: cn(badgeVariants({ variant }), className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Comp, { "data-slot": "badge", className: cn(badgeVariants({ variant }), className), ...props });
 }
 
 // src/primitivos/Input.tsx
@@ -349,10 +332,7 @@ function Textarea({ className, ...props }) {
 // src/primitivos/Label.tsx
 var LabelPrimitive = __toESM(require("@radix-ui/react-label"));
 var import_jsx_runtime6 = require("react/jsx-runtime");
-function Label({
-  className,
-  ...props
-}) {
+function Label({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
     LabelPrimitive.Root,
     {
@@ -394,9 +374,7 @@ function Separator({
 var AccordionPrimitive = __toESM(require("@radix-ui/react-accordion"));
 var import_lucide_react = require("lucide-react");
 var import_jsx_runtime8 = require("react/jsx-runtime");
-function Accordion({
-  ...props
-}) {
+function Accordion({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(AccordionPrimitive.Root, { "data-slot": "accordion", ...props });
 }
 function AccordionItem({
@@ -453,24 +431,16 @@ function AccordionContent({
 var DialogPrimitive = __toESM(require("@radix-ui/react-dialog"));
 var import_lucide_react2 = require("lucide-react");
 var import_jsx_runtime9 = require("react/jsx-runtime");
-function Dialog({
-  ...props
-}) {
+function Dialog({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
 }
-function DialogTrigger({
-  ...props
-}) {
+function DialogTrigger({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(DialogPrimitive.Trigger, { "data-slot": "dialog-trigger", ...props });
 }
-function DialogPortal({
-  ...props
-}) {
+function DialogPortal({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
 }
-function DialogClose({
-  ...props
-}) {
+function DialogClose({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(DialogPrimitive.Close, { "data-slot": "dialog-close", ...props });
 }
 function DialogOverlay({
@@ -539,18 +509,12 @@ function DialogFooter({ className, ...props }) {
     "div",
     {
       "data-slot": "dialog-footer",
-      className: cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
-      ),
+      className: cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className),
       ...props
     }
   );
 }
-function DialogTitle({
-  className,
-  ...props
-}) {
+function DialogTitle({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
     DialogPrimitive.Title,
     {
@@ -581,19 +545,13 @@ var import_jsx_runtime10 = require("react/jsx-runtime");
 function Sheet({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
 }
-function SheetTrigger({
-  ...props
-}) {
+function SheetTrigger({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
 }
-function SheetClose({
-  ...props
-}) {
+function SheetClose({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
 }
-function SheetPortal({
-  ...props
-}) {
+function SheetPortal({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
 }
 function SheetOverlay({
@@ -664,10 +622,7 @@ function SheetFooter({ className, ...props }) {
     }
   );
 }
-function SheetTitle({
-  className,
-  ...props
-}) {
+function SheetTitle({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
     SheetPrimitive.Title,
     {
@@ -707,14 +662,10 @@ function TooltipProvider({
     }
   );
 }
-function Tooltip({
-  ...props
-}) {
+function Tooltip({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(TooltipProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
 }
-function TooltipTrigger({
-  ...props
-}) {
+function TooltipTrigger({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(TooltipPrimitive.Trigger, { "data-slot": "tooltip-trigger", ...props });
 }
 function TooltipContent({
@@ -745,19 +696,13 @@ function TooltipContent({
 var SelectPrimitive = __toESM(require("@radix-ui/react-select"));
 var import_lucide_react4 = require("lucide-react");
 var import_jsx_runtime12 = require("react/jsx-runtime");
-function Select({
-  ...props
-}) {
+function Select({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SelectPrimitive.Root, { "data-slot": "select", ...props });
 }
-function SelectGroup({
-  ...props
-}) {
+function SelectGroup({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SelectPrimitive.Group, { "data-slot": "select-group", ...props });
 }
-function SelectValue({
-  ...props
-}) {
+function SelectValue({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
 }
 function SelectTrigger({
@@ -843,10 +788,7 @@ function SelectContent({
     }
   ) });
 }
-function SelectLabel({
-  className,
-  ...props
-}) {
+function SelectLabel({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
     SelectPrimitive.Label,
     {
@@ -895,10 +837,7 @@ function SelectSeparator({
 var CheckboxPrimitive = __toESM(require("@radix-ui/react-checkbox"));
 var import_lucide_react5 = require("lucide-react");
 var import_jsx_runtime13 = require("react/jsx-runtime");
-function Checkbox({
-  className,
-  ...props
-}) {
+function Checkbox({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
     CheckboxPrimitive.Root,
     {
@@ -923,10 +862,7 @@ function Checkbox({
 // src/primitivos/Switch.tsx
 var SwitchPrimitive = __toESM(require("@radix-ui/react-switch"));
 var import_jsx_runtime14 = require("react/jsx-runtime");
-function Switch({
-  className,
-  ...props
-}) {
+function Switch({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
     SwitchPrimitive.Root,
     {
@@ -952,10 +888,7 @@ function Switch({
 // src/primitivos/Tabs.tsx
 var TabsPrimitive = __toESM(require("@radix-ui/react-tabs"));
 var import_jsx_runtime15 = require("react/jsx-runtime");
-function Tabs({
-  className,
-  ...props
-}) {
+function Tabs({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
     TabsPrimitive.Root,
     {
@@ -965,10 +898,7 @@ function Tabs({
     }
   );
 }
-function TabsList({
-  className,
-  ...props
-}) {
+function TabsList({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
     TabsPrimitive.List,
     {
@@ -981,10 +911,7 @@ function TabsList({
     }
   );
 }
-function TabsTrigger({
-  className,
-  ...props
-}) {
+function TabsTrigger({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
     TabsPrimitive.Trigger,
     {
@@ -997,10 +924,7 @@ function TabsTrigger({
     }
   );
 }
-function TabsContent({
-  className,
-  ...props
-}) {
+function TabsContent({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
     TabsPrimitive.Content,
     {
@@ -1037,14 +961,7 @@ function Table({ className, ...props }) {
   ) });
 }
 function TableHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
-    "thead",
-    {
-      "data-slot": "table-header",
-      className: cn("[&_tr]:border-b", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
 }
 function TableBody({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
@@ -1224,23 +1141,11 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
   if (totalPages <= 1) return null;
   const paginasVisiveis = gerarPaginasVisiveis(page, totalPages);
   return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Pagination, { className, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(PaginationContent, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
-      PaginationPrevious,
-      {
-        disabled: page <= 1,
-        onClick: () => onPageChange(page - 1)
-      }
-    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
     paginasVisiveis.map(
       (p, index) => p === "ellipsis" ? /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationEllipsis, {}) }, `ellipsis-${index}`) : /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationLink, { isActive: p === page, onClick: () => onPageChange(p), children: p }) }, p)
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
-      PaginationNext,
-      {
-        disabled: page >= totalPages,
-        onClick: () => onPageChange(page + 1)
-      }
-    ) })
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
   ] }) });
 }
 
@@ -1248,9 +1153,7 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
 var DropdownMenuPrimitive = __toESM(require("@radix-ui/react-dropdown-menu"));
 var import_lucide_react7 = require("lucide-react");
 var import_jsx_runtime19 = require("react/jsx-runtime");
-function DropdownMenu({
-  ...props
-}) {
+function DropdownMenu({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Root, { "data-slot": "dropdown-menu", ...props });
 }
 function DropdownMenuTrigger({
@@ -1263,9 +1166,7 @@ function DropdownMenuPortal({
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Portal, { "data-slot": "dropdown-menu-portal", ...props });
 }
-function DropdownMenuGroup({
-  ...props
-}) {
+function DropdownMenuGroup({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Group, { "data-slot": "dropdown-menu-group", ...props });
 }
 function DropdownMenuContent({
@@ -1393,9 +1294,7 @@ function DropdownMenuShortcut({ className, ...props }) {
     }
   );
 }
-function DropdownMenuSub({
-  ...props
-}) {
+function DropdownMenuSub({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Sub, { "data-slot": "dropdown-menu-sub", ...props });
 }
 function DropdownMenuSubTrigger({
@@ -1444,9 +1343,7 @@ var ToastPrimitive = __toESM(require("@radix-ui/react-toast"));
 var import_class_variance_authority3 = require("class-variance-authority");
 var import_lucide_react8 = require("lucide-react");
 var import_jsx_runtime20 = require("react/jsx-runtime");
-function ToastProvider({
-  ...props
-}) {
+function ToastProvider({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ToastPrimitive.Provider, { "data-slot": "toast-provider", ...props });
 }
 function ToastViewport({
@@ -1517,10 +1414,7 @@ function ToastDescription({
     }
   );
 }
-function ToastAction({
-  className,
-  ...props
-}) {
+function ToastAction({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
     ToastPrimitive.Action,
     {

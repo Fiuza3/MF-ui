@@ -31,14 +31,7 @@ function Badge({
   ...props
 }) {
   const Comp = asChild ? Slot : "span";
-  return /* @__PURE__ */ jsx(
-    Comp,
-    {
-      "data-slot": "badge",
-      className: cn(badgeVariants({ variant }), className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ jsx(Comp, { "data-slot": "badge", className: cn(badgeVariants({ variant }), className), ...props });
 }
 
 // src/primitivos/Textarea.tsx
@@ -85,9 +78,7 @@ function Separator({
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "lucide-react";
 import { jsx as jsx4, jsxs } from "react/jsx-runtime";
-function Accordion({
-  ...props
-}) {
+function Accordion({ ...props }) {
   return /* @__PURE__ */ jsx4(AccordionPrimitive.Root, { "data-slot": "accordion", ...props });
 }
 function AccordionItem({
@@ -144,24 +135,16 @@ function AccordionContent({
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
-function Dialog({
-  ...props
-}) {
+function Dialog({ ...props }) {
   return /* @__PURE__ */ jsx5(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
 }
-function DialogTrigger({
-  ...props
-}) {
+function DialogTrigger({ ...props }) {
   return /* @__PURE__ */ jsx5(DialogPrimitive.Trigger, { "data-slot": "dialog-trigger", ...props });
 }
-function DialogPortal({
-  ...props
-}) {
+function DialogPortal({ ...props }) {
   return /* @__PURE__ */ jsx5(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
 }
-function DialogClose({
-  ...props
-}) {
+function DialogClose({ ...props }) {
   return /* @__PURE__ */ jsx5(DialogPrimitive.Close, { "data-slot": "dialog-close", ...props });
 }
 function DialogOverlay({
@@ -230,18 +213,12 @@ function DialogFooter({ className, ...props }) {
     "div",
     {
       "data-slot": "dialog-footer",
-      className: cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
-      ),
+      className: cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className),
       ...props
     }
   );
 }
-function DialogTitle({
-  className,
-  ...props
-}) {
+function DialogTitle({ className, ...props }) {
   return /* @__PURE__ */ jsx5(
     DialogPrimitive.Title,
     {
@@ -272,19 +249,13 @@ import { jsx as jsx6, jsxs as jsxs3 } from "react/jsx-runtime";
 function Sheet({ ...props }) {
   return /* @__PURE__ */ jsx6(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
 }
-function SheetTrigger({
-  ...props
-}) {
+function SheetTrigger({ ...props }) {
   return /* @__PURE__ */ jsx6(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
 }
-function SheetClose({
-  ...props
-}) {
+function SheetClose({ ...props }) {
   return /* @__PURE__ */ jsx6(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
 }
-function SheetPortal({
-  ...props
-}) {
+function SheetPortal({ ...props }) {
   return /* @__PURE__ */ jsx6(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
 }
 function SheetOverlay({
@@ -355,10 +326,7 @@ function SheetFooter({ className, ...props }) {
     }
   );
 }
-function SheetTitle({
-  className,
-  ...props
-}) {
+function SheetTitle({ className, ...props }) {
   return /* @__PURE__ */ jsx6(
     SheetPrimitive.Title,
     {
@@ -398,14 +366,10 @@ function TooltipProvider({
     }
   );
 }
-function Tooltip({
-  ...props
-}) {
+function Tooltip({ ...props }) {
   return /* @__PURE__ */ jsx7(TooltipProvider, { children: /* @__PURE__ */ jsx7(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
 }
-function TooltipTrigger({
-  ...props
-}) {
+function TooltipTrigger({ ...props }) {
   return /* @__PURE__ */ jsx7(TooltipPrimitive.Trigger, { "data-slot": "tooltip-trigger", ...props });
 }
 function TooltipContent({
@@ -436,19 +400,13 @@ function TooltipContent({
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon as ChevronDownIcon2, ChevronUpIcon } from "lucide-react";
 import { jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
-function Select({
-  ...props
-}) {
+function Select({ ...props }) {
   return /* @__PURE__ */ jsx8(SelectPrimitive.Root, { "data-slot": "select", ...props });
 }
-function SelectGroup({
-  ...props
-}) {
+function SelectGroup({ ...props }) {
   return /* @__PURE__ */ jsx8(SelectPrimitive.Group, { "data-slot": "select-group", ...props });
 }
-function SelectValue({
-  ...props
-}) {
+function SelectValue({ ...props }) {
   return /* @__PURE__ */ jsx8(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
 }
 function SelectTrigger({
@@ -534,10 +492,7 @@ function SelectContent({
     }
   ) });
 }
-function SelectLabel({
-  className,
-  ...props
-}) {
+function SelectLabel({ className, ...props }) {
   return /* @__PURE__ */ jsx8(
     SelectPrimitive.Label,
     {
@@ -586,10 +541,7 @@ function SelectSeparator({
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon as CheckIcon2 } from "lucide-react";
 import { jsx as jsx9 } from "react/jsx-runtime";
-function Checkbox({
-  className,
-  ...props
-}) {
+function Checkbox({ className, ...props }) {
   return /* @__PURE__ */ jsx9(
     CheckboxPrimitive.Root,
     {
@@ -614,10 +566,7 @@ function Checkbox({
 // src/primitivos/Switch.tsx
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import { jsx as jsx10 } from "react/jsx-runtime";
-function Switch({
-  className,
-  ...props
-}) {
+function Switch({ className, ...props }) {
   return /* @__PURE__ */ jsx10(
     SwitchPrimitive.Root,
     {
@@ -643,10 +592,7 @@ function Switch({
 // src/primitivos/Tabs.tsx
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { jsx as jsx11 } from "react/jsx-runtime";
-function Tabs({
-  className,
-  ...props
-}) {
+function Tabs({ className, ...props }) {
   return /* @__PURE__ */ jsx11(
     TabsPrimitive.Root,
     {
@@ -656,10 +602,7 @@ function Tabs({
     }
   );
 }
-function TabsList({
-  className,
-  ...props
-}) {
+function TabsList({ className, ...props }) {
   return /* @__PURE__ */ jsx11(
     TabsPrimitive.List,
     {
@@ -672,10 +615,7 @@ function TabsList({
     }
   );
 }
-function TabsTrigger({
-  className,
-  ...props
-}) {
+function TabsTrigger({ className, ...props }) {
   return /* @__PURE__ */ jsx11(
     TabsPrimitive.Trigger,
     {
@@ -688,10 +628,7 @@ function TabsTrigger({
     }
   );
 }
-function TabsContent({
-  className,
-  ...props
-}) {
+function TabsContent({ className, ...props }) {
   return /* @__PURE__ */ jsx11(
     TabsPrimitive.Content,
     {
@@ -706,9 +643,7 @@ function TabsContent({
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { CheckIcon as CheckIcon3, ChevronRightIcon, CircleIcon } from "lucide-react";
 import { jsx as jsx12, jsxs as jsxs6 } from "react/jsx-runtime";
-function DropdownMenu({
-  ...props
-}) {
+function DropdownMenu({ ...props }) {
   return /* @__PURE__ */ jsx12(DropdownMenuPrimitive.Root, { "data-slot": "dropdown-menu", ...props });
 }
 function DropdownMenuTrigger({
@@ -721,9 +656,7 @@ function DropdownMenuPortal({
 }) {
   return /* @__PURE__ */ jsx12(DropdownMenuPrimitive.Portal, { "data-slot": "dropdown-menu-portal", ...props });
 }
-function DropdownMenuGroup({
-  ...props
-}) {
+function DropdownMenuGroup({ ...props }) {
   return /* @__PURE__ */ jsx12(DropdownMenuPrimitive.Group, { "data-slot": "dropdown-menu-group", ...props });
 }
 function DropdownMenuContent({
@@ -851,9 +784,7 @@ function DropdownMenuShortcut({ className, ...props }) {
     }
   );
 }
-function DropdownMenuSub({
-  ...props
-}) {
+function DropdownMenuSub({ ...props }) {
   return /* @__PURE__ */ jsx12(DropdownMenuPrimitive.Sub, { "data-slot": "dropdown-menu-sub", ...props });
 }
 function DropdownMenuSubTrigger({
@@ -902,9 +833,7 @@ import * as ToastPrimitive from "@radix-ui/react-toast";
 import { cva as cva2 } from "class-variance-authority";
 import { XIcon as XIcon3 } from "lucide-react";
 import { jsx as jsx13, jsxs as jsxs7 } from "react/jsx-runtime";
-function ToastProvider({
-  ...props
-}) {
+function ToastProvider({ ...props }) {
   return /* @__PURE__ */ jsx13(ToastPrimitive.Provider, { "data-slot": "toast-provider", ...props });
 }
 function ToastViewport({
@@ -975,10 +904,7 @@ function ToastDescription({
     }
   );
 }
-function ToastAction({
-  className,
-  ...props
-}) {
+function ToastAction({ className, ...props }) {
   return /* @__PURE__ */ jsx13(
     ToastPrimitive.Action,
     {
@@ -1128,4 +1054,4 @@ export {
   ToastComponentProvider,
   useToast
 };
-//# sourceMappingURL=chunk-5NWVND4C.mjs.map
+//# sourceMappingURL=chunk-7CPPQH6B.mjs.map

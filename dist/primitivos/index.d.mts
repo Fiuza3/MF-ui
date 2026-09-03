@@ -18,28 +18,28 @@ declare const buttonVariants: (props?: ({
     variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
     size?: "default" | "icon" | "sm" | "lg" | "icon-sm" | "icon-lg" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-declare function Button({ className, variant, size, asChild, ...props }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {
+declare function Button({ className, variant, size, asChild, ...props }: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
 }): react_jsx_runtime.JSX.Element;
 
-declare function Card({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function CardHeader({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function CardTitle({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function CardDescription({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function CardAction({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function CardContent({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function CardFooter({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
+declare function Card({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function CardHeader({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function CardTitle({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function CardDescription({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function CardAction({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function CardContent({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function CardFooter({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
 
 declare const badgeVariants: (props?: ({
     variant?: "default" | "destructive" | "outline" | "secondary" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-declare function Badge({ className, variant, asChild, ...props }: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & {
+declare function Badge({ className, variant, asChild, ...props }: React.ComponentProps<"span"> & VariantProps<typeof badgeVariants> & {
     asChild?: boolean;
 }): react_jsx_runtime.JSX.Element;
 
-declare function Input({ className, type, ...props }: React.ComponentProps<'input'>): react_jsx_runtime.JSX.Element;
+declare function Input({ className, type, ...props }: React.ComponentProps<"input">): react_jsx_runtime.JSX.Element;
 
-declare function Textarea({ className, ...props }: React.ComponentProps<'textarea'>): react_jsx_runtime.JSX.Element;
+declare function Textarea({ className, ...props }: React.ComponentProps<"textarea">): react_jsx_runtime.JSX.Element;
 
 declare function Label({ className, ...props }: React.ComponentProps<typeof LabelPrimitive.Root>): react_jsx_runtime.JSX.Element;
 
@@ -58,8 +58,8 @@ declare function DialogOverlay({ className, ...props }: React.ComponentProps<typ
 declare function DialogContent({ className, children, showCloseButton, ...props }: React.ComponentProps<typeof DialogPrimitive.Content> & {
     showCloseButton?: boolean;
 }): react_jsx_runtime.JSX.Element;
-declare function DialogHeader({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function DialogFooter({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
+declare function DialogHeader({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function DialogFooter({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
 declare function DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>): react_jsx_runtime.JSX.Element;
 declare function DialogDescription({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>): react_jsx_runtime.JSX.Element;
 
@@ -67,10 +67,10 @@ declare function Sheet({ ...props }: React.ComponentProps<typeof DialogPrimitive
 declare function SheetTrigger({ ...props }: React.ComponentProps<typeof DialogPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
 declare function SheetClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.Close>): react_jsx_runtime.JSX.Element;
 declare function SheetContent({ className, children, side, ...props }: React.ComponentProps<typeof DialogPrimitive.Content> & {
-    side?: 'top' | 'right' | 'bottom' | 'left';
+    side?: "top" | "right" | "bottom" | "left";
 }): react_jsx_runtime.JSX.Element;
-declare function SheetHeader({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
-declare function SheetFooter({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
+declare function SheetHeader({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SheetFooter({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
 declare function SheetTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>): react_jsx_runtime.JSX.Element;
 declare function SheetDescription({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>): react_jsx_runtime.JSX.Element;
 
@@ -99,27 +99,27 @@ declare function TabsList({ className, ...props }: React.ComponentProps<typeof T
 declare function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
 declare function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>): react_jsx_runtime.JSX.Element;
 
-declare function Skeleton({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
+declare function Skeleton({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
 
-declare function Table({ className, ...props }: React.ComponentProps<'table'>): react_jsx_runtime.JSX.Element;
-declare function TableHeader({ className, ...props }: React.ComponentProps<'thead'>): react_jsx_runtime.JSX.Element;
-declare function TableBody({ className, ...props }: React.ComponentProps<'tbody'>): react_jsx_runtime.JSX.Element;
-declare function TableFooter({ className, ...props }: React.ComponentProps<'tfoot'>): react_jsx_runtime.JSX.Element;
-declare function TableRow({ className, ...props }: React.ComponentProps<'tr'>): react_jsx_runtime.JSX.Element;
-declare function TableHead({ className, ...props }: React.ComponentProps<'th'>): react_jsx_runtime.JSX.Element;
-declare function TableCell({ className, ...props }: React.ComponentProps<'td'>): react_jsx_runtime.JSX.Element;
-declare function TableCaption({ className, ...props }: React.ComponentProps<'caption'>): react_jsx_runtime.JSX.Element;
+declare function Table({ className, ...props }: React.ComponentProps<"table">): react_jsx_runtime.JSX.Element;
+declare function TableHeader({ className, ...props }: React.ComponentProps<"thead">): react_jsx_runtime.JSX.Element;
+declare function TableBody({ className, ...props }: React.ComponentProps<"tbody">): react_jsx_runtime.JSX.Element;
+declare function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">): react_jsx_runtime.JSX.Element;
+declare function TableRow({ className, ...props }: React.ComponentProps<"tr">): react_jsx_runtime.JSX.Element;
+declare function TableHead({ className, ...props }: React.ComponentProps<"th">): react_jsx_runtime.JSX.Element;
+declare function TableCell({ className, ...props }: React.ComponentProps<"td">): react_jsx_runtime.JSX.Element;
+declare function TableCaption({ className, ...props }: React.ComponentProps<"caption">): react_jsx_runtime.JSX.Element;
 
-declare function Pagination({ className, ...props }: React.ComponentProps<'nav'>): react_jsx_runtime.JSX.Element;
-declare function PaginationContent({ className, ...props }: React.ComponentProps<'ul'>): react_jsx_runtime.JSX.Element;
-declare function PaginationItem({ ...props }: React.ComponentProps<'li'>): react_jsx_runtime.JSX.Element;
+declare function Pagination({ className, ...props }: React.ComponentProps<"nav">): react_jsx_runtime.JSX.Element;
+declare function PaginationContent({ className, ...props }: React.ComponentProps<"ul">): react_jsx_runtime.JSX.Element;
+declare function PaginationItem({ ...props }: React.ComponentProps<"li">): react_jsx_runtime.JSX.Element;
 type PaginationLinkProps = {
     isActive?: boolean;
-} & React.ComponentProps<'button'>;
+} & React.ComponentProps<"button">;
 declare function PaginationLink({ className, isActive, ...props }: PaginationLinkProps): react_jsx_runtime.JSX.Element;
-declare function PaginationPrevious({ className, ...props }: React.ComponentProps<'button'>): react_jsx_runtime.JSX.Element;
-declare function PaginationNext({ className, ...props }: React.ComponentProps<'button'>): react_jsx_runtime.JSX.Element;
-declare function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>): react_jsx_runtime.JSX.Element;
+declare function PaginationPrevious({ className, ...props }: React.ComponentProps<"button">): react_jsx_runtime.JSX.Element;
+declare function PaginationNext({ className, ...props }: React.ComponentProps<"button">): react_jsx_runtime.JSX.Element;
+declare function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span">): react_jsx_runtime.JSX.Element;
 type PaginationControlProps = {
     page: number;
     totalPages: number;
@@ -136,7 +136,7 @@ declare function DropdownMenuGroup({ ...props }: React.ComponentProps<typeof Dro
 declare function DropdownMenuContent({ className, sideOffset, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Content>): react_jsx_runtime.JSX.Element;
 declare function DropdownMenuItem({ className, inset, variant, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
     inset?: boolean;
-    variant?: 'default' | 'destructive';
+    variant?: "default" | "destructive";
 }): react_jsx_runtime.JSX.Element;
 declare function DropdownMenuCheckboxItem({ className, children, checked, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>): react_jsx_runtime.JSX.Element;
 declare function DropdownMenuRadioGroup({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>): react_jsx_runtime.JSX.Element;
@@ -145,7 +145,7 @@ declare function DropdownMenuLabel({ className, inset, ...props }: React.Compone
     inset?: boolean;
 }): react_jsx_runtime.JSX.Element;
 declare function DropdownMenuSeparator({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Separator>): react_jsx_runtime.JSX.Element;
-declare function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<'span'>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"span">): react_jsx_runtime.JSX.Element;
 declare function DropdownMenuSub({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Sub>): react_jsx_runtime.JSX.Element;
 declare function DropdownMenuSubTrigger({ className, inset, children, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
     inset?: boolean;
@@ -162,7 +162,7 @@ declare function ToastTitle({ className, ...props }: React.ComponentProps<typeof
 declare function ToastDescription({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Description>): react_jsx_runtime.JSX.Element;
 declare function ToastAction({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Action>): react_jsx_runtime.JSX.Element;
 declare function ToastClose({ className, ...props }: React.ComponentProps<typeof ToastPrimitive.Close>): react_jsx_runtime.JSX.Element;
-type ToastVariant = NonNullable<VariantProps<typeof toastVariants>['variant']>;
+type ToastVariant = NonNullable<VariantProps<typeof toastVariants>["variant"]>;
 type ToastData = {
     id: string;
     title?: React.ReactNode;
@@ -174,7 +174,7 @@ type ToastData = {
         onClick: () => void;
     };
 };
-type ToastInput = Omit<ToastData, 'id'>;
+type ToastInput = Omit<ToastData, "id">;
 type ToastContextValue = {
     toasts: ToastData[];
     toast: (data: ToastInput) => string;

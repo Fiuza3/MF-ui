@@ -1,17 +1,6 @@
 'use client'
 
 import {
-  About,
-  Contact,
-  Hero,
-  Process,
-  Projects,
-  Reveal,
-  Services,
-  Stack,
-  Testimonials
-} from "./chunk-4HAI6XVN.mjs";
-import {
   AppShell,
   CopyField,
   DataTable,
@@ -19,7 +8,7 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-CNND3WFH.mjs";
+} from "./chunk-Y7TXQSF4.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -92,7 +81,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-5NWVND4C.mjs";
+} from "./chunk-7CPPQH6B.mjs";
 import {
   Button,
   Card,
@@ -122,7 +111,18 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-TE43X62N.mjs";
+} from "./chunk-W74KDTUE.mjs";
+import {
+  About,
+  Contact,
+  Hero,
+  Process,
+  Projects,
+  Reveal,
+  Services,
+  Stack,
+  Testimonials
+} from "./chunk-7WG3BK7Z.mjs";
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
@@ -133,7 +133,7 @@ import {
   ease,
   familias,
   pesos
-} from "./chunk-JKD33GCI.mjs";
+} from "./chunk-J7WEEPNT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -320,9 +320,24 @@ function Navbar({
           onClick: () => setMenuOpen(!menuOpen),
           className: "flex flex-col gap-1.5 rounded p-2 md:hidden",
           children: [
-            /* @__PURE__ */ jsx3("span", { className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "translate-y-2 rotate-45" : ""}` }),
-            /* @__PURE__ */ jsx3("span", { className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "opacity-0" : ""}` }),
-            /* @__PURE__ */ jsx3("span", { className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "-translate-y-2 -rotate-45" : ""}` })
+            /* @__PURE__ */ jsx3(
+              "span",
+              {
+                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "translate-y-2 rotate-45" : ""}`
+              }
+            ),
+            /* @__PURE__ */ jsx3(
+              "span",
+              {
+                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "opacity-0" : ""}`
+              }
+            ),
+            /* @__PURE__ */ jsx3(
+              "span",
+              {
+                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`
+              }
+            )
           ]
         }
       )

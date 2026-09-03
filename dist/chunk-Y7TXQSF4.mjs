@@ -14,7 +14,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "./chunk-TE43X62N.mjs";
+} from "./chunk-W74KDTUE.mjs";
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
@@ -165,14 +165,7 @@ function FormField({ label, error, children, className, htmlFor }) {
   const errorId = htmlFor ? `${htmlFor}-error` : void 0;
   return /* @__PURE__ */ jsxs6("div", { "data-slot": "form-field", className: cn("flex flex-col gap-1.5", className), children: [
     /* @__PURE__ */ jsx6(Label, { htmlFor, children: label }),
-    /* @__PURE__ */ jsx6(
-      "div",
-      {
-        "aria-invalid": Boolean(error),
-        "aria-describedby": error ? errorId : void 0,
-        children
-      }
-    ),
+    /* @__PURE__ */ jsx6("div", { "aria-invalid": Boolean(error), "aria-describedby": error ? errorId : void 0, children }),
     error && /* @__PURE__ */ jsx6("p", { id: errorId, role: "alert", className: "text-destructive text-xs font-medium", children: error })
   ] });
 }
@@ -217,4 +210,4 @@ export {
   FormField,
   CopyField
 };
-//# sourceMappingURL=chunk-CNND3WFH.mjs.map
+//# sourceMappingURL=chunk-Y7TXQSF4.mjs.map

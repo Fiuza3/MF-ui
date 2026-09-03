@@ -88,14 +88,7 @@ function Table({ className, ...props }) {
   ) });
 }
 function TableHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-    "thead",
-    {
-      "data-slot": "table-header",
-      className: cn("[&_tr]:border-b", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
 }
 function TableBody({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
@@ -268,23 +261,11 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
   if (totalPages <= 1) return null;
   const paginasVisiveis = gerarPaginasVisiveis(page, totalPages);
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Pagination, { className, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(PaginationContent, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-      PaginationPrevious,
-      {
-        disabled: page <= 1,
-        onClick: () => onPageChange(page - 1)
-      }
-    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
     paginasVisiveis.map(
       (p, index) => p === "ellipsis" ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationEllipsis, {}) }, `ellipsis-${index}`) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationLink, { isActive: p === page, onClick: () => onPageChange(p), children: p }) }, p)
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-      PaginationNext,
-      {
-        disabled: page >= totalPages,
-        onClick: () => onPageChange(page + 1)
-      }
-    ) })
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
   ] }) });
 }
 
@@ -357,14 +338,7 @@ function Card({ className, ...props }) {
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "div",
-    {
-      "data-slot": "card-content",
-      className: cn("px-6", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
 }
 
 // src/blocos-app/StatCard.tsx
@@ -431,10 +405,7 @@ function PageHeader({ title, breadcrumb, actions, className }) {
 // src/primitivos/Label.tsx
 var LabelPrimitive = __toESM(require("@radix-ui/react-label"));
 var import_jsx_runtime10 = require("react/jsx-runtime");
-function Label({
-  className,
-  ...props
-}) {
+function Label({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
     LabelPrimitive.Root,
     {
@@ -454,14 +425,7 @@ function FormField({ label, error, children, className, htmlFor }) {
   const errorId = htmlFor ? `${htmlFor}-error` : void 0;
   return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { "data-slot": "form-field", className: cn("flex flex-col gap-1.5", className), children: [
     /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Label, { htmlFor, children: label }),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-      "div",
-      {
-        "aria-invalid": Boolean(error),
-        "aria-describedby": error ? errorId : void 0,
-        children
-      }
-    ),
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { "aria-invalid": Boolean(error), "aria-describedby": error ? errorId : void 0, children }),
     error && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { id: errorId, role: "alert", className: "text-destructive text-xs font-medium", children: error })
   ] });
 }

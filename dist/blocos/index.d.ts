@@ -33,7 +33,7 @@ type ServicesProps = {
     description: React.ReactNode;
     services: ServiceItem[];
 };
-declare function Services({ eyebrow, title, description, services, }: ServicesProps): react_jsx_runtime.JSX.Element;
+declare function Services({ eyebrow, title, description, services }: ServicesProps): react_jsx_runtime.JSX.Element;
 
 type ProjectItem = {
     title: string;
@@ -53,7 +53,7 @@ type ProjectsProps = {
     description: React.ReactNode;
     projects: ProjectItem[];
 };
-declare function Projects({ eyebrow, title, description, projects, }: ProjectsProps): react_jsx_runtime.JSX.Element;
+declare function Projects({ eyebrow, title, description, projects }: ProjectsProps): react_jsx_runtime.JSX.Element;
 
 type ProcessStep = {
     numero: string;
@@ -98,7 +98,7 @@ type TestimonialsProps = {
     title: React.ReactNode;
     depoimentos: Depoimento[];
 };
-declare function Testimonials({ eyebrow, title, depoimentos, }: TestimonialsProps): react_jsx_runtime.JSX.Element;
+declare function Testimonials({ eyebrow, title, depoimentos }: TestimonialsProps): react_jsx_runtime.JSX.Element;
 
 type AboutProps = {
     eyebrow: string;
@@ -106,7 +106,7 @@ type AboutProps = {
     paragrafos: React.ReactNode[];
     slotLateral?: React.ReactNode;
 };
-declare function About({ eyebrow, title, paragrafos, slotLateral, }: AboutProps): react_jsx_runtime.JSX.Element;
+declare function About({ eyebrow, title, paragrafos, slotLateral }: AboutProps): react_jsx_runtime.JSX.Element;
 
 type ContactProps = {
     eyebrow: string;
@@ -119,6 +119,6 @@ type ContactProps = {
     email?: string;
     slotFormulario?: React.ReactNode;
 };
-declare function Contact({ eyebrow, title, description, cta, email, slotFormulario, }: ContactProps): react_jsx_runtime.JSX.Element;
+declare function Contact({ eyebrow, title, description, cta, email, slotFormulario }: ContactProps): react_jsx_runtime.JSX.Element;
 
 export { About, type AboutProps, Contact, type ContactProps, type Depoimento, Hero, type HeroProps, type HeroStat, Process, type ProcessProps, type ProcessStep, type ProjectItem, Projects, type ProjectsProps, type ServiceItem, Services, type ServicesProps, Stack, type StackGrupo, type StackProps, Testimonials, type TestimonialsProps };

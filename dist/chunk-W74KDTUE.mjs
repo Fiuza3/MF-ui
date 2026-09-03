@@ -106,23 +106,13 @@ function CardAction({ className, ...props }) {
     "div",
     {
       "data-slot": "card-action",
-      className: cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      ),
+      className: cn("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className),
       ...props
     }
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx2(
-    "div",
-    {
-      "data-slot": "card-content",
-      className: cn("px-6", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ jsx2("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
 }
 function CardFooter({ className, ...props }) {
   return /* @__PURE__ */ jsx2(
@@ -157,10 +147,7 @@ function Input({ className, type, ...props }) {
 // src/primitivos/Label.tsx
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { jsx as jsx4 } from "react/jsx-runtime";
-function Label({
-  className,
-  ...props
-}) {
+function Label({ className, ...props }) {
   return /* @__PURE__ */ jsx4(
     LabelPrimitive.Root,
     {
@@ -200,14 +187,7 @@ function Table({ className, ...props }) {
   ) });
 }
 function TableHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx6(
-    "thead",
-    {
-      "data-slot": "table-header",
-      className: cn("[&_tr]:border-b", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ jsx6("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
 }
 function TableBody({ className, ...props }) {
   return /* @__PURE__ */ jsx6(
@@ -387,23 +367,11 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
   if (totalPages <= 1) return null;
   const paginasVisiveis = gerarPaginasVisiveis(page, totalPages);
   return /* @__PURE__ */ jsx7(Pagination, { className, children: /* @__PURE__ */ jsxs(PaginationContent, { children: [
-    /* @__PURE__ */ jsx7(PaginationItem, { children: /* @__PURE__ */ jsx7(
-      PaginationPrevious,
-      {
-        disabled: page <= 1,
-        onClick: () => onPageChange(page - 1)
-      }
-    ) }),
+    /* @__PURE__ */ jsx7(PaginationItem, { children: /* @__PURE__ */ jsx7(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
     paginasVisiveis.map(
       (p, index) => p === "ellipsis" ? /* @__PURE__ */ jsx7(PaginationItem, { children: /* @__PURE__ */ jsx7(PaginationEllipsis, {}) }, `ellipsis-${index}`) : /* @__PURE__ */ jsx7(PaginationItem, { children: /* @__PURE__ */ jsx7(PaginationLink, { isActive: p === page, onClick: () => onPageChange(p), children: p }) }, p)
     ),
-    /* @__PURE__ */ jsx7(PaginationItem, { children: /* @__PURE__ */ jsx7(
-      PaginationNext,
-      {
-        disabled: page >= totalPages,
-        onClick: () => onPageChange(page + 1)
-      }
-    ) })
+    /* @__PURE__ */ jsx7(PaginationItem, { children: /* @__PURE__ */ jsx7(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
   ] }) });
 }
 
@@ -437,4 +405,4 @@ export {
   PaginationEllipsis,
   PaginationControl
 };
-//# sourceMappingURL=chunk-TE43X62N.mjs.map
+//# sourceMappingURL=chunk-W74KDTUE.mjs.map

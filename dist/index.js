@@ -380,9 +380,24 @@ function Navbar({
           onClick: () => setMenuOpen(!menuOpen),
           className: "flex flex-col gap-1.5 rounded p-2 md:hidden",
           children: [
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "translate-y-2 rotate-45" : ""}` }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "opacity-0" : ""}` }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "-translate-y-2 -rotate-45" : ""}` })
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+              "span",
+              {
+                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "translate-y-2 rotate-45" : ""}`
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+              "span",
+              {
+                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "opacity-0" : ""}`
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+              "span",
+              {
+                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`
+              }
+            )
           ]
         }
       )
@@ -515,33 +530,35 @@ function Reveal({
   ...rest
 }) {
   const ref = React.useRef(null);
-  const [state, setState] = React.useState("ssr");
+  const escondido = variant === "left" ? "mf-reveal-hidden-left" : "mf-reveal-hidden";
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || typeof window.IntersectionObserver === "undefined") return;
-    setState("hidden");
+    el.classList.add(escondido);
     const observer = new window.IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          setState("visible");
+          el.classList.remove(escondido);
+          el.classList.add("mf-reveal-visible");
           observer.disconnect();
         }
       },
       { rootMargin: margin }
     );
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [margin]);
+    return () => {
+      observer.disconnect();
+      el.classList.remove(escondido, "mf-reveal-visible");
+    };
+  }, [margin, escondido]);
   const Tag = as;
-  const escondido = variant === "left" ? "mf-reveal-hidden-left" : "mf-reveal-hidden";
-  const revealClass = state === "hidden" ? escondido : state === "visible" ? "mf-reveal-visible" : "";
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
     Tag,
     {
       ref,
-      className: [className, revealClass].filter(Boolean).join(" "),
+      className,
       style: delayMs ? { "--mf-entrada-delay": `${delayMs}ms` } : void 0,
       ...rest,
       children
@@ -784,23 +801,13 @@ function CardAction({ className, ...props }) {
     "div",
     {
       "data-slot": "card-action",
-      className: cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      ),
+      className: cn("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className),
       ...props
     }
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "card-content",
-      className: cn("px-6", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
 }
 function CardFooter({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
@@ -840,14 +847,7 @@ function Badge({
   ...props
 }) {
   const Comp = asChild ? import_react_slot2.Slot : "span";
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
-    Comp,
-    {
-      "data-slot": "badge",
-      className: cn(badgeVariants({ variant }), className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Comp, { "data-slot": "badge", className: cn(badgeVariants({ variant }), className), ...props });
 }
 
 // src/primitivos/Input.tsx
@@ -888,10 +888,7 @@ function Textarea({ className, ...props }) {
 // src/primitivos/Label.tsx
 var LabelPrimitive = __toESM(require("@radix-ui/react-label"));
 var import_jsx_runtime12 = require("react/jsx-runtime");
-function Label({
-  className,
-  ...props
-}) {
+function Label({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
     LabelPrimitive.Root,
     {
@@ -933,9 +930,7 @@ function Separator({
 var AccordionPrimitive = __toESM(require("@radix-ui/react-accordion"));
 var import_lucide_react = require("lucide-react");
 var import_jsx_runtime14 = require("react/jsx-runtime");
-function Accordion({
-  ...props
-}) {
+function Accordion({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(AccordionPrimitive.Root, { "data-slot": "accordion", ...props });
 }
 function AccordionItem({
@@ -992,24 +987,16 @@ function AccordionContent({
 var DialogPrimitive = __toESM(require("@radix-ui/react-dialog"));
 var import_lucide_react2 = require("lucide-react");
 var import_jsx_runtime15 = require("react/jsx-runtime");
-function Dialog({
-  ...props
-}) {
+function Dialog({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
 }
-function DialogTrigger({
-  ...props
-}) {
+function DialogTrigger({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(DialogPrimitive.Trigger, { "data-slot": "dialog-trigger", ...props });
 }
-function DialogPortal({
-  ...props
-}) {
+function DialogPortal({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
 }
-function DialogClose({
-  ...props
-}) {
+function DialogClose({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(DialogPrimitive.Close, { "data-slot": "dialog-close", ...props });
 }
 function DialogOverlay({
@@ -1078,18 +1065,12 @@ function DialogFooter({ className, ...props }) {
     "div",
     {
       "data-slot": "dialog-footer",
-      className: cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
-      ),
+      className: cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className),
       ...props
     }
   );
 }
-function DialogTitle({
-  className,
-  ...props
-}) {
+function DialogTitle({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
     DialogPrimitive.Title,
     {
@@ -1120,19 +1101,13 @@ var import_jsx_runtime16 = require("react/jsx-runtime");
 function Sheet({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
 }
-function SheetTrigger({
-  ...props
-}) {
+function SheetTrigger({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
 }
-function SheetClose({
-  ...props
-}) {
+function SheetClose({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
 }
-function SheetPortal({
-  ...props
-}) {
+function SheetPortal({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
 }
 function SheetOverlay({
@@ -1203,10 +1178,7 @@ function SheetFooter({ className, ...props }) {
     }
   );
 }
-function SheetTitle({
-  className,
-  ...props
-}) {
+function SheetTitle({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
     SheetPrimitive.Title,
     {
@@ -1246,14 +1218,10 @@ function TooltipProvider({
     }
   );
 }
-function Tooltip({
-  ...props
-}) {
+function Tooltip({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(TooltipProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
 }
-function TooltipTrigger({
-  ...props
-}) {
+function TooltipTrigger({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(TooltipPrimitive.Trigger, { "data-slot": "tooltip-trigger", ...props });
 }
 function TooltipContent({
@@ -1284,19 +1252,13 @@ function TooltipContent({
 var SelectPrimitive = __toESM(require("@radix-ui/react-select"));
 var import_lucide_react4 = require("lucide-react");
 var import_jsx_runtime18 = require("react/jsx-runtime");
-function Select({
-  ...props
-}) {
+function Select({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SelectPrimitive.Root, { "data-slot": "select", ...props });
 }
-function SelectGroup({
-  ...props
-}) {
+function SelectGroup({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SelectPrimitive.Group, { "data-slot": "select-group", ...props });
 }
-function SelectValue({
-  ...props
-}) {
+function SelectValue({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
 }
 function SelectTrigger({
@@ -1382,10 +1344,7 @@ function SelectContent({
     }
   ) });
 }
-function SelectLabel({
-  className,
-  ...props
-}) {
+function SelectLabel({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
     SelectPrimitive.Label,
     {
@@ -1434,10 +1393,7 @@ function SelectSeparator({
 var CheckboxPrimitive = __toESM(require("@radix-ui/react-checkbox"));
 var import_lucide_react5 = require("lucide-react");
 var import_jsx_runtime19 = require("react/jsx-runtime");
-function Checkbox({
-  className,
-  ...props
-}) {
+function Checkbox({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
     CheckboxPrimitive.Root,
     {
@@ -1462,10 +1418,7 @@ function Checkbox({
 // src/primitivos/Switch.tsx
 var SwitchPrimitive = __toESM(require("@radix-ui/react-switch"));
 var import_jsx_runtime20 = require("react/jsx-runtime");
-function Switch({
-  className,
-  ...props
-}) {
+function Switch({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
     SwitchPrimitive.Root,
     {
@@ -1491,10 +1444,7 @@ function Switch({
 // src/primitivos/Tabs.tsx
 var TabsPrimitive = __toESM(require("@radix-ui/react-tabs"));
 var import_jsx_runtime21 = require("react/jsx-runtime");
-function Tabs({
-  className,
-  ...props
-}) {
+function Tabs({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
     TabsPrimitive.Root,
     {
@@ -1504,10 +1454,7 @@ function Tabs({
     }
   );
 }
-function TabsList({
-  className,
-  ...props
-}) {
+function TabsList({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
     TabsPrimitive.List,
     {
@@ -1520,10 +1467,7 @@ function TabsList({
     }
   );
 }
-function TabsTrigger({
-  className,
-  ...props
-}) {
+function TabsTrigger({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
     TabsPrimitive.Trigger,
     {
@@ -1536,10 +1480,7 @@ function TabsTrigger({
     }
   );
 }
-function TabsContent({
-  className,
-  ...props
-}) {
+function TabsContent({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
     TabsPrimitive.Content,
     {
@@ -1576,14 +1517,7 @@ function Table({ className, ...props }) {
   ) });
 }
 function TableHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
-    "thead",
-    {
-      "data-slot": "table-header",
-      className: cn("[&_tr]:border-b", className),
-      ...props
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
 }
 function TableBody({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
@@ -1763,23 +1697,11 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
   if (totalPages <= 1) return null;
   const paginasVisiveis = gerarPaginasVisiveis(page, totalPages);
   return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Pagination, { className, children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(PaginationContent, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
-      PaginationPrevious,
-      {
-        disabled: page <= 1,
-        onClick: () => onPageChange(page - 1)
-      }
-    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
     paginasVisiveis.map(
       (p, index) => p === "ellipsis" ? /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationEllipsis, {}) }, `ellipsis-${index}`) : /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationLink, { isActive: p === page, onClick: () => onPageChange(p), children: p }) }, p)
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
-      PaginationNext,
-      {
-        disabled: page >= totalPages,
-        onClick: () => onPageChange(page + 1)
-      }
-    ) })
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
   ] }) });
 }
 
@@ -1787,9 +1709,7 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
 var DropdownMenuPrimitive = __toESM(require("@radix-ui/react-dropdown-menu"));
 var import_lucide_react7 = require("lucide-react");
 var import_jsx_runtime25 = require("react/jsx-runtime");
-function DropdownMenu({
-  ...props
-}) {
+function DropdownMenu({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(DropdownMenuPrimitive.Root, { "data-slot": "dropdown-menu", ...props });
 }
 function DropdownMenuTrigger({
@@ -1802,9 +1722,7 @@ function DropdownMenuPortal({
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(DropdownMenuPrimitive.Portal, { "data-slot": "dropdown-menu-portal", ...props });
 }
-function DropdownMenuGroup({
-  ...props
-}) {
+function DropdownMenuGroup({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(DropdownMenuPrimitive.Group, { "data-slot": "dropdown-menu-group", ...props });
 }
 function DropdownMenuContent({
@@ -1932,9 +1850,7 @@ function DropdownMenuShortcut({ className, ...props }) {
     }
   );
 }
-function DropdownMenuSub({
-  ...props
-}) {
+function DropdownMenuSub({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(DropdownMenuPrimitive.Sub, { "data-slot": "dropdown-menu-sub", ...props });
 }
 function DropdownMenuSubTrigger({
@@ -1983,9 +1899,7 @@ var ToastPrimitive = __toESM(require("@radix-ui/react-toast"));
 var import_class_variance_authority3 = require("class-variance-authority");
 var import_lucide_react8 = require("lucide-react");
 var import_jsx_runtime26 = require("react/jsx-runtime");
-function ToastProvider({
-  ...props
-}) {
+function ToastProvider({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ToastPrimitive.Provider, { "data-slot": "toast-provider", ...props });
 }
 function ToastViewport({
@@ -2056,10 +1970,7 @@ function ToastDescription({
     }
   );
 }
-function ToastAction({
-  className,
-  ...props
-}) {
+function ToastAction({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
     ToastPrimitive.Action,
     {
@@ -2194,7 +2105,13 @@ function Hero({
                         className: "group inline-flex w-fit items-center gap-3 rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
                         children: [
                           cta.label,
-                          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan", "aria-hidden": "true" })
+                          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+                            "span",
+                            {
+                              className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan",
+                              "aria-hidden": "true"
+                            }
+                          )
                         ]
                       }
                     )
@@ -2233,10 +2150,7 @@ function Hero({
 
 // src/blocos/Services.tsx
 var import_jsx_runtime28 = require("react/jsx-runtime");
-function ServiceCard({
-  service,
-  index
-}) {
+function ServiceCard({ service, index }) {
   return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
     Reveal,
     {
@@ -2265,42 +2179,16 @@ function ServiceCard({
             /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "mt-4 max-w-2xl text-sm leading-relaxed text-gray-text lg:text-base", children: service.description })
           ] }),
           service.motif,
-          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
-            "ul",
-            {
-              className: "grid gap-2 sm:grid-cols-2",
-              "aria-label": `Itens de ${service.title}`,
-              children: service.items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
-                "li",
-                {
-                  className: "flex items-start gap-2 text-sm text-gray-text",
-                  children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
-                      "span",
-                      {
-                        className: "mt-0.5 font-mono text-cyan",
-                        "aria-hidden": "true",
-                        children: "/"
-                      }
-                    ),
-                    item
-                  ]
-                },
-                item
-              ))
-            }
-          )
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "grid gap-2 sm:grid-cols-2", "aria-label": `Itens de ${service.title}`, children: service.items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("li", { className: "flex items-start gap-2 text-sm text-gray-text", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mt-0.5 font-mono text-cyan", "aria-hidden": "true", children: "/" }),
+            item
+          ] }, item)) })
         ] })
       ]
     }
   );
 }
-function Services({
-  eyebrow,
-  title,
-  description,
-  services
-}) {
+function Services({ eyebrow, title, description, services }) {
   return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
     "section",
     {
@@ -2321,11 +2209,9 @@ function Services({
 
 // src/blocos/Projects.tsx
 var import_react2 = require("react");
+var import_lucide_react9 = require("lucide-react");
 var import_jsx_runtime29 = require("react/jsx-runtime");
-function ProjectModal({
-  project,
-  onClose
-}) {
+function ProjectModal({ project, onClose }) {
   const closeRef = (0, import_react2.useRef)(null);
   const dialogRef = (0, import_react2.useRef)(null);
   (0, import_react2.useEffect)(() => {
@@ -2351,70 +2237,63 @@ function ProjectModal({
     window.setTimeout(() => closeRef.current?.focus(), 30);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
-    "div",
-    {
-      className: "mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5",
-      onMouseDown: onClose,
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
-          "div",
-          {
-            className: "absolute inset-0 bg-background/85 backdrop-blur-md",
-            "aria-hidden": "true"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
-          "div",
-          {
-            ref: dialogRef,
-            onMouseDown: (event) => event.stopPropagation(),
-            className: "mf-entrada mf-entrada-up relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8",
-            role: "dialog",
-            "aria-modal": "true",
-            "aria-label": `Case tecnico: ${project.title}`,
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
-                "button",
-                {
-                  ref: closeRef,
-                  type: "button",
-                  onClick: onClose,
-                  "aria-label": "Fechar case",
-                  className: "absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
-                  children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { "aria-hidden": "true", children: "\u2715" })
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
-                "case.log",
-                project.ano ? ` / ${project.ano}` : ""
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl", children: project.title }),
-              project.description && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-5 max-w-2xl text-base leading-relaxed text-gray-text", children: project.description }),
-              (project.metrica || project.resultado) && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mt-8 grid gap-4 sm:grid-cols-2", children: [
-                project.metrica && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-3 font-mono text-xl text-cyan", children: project.metrica })
-                ] }),
-                project.resultado && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "resultado" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-3 text-sm leading-relaxed text-foreground", children: project.resultado })
-                ] })
-              ] }),
-              project.tags && project.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-6 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
-                "span",
-                {
-                  className: "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text",
-                  children: tag
-                },
-                tag
-              )) })
-            ]
-          }
-        )
-      ]
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+      "div",
+      {
+        className: "absolute inset-0 bg-background/85 backdrop-blur-md",
+        "aria-hidden": "true",
+        onMouseDown: onClose
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
+      "div",
+      {
+        ref: dialogRef,
+        className: "mf-entrada mf-entrada-up relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8",
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": `Case tecnico: ${project.title}`,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+            "button",
+            {
+              ref: closeRef,
+              type: "button",
+              onClick: onClose,
+              "aria-label": "Fechar case",
+              className: "absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
+              children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(import_lucide_react9.X, { className: "size-4", "aria-hidden": "true" })
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
+            "case.log",
+            project.ano ? ` / ${project.ano}` : ""
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl", children: project.title }),
+          project.description && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-5 max-w-2xl text-base leading-relaxed text-gray-text", children: project.description }),
+          (project.metrica || project.resultado) && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mt-8 grid gap-4 sm:grid-cols-2", children: [
+            project.metrica && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica" }),
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-3 font-mono text-xl text-cyan", children: project.metrica })
+            ] }),
+            project.resultado && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "rounded border border-line bg-background/50 p-4", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "resultado" }),
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-3 text-sm leading-relaxed text-foreground", children: project.resultado })
+            ] })
+          ] }),
+          project.tags && project.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-6 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+            "span",
+            {
+              className: "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text",
+              children: tag
+            },
+            tag
+          )) })
+        ]
+      }
+    )
+  ] });
 }
 function ProjectFrame({
   project,
@@ -2478,12 +2357,7 @@ function ProjectFrame({
     }
   );
 }
-function Projects({
-  eyebrow,
-  title,
-  description,
-  projects
-}) {
+function Projects({ eyebrow, title, description, projects }) {
   const [selected, setSelected] = (0, import_react2.useState)(null);
   const loopedProjects = [...projects, ...projects];
   return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
@@ -2548,10 +2422,7 @@ function Projects({
 
 // src/blocos/Process.tsx
 var import_jsx_runtime30 = require("react/jsx-runtime");
-function PipelineCard({
-  step,
-  index
-}) {
+function PipelineCard({ step, index }) {
   return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(
     Reveal,
     {
@@ -2671,58 +2542,51 @@ function Stack({ eyebrow, title, description, grupos }) {
               grupo.categoria
             );
           }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "rounded border border-line bg-surface p-5 lg:p-8", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(
-            "div",
-            {
-              className: "mf-entrada mf-entrada-up-suave",
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "flex items-start justify-between gap-6", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
-                      "layer / ",
-                      active.categoria.toLowerCase()
-                    ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h3", { className: "mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: active.categoria })
-                  ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: "active" })
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "rounded border border-line bg-surface p-5 lg:p-8", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "mf-entrada mf-entrada-up-suave", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "flex items-start justify-between gap-6", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
+                  "layer / ",
+                  active.categoria.toLowerCase()
                 ] }),
-                active.description && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: active.description }),
-                /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3", children: active.itens.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(
-                  "div",
-                  {
-                    style: {
-                      "--mf-entrada-delay": `${index * 40}ms`
-                    },
-                    className: "mf-entrada mf-entrada-up-suave group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60",
-                    children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "relative z-10 text-sm text-foreground", children: item }),
-                      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
-                        "span",
-                        {
-                          className: "stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100",
-                          "aria-hidden": "true"
-                        }
-                      )
-                    ]
-                  },
-                  item
-                )) }),
-                active.comando && /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("p", { className: "text-sm text-foreground", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "text-cyan", children: "$" }),
-                    " explain --when-to-use",
-                    " ",
-                    active.categoria.toLowerCase()
-                  ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "text-cyan/70", children: ">" }),
-                    " uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
-                  ] })
-                ] })
-              ]
-            },
-            active.categoria
-          ) })
+                /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h3", { className: "mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: active.categoria })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: "active" })
+            ] }),
+            active.description && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: active.description }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3", children: active.itens.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(
+              "div",
+              {
+                style: {
+                  "--mf-entrada-delay": `${index * 40}ms`
+                },
+                className: "mf-entrada mf-entrada-up-suave group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60",
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "relative z-10 text-sm text-foreground", children: item }),
+                  /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
+                    "span",
+                    {
+                      className: "stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100",
+                      "aria-hidden": "true"
+                    }
+                  )
+                ]
+              },
+              item
+            )) }),
+            active.comando && /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("p", { className: "text-sm text-foreground", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "text-cyan", children: "$" }),
+                " explain --when-to-use",
+                " ",
+                active.categoria.toLowerCase()
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "text-cyan/70", children: ">" }),
+                " uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
+              ] })
+            ] })
+          ] }, active.categoria) })
         ] })
       ] })
     }
@@ -2733,11 +2597,7 @@ function Stack({ eyebrow, title, description, grupos }) {
 var import_react4 = require("react");
 var import_jsx_runtime32 = require("react/jsx-runtime");
 var AUTOPLAY_MS = 5e3;
-function Testimonials({
-  eyebrow,
-  title,
-  depoimentos
-}) {
+function Testimonials({ eyebrow, title, depoimentos }) {
   const [current, setCurrent] = (0, import_react4.useState)(0);
   const [paused, setPaused] = (0, import_react4.useState)(false);
   const [userPaused, setUserPaused] = (0, import_react4.useState)(false);
@@ -2860,8 +2720,7 @@ function Testimonials({
                 ),
                 /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("span", { className: "ml-auto font-mono text-xs text-gray-text", children: [
                   String(current + 1).padStart(2, "0"),
-                  " /",
-                  " ",
+                  " / ",
                   String(depoimentos.length).padStart(2, "0")
                 ] })
               ] })
@@ -2875,62 +2734,42 @@ function Testimonials({
 
 // src/blocos/About.tsx
 var import_jsx_runtime33 = require("react/jsx-runtime");
-function About({
-  eyebrow,
-  title,
-  paragrafos,
-  slotLateral
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(
-    "section",
-    {
-      id: "sobre",
-      "aria-label": "Sobre",
-      className: "relative overflow-hidden py-16 lg:py-24",
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(Reveal, { as: "div", margin: "-80px", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
-            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
-              Reveal,
-              {
-                as: "div",
-                margin: "-80px",
-                delayMs: index * 60,
-                className: "text-base leading-relaxed text-gray-text lg:text-lg",
-                children: paragrafo
-              },
-              index
-            )) })
-          ] }),
-          slotLateral && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
-            Reveal,
-            {
-              as: "aside",
-              margin: "-80px",
-              delayMs: 120,
-              className: "rounded border border-line bg-surface font-mono lg:sticky lg:top-28",
-              children: slotLateral
-            }
-          )
-        ] }) })
-      ]
-    }
-  );
+function About({ eyebrow, title, paragrafos, slotLateral }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("section", { id: "sobre", "aria-label": "Sobre", className: "relative overflow-hidden py-16 lg:py-24", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(Reveal, { as: "div", margin: "-80px", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
+          Reveal,
+          {
+            as: "div",
+            margin: "-80px",
+            delayMs: index * 60,
+            className: "text-base leading-relaxed text-gray-text lg:text-lg",
+            children: paragrafo
+          },
+          index
+        )) })
+      ] }),
+      slotLateral && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
+        Reveal,
+        {
+          as: "aside",
+          margin: "-80px",
+          delayMs: 120,
+          className: "rounded border border-line bg-surface font-mono lg:sticky lg:top-28",
+          children: slotLateral
+        }
+      )
+    ] }) })
+  ] });
 }
 
 // src/blocos/Contact.tsx
 var import_jsx_runtime34 = require("react/jsx-runtime");
-function Contact({
-  eyebrow,
-  title,
-  description,
-  cta,
-  email,
-  slotFormulario
-}) {
+function Contact({ eyebrow, title, description, cta, email, slotFormulario }) {
   return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
     "section",
     {
@@ -3137,21 +2976,14 @@ function FormField({ label, error, children, className, htmlFor }) {
   const errorId = htmlFor ? `${htmlFor}-error` : void 0;
   return /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { "data-slot": "form-field", className: cn("flex flex-col gap-1.5", className), children: [
     /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(Label, { htmlFor, children: label }),
-    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(
-      "div",
-      {
-        "aria-invalid": Boolean(error),
-        "aria-describedby": error ? errorId : void 0,
-        children
-      }
-    ),
+    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { "aria-invalid": Boolean(error), "aria-describedby": error ? errorId : void 0, children }),
     error && /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("p", { id: errorId, role: "alert", className: "text-destructive text-xs font-medium", children: error })
   ] });
 }
 
 // src/blocos-app/CopyField.tsx
 var React4 = __toESM(require("react"));
-var import_lucide_react9 = require("lucide-react");
+var import_lucide_react10 = require("lucide-react");
 var import_jsx_runtime41 = require("react/jsx-runtime");
 function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
   const [copiado, setCopiado] = React4.useState(false);
@@ -3173,7 +3005,7 @@ function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
           size: "icon",
           "aria-label": copiado ? "Valor copiado" : "Copiar valor",
           onClick: copiarValor,
-          children: copiado ? /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(import_lucide_react9.CheckIcon, { className: "text-primary" }) : /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(import_lucide_react9.CopyIcon, {})
+          children: copiado ? /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(import_lucide_react10.CheckIcon, { className: "text-primary" }) : /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(import_lucide_react10.CopyIcon, {})
         }
       )
     ] })

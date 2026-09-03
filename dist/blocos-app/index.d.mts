@@ -52,7 +52,7 @@ declare function DataTable<TRow>({ columns, rows, getRowKey, loading, loadingRow
 
 type StatCardDelta = {
     value: React.ReactNode;
-    direction?: 'up' | 'down' | 'neutral';
+    direction?: "up" | "down" | "neutral";
 };
 type StatCardProps = {
     label: React.ReactNode;

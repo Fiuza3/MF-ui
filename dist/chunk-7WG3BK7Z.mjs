@@ -46,7 +46,13 @@ function Hero({
                         className: "group inline-flex w-fit items-center gap-3 rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
                         children: [
                           cta.label,
-                          /* @__PURE__ */ jsx("span", { className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan", "aria-hidden": "true" })
+                          /* @__PURE__ */ jsx(
+                            "span",
+                            {
+                              className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan",
+                              "aria-hidden": "true"
+                            }
+                          )
                         ]
                       }
                     )
@@ -96,33 +102,35 @@ function Reveal({
   ...rest
 }) {
   const ref = React.useRef(null);
-  const [state, setState] = React.useState("ssr");
+  const escondido = variant === "left" ? "mf-reveal-hidden-left" : "mf-reveal-hidden";
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || typeof window.IntersectionObserver === "undefined") return;
-    setState("hidden");
+    el.classList.add(escondido);
     const observer = new window.IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          setState("visible");
+          el.classList.remove(escondido);
+          el.classList.add("mf-reveal-visible");
           observer.disconnect();
         }
       },
       { rootMargin: margin }
     );
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [margin]);
+    return () => {
+      observer.disconnect();
+      el.classList.remove(escondido, "mf-reveal-visible");
+    };
+  }, [margin, escondido]);
   const Tag = as;
-  const escondido = variant === "left" ? "mf-reveal-hidden-left" : "mf-reveal-hidden";
-  const revealClass = state === "hidden" ? escondido : state === "visible" ? "mf-reveal-visible" : "";
   return /* @__PURE__ */ jsx2(
     Tag,
     {
       ref,
-      className: [className, revealClass].filter(Boolean).join(" "),
+      className,
       style: delayMs ? { "--mf-entrada-delay": `${delayMs}ms` } : void 0,
       ...rest,
       children
@@ -132,10 +140,7 @@ function Reveal({
 
 // src/blocos/Services.tsx
 import { jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
-function ServiceCard({
-  service,
-  index
-}) {
+function ServiceCard({ service, index }) {
   return /* @__PURE__ */ jsxs2(
     Reveal,
     {
@@ -164,42 +169,16 @@ function ServiceCard({
             /* @__PURE__ */ jsx3("p", { className: "mt-4 max-w-2xl text-sm leading-relaxed text-gray-text lg:text-base", children: service.description })
           ] }),
           service.motif,
-          /* @__PURE__ */ jsx3(
-            "ul",
-            {
-              className: "grid gap-2 sm:grid-cols-2",
-              "aria-label": `Itens de ${service.title}`,
-              children: service.items.map((item) => /* @__PURE__ */ jsxs2(
-                "li",
-                {
-                  className: "flex items-start gap-2 text-sm text-gray-text",
-                  children: [
-                    /* @__PURE__ */ jsx3(
-                      "span",
-                      {
-                        className: "mt-0.5 font-mono text-cyan",
-                        "aria-hidden": "true",
-                        children: "/"
-                      }
-                    ),
-                    item
-                  ]
-                },
-                item
-              ))
-            }
-          )
+          /* @__PURE__ */ jsx3("ul", { className: "grid gap-2 sm:grid-cols-2", "aria-label": `Itens de ${service.title}`, children: service.items.map((item) => /* @__PURE__ */ jsxs2("li", { className: "flex items-start gap-2 text-sm text-gray-text", children: [
+            /* @__PURE__ */ jsx3("span", { className: "mt-0.5 font-mono text-cyan", "aria-hidden": "true", children: "/" }),
+            item
+          ] }, item)) })
         ] })
       ]
     }
   );
 }
-function Services({
-  eyebrow,
-  title,
-  description,
-  services
-}) {
+function Services({ eyebrow, title, description, services }) {
   return /* @__PURE__ */ jsx3(
     "section",
     {
@@ -219,12 +198,10 @@ function Services({
 }
 
 // src/blocos/Projects.tsx
-import { useState as useState2, useEffect as useEffect2, useRef as useRef2 } from "react";
+import { useState, useEffect as useEffect2, useRef as useRef2 } from "react";
+import { X } from "lucide-react";
 import { jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
-function ProjectModal({
-  project,
-  onClose
-}) {
+function ProjectModal({ project, onClose }) {
   const closeRef = useRef2(null);
   const dialogRef = useRef2(null);
   useEffect2(() => {
@@ -250,70 +227,63 @@ function ProjectModal({
     window.setTimeout(() => closeRef.current?.focus(), 30);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
-  return /* @__PURE__ */ jsxs3(
-    "div",
-    {
-      className: "mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5",
-      onMouseDown: onClose,
-      children: [
-        /* @__PURE__ */ jsx4(
-          "div",
-          {
-            className: "absolute inset-0 bg-background/85 backdrop-blur-md",
-            "aria-hidden": "true"
-          }
-        ),
-        /* @__PURE__ */ jsxs3(
-          "div",
-          {
-            ref: dialogRef,
-            onMouseDown: (event) => event.stopPropagation(),
-            className: "mf-entrada mf-entrada-up relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8",
-            role: "dialog",
-            "aria-modal": "true",
-            "aria-label": `Case tecnico: ${project.title}`,
-            children: [
-              /* @__PURE__ */ jsx4(
-                "button",
-                {
-                  ref: closeRef,
-                  type: "button",
-                  onClick: onClose,
-                  "aria-label": "Fechar case",
-                  className: "absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
-                  children: /* @__PURE__ */ jsx4("span", { "aria-hidden": "true", children: "\u2715" })
-                }
-              ),
-              /* @__PURE__ */ jsxs3("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
-                "case.log",
-                project.ano ? ` / ${project.ano}` : ""
-              ] }),
-              /* @__PURE__ */ jsx4("h3", { className: "mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl", children: project.title }),
-              project.description && /* @__PURE__ */ jsx4("p", { className: "mt-5 max-w-2xl text-base leading-relaxed text-gray-text", children: project.description }),
-              (project.metrica || project.resultado) && /* @__PURE__ */ jsxs3("div", { className: "mt-8 grid gap-4 sm:grid-cols-2", children: [
-                project.metrica && /* @__PURE__ */ jsxs3("div", { className: "rounded border border-line bg-background/50 p-4", children: [
-                  /* @__PURE__ */ jsx4("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica" }),
-                  /* @__PURE__ */ jsx4("p", { className: "mt-3 font-mono text-xl text-cyan", children: project.metrica })
-                ] }),
-                project.resultado && /* @__PURE__ */ jsxs3("div", { className: "rounded border border-line bg-background/50 p-4", children: [
-                  /* @__PURE__ */ jsx4("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "resultado" }),
-                  /* @__PURE__ */ jsx4("p", { className: "mt-3 text-sm leading-relaxed text-foreground", children: project.resultado })
-                ] })
-              ] }),
-              project.tags && project.tags.length > 0 && /* @__PURE__ */ jsx4("div", { className: "mt-6 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ jsx4(
-                "span",
-                {
-                  className: "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text",
-                  children: tag
-                },
-                tag
-              )) })
-            ]
-          }
-        )
-      ]
-    }
-  );
+  return /* @__PURE__ */ jsxs3("div", { className: "mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5", children: [
+    /* @__PURE__ */ jsx4(
+      "div",
+      {
+        className: "absolute inset-0 bg-background/85 backdrop-blur-md",
+        "aria-hidden": "true",
+        onMouseDown: onClose
+      }
+    ),
+    /* @__PURE__ */ jsxs3(
+      "div",
+      {
+        ref: dialogRef,
+        className: "mf-entrada mf-entrada-up relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8",
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": `Case tecnico: ${project.title}`,
+        children: [
+          /* @__PURE__ */ jsx4(
+            "button",
+            {
+              ref: closeRef,
+              type: "button",
+              onClick: onClose,
+              "aria-label": "Fechar case",
+              className: "absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
+              children: /* @__PURE__ */ jsx4(X, { className: "size-4", "aria-hidden": "true" })
+            }
+          ),
+          /* @__PURE__ */ jsxs3("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
+            "case.log",
+            project.ano ? ` / ${project.ano}` : ""
+          ] }),
+          /* @__PURE__ */ jsx4("h3", { className: "mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl", children: project.title }),
+          project.description && /* @__PURE__ */ jsx4("p", { className: "mt-5 max-w-2xl text-base leading-relaxed text-gray-text", children: project.description }),
+          (project.metrica || project.resultado) && /* @__PURE__ */ jsxs3("div", { className: "mt-8 grid gap-4 sm:grid-cols-2", children: [
+            project.metrica && /* @__PURE__ */ jsxs3("div", { className: "rounded border border-line bg-background/50 p-4", children: [
+              /* @__PURE__ */ jsx4("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "metrica" }),
+              /* @__PURE__ */ jsx4("p", { className: "mt-3 font-mono text-xl text-cyan", children: project.metrica })
+            ] }),
+            project.resultado && /* @__PURE__ */ jsxs3("div", { className: "rounded border border-line bg-background/50 p-4", children: [
+              /* @__PURE__ */ jsx4("p", { className: "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "resultado" }),
+              /* @__PURE__ */ jsx4("p", { className: "mt-3 text-sm leading-relaxed text-foreground", children: project.resultado })
+            ] })
+          ] }),
+          project.tags && project.tags.length > 0 && /* @__PURE__ */ jsx4("div", { className: "mt-6 flex flex-wrap gap-2", children: project.tags.map((tag) => /* @__PURE__ */ jsx4(
+            "span",
+            {
+              className: "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text",
+              children: tag
+            },
+            tag
+          )) })
+        ]
+      }
+    )
+  ] });
 }
 function ProjectFrame({
   project,
@@ -377,13 +347,8 @@ function ProjectFrame({
     }
   );
 }
-function Projects({
-  eyebrow,
-  title,
-  description,
-  projects
-}) {
-  const [selected, setSelected] = useState2(null);
+function Projects({ eyebrow, title, description, projects }) {
+  const [selected, setSelected] = useState(null);
   const loopedProjects = [...projects, ...projects];
   return /* @__PURE__ */ jsxs3(
     "section",
@@ -447,10 +412,7 @@ function Projects({
 
 // src/blocos/Process.tsx
 import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
-function PipelineCard({
-  step,
-  index
-}) {
+function PipelineCard({ step, index }) {
   return /* @__PURE__ */ jsxs4(
     Reveal,
     {
@@ -513,10 +475,10 @@ function Process({ eyebrow, title, description, steps }) {
 }
 
 // src/blocos/Stack.tsx
-import { useState as useState3 } from "react";
+import { useState as useState2 } from "react";
 import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
 function Stack({ eyebrow, title, description, grupos }) {
-  const [active, setActive] = useState3(grupos[0]);
+  const [active, setActive] = useState2(grupos[0]);
   return /* @__PURE__ */ jsx6(
     "section",
     {
@@ -570,58 +532,51 @@ function Stack({ eyebrow, title, description, grupos }) {
               grupo.categoria
             );
           }) }),
-          /* @__PURE__ */ jsx6("div", { className: "rounded border border-line bg-surface p-5 lg:p-8", children: /* @__PURE__ */ jsxs5(
-            "div",
-            {
-              className: "mf-entrada mf-entrada-up-suave",
-              children: [
-                /* @__PURE__ */ jsxs5("div", { className: "flex items-start justify-between gap-6", children: [
-                  /* @__PURE__ */ jsxs5("div", { children: [
-                    /* @__PURE__ */ jsxs5("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
-                      "layer / ",
-                      active.categoria.toLowerCase()
-                    ] }),
-                    /* @__PURE__ */ jsx6("h3", { className: "mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: active.categoria })
-                  ] }),
-                  /* @__PURE__ */ jsx6("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: "active" })
+          /* @__PURE__ */ jsx6("div", { className: "rounded border border-line bg-surface p-5 lg:p-8", children: /* @__PURE__ */ jsxs5("div", { className: "mf-entrada mf-entrada-up-suave", children: [
+            /* @__PURE__ */ jsxs5("div", { className: "flex items-start justify-between gap-6", children: [
+              /* @__PURE__ */ jsxs5("div", { children: [
+                /* @__PURE__ */ jsxs5("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
+                  "layer / ",
+                  active.categoria.toLowerCase()
                 ] }),
-                active.description && /* @__PURE__ */ jsx6("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: active.description }),
-                /* @__PURE__ */ jsx6("div", { className: "stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3", children: active.itens.map((item, index) => /* @__PURE__ */ jsxs5(
-                  "div",
-                  {
-                    style: {
-                      "--mf-entrada-delay": `${index * 40}ms`
-                    },
-                    className: "mf-entrada mf-entrada-up-suave group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60",
-                    children: [
-                      /* @__PURE__ */ jsx6("span", { className: "relative z-10 text-sm text-foreground", children: item }),
-                      /* @__PURE__ */ jsx6(
-                        "span",
-                        {
-                          className: "stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100",
-                          "aria-hidden": "true"
-                        }
-                      )
-                    ]
-                  },
-                  item
-                )) }),
-                active.comando && /* @__PURE__ */ jsxs5("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
-                  /* @__PURE__ */ jsxs5("p", { className: "text-sm text-foreground", children: [
-                    /* @__PURE__ */ jsx6("span", { className: "text-cyan", children: "$" }),
-                    " explain --when-to-use",
-                    " ",
-                    active.categoria.toLowerCase()
-                  ] }),
-                  /* @__PURE__ */ jsxs5("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: [
-                    /* @__PURE__ */ jsx6("span", { className: "text-cyan/70", children: ">" }),
-                    " uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
-                  ] })
-                ] })
-              ]
-            },
-            active.categoria
-          ) })
+                /* @__PURE__ */ jsx6("h3", { className: "mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: active.categoria })
+              ] }),
+              /* @__PURE__ */ jsx6("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: "active" })
+            ] }),
+            active.description && /* @__PURE__ */ jsx6("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: active.description }),
+            /* @__PURE__ */ jsx6("div", { className: "stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3", children: active.itens.map((item, index) => /* @__PURE__ */ jsxs5(
+              "div",
+              {
+                style: {
+                  "--mf-entrada-delay": `${index * 40}ms`
+                },
+                className: "mf-entrada mf-entrada-up-suave group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60",
+                children: [
+                  /* @__PURE__ */ jsx6("span", { className: "relative z-10 text-sm text-foreground", children: item }),
+                  /* @__PURE__ */ jsx6(
+                    "span",
+                    {
+                      className: "stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100",
+                      "aria-hidden": "true"
+                    }
+                  )
+                ]
+              },
+              item
+            )) }),
+            active.comando && /* @__PURE__ */ jsxs5("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
+              /* @__PURE__ */ jsxs5("p", { className: "text-sm text-foreground", children: [
+                /* @__PURE__ */ jsx6("span", { className: "text-cyan", children: "$" }),
+                " explain --when-to-use",
+                " ",
+                active.categoria.toLowerCase()
+              ] }),
+              /* @__PURE__ */ jsxs5("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: [
+                /* @__PURE__ */ jsx6("span", { className: "text-cyan/70", children: ">" }),
+                " uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
+              ] })
+            ] })
+          ] }, active.categoria) })
         ] })
       ] })
     }
@@ -629,17 +584,13 @@ function Stack({ eyebrow, title, description, grupos }) {
 }
 
 // src/blocos/Testimonials.tsx
-import { useState as useState4, useEffect as useEffect3, useRef as useRef3, useCallback } from "react";
+import { useState as useState3, useEffect as useEffect3, useRef as useRef3, useCallback } from "react";
 import { jsx as jsx7, jsxs as jsxs6 } from "react/jsx-runtime";
 var AUTOPLAY_MS = 5e3;
-function Testimonials({
-  eyebrow,
-  title,
-  depoimentos
-}) {
-  const [current, setCurrent] = useState4(0);
-  const [paused, setPaused] = useState4(false);
-  const [userPaused, setUserPaused] = useState4(false);
+function Testimonials({ eyebrow, title, depoimentos }) {
+  const [current, setCurrent] = useState3(0);
+  const [paused, setPaused] = useState3(false);
+  const [userPaused, setUserPaused] = useState3(false);
   const timerRef = useRef3(null);
   const next = useCallback(() => {
     setCurrent((c) => (c + 1) % depoimentos.length);
@@ -759,8 +710,7 @@ function Testimonials({
                 ),
                 /* @__PURE__ */ jsxs6("span", { className: "ml-auto font-mono text-xs text-gray-text", children: [
                   String(current + 1).padStart(2, "0"),
-                  " /",
-                  " ",
+                  " / ",
                   String(depoimentos.length).padStart(2, "0")
                 ] })
               ] })
@@ -774,62 +724,42 @@ function Testimonials({
 
 // src/blocos/About.tsx
 import { jsx as jsx8, jsxs as jsxs7 } from "react/jsx-runtime";
-function About({
-  eyebrow,
-  title,
-  paragrafos,
-  slotLateral
-}) {
-  return /* @__PURE__ */ jsxs7(
-    "section",
-    {
-      id: "sobre",
-      "aria-label": "Sobre",
-      className: "relative overflow-hidden py-16 lg:py-24",
-      children: [
-        /* @__PURE__ */ jsx8("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
-        /* @__PURE__ */ jsx8("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs7("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
-          /* @__PURE__ */ jsxs7(Reveal, { as: "div", margin: "-80px", children: [
-            /* @__PURE__ */ jsx8("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-            /* @__PURE__ */ jsx8("h2", { className: "text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
-            /* @__PURE__ */ jsx8("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ jsx8(
-              Reveal,
-              {
-                as: "div",
-                margin: "-80px",
-                delayMs: index * 60,
-                className: "text-base leading-relaxed text-gray-text lg:text-lg",
-                children: paragrafo
-              },
-              index
-            )) })
-          ] }),
-          slotLateral && /* @__PURE__ */ jsx8(
-            Reveal,
-            {
-              as: "aside",
-              margin: "-80px",
-              delayMs: 120,
-              className: "rounded border border-line bg-surface font-mono lg:sticky lg:top-28",
-              children: slotLateral
-            }
-          )
-        ] }) })
-      ]
-    }
-  );
+function About({ eyebrow, title, paragrafos, slotLateral }) {
+  return /* @__PURE__ */ jsxs7("section", { id: "sobre", "aria-label": "Sobre", className: "relative overflow-hidden py-16 lg:py-24", children: [
+    /* @__PURE__ */ jsx8("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
+    /* @__PURE__ */ jsx8("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs7("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
+      /* @__PURE__ */ jsxs7(Reveal, { as: "div", margin: "-80px", children: [
+        /* @__PURE__ */ jsx8("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
+        /* @__PURE__ */ jsx8("h2", { className: "text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
+        /* @__PURE__ */ jsx8("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ jsx8(
+          Reveal,
+          {
+            as: "div",
+            margin: "-80px",
+            delayMs: index * 60,
+            className: "text-base leading-relaxed text-gray-text lg:text-lg",
+            children: paragrafo
+          },
+          index
+        )) })
+      ] }),
+      slotLateral && /* @__PURE__ */ jsx8(
+        Reveal,
+        {
+          as: "aside",
+          margin: "-80px",
+          delayMs: 120,
+          className: "rounded border border-line bg-surface font-mono lg:sticky lg:top-28",
+          children: slotLateral
+        }
+      )
+    ] }) })
+  ] });
 }
 
 // src/blocos/Contact.tsx
 import { jsx as jsx9, jsxs as jsxs8 } from "react/jsx-runtime";
-function Contact({
-  eyebrow,
-  title,
-  description,
-  cta,
-  email,
-  slotFormulario
-}) {
+function Contact({ eyebrow, title, description, cta, email, slotFormulario }) {
   return /* @__PURE__ */ jsxs8(
     "section",
     {
@@ -901,4 +831,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-4HAI6XVN.mjs.map
+//# sourceMappingURL=chunk-7WG3BK7Z.mjs.map
