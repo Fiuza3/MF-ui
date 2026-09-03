@@ -17,11 +17,11 @@ describe("Button", () => {
   });
 
   it.each<[ButtonVariant, string]>([
-    ["default",     "bg-primary"],
-    ["outline",     "border"],
-    ["ghost",       "hover:bg-accent"],
+    ["default", "bg-primary"],
+    ["outline", "border"],
+    ["ghost", "hover:bg-accent"],
     ["destructive", "bg-destructive"],
-    ["secondary",   "bg-secondary"],
+    ["secondary", "bg-secondary"],
   ])("variante %s aplica classe correta", (variant, expectedClass) => {
     render(<Button variant={variant}>x</Button>);
     expect(screen.getByRole("button").className).toContain(expectedClass);

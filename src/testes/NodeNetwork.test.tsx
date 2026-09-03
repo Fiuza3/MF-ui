@@ -5,9 +5,18 @@ import { NodeNetwork } from "../componentes/NodeNetwork";
 // jsdom nao implementa canvas: sem um contexto falso o componente sai cedo
 // no `if (!context) return` e nenhum comportamento fica observavel.
 const contextoFalso = {
-  clearRect: vi.fn(), beginPath: vi.fn(), moveTo: vi.fn(), lineTo: vi.fn(),
-  stroke: vi.fn(), arc: vi.fn(), fill: vi.fn(), setTransform: vi.fn(),
-  strokeStyle: "", fillStyle: "", globalAlpha: 1, lineWidth: 1,
+  clearRect: vi.fn(),
+  beginPath: vi.fn(),
+  moveTo: vi.fn(),
+  lineTo: vi.fn(),
+  stroke: vi.fn(),
+  arc: vi.fn(),
+  fill: vi.fn(),
+  setTransform: vi.fn(),
+  strokeStyle: "",
+  fillStyle: "",
+  globalAlpha: 1,
+  lineWidth: 1,
 };
 
 function definirMovimentoReduzido(reduzido: boolean) {

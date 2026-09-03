@@ -19,11 +19,7 @@ export type TestimonialsProps = {
   depoimentos: Depoimento[];
 };
 
-export function Testimonials({
-  eyebrow,
-  title,
-  depoimentos,
-}: TestimonialsProps) {
+export function Testimonials({ eyebrow, title, depoimentos }: TestimonialsProps) {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [userPaused, setUserPaused] = useState(false);
@@ -58,12 +54,8 @@ export function Testimonials({
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <Reveal margin="-60px" className="mb-16">
-          <p className="font-mono text-sm text-cyan tracking-widest uppercase mb-4">
-            {eyebrow}
-          </p>
-          <h2 className="text-3xl font-bold text-balance lg:text-4xl">
-            {title}
-          </h2>
+          <p className="font-mono text-sm text-cyan tracking-widest uppercase mb-4">{eyebrow}</p>
+          <h2 className="text-3xl font-bold text-balance lg:text-4xl">{title}</h2>
         </Reveal>
 
         <div
@@ -99,9 +91,7 @@ export function Testimonials({
                   {t.autor.charAt(0)}
                 </div>
                 <div>
-                  <cite className="not-italic font-semibold text-foreground">
-                    {t.autor}
-                  </cite>
+                  <cite className="not-italic font-semibold text-foreground">{t.autor}</cite>
                   {(t.papel || t.empresa) && (
                     <p className="text-sm text-gray-text">
                       {[t.papel, t.empresa].filter(Boolean).join(" · ")}
@@ -140,9 +130,7 @@ export function Testimonials({
                 >
                   <span
                     className={`block rounded-full transition-all duration-300 ${
-                      i === current
-                        ? "h-1 w-6 bg-cyan"
-                        : "h-1.5 w-1.5 bg-line hover:bg-gray-text"
+                      i === current ? "h-1 w-6 bg-cyan" : "h-1.5 w-1.5 bg-line hover:bg-gray-text"
                     }`}
                   />
                 </button>
@@ -151,16 +139,13 @@ export function Testimonials({
 
             <button
               onClick={() => setUserPaused((p) => !p)}
-              aria-label={
-                userPaused ? "Retomar apresentação" : "Pausar apresentação"
-              }
+              aria-label={userPaused ? "Retomar apresentação" : "Pausar apresentação"}
               className="flex h-11 w-11 items-center justify-center rounded border border-line text-gray-text hover:border-cyan hover:text-cyan transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
             >
               <span aria-hidden="true">{userPaused ? "▶" : "⏸"}</span>
             </button>
             <span className="ml-auto font-mono text-xs text-gray-text">
-              {String(current + 1).padStart(2, "0")} /{" "}
-              {String(depoimentos.length).padStart(2, "0")}
+              {String(current + 1).padStart(2, "0")} / {String(depoimentos.length).padStart(2, "0")}
             </span>
           </div>
         </div>

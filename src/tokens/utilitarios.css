@@ -1,15 +1,29 @@
 /* src/tokens/utilitarios.css — utilitários genéricos do design system */
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--background); }
-::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
 
-::selection { background: var(--cyan-glow); color: var(--cyan); }
+::selection {
+  background: var(--cyan-glow);
+  color: var(--cyan);
+}
 
-.noise-bg { position: relative; }
+.noise-bg {
+  position: relative;
+}
 .noise-bg::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
@@ -23,17 +37,33 @@
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
-.animate-marquee { animation: marquee 30s linear infinite; }
-.animate-marquee:hover { animation-play-state: paused; }
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
 
-.glow-cyan { box-shadow: 0 0 20px var(--cyan-glow), 0 0 60px var(--cyan-dim); }
-.text-glow { text-shadow: 0 0 20px var(--cyan-glow); }
+.glow-cyan {
+  box-shadow:
+    0 0 20px var(--cyan-glow),
+    0 0 60px var(--cyan-dim);
+}
+.text-glow {
+  text-shadow: 0 0 20px var(--cyan-glow);
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; }
+  .animate-marquee {
+    animation: none;
+  }
 }
 
 /* Motion CSS-first: entrada anima por keyframe (compositor, sem JS).
@@ -46,45 +76,91 @@
 }
 
 @keyframes mf-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes mf-fade-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes mf-fade-up-suave {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes mf-fade-left {
-  from { opacity: 0; transform: translateX(-18px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes mf-fade-down {
-  from { opacity: 0; transform: translateY(-16px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes mf-fade-scale {
-  from { opacity: 0; transform: translateY(24px) scale(0.96); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.mf-entrada-up { --mf-entrada-anim: mf-fade-up; }
-.mf-entrada-up-suave { --mf-entrada-anim: mf-fade-up-suave; }
-.mf-entrada-left { --mf-entrada-anim: mf-fade-left; }
-.mf-entrada-scale { --mf-entrada-anim: mf-fade-scale; }
-.mf-entrada-down { --mf-entrada-anim: mf-fade-down; }
-.mf-entrada-fade { --mf-entrada-anim: mf-fade; }
+.mf-entrada-up {
+  --mf-entrada-anim: mf-fade-up;
+}
+.mf-entrada-up-suave {
+  --mf-entrada-anim: mf-fade-up-suave;
+}
+.mf-entrada-left {
+  --mf-entrada-anim: mf-fade-left;
+}
+.mf-entrada-scale {
+  --mf-entrada-anim: mf-fade-scale;
+}
+.mf-entrada-down {
+  --mf-entrada-anim: mf-fade-down;
+}
+.mf-entrada-fade {
+  --mf-entrada-anim: mf-fade;
+}
 
 .mf-entrada {
-  animation: var(--mf-entrada-anim, mf-fade-up) var(--mf-dur-entrada)
-    var(--mf-ease-expo-out) var(--mf-entrada-delay, 0ms) both;
+  animation: var(--mf-entrada-anim, mf-fade-up) var(--mf-dur-entrada) var(--mf-ease-expo-out)
+    var(--mf-entrada-delay, 0ms) both;
 }
 
 /* Reveal por scroll: as classes só são aplicadas pelo Reveal.tsx DEPOIS
@@ -102,10 +178,9 @@
 .mf-reveal-visible {
   opacity: 1;
   transform: none;
-  transition: opacity var(--mf-dur-entrada) var(--mf-ease-expo-out)
-      var(--mf-entrada-delay, 0ms),
-    transform var(--mf-dur-entrada) var(--mf-ease-expo-out)
-      var(--mf-entrada-delay, 0ms);
+  transition:
+    opacity var(--mf-dur-entrada) var(--mf-ease-expo-out) var(--mf-entrada-delay, 0ms),
+    transform var(--mf-dur-entrada) var(--mf-ease-expo-out) var(--mf-entrada-delay, 0ms);
 }
 
 @media (prefers-reduced-motion: reduce) {

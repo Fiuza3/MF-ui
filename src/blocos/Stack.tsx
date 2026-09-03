@@ -32,15 +32,11 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <Reveal margin="-80px" className="mb-10 lg:mb-12">
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
-            {eyebrow}
-          </p>
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
           <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
             {title}
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
-            {description}
-          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </Reveal>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr] xl:grid-cols-[0.95fr_1.25fr]">
@@ -68,9 +64,7 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
                   <span
                     className={cn(
                       "font-mono text-sm transition-colors",
-                      selected
-                        ? "text-cyan"
-                        : "text-gray-text group-hover:text-cyan",
+                      selected ? "text-cyan" : "text-gray-text group-hover:text-cyan",
                     )}
                   >
                     {String(index + 1).padStart(2, "0")}
@@ -91,65 +85,59 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
           </div>
 
           <div className="rounded border border-line bg-surface p-5 lg:p-8">
-            <div
-              key={active.categoria}
-              className="mf-entrada mf-entrada-up-suave"
-            >
-                <div className="flex items-start justify-between gap-6">
-                  <div>
-                    <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
-                      layer / {active.categoria.toLowerCase()}
-                    </p>
-                    <h3 className="mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground">
-                      {active.categoria}
-                    </h3>
-                  </div>
-                  <span className="hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block">
-                    active
-                  </span>
-                </div>
-
-                {active.description && (
-                  <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-text">
-                    {active.description}
+            <div key={active.categoria} className="mf-entrada mf-entrada-up-suave">
+              <div className="flex items-start justify-between gap-6">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
+                    layer / {active.categoria.toLowerCase()}
                   </p>
-                )}
-
-                <div className="stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                  {active.itens.map((item, index) => (
-                    <div
-                      key={item}
-                      style={
-                        {
-                          "--mf-entrada-delay": `${index * 40}ms`,
-                        } as React.CSSProperties
-                      }
-                      className="mf-entrada mf-entrada-up-suave group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60"
-                    >
-                      <span className="relative z-10 text-sm text-foreground">
-                        {item}
-                      </span>
-                      <span
-                        className="stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  ))}
+                  <h3 className="mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground">
+                    {active.categoria}
+                  </h3>
                 </div>
+                <span className="hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block">
+                  active
+                </span>
+              </div>
 
-                {active.comando && (
-                  <div className="mt-8 border-t border-line pt-5 font-mono">
-                    <p className="text-sm text-foreground">
-                      <span className="text-cyan">$</span> explain --when-to-use{" "}
-                      {active.categoria.toLowerCase()}
-                    </p>
-                    <p className="mt-2 text-xs leading-relaxed text-gray-text">
-                      <span className="text-cyan/70">&gt;</span> uso essa camada
-                      quando ela diminui incerteza operacional, não para
-                      preencher logo em carrossel.
-                    </p>
+              {active.description && (
+                <p className="mt-6 max-w-3xl text-base leading-relaxed text-gray-text">
+                  {active.description}
+                </p>
+              )}
+
+              <div className="stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {active.itens.map((item, index) => (
+                  <div
+                    key={item}
+                    style={
+                      {
+                        "--mf-entrada-delay": `${index * 40}ms`,
+                      } as React.CSSProperties
+                    }
+                    className="mf-entrada mf-entrada-up-suave group/item relative overflow-hidden rounded border border-line bg-background/55 p-4 font-mono transition-colors hover:border-cyan/60"
+                  >
+                    <span className="relative z-10 text-sm text-foreground">{item}</span>
+                    <span
+                      className="stack-chip-fill absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-cyan/10 transition-transform duration-500 group-hover/item:scale-x-100"
+                      aria-hidden="true"
+                    />
                   </div>
-                )}
+                ))}
+              </div>
+
+              {active.comando && (
+                <div className="mt-8 border-t border-line pt-5 font-mono">
+                  <p className="text-sm text-foreground">
+                    <span className="text-cyan">$</span> explain --when-to-use{" "}
+                    {active.categoria.toLowerCase()}
+                  </p>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-text">
+                    <span className="text-cyan/70">&gt;</span> uso essa camada quando ela diminui
+                    incerteza operacional, não para preencher logo em carrossel.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

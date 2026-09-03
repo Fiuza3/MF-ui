@@ -54,7 +54,9 @@ export function Footer({
           <div className="grid gap-8 font-mono">
             {(email || localizacao || cnpj) && (
               <div className="rounded border border-[var(--line)] bg-[var(--surface)] p-5">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--gray-text)]">runtime summary</p>
+                <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--gray-text)]">
+                  runtime summary
+                </p>
                 <div className="mt-5 grid gap-3 text-sm">
                   {localizacao && (
                     <p className="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2">
@@ -98,7 +100,9 @@ export function Footer({
             )}
 
             <div className="flex flex-col gap-3 border-t border-[var(--line)] pt-6 text-xs text-[var(--gray-text)] sm:flex-row sm:items-center sm:justify-between">
-              <p>© {year} {nomeEmpresa}</p>
+              <p>
+                © {year} {nomeEmpresa}
+              </p>
               <p>
                 <span className="text-[var(--cyan)]">$</span> process.exit(0)
               </p>

@@ -9,18 +9,14 @@ describe("About", () => {
         eyebrow="// diagnóstico antes do código"
         title={<>Eu não começo pelo código.</>}
         paragrafos={[
-          <p key="p1">
-            Antes da primeira linha, eu entendo produto e regra de negócio.
-          </p>,
+          <p key="p1">Antes da primeira linha, eu entendo produto e regra de negócio.</p>,
         ]}
       />,
     );
 
     expect(screen.getByText("Eu não começo pelo código.")).toBeTruthy();
     expect(
-      screen.getByText(
-        "Antes da primeira linha, eu entendo produto e regra de negócio.",
-      ),
+      screen.getByText("Antes da primeira linha, eu entendo produto e regra de negócio."),
     ).toBeTruthy();
   });
 
@@ -45,9 +41,9 @@ describe("About", () => {
         slotLateral={<div data-testid="lateral-about">terminal</div>}
       />,
     );
-    const escondidos = Array.from(
-      container.querySelectorAll<HTMLElement>("[style]"),
-    ).filter((el) => /opacity:\s*0\b/.test(el.getAttribute("style") ?? ""));
+    const escondidos = Array.from(container.querySelectorAll<HTMLElement>("[style]")).filter((el) =>
+      /opacity:\s*0\b/.test(el.getAttribute("style") ?? ""),
+    );
     expect(escondidos).toHaveLength(0);
   });
 });

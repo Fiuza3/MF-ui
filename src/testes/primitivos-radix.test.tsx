@@ -1,8 +1,25 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../primitivos/Accordion";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../primitivos/Dialog";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "../primitivos/Sheet";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "../primitivos/Accordion";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "../primitivos/Dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "../primitivos/Sheet";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../primitivos/Tooltip";
 
 describe("primitivos radix", () => {

@@ -18,7 +18,7 @@ describe("Select", () => {
         <SelectContent>
           <SelectItem value="moradia">Moradia</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
     expect(screen.getByText("Selecionar categoria")).toBeTruthy();
   });
@@ -32,7 +32,7 @@ describe("Select", () => {
         <SelectContent>
           <SelectItem value="alimentacao">Alimentação</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
     const trigger = screen.getByRole("combobox");
     expect(trigger.getAttribute("aria-expanded")).toBe("false");

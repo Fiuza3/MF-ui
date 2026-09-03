@@ -1,33 +1,33 @@
-import * as React from 'react'
+import * as React from "react";
 
-import { cn } from '../lib/cn'
-import { Card, CardContent } from '../primitivos/Card'
+import { cn } from "../lib/cn";
+import { Card, CardContent } from "../primitivos/Card";
 
 export type StatCardDelta = {
-  value: React.ReactNode
-  direction?: 'up' | 'down' | 'neutral'
-}
+  value: React.ReactNode;
+  direction?: "up" | "down" | "neutral";
+};
 
 export type StatCardProps = {
-  label: React.ReactNode
-  value: React.ReactNode
-  icon?: React.ReactNode
-  delta?: StatCardDelta
-  className?: string
-}
+  label: React.ReactNode;
+  value: React.ReactNode;
+  icon?: React.ReactNode;
+  delta?: StatCardDelta;
+  className?: string;
+};
 
-const deltaCorPorDirecao: Record<NonNullable<StatCardDelta['direction']>, string> = {
-  up: 'text-primary',
-  down: 'text-destructive',
-  neutral: 'text-muted-foreground',
-}
+const deltaCorPorDirecao: Record<NonNullable<StatCardDelta["direction"]>, string> = {
+  up: "text-primary",
+  down: "text-destructive",
+  neutral: "text-muted-foreground",
+};
 
 /** Cartão de métrica única (label + valor + variação opcional) para dashboards. */
 function StatCard({ label, value, icon, delta, className }: StatCardProps) {
-  const direcao = delta?.direction ?? 'neutral'
+  const direcao = delta?.direction ?? "neutral";
 
   return (
-    <Card className={cn('gap-1 py-5', className)}>
+    <Card className={cn("gap-1 py-5", className)}>
       <CardContent className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 flex-col gap-1">
           <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
@@ -35,9 +35,7 @@ function StatCard({ label, value, icon, delta, className }: StatCardProps) {
           </p>
           <p className="text-foreground text-2xl font-semibold tabular-nums">{value}</p>
           {delta && (
-            <p className={cn('text-xs font-medium', deltaCorPorDirecao[direcao])}>
-              {delta.value}
-            </p>
+            <p className={cn("text-xs font-medium", deltaCorPorDirecao[direcao])}>{delta.value}</p>
           )}
         </div>
         {icon && (
@@ -50,7 +48,7 @@ function StatCard({ label, value, icon, delta, className }: StatCardProps) {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
 
-export { StatCard }
+export { StatCard };

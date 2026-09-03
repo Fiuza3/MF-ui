@@ -1,42 +1,35 @@
-import * as React from 'react'
+import * as React from "react";
 
-import { cn } from '../lib/cn'
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from '../primitivos/Table'
-import { Skeleton } from '../primitivos/Skeleton'
-import { PaginationControl } from '../primitivos/Pagination'
-import { EmptyState, type EmptyStateProps } from './EmptyState'
+import { cn } from "../lib/cn";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../primitivos/Table";
+import { Skeleton } from "../primitivos/Skeleton";
+import { PaginationControl } from "../primitivos/Pagination";
+import { EmptyState, type EmptyStateProps } from "./EmptyState";
 
 export type DataTableColumn<TRow> = {
-  key: string
-  header: React.ReactNode
-  render: (row: TRow) => React.ReactNode
-  className?: string
-}
+  key: string;
+  header: React.ReactNode;
+  render: (row: TRow) => React.ReactNode;
+  className?: string;
+};
 
 export type DataTableProps<TRow> = {
-  columns: DataTableColumn<TRow>[]
-  rows: TRow[]
+  columns: DataTableColumn<TRow>[];
+  rows: TRow[];
   /** Extrai uma key estável de cada linha. Padrão: índice (usar quando possível uma key real). */
-  getRowKey?: (row: TRow, index: number) => React.Key
-  loading?: boolean
+  getRowKey?: (row: TRow, index: number) => React.Key;
+  loading?: boolean;
   /** Quantidade de linhas de skeleton exibidas durante `loading`. Padrão: 5. */
-  loadingRowCount?: number
-  emptyState?: React.ReactNode | EmptyStateProps
-  page?: number
-  totalPages?: number
-  onPageChange?: (page: number) => void
-  className?: string
-}
+  loadingRowCount?: number;
+  emptyState?: React.ReactNode | EmptyStateProps;
+  page?: number;
+  totalPages?: number;
+  onPageChange?: (page: number) => void;
+  className?: string;
+};
 
 function isEmptyStateProps(value: unknown): value is EmptyStateProps {
-  return typeof value === 'object' && value !== null && 'title' in value
+  return typeof value === "object" && value !== null && "title" in value;
 }
 
 /**
@@ -55,10 +48,10 @@ function DataTable<TRow>({
   onPageChange,
   className,
 }: DataTableProps<TRow>) {
-  const mostrarPaginacao = page !== undefined && totalPages !== undefined && onPageChange
+  const mostrarPaginacao = page !== undefined && totalPages !== undefined && onPageChange;
 
   return (
-    <div data-slot="data-table" className={cn('flex flex-col gap-4', className)}>
+    <div data-slot="data-table" className={cn("flex flex-col gap-4", className)}>
       <Table>
         <TableHeader>
           <TableRow>
@@ -94,15 +87,16 @@ function DataTable<TRow>({
         </TableBody>
       </Table>
 
-      {!loading && rows.length === 0 && emptyState && (
-        isEmptyStateProps(emptyState) ? <EmptyState {...emptyState} /> : emptyState
-      )}
+      {!loading &&
+        rows.length === 0 &&
+        emptyState &&
+        (isEmptyStateProps(emptyState) ? <EmptyState {...emptyState} /> : emptyState)}
 
       {mostrarPaginacao && (
         <PaginationControl page={page} totalPages={totalPages} onPageChange={onPageChange} />
       )}
     </div>
-  )
+  );
 }
 
-export { DataTable }
+export { DataTable };

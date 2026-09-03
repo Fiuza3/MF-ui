@@ -1,1 +1,1 @@
-export { duration as motionDurations, ease as motionEase, blinkMs } from '../tokens'
+export { duration as motionDurations, ease as motionEase, blinkMs } from "../tokens";

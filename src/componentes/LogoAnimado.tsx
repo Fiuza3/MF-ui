@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  RATIO_ALTURA_LOGO,
-  RATIO_AVANCO_LOGO,
-  RATIO_PADDING_LOGO,
-} from "./Logo";
+import { RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO } from "./Logo";
 import { familias } from "../tokens/tipografia";
 
 export type LogoAnimadoProps = {

@@ -43,7 +43,7 @@ describe("Process", () => {
     );
 
     const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter((el) =>
-      (el.getAttribute("style") ?? "").includes("opacity:0")
+      (el.getAttribute("style") ?? "").includes("opacity:0"),
     );
     expect(escondidos).toHaveLength(0);
   });

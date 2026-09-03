@@ -30,7 +30,7 @@ describe("Contact", () => {
     );
 
     const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter(
-      (el) => el.style.opacity === "0"
+      (el) => el.style.opacity === "0",
     );
     expect(escondidos).toHaveLength(0);
   });

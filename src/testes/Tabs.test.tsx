@@ -12,7 +12,7 @@ describe("Tabs", () => {
         </TabsList>
         <TabsContent value="receitas">Conteúdo receitas</TabsContent>
         <TabsContent value="despesas">Conteúdo despesas</TabsContent>
-      </Tabs>
+      </Tabs>,
     );
     expect(screen.getAllByRole("tab").length).toBe(2);
   });
@@ -24,7 +24,7 @@ describe("Tabs", () => {
           <TabsTrigger value="receitas">Receitas</TabsTrigger>
         </TabsList>
         <TabsContent value="receitas">Conteúdo visível</TabsContent>
-      </Tabs>
+      </Tabs>,
     );
     expect(screen.getByText("Conteúdo visível")).toBeTruthy();
   });

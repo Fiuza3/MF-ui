@@ -1,18 +1,18 @@
-import * as React from 'react'
+import * as React from "react";
 
-import { cn } from '../lib/cn'
+import { cn } from "../lib/cn";
 
 export type PageHeaderBreadcrumbItem = {
-  label: React.ReactNode
-  href?: string
-}
+  label: React.ReactNode;
+  href?: string;
+};
 
 export type PageHeaderProps = {
-  title: React.ReactNode
-  breadcrumb?: PageHeaderBreadcrumbItem[]
-  actions?: React.ReactNode
-  className?: string
-}
+  title: React.ReactNode;
+  breadcrumb?: PageHeaderBreadcrumbItem[];
+  actions?: React.ReactNode;
+  className?: string;
+};
 
 /** Cabeçalho de página genérico: breadcrumb opcional, título e slot de ações. */
 function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) {
@@ -20,7 +20,7 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
     <div
       data-slot="page-header"
       className={cn(
-        'flex flex-col gap-4 border-b border-border px-6 py-5 sm:flex-row sm:items-center sm:justify-between',
+        "flex flex-col gap-4 border-b border-border px-6 py-5 sm:flex-row sm:items-center sm:justify-between",
         className,
       )}
     >
@@ -29,7 +29,7 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
           <nav aria-label="Breadcrumb">
             <ol className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-xs">
               {breadcrumb.map((item, index) => {
-                const isLast = index === breadcrumb.length - 1
+                const isLast = index === breadcrumb.length - 1;
                 return (
                   <li key={index} className="flex items-center gap-1.5">
                     {item.href && !isLast ? (
@@ -38,15 +38,15 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
                       </a>
                     ) : (
                       <span
-                        aria-current={isLast ? 'page' : undefined}
-                        className={isLast ? 'text-foreground' : undefined}
+                        aria-current={isLast ? "page" : undefined}
+                        className={isLast ? "text-foreground" : undefined}
                       >
                         {item.label}
                       </span>
                     )}
                     {!isLast && <span aria-hidden="true">/</span>}
                   </li>
-                )
+                );
               })}
             </ol>
           </nav>
@@ -60,7 +60,7 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export { PageHeader }
+export { PageHeader };

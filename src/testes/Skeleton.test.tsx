@@ -11,7 +11,7 @@ describe("Skeleton", () => {
   it("aceita className extra", () => {
     const { container } = render(<Skeleton className="h-4 w-32" />);
     const el = container.querySelector('[data-slot="skeleton"]');
-    expect(el?.classList.contains('h-4')).toBe(true);
-    expect(el?.classList.contains('w-32')).toBe(true);
+    expect(el?.classList.contains("h-4")).toBe(true);
+    expect(el?.classList.contains("w-32")).toBe(true);
   });
 });

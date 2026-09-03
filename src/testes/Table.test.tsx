@@ -27,7 +27,7 @@ describe("Table", () => {
             <TableCell>R$ 5.000</TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table>,
     );
     expect(screen.getByText("Lista de transações")).toBeTruthy();
     expect(screen.getByText("Salário")).toBeTruthy();
@@ -42,7 +42,7 @@ describe("Table", () => {
             <TableCell>item</TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table>,
     );
     expect(container.querySelector("table")).toBeTruthy();
   });

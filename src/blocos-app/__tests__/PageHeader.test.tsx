@@ -21,9 +21,7 @@ describe("PageHeader", () => {
   });
 
   it("renderiza actions quando informadas", () => {
-    render(
-      <PageHeader title="Clientes" actions={<button type="button">Novo cliente</button>} />,
-    );
+    render(<PageHeader title="Clientes" actions={<button type="button">Novo cliente</button>} />);
 
     expect(screen.getByRole("button", { name: "Novo cliente" })).toBeTruthy();
   });

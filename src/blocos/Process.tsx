@@ -19,13 +19,7 @@ export type ProcessProps = {
   steps: ProcessStep[];
 };
 
-function PipelineCard({
-  step,
-  index,
-}: {
-  step: ProcessStep;
-  index: number;
-}) {
+function PipelineCard({ step, index }: { step: ProcessStep; index: number }) {
   return (
     <Reveal
       as="article"
@@ -36,17 +30,14 @@ function PipelineCard({
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background:
-            "radial-gradient(circle at 0% 0%, rgba(61,242,224,0.07), transparent 52%)",
+          background: "radial-gradient(circle at 0% 0%, rgba(61,242,224,0.07), transparent 52%)",
         }}
         aria-hidden="true"
       />
 
       <div className="relative flex h-full flex-col">
         <div className="flex items-start justify-between gap-3">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
-            {step.numero}
-          </p>
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">{step.numero}</p>
           {step.duracao && (
             <span className="shrink-0 rounded border border-line px-2 py-0.5 font-mono text-[10px] text-gray-text">
               {step.duracao}
@@ -58,22 +49,18 @@ function PipelineCard({
           {step.title}
         </h3>
 
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-text">
-          {step.description}
-        </p>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-text">{step.description}</p>
 
         {(step.commitLabel || step.commitOutput) && (
           <div className="mt-4 border-t border-line pt-3 font-mono">
             {step.commitLabel && (
               <p className="truncate text-xs text-foreground">
-                <span className="text-cyan">$</span>{" "}
-                {step.commitLabel}
+                <span className="text-cyan">$</span> {step.commitLabel}
               </p>
             )}
             {step.commitOutput && (
               <p className="mt-1 truncate text-[11px] text-gray-text">
-                <span className="text-cyan/60">&gt;</span>{" "}
-                {step.commitOutput}
+                <span className="text-cyan/60">&gt;</span> {step.commitOutput}
               </p>
             )}
           </div>
@@ -92,15 +79,11 @@ export function Process({ eyebrow, title, description, steps }: ProcessProps) {
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <Reveal margin="-80px" className="mb-8 lg:mb-10">
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
-            {eyebrow}
-          </p>
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
           <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
             {title}
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
-            {description}
-          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </Reveal>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">

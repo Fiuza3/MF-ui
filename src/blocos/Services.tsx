@@ -19,13 +19,7 @@ export type ServicesProps = {
   services: ServiceItem[];
 };
 
-function ServiceCard({
-  service,
-  index,
-}: {
-  service: ServiceItem;
-  index: number;
-}) {
+function ServiceCard({ service, index }: { service: ServiceItem; index: number }) {
   return (
     <Reveal
       as="article"
@@ -36,8 +30,7 @@ function ServiceCard({
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background:
-            "radial-gradient(circle at 24% 0%, rgba(61,242,224,0.08), transparent 46%)",
+          background: "radial-gradient(circle at 24% 0%, rgba(61,242,224,0.08), transparent 46%)",
         }}
         aria-hidden="true"
       />
@@ -61,19 +54,10 @@ function ServiceCard({
 
         {service.motif}
 
-        <ul
-          className="grid gap-2 sm:grid-cols-2"
-          aria-label={`Itens de ${service.title}`}
-        >
+        <ul className="grid gap-2 sm:grid-cols-2" aria-label={`Itens de ${service.title}`}>
           {service.items.map((item) => (
-            <li
-              key={item}
-              className="flex items-start gap-2 text-sm text-gray-text"
-            >
-              <span
-                className="mt-0.5 font-mono text-cyan"
-                aria-hidden="true"
-              >
+            <li key={item} className="flex items-start gap-2 text-sm text-gray-text">
+              <span className="mt-0.5 font-mono text-cyan" aria-hidden="true">
                 /
               </span>
               {item}
@@ -85,12 +69,7 @@ function ServiceCard({
   );
 }
 
-export function Services({
-  eyebrow,
-  title,
-  description,
-  services,
-}: ServicesProps) {
+export function Services({ eyebrow, title, description, services }: ServicesProps) {
   return (
     <section
       id="servicos"
@@ -100,7 +79,9 @@ export function Services({
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-16">
         <Reveal margin="-60px" className="mb-8 lg:mb-10">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
-          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">{title}</h2>
+          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+            {title}
+          </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </Reveal>
 

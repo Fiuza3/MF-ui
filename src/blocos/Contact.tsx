@@ -12,14 +12,7 @@ export type ContactProps = {
   slotFormulario?: React.ReactNode;
 };
 
-export function Contact({
-  eyebrow,
-  title,
-  description,
-  cta,
-  email,
-  slotFormulario,
-}: ContactProps) {
+export function Contact({ eyebrow, title, description, cta, email, slotFormulario }: ContactProps) {
   return (
     <section
       id="contato"
@@ -36,9 +29,7 @@ export function Contact({
           <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
             {title}
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">
-            {description}
-          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </Reveal>
 
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.55fr] lg:items-start 2xl:grid-cols-[0.58fr_1.7fr]">
@@ -54,9 +45,7 @@ export function Contact({
               </span>
               <div>
                 <p className="font-mono text-sm text-foreground">{cta.label}</p>
-                <p className="mt-1 text-xs text-gray-text">
-                  para quando o escopo já está claro
-                </p>
+                <p className="mt-1 text-xs text-gray-text">para quando o escopo já está claro</p>
               </div>
             </a>
 
@@ -70,9 +59,7 @@ export function Contact({
                 </span>
                 <div>
                   <p className="font-mono text-sm text-foreground">{email}</p>
-                  <p className="mt-1 text-xs text-gray-text">
-                    para materiais e projetos maiores
-                  </p>
+                  <p className="mt-1 text-xs text-gray-text">para materiais e projetos maiores</p>
                 </div>
               </a>
             )}
@@ -83,8 +70,7 @@ export function Contact({
               </p>
               <p className="mt-4 text-sm text-foreground">PJ / NFS-e / remoto</p>
               <p className="mt-2 text-xs leading-relaxed text-gray-text">
-                O objetivo é sair da primeira conversa com risco, escopo e
-                próximo passo claros.
+                O objetivo é sair da primeira conversa com risco, escopo e próximo passo claros.
               </p>
             </div>
           </Reveal>

@@ -60,7 +60,10 @@ export function Hero({
                 className="group inline-flex w-fit items-center gap-3 rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
               >
                 {cta.label}
-                <span className="h-px w-8 bg-background transition-colors group-hover:bg-cyan" aria-hidden="true" />
+                <span
+                  className="h-px w-8 bg-background transition-colors group-hover:bg-cyan"
+                  aria-hidden="true"
+                />
               </a>
             </div>
           </div>
@@ -86,8 +89,12 @@ export function Hero({
         >
           {stats.map((stat) => (
             <div key={stat.label}>
-              <div className="font-mono text-3xl font-black text-foreground sm:text-4xl">{stat.value}</div>
-              <p className="mt-2 text-xs uppercase tracking-[0.18em] text-gray-text">{stat.label}</p>
+              <div className="font-mono text-3xl font-black text-foreground sm:text-4xl">
+                {stat.value}
+              </div>
+              <p className="mt-2 text-xs uppercase tracking-[0.18em] text-gray-text">
+                {stat.label}
+              </p>
             </div>
           ))}
         </div>

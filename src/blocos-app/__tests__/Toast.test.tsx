@@ -10,7 +10,10 @@ function Disparador() {
       <button type="button" onClick={() => toast({ title: "Salvo com sucesso" })}>
         disparar 1
       </button>
-      <button type="button" onClick={() => toast({ title: "Erro ao salvar", variant: "destructive" })}>
+      <button
+        type="button"
+        onClick={() => toast({ title: "Erro ao salvar", variant: "destructive" })}
+      >
         disparar 2
       </button>
     </div>

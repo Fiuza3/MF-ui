@@ -10,18 +10,9 @@ export type AboutProps = {
   slotLateral?: React.ReactNode;
 };
 
-export function About({
-  eyebrow,
-  title,
-  paragrafos,
-  slotLateral,
-}: AboutProps) {
+export function About({ eyebrow, title, paragrafos, slotLateral }: AboutProps) {
   return (
-    <section
-      id="sobre"
-      aria-label="Sobre"
-      className="relative overflow-hidden py-16 lg:py-24"
-    >
+    <section id="sobre" aria-label="Sobre" className="relative overflow-hidden py-16 lg:py-24">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" />
 
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">

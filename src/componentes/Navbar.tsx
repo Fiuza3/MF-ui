@@ -45,7 +45,9 @@ export function Navbar({
 
   const navClass = [
     "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-    isScrolled ? "border-b border-[var(--line)] bg-[var(--background)]/90 backdrop-blur-md" : "bg-transparent",
+    isScrolled
+      ? "border-b border-[var(--line)] bg-[var(--background)]/90 backdrop-blur-md"
+      : "bg-transparent",
   ].join(" ");
 
   return (
@@ -89,9 +91,15 @@ export function Navbar({
             onClick={() => setMenuOpen(!menuOpen)}
             className="flex flex-col gap-1.5 rounded p-2 md:hidden"
           >
-            <span className={`block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
-            <span className={`block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+            <span
+              className={`block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            />
           </button>
         </div>
       </header>

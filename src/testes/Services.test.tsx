@@ -58,7 +58,7 @@ describe("Services", () => {
       />,
     );
     const escondidos = [...container.querySelectorAll<HTMLElement>("[style]")].filter((el) =>
-      /opacity:\s*0\s*(;|$)/.test(el.getAttribute("style") ?? "")
+      /opacity:\s*0\s*(;|$)/.test(el.getAttribute("style") ?? ""),
     );
     expect(escondidos).toHaveLength(0);
   });

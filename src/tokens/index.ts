@@ -1,6 +1,6 @@
-export { cores } from './cores'
-export type { Cores } from './cores'
-export { familias, pesos } from './tipografia'
-export { duration, blinkMs } from './duration'
-export { ease } from './ease'
-export { fadeUp, fadeIn, scaleIn } from './motion'
+export { cores } from "./cores";
+export type { Cores } from "./cores";
+export { familias, pesos } from "./tipografia";
+export { duration, blinkMs } from "./duration";
+export { ease } from "./ease";
+export { fadeUp, fadeIn, scaleIn } from "./motion";

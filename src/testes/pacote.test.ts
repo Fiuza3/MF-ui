@@ -43,9 +43,7 @@ describe("pacote publicado", () => {
   });
 
   it("nao publica os testes para dentro do consumidor", () => {
-    const testes = caminhos.filter(
-      (c) => c.includes("/testes/") || c.includes("/__tests__/"),
-    );
+    const testes = caminhos.filter((c) => c.includes("/testes/") || c.includes("/__tests__/"));
 
     expect(testes).toEqual([]);
   });

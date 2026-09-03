@@ -1,13 +1,13 @@
-import * as React from 'react'
+import * as React from "react";
 
-import { cn } from '../lib/cn'
+import { cn } from "../lib/cn";
 
 export type AppShellProps = {
-  sidebar: React.ReactNode
-  topbar: React.ReactNode
-  children: React.ReactNode
-  className?: string
-}
+  sidebar: React.ReactNode;
+  topbar: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
+};
 
 /**
  * Shell genérico de painel: sidebar fixa em telas largas, topbar sticky,
@@ -16,7 +16,7 @@ export type AppShellProps = {
  */
 function AppShell({ sidebar, topbar, children, className }: AppShellProps) {
   return (
-    <div className={cn('bg-background text-foreground flex min-h-svh w-full', className)}>
+    <div className={cn("bg-background text-foreground flex min-h-svh w-full", className)}>
       <aside
         data-slot="app-shell-sidebar"
         className="border-border bg-card hidden w-64 shrink-0 border-r lg:block"
@@ -37,7 +37,7 @@ function AppShell({ sidebar, topbar, children, className }: AppShellProps) {
         </main>
       </div>
     </div>
-  )
+  );
 }
 
-export { AppShell }
+export { AppShell };

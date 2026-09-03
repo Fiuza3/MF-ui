@@ -11,12 +11,7 @@ describe("EmptyState", () => {
   });
 
   it("renderiza a action quando informada", () => {
-    render(
-      <EmptyState
-        title="Nada por aqui"
-        action={<button type="button">Criar novo</button>}
-      />,
-    );
+    render(<EmptyState title="Nada por aqui" action={<button type="button">Criar novo</button>} />);
 
     expect(screen.getByRole("button", { name: "Criar novo" })).toBeTruthy();
   });

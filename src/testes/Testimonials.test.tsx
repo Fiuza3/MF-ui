@@ -26,7 +26,7 @@ describe("Testimonials", () => {
   it("nao renderiza nenhum elemento com opacity 0 no primeiro paint", () => {
     const { container } = render(<Testimonials {...propsMinimas} />);
     const escondidos = Array.from(container.querySelectorAll<HTMLElement>("[style]")).filter((el) =>
-      /opacity:\s*0(;|$)/.test(el.getAttribute("style") ?? "")
+      /opacity:\s*0(;|$)/.test(el.getAttribute("style") ?? ""),
     );
     expect(escondidos).toHaveLength(0);
   });
