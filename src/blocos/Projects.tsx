@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
+import { X } from "lucide-react";
 import { Reveal } from "../componentes/Reveal";
 
 export type ProjectItem = {
@@ -33,13 +34,7 @@ interface ModalProject {
   resultado?: string;
 }
 
-function ProjectModal({
-  project,
-  onClose,
-}: {
-  project: ModalProject;
-  onClose: () => void;
-}) {
+function ProjectModal({ project, onClose }: { project: ModalProject; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -73,17 +68,17 @@ function ProjectModal({
   }, [onClose]);
 
   return (
-    <div
-      className="mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5"
-      onMouseDown={onClose}
-    >
+    <div className="mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5">
+      {/* O backdrop e quem fecha ao clique. Poe-lo aqui, e nao no container,
+          dispensa o stopPropagation do dialogo e mantem o container sem
+          handler — um div sem papel nao deve responder a mouse ou teclado. */}
       <div
         className="absolute inset-0 bg-background/85 backdrop-blur-md"
         aria-hidden="true"
+        onMouseDown={onClose}
       />
       <div
         ref={dialogRef}
-        onMouseDown={(event) => event.stopPropagation()}
         className="mf-entrada mf-entrada-up relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8"
         role="dialog"
         aria-modal="true"
@@ -96,7 +91,7 @@ function ProjectModal({
           aria-label="Fechar case"
           className="absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
         >
-          <span aria-hidden="true">✕</span>
+          <X className="size-4" aria-hidden="true" />
         </button>
 
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
@@ -118,9 +113,7 @@ function ProjectModal({
                 <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
                   metrica
                 </p>
-                <p className="mt-3 font-mono text-xl text-cyan">
-                  {project.metrica}
-                </p>
+                <p className="mt-3 font-mono text-xl text-cyan">{project.metrica}</p>
               </div>
             )}
             {project.resultado && (
@@ -128,9 +121,7 @@ function ProjectModal({
                 <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
                   resultado
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-foreground">
-                  {project.resultado}
-                </p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground">{project.resultado}</p>
               </div>
             )}
           </div>
@@ -201,9 +192,7 @@ function ProjectFrame({
             <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
               metrica forte
             </p>
-            <p className="mt-2 font-mono text-xl text-cyan lg:text-2xl">
-              {project.metrica}
-            </p>
+            <p className="mt-2 font-mono text-xl text-cyan lg:text-2xl">{project.metrica}</p>
           </div>
         )}
         {project.tags && project.tags.length > 0 && (
@@ -235,12 +224,7 @@ function ProjectFrame({
   );
 }
 
-export function Projects({
-  eyebrow,
-  title,
-  description,
-  projects,
-}: ProjectsProps) {
+export function Projects({ eyebrow, title, description, projects }: ProjectsProps) {
   const [selected, setSelected] = useState<ProjectItem | null>(null);
   const loopedProjects = [...projects, ...projects];
 
@@ -253,7 +237,9 @@ export function Projects({
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <Reveal margin="-80px" className="mb-8 lg:mb-10">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
-          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">{title}</h2>
+          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+            {title}
+          </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </Reveal>
       </div>
@@ -291,9 +277,7 @@ export function Projects({
         />
       </div>
 
-      {selected && (
-        <ProjectModal project={selected} onClose={() => setSelected(null)} />
-      )}
+      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
     </section>
   );
 }
