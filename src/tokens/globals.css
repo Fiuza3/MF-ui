@@ -28,6 +28,10 @@
   --accent-foreground: #0b0f14;
   --destructive: #ff6b5e;
   --destructive-foreground: #0b0f14;
+  --subtle-foreground: #7a8da3;
+  --primary-hover: #5df5e6;
+  --warning: #ffbd2e;
+  --warning-foreground: #0b0f14;
   --border: #1e2a38;
   --input: #546b82;
   --ring: #3df2e0;
@@ -60,6 +64,10 @@
   --accent-foreground: #fbf7ef;
   --destructive: #c2301c;
   --destructive-foreground: #fbf7ef;
+  --subtle-foreground: #726449;
+  --primary-hover: #96400c;
+  --warning: #8a5a00;
+  --warning-foreground: #fbf7ef;
   --border: #e0d6c4;
   --input: #94825f;
   --ring: #b04e14;
@@ -72,6 +80,20 @@
   --surface: #fbf7ef;
   --surface-raised: #efe7d6;
   --line: #e0d6c4;
+}
+
+/* Motion — duracoes e curvas. Nao mudam com o tema, por isso ficam fora dos
+   blocos .dark / .light. Fonte unica: os utilitarios e o TypeScript apenas
+   referenciam estes nomes. */
+:root {
+  --mf-duration-micro: 150ms;
+  --mf-duration-fast: 240ms;
+  --mf-duration-reveal: 600ms;
+  --mf-duration-section: 900ms;
+
+  --mf-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --mf-ease-power: cubic-bezier(0.22, 1, 0.36, 1);
+  --mf-ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @theme inline {
@@ -96,6 +118,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

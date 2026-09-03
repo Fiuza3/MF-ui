@@ -1,20 +1,37 @@
-import { duration } from "./duration";
-import { ease } from "./ease";
+/**
+ * Tokens de motion.
+ *
+ * Mesma regra das cores: os valores vivem em `globals.css`, aqui so ha
+ * referencias. Isso mantem uma unica definicao de "quanto tempo dura uma
+ * entrada" — antes havia duas, em unidades diferentes, e elas ja tinham
+ * divergido (0.64s no TypeScript contra 600ms no CSS).
+ */
 
-export const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: duration.reveal, ease: ease.expoOut },
-});
+const DURACOES = {
+  micro: "--mf-duration-micro",
+  rapida: "--mf-duration-fast",
+  entrada: "--mf-duration-reveal",
+  secao: "--mf-duration-section",
+} as const;
 
-export const fadeIn = (delay = 0) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { delay, duration: duration.reveal, ease: ease.expoOut },
-});
+const CURVAS = {
+  expo: "--mf-ease-expo",
+  power: "--mf-ease-power",
+  suave: "--mf-ease-soft",
+} as const;
 
-export const scaleIn = (delay = 0) => ({
-  initial: { opacity: 0, scale: 0.96 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { delay, duration: duration.fast, ease: ease.powerOut },
-});
+export type NomeDeDuracao = keyof typeof DURACOES;
+export type NomeDeCurva = keyof typeof CURVAS;
+
+/** Nomes das custom properties, para uso com `lerToken`. */
+export const tokensDeMotion = { duracoes: DURACOES, curvas: CURVAS } as const;
+
+/** `var(--token)` de cada duracao, para `style` e `transition` inline. */
+export const duracoes = Object.fromEntries(
+  Object.entries(DURACOES).map(([chave, prop]) => [chave, `var(${prop})`]),
+) as Record<NomeDeDuracao, string>;
+
+/** `var(--token)` de cada curva de aceleracao. */
+export const curvas = Object.fromEntries(
+  Object.entries(CURVAS).map(([chave, prop]) => [chave, `var(${prop})`]),
+) as Record<NomeDeCurva, string>;

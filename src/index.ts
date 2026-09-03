@@ -1,7 +1,9 @@
 // Tokens
-export { cores } from "./tokens/cores";
-export type { Cores } from "./tokens/cores";
+export { cores, tokensDeCor } from "./tokens/cores";
+export type { Cores, NomeDeCor } from "./tokens/cores";
 export { familias, pesos } from "./tokens/tipografia";
+export { duracoes, curvas, tokensDeMotion } from "./tokens/motion";
+export type { NomeDeDuracao, NomeDeCurva } from "./tokens/motion";
 
 // Componentes
 export { Logo, RATIO_AVANCO_LOGO, RATIO_ALTURA_LOGO, RATIO_PADDING_LOGO } from "./componentes/Logo";
@@ -20,7 +22,7 @@ export type { NodeNetworkProps } from "./componentes/NodeNetwork";
 // Primitivos
 export * from "./primitivos";
 export { cn } from "./lib/cn";
-export { motionEase, motionDurations, blinkMs } from "./lib/motion";
+export { lerToken } from "./lib/token";
 
 // Blocos
 export * from "./blocos";

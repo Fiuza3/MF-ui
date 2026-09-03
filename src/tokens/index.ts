@@ -1,6 +1,5 @@
-export { cores } from "./cores";
-export type { Cores } from "./cores";
+export { cores, tokensDeCor } from "./cores";
+export type { Cores, NomeDeCor } from "./cores";
 export { familias, pesos } from "./tipografia";
-export { duration, blinkMs } from "./duration";
-export { ease } from "./ease";
-export { fadeUp, fadeIn, scaleIn } from "./motion";
+export { duracoes, curvas, tokensDeMotion } from "./motion";
+export type { NomeDeDuracao, NomeDeCurva } from "./motion";

@@ -2,6 +2,9 @@
 
 import * as React from "react";
 
+import { lerToken } from "../lib/token";
+import { tokensDeCor } from "../tokens/cores";
+
 export type NodeNetworkProps = {
   /** Quantidade de nós. Padrão: 52. */
   count?: number;
@@ -10,7 +13,7 @@ export type NodeNetworkProps = {
   /** Velocidade dos nós. Padrão: 0.45. */
   speed?: number;
   /**
-   * Cor das linhas e nós. Por padrão lê o token `--cyan` em runtime,
+   * Cor das linhas e nós. Por padrão lê o token `--primary` em runtime,
    * acompanhando tema claro/escuro automaticamente.
    */
   color?: string;
@@ -21,9 +24,7 @@ export type NodeNetworkProps = {
 type NetworkNode = { x: number; y: number; vx: number; vy: number };
 
 function lerCor(el: HTMLElement, override?: string): string {
-  if (override) return override;
-  const cyan = getComputedStyle(el).getPropertyValue("--cyan").trim();
-  return cyan || "#3DF2E0";
+  return override ?? lerToken(el, tokensDeCor.primaria);
 }
 
 /**

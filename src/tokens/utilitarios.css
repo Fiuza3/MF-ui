@@ -69,12 +69,6 @@
 /* Motion CSS-first: entrada anima por keyframe (compositor, sem JS).
    O estado inicial escondido vive DENTRO do keyframe — se a animação
    não rodar (browser antigo, reduced motion), o elemento fica visível. */
-:root {
-  --mf-ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --mf-dur-entrada: 600ms;
-  --mf-dur-entrada-lenta: 900ms;
-}
-
 @keyframes mf-fade {
   from {
     opacity: 0;
@@ -159,7 +153,7 @@
 }
 
 .mf-entrada {
-  animation: var(--mf-entrada-anim, mf-fade-up) var(--mf-dur-entrada) var(--mf-ease-expo-out)
+  animation: var(--mf-entrada-anim, mf-fade-up) var(--mf-duration-reveal) var(--mf-ease-expo)
     var(--mf-entrada-delay, 0ms) both;
 }
 
@@ -179,8 +173,8 @@
   opacity: 1;
   transform: none;
   transition:
-    opacity var(--mf-dur-entrada) var(--mf-ease-expo-out) var(--mf-entrada-delay, 0ms),
-    transform var(--mf-dur-entrada) var(--mf-ease-expo-out) var(--mf-entrada-delay, 0ms);
+    opacity var(--mf-duration-reveal) var(--mf-ease-expo) var(--mf-entrada-delay, 0ms),
+    transform var(--mf-duration-reveal) var(--mf-ease-expo) var(--mf-entrada-delay, 0ms);
 }
 
 @media (prefers-reduced-motion: reduce) {

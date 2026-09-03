@@ -1,20 +1,55 @@
-export const cores = {
-  fundo: "#0B0F14",
-  superficie: "#141C26",
-  superficieElevada: "#0F1520",
-  borda: "#1E2A38",
-  bordaForte: "#2A3B4D",
+/**
+ * Tokens de cor.
+ *
+ * Os VALORES ficam em `globals.css` e trocam entre `:root, .dark` e `.light`.
+ * Aqui existem apenas referencias — nenhum hexadecimal. Uma constante com o
+ * valor literal so estaria certa em um dos dois temas.
+ *
+ * - em estilo inline ou CSS-in-JS: use `cores.accent` (`"var(--primary)"`).
+ * - em API que nao entende `var()` (canvas, WebGL, libs de grafico): use
+ *   `lerToken(el, tokensDeCor.accent)`, que resolve no tema ativo.
+ */
 
-  textoPrimario: "#F7FAFC",
-  textoSecundario: "#A0AEC0",
-  textoSutil: "#5C6B7E",
+const NOMES = {
+  fundo: "--background",
+  texto: "--foreground",
 
-  accent: "#3DF2E0",
-  accentForte: "#5DF5E6",
-  accentSutil: "rgba(61,242,224,0.1)",
+  superficie: "--card",
+  superficieTexto: "--card-foreground",
+  superficieElevada: "--surface-raised",
+  flutuante: "--popover",
+  flutuanteTexto: "--popover-foreground",
 
-  alerta: "#FFBD2E",
-  erro: "#E40014",
+  primaria: "--primary",
+  primariaTexto: "--primary-foreground",
+  primariaHover: "--primary-hover",
+  primariaSutil: "--cyan-dim",
+  secundaria: "--secondary",
+  secundariaTexto: "--secondary-foreground",
+  neutra: "--muted",
+  neutraTexto: "--muted-foreground",
+  textoSutil: "--subtle-foreground",
+  destaque: "--accent",
+  destaqueTexto: "--accent-foreground",
+
+  alerta: "--warning",
+  alertaTexto: "--warning-foreground",
+  erro: "--destructive",
+  erroTexto: "--destructive-foreground",
+
+  borda: "--border",
+  bordaCampo: "--input",
+  foco: "--ring",
 } as const;
+
+export type NomeDeCor = keyof typeof NOMES;
+
+/** Nome da custom property de cada token, para uso com `lerToken`. */
+export const tokensDeCor: Record<NomeDeCor, string> = NOMES;
+
+/** Referencia `var(--token)` de cada cor, para estilo inline e CSS-in-JS. */
+export const cores = Object.fromEntries(
+  Object.entries(NOMES).map(([chave, prop]) => [chave, `var(${prop})`]),
+) as Record<NomeDeCor, string>;
 
 export type Cores = typeof cores;
