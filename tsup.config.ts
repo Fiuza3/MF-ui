@@ -3,7 +3,13 @@ import { defineConfig } from "tsup";
 import { preserveDirectivesPlugin } from "esbuild-plugin-preserve-directives";
 
 export default defineConfig({
-  entry: ["src/index.ts", "src/tokens/index.ts", "src/primitivos/index.ts", "src/blocos/index.ts", "src/blocos-app/index.ts"],
+  entry: [
+    "src/index.ts",
+    "src/tokens/index.ts",
+    "src/primitivos/index.ts",
+    "src/blocos/index.ts",
+    "src/blocos-app/index.ts",
+  ],
   format: ["cjs", "esm"],
   dts: true,
   sourcemap: true,
