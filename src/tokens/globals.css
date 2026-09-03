@@ -3,79 +3,81 @@
    carregadas pelo app nem do sistema operacional do visitante. */
 @font-face {
   font-family: "MF Logo Mono";
-  src: url(data:font/woff2;base64,d09GMgABAAAAAASIABAAAAAACLQAAAQsAAGzMwAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIByBBAZgP1NUQVREAGwRCAqFZIQzATYCJAMcCxoABCAFhBQHIAwHG9UGCB6FTdludExAUubla5OGG8Hzdb1f5w7y0j2x8UF5Ra6C/vm59v6JIerbiRgiMnbi/1CNFjpJI1TTRCUU8Ub/D3IW/uOYr29rHQ4rxYdYkRh1HqVD6QKK/kneWObWcMb28OFk6TgshkREfZ49lkANkIRQEQKZ9vKh6TObuoCnDAUARunJiFEYv/cO0xGIh9WJa9MPDYTIqffwUpAKBAghqWoLIdQJ1YIQ6imr89TtEyQWDdVXQmTuJJuAvEXqS2cqpDM7EWAeD46NxDEVpID6FH842cqllia4MshC6W/7F5QnxxYCUuv0KjrjiDXcNDfQ/ccetptvGgF7HEyFUBmkrDEE0Sk9jZKQojxanVw3zZH/geZYVgNNJWJKBtHSs2tGiVoo4L2F4nPvedtTxSPFjcXFxdmC+rkhChoh1EBroAnwEtEBgDKP4U2iti4JkSf2qrVs2KRMRB6PxUuNYcdBbZnSNtFrK1gZO6Y/G8ztPctWd299+mmc8NmqVRsvZmc+3X7ly2f5WZ9w/CV5DhffnJ355oMd86uf/3jlWW89FNH18O2Of2JFJaa75SkOnxg+/hjd3acvdmyV1p31WZzwaXbm2x87/pN3VkTM9m3tOmVr8/51MUP3f5zttiqma+d2zIqlmPm2aCfjQRnbcQfGlHt7oVURhKt6BeIN60UxeOWNDy8fv98ZP3Q/pjQP7LDTQanh5qvXH/hCT524/tUTG5YGr8V3+ZAlJcQ00trT2Jiw13XYKQN7P7b5rHoNWw4fGZ4OTfvPm3/bsOWubSeNeh9136LRtCfndE7ZpVz9cPfOh2YpvmnftgPFJfeeVMqtF64wmxzD9cRqawuxZkc5aixZrz/81uCgkI9d0NHRMsuLp+TaFYpdm2Dikr3nZD/v/GO/p/4/p4MOm9p9Z2avFkKv/ZUTih1PLM5/5cTtO5yw3Yp9km/XH98mYRxzzh0DtpRj3n75sjdfFkGSDFINvqz1S7seWhyNj3uPoTd8I8iWLUdb5TGe14ymh8BbTk2aGt1b5dHhuL8E4qFh595VabMpQft/XYn5Cd+vvnMV4Icjq+TWAcXuSZH+QFUCwUcypNUQXpFgugGVSPFvKI01ohZBqUixnu3Dp0h2dohSMwyzSaB5uTOVRJkP3EqPFprbpyUNPUkrGe2JVtY90CraRndqVdeYyINALcZoBXgRopWJjendlBPEummwqAWT/Lx8phUSExKTKtTlINxOBzemnuLUNpOwAKlpTjWZMc3nKSdBAREq+QTSPWqKGonk5aftZ4wj0LAw0iy3STS3kMiC+tXxwCKmESfUV62hboacWAd9t9eMEMokEYKCkJBGjw4WTTQs4wZ1qXhAo0Jx93BfUe3Hagojy42BXvkN/59mWIhLvWmUED9aByyMEsEEihv6dtIfj2L3l88BAAA=) format("woff2");
+  src: url(data:font/woff2;base64,d09GMgABAAAAAASIABAAAAAACLQAAAQsAAGzMwAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIByBBAZgP1NUQVREAGwRCAqFZIQzATYCJAMcCxoABCAFhBQHIAwHG9UGCB6FTdludExAUubla5OGG8Hzdb1f5w7y0j2x8UF5Ra6C/vm59v6JIerbiRgiMnbi/1CNFjpJI1TTRCUU8Ub/D3IW/uOYr29rHQ4rxYdYkRh1HqVD6QKK/kneWObWcMb28OFk6TgshkREfZ49lkANkIRQEQKZ9vKh6TObuoCnDAUARunJiFEYv/cO0xGIh9WJa9MPDYTIqffwUpAKBAghqWoLIdQJ1YIQ6imr89TtEyQWDdVXQmTuJJuAvEXqS2cqpDM7EWAeD46NxDEVpID6FH842cqllia4MshC6W/7F5QnxxYCUuv0KjrjiDXcNDfQ/ccetptvGgF7HEyFUBmkrDEE0Sk9jZKQojxanVw3zZH/geZYVgNNJWJKBtHSs2tGiVoo4L2F4nPvedtTxSPFjcXFxdmC+rkhChoh1EBroAnwEtEBgDKP4U2iti4JkSf2qrVs2KRMRB6PxUuNYcdBbZnSNtFrK1gZO6Y/G8ztPctWd299+mmc8NmqVRsvZmc+3X7ly2f5WZ9w/CV5DhffnJ355oMd86uf/3jlWW89FNH18O2Of2JFJaa75SkOnxg+/hjd3acvdmyV1p31WZzwaXbm2x87/pN3VkTM9m3tOmVr8/51MUP3f5zttiqma+d2zIqlmPm2aCfjQRnbcQfGlHt7oVURhKt6BeIN60UxeOWNDy8fv98ZP3Q/pjQP7LDTQanh5qvXH/hCT524/tUTG5YGr8V3+ZAlJcQ00trT2Jiw13XYKQN7P7b5rHoNWw4fGZ4OTfvPm3/bsOWubSeNeh9136LRtCfndE7ZpVz9cPfOh2YpvmnftgPFJfeeVMqtF64wmxzD9cRqawuxZkc5aixZrz/81uCgkI9d0NHRMsuLp+TaFYpdm2Dikr3nZD/v/GO/p/4/p4MOm9p9Z2avFkKv/ZUTih1PLM5/5cTtO5yw3Yp9km/XH98mYRxzzh0DtpRj3n75sjdfFkGSDFINvqz1S7seWhyNj3uPoTd8I8iWLUdb5TGe14ymh8BbTk2aGt1b5dHhuL8E4qFh595VabMpQft/XYn5Cd+vvnMV4Icjq+TWAcXuSZH+QFUCwUcypNUQXpFgugGVSPFvKI01ohZBqUixnu3Dp0h2dohSMwyzSaB5uTOVRJkP3EqPFprbpyUNPUkrGe2JVtY90CraRndqVdeYyINALcZoBXgRopWJjendlBPEummwqAWT/Lx8phUSExKTKtTlINxOBzemnuLUNpOwAKlpTjWZMc3nKSdBAREq+QTSPWqKGonk5aftZ4wj0LAw0iy3STS3kMiC+tXxwCKmESfUV62hboacWAd9t9eMEMokEYKCkJBGjw4WTTQs4wZ1qXhAo0Jx93BfUe3Hagojy42BXvkN/59mWIhLvWmUED9aByyMEsEEihv6dtIfj2L3l88BAAA=)
+    format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: block;
 }
 
-:root, .dark {
-  --background: #0B0F14;
-  --foreground: #F7FAFC;
-  --card: #0F1520;
-  --card-foreground: #F7FAFC;
-  --popover: #0F1520;
-  --popover-foreground: #F7FAFC;
-  --primary: #3DF2E0;
-  --primary-foreground: #0B0F14;
-  --secondary: #141C26;
-  --secondary-foreground: #F7FAFC;
-  --muted: #141C26;
-  --muted-foreground: #A0AEC0;
-  --accent: #3DF2E0;
-  --accent-foreground: #0B0F14;
-  --destructive: #E40014;
-  --destructive-foreground: #F7FAFC;
-  --border: #1E2A38;
-  --input: #1E2A38;
-  --ring: #3DF2E0;
+:root,
+.dark {
+  --background: #0b0f14;
+  --foreground: #f7fafc;
+  --card: #0f1520;
+  --card-foreground: #f7fafc;
+  --popover: #0f1520;
+  --popover-foreground: #f7fafc;
+  --primary: #3df2e0;
+  --primary-foreground: #0b0f14;
+  --secondary: #141c26;
+  --secondary-foreground: #f7fafc;
+  --muted: #141c26;
+  --muted-foreground: #a0aec0;
+  --accent: #3df2e0;
+  --accent-foreground: #0b0f14;
+  --destructive: #ff6b5e;
+  --destructive-foreground: #0b0f14;
+  --border: #1e2a38;
+  --input: #546b82;
+  --ring: #3df2e0;
   --radius: 0.375rem;
 
-  --cyan: #3DF2E0;
+  --cyan: #3df2e0;
   --cyan-dim: rgba(61, 242, 224, 0.1);
   --cyan-glow: rgba(61, 242, 224, 0.25);
-  --gray-text: #A0AEC0;
-  --surface: #0F1520;
-  --surface-raised: #141C26;
-  --line: #1E2A38;
+  --gray-text: #a0aec0;
+  --surface: #0f1520;
+  --surface-raised: #141c26;
+  --line: #1e2a38;
 }
 
-/* Tema claro — creme + laranja. VALORES PLACEHOLDER: ajustar no navegador. */
+/* Tema claro — creme + laranja. */
 .light {
-  --background: #F5F0E6;
-  --foreground: #1A1410;
-  --card: #FBF7EF;
-  --card-foreground: #1A1410;
-  --popover: #FBF7EF;
-  --popover-foreground: #1A1410;
-  --primary: #E8722C;
-  --primary-foreground: #FBF7EF;
-  --secondary: #EFE7D6;
-  --secondary-foreground: #1A1410;
-  --muted: #EFE7D6;
-  --muted-foreground: #6B5E4A;
-  --accent: #E8722C;
-  --accent-foreground: #FBF7EF;
-  --destructive: #C2301C;
-  --destructive-foreground: #FBF7EF;
-  --border: #E0D6C4;
-  --input: #E0D6C4;
-  --ring: #E8722C;
+  --background: #f5f0e6;
+  --foreground: #1a1410;
+  --card: #fbf7ef;
+  --card-foreground: #1a1410;
+  --popover: #fbf7ef;
+  --popover-foreground: #1a1410;
+  --primary: #b04e14;
+  --primary-foreground: #fbf7ef;
+  --secondary: #efe7d6;
+  --secondary-foreground: #1a1410;
+  --muted: #efe7d6;
+  --muted-foreground: #6b5e4a;
+  --accent: #b04e14;
+  --accent-foreground: #fbf7ef;
+  --destructive: #c2301c;
+  --destructive-foreground: #fbf7ef;
+  --border: #e0d6c4;
+  --input: #94825f;
+  --ring: #b04e14;
   --radius: 0.375rem;
 
-  --cyan: #E8722C;
-  --cyan-dim: rgba(232, 114, 44, 0.1);
-  --cyan-glow: rgba(232, 114, 44, 0.25);
-  --gray-text: #6B5E4A;
-  --surface: #FBF7EF;
-  --surface-raised: #EFE7D6;
-  --line: #E0D6C4;
+  --cyan: #b04e14;
+  --cyan-dim: rgba(176, 78, 20, 0.1);
+  --cyan-glow: rgba(176, 78, 20, 0.25);
+  --gray-text: #6b5e4a;
+  --surface: #fbf7ef;
+  --surface-raised: #efe7d6;
+  --line: #e0d6c4;
 }
 
 @theme inline {
   /* — Fontes — */
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
 
   /* — Cores semânticas — */
   --color-background: var(--background);
@@ -106,22 +108,22 @@
   --color-line: var(--line);
 
   /* — Radius — */
-  --radius-xs:   2px;
-  --radius-sm:   4px;
-  --radius-md:   6px;
-  --radius-lg:   12px;
-  --radius-xl:   16px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
   /* — Spacing (base 4px, 20 passos) — */
-  --spacing-1:  4px;
-  --spacing-2:  8px;
-  --spacing-3:  12px;
-  --spacing-4:  16px;
-  --spacing-5:  20px;
-  --spacing-6:  24px;
-  --spacing-7:  28px;
-  --spacing-8:  32px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
   --spacing-10: 40px;
   --spacing-12: 48px;
   --spacing-14: 56px;
@@ -131,31 +133,31 @@
 
   /* — Tipografia Display/Heading — fluída (clamp) — */
   --text-display: clamp(3.5rem, 9vw, 9.5rem);
-  --text-h1:      clamp(2.2rem, 5vw, 5.8rem);
-  --text-h2:      clamp(1.6rem, 3vw, 3.5rem);
-  --text-h3:      clamp(1.25rem, 2vw, 1.75rem);
+  --text-h1: clamp(2.2rem, 5vw, 5.8rem);
+  --text-h2: clamp(1.6rem, 3vw, 3.5rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.75rem);
 
   /* — Tipografia Body/UI — fixa (interfaces não devem ser fluídas) — */
-  --text-body:    1rem;
+  --text-body: 1rem;
   --text-body-lg: 1.125rem;
-  --text-small:   0.875rem;
-  --text-label:   0.75rem;
-  --text-mono:    0.75rem;
+  --text-small: 0.875rem;
+  --text-label: 0.75rem;
+  --text-mono: 0.75rem;
   --text-mono-lg: 1rem;
 
   /* — Line heights — */
-  --leading-tight:  0.88;
-  --leading-snug:   0.96;
+  --leading-tight: 0.88;
+  --leading-snug: 0.96;
   --leading-normal: 1.6;
 
   /* — Letter spacing — */
-  --tracking-wide:   0.18em;
-  --tracking-wider:  0.28em;
+  --tracking-wide: 0.18em;
+  --tracking-wider: 0.28em;
   --tracking-widest: 0.34em;
 
   /* — Shadows / Elevation (oklch — W3C 2025) — */
-  --shadow-sm:   0 1px 3px oklch(0 0 0 / 0.3);
-  --shadow-md:   0 4px 16px oklch(0 0 0 / 0.4);
-  --shadow-lg:   0 8px 32px oklch(0 0 0 / 0.5);
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 4px 16px oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 8px 32px oklch(0 0 0 / 0.5);
   --shadow-glow: 0 0 20px var(--cyan-glow), 0 0 60px var(--cyan-dim);
 }
