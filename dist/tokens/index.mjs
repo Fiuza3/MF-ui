@@ -8,7 +8,7 @@ import {
   familias,
   pesos,
   scaleIn
-} from "../chunk-NPQCGWPS.mjs";
+} from "../chunk-JKD33GCI.mjs";
 export {
   blinkMs,
   cores,

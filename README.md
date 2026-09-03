@@ -6,7 +6,7 @@
 Tokens, primitivos e blocos de seção reutilizáveis — extraídos do site
 [mfdesenvolvimento.online](https://mfdesenvolvimento.online) e prontos para qualquer projeto React.
  
-[![versão](https://img.shields.io/badge/versão-2.4.0-FF6B00?style=flat-square)](https://github.com/Fiuza3/MF-ui/tags)
+[![versão](https://img.shields.io/badge/versão-2.5.0-FF6B00?style=flat-square)](https://github.com/Fiuza3/MF-ui/tags)
 [![React](https://img.shields.io/badge/React-19+-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 [![Tailwind](https://img.shields.io/badge/Tailwind-v4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -45,7 +45,7 @@ O pacote entrega três camadas:
 ## Instalação
  
 ```bash
-pnpm add github:Fiuza3/MF-ui#v2.4.0
+pnpm add github:Fiuza3/MF-ui#v2.5.0
 ```
  
 > Sempre fixe uma **tag**. `#master` funciona, mas quebra builds sem aviso.

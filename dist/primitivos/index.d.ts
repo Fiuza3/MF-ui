@@ -15,8 +15,8 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 
 declare const buttonVariants: (props?: ({
-    variant?: "link" | "outline" | "default" | "destructive" | "secondary" | "ghost" | null | undefined;
-    size?: "default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg" | null | undefined;
+    variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
+    size?: "default" | "icon" | "sm" | "lg" | "icon-sm" | "icon-lg" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 declare function Button({ className, variant, size, asChild, ...props }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
@@ -31,7 +31,7 @@ declare function CardContent({ className, ...props }: React.ComponentProps<'div'
 declare function CardFooter({ className, ...props }: React.ComponentProps<'div'>): react_jsx_runtime.JSX.Element;
 
 declare const badgeVariants: (props?: ({
-    variant?: "outline" | "default" | "destructive" | "secondary" | null | undefined;
+    variant?: "default" | "destructive" | "outline" | "secondary" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 declare function Badge({ className, variant, asChild, ...props }: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & {
     asChild?: boolean;

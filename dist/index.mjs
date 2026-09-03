@@ -6,10 +6,11 @@ import {
   Hero,
   Process,
   Projects,
+  Reveal,
   Services,
   Stack,
   Testimonials
-} from "./chunk-BDFSNVED.mjs";
+} from "./chunk-4HAI6XVN.mjs";
 import {
   AppShell,
   CopyField,
@@ -18,7 +19,7 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-GKB6KWDD.mjs";
+} from "./chunk-CNND3WFH.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -91,7 +92,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-3FSLQ2JO.mjs";
+} from "./chunk-OUPAG7LT.mjs";
 import {
   Button,
   Card,
@@ -121,7 +122,7 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-UJHI3XUF.mjs";
+} from "./chunk-TE43X62N.mjs";
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
@@ -132,7 +133,7 @@ import {
   ease,
   familias,
   pesos
-} from "./chunk-NPQCGWPS.mjs";
+} from "./chunk-JKD33GCI.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -183,9 +184,7 @@ function Logo({
 }
 
 // src/componentes/LogoAnimado.tsx
-import { motion, useReducedMotion } from "framer-motion";
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
-var SUAVE = [0.16, 1, 0.3, 1];
 function LogoAnimado({
   tamanho = 24,
   cor = "var(--cyan)",
@@ -195,17 +194,11 @@ function LogoAnimado({
   label = "MF Desenvolvimento",
   className
 }) {
-  const reduzido = useReducedMotion();
   const cw = tamanho * RATIO_AVANCO_LOGO;
   const altura = tamanho * RATIO_ALTURA_LOGO;
   const padX = tamanho * RATIO_PADDING_LOGO;
   const larguraTotal = padX + cw * 5;
   const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
-  const entrar = reduzido ? {} : {
-    initial: { opacity: 0, y: 5 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: SUAVE }
-  };
   const svg = /* @__PURE__ */ jsx2(
     "svg",
     {
@@ -217,9 +210,9 @@ function LogoAnimado({
       xmlns: "http://www.w3.org/2000/svg",
       className: `transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`,
       children: /* @__PURE__ */ jsxs2(
-        motion.text,
+        "text",
         {
-          ...entrar,
+          className: "mf-entrada mf-entrada-fade",
           x: padX,
           y: altura / 2,
           dominantBaseline: "central",
@@ -256,7 +249,6 @@ function LogoAnimado({
 
 // src/componentes/Navbar.tsx
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion as motion2 } from "framer-motion";
 import { Fragment, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 function Navbar({
   links = [],
@@ -266,7 +258,6 @@ function Navbar({
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
   const hamburgerRef = useRef(null);
   useEffect(() => {
     const handler = () => setIsScrolled(window.scrollY > 40);
@@ -336,39 +327,28 @@ function Navbar({
         }
       )
     ] }) }),
-    /* @__PURE__ */ jsx3(AnimatePresence, { children: menuOpen && /* @__PURE__ */ jsx3(
-      motion2.div,
-      {
-        ref: menuRef,
-        initial: { opacity: 0, y: -16 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -16 },
-        transition: { duration: 0.2 },
-        className: "fixed inset-x-0 top-[65px] z-40 border-b border-[var(--line)] bg-[var(--background)]/95 backdrop-blur-md md:hidden",
-        children: /* @__PURE__ */ jsxs3("nav", { "aria-label": "Menu mobile", className: "flex flex-col gap-1 px-6 py-6", children: [
-          links.map((link) => /* @__PURE__ */ jsx3(
-            "a",
-            {
-              href: link.href,
-              onClick: () => setMenuOpen(false),
-              className: "rounded py-2 font-mono text-sm text-[var(--gray-text)] hover:text-[var(--foreground)] transition-colors",
-              children: link.label
-            },
-            link.href
-          )),
-          ctaHref && /* @__PURE__ */ jsx3(
-            "a",
-            {
-              href: ctaHref,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              className: "mt-4 rounded border border-[var(--cyan)] px-4 py-2 text-center font-mono text-sm text-[var(--cyan)] hover:bg-[var(--cyan)] hover:text-[var(--background)] transition-all",
-              children: ctaLabel
-            }
-          )
-        ] })
-      }
-    ) })
+    menuOpen && /* @__PURE__ */ jsx3("div", { className: "mf-entrada mf-entrada-down fixed inset-x-0 top-[65px] z-40 border-b border-[var(--line)] bg-[var(--background)]/95 backdrop-blur-md md:hidden", children: /* @__PURE__ */ jsxs3("nav", { "aria-label": "Menu mobile", className: "flex flex-col gap-1 px-6 py-6", children: [
+      links.map((link) => /* @__PURE__ */ jsx3(
+        "a",
+        {
+          href: link.href,
+          onClick: () => setMenuOpen(false),
+          className: "rounded py-2 font-mono text-sm text-[var(--gray-text)] hover:text-[var(--foreground)] transition-colors",
+          children: link.label
+        },
+        link.href
+      )),
+      ctaHref && /* @__PURE__ */ jsx3(
+        "a",
+        {
+          href: ctaHref,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: "mt-4 rounded border border-[var(--cyan)] px-4 py-2 text-center font-mono text-sm text-[var(--cyan)] hover:bg-[var(--cyan)] hover:text-[var(--background)] transition-all",
+          children: ctaLabel
+        }
+      )
+    ] }) })
   ] });
 }
 
@@ -529,6 +509,7 @@ export {
   RATIO_ALTURA_LOGO,
   RATIO_AVANCO_LOGO,
   RATIO_PADDING_LOGO,
+  Reveal,
   Select,
   SelectContent,
   SelectGroup,
