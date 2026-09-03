@@ -17,13 +17,13 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 11
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -40,15 +40,22 @@ jobs:
       - name: Testes
         run: pnpm test
 
+      - name: Registrar o dist/ commitado
+        run: find dist -type f | sort > "$RUNNER_TEMP/dist-commitado.txt"
+
       - name: Build
         run: pnpm build
 
       - name: dist/ está sincronizado com src/
+        # A comparação é pela LISTA de arquivos, não pelo conteúdo: o esbuild
+        # emite os blocos de import em ordem variável entre execuções, então
+        # dois builds do mesmo source não são byte a byte iguais. Os nomes de
+        # chunk, por outro lado, carregam hash de conteúdo — se o src mudou e
+        # o dist não foi regerado, a lista muda e este passo pega.
         run: |
-          if [ -n "$(git status --porcelain dist)" ]; then
-            echo "::error::O dist/ commitado não corresponde ao build de src/."
-            echo "Rode 'pnpm build' e commite o dist/ atualizado."
-            git --no-pager diff --stat dist
+          find dist -type f | sort > "$RUNNER_TEMP/dist-rebuild.txt"
+          if ! diff -u "$RUNNER_TEMP/dist-commitado.txt" "$RUNNER_TEMP/dist-rebuild.txt"; then
+            echo "::error::O dist/ commitado não corresponde ao build de src/. Rode 'pnpm build' e commite o dist/ atualizado."
             exit 1
           fi
           echo "dist/ sincronizado."
