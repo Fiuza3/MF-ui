@@ -4,9 +4,71 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [3.0.0] — 2026-09-03
+
+Esta versão elimina as fontes de verdade duplicadas do sistema. `globals.css` passa a ser o único lugar onde um valor de token existe; o TypeScript exporta referências.
+
+### Por quê
+
+`cores.ts` guardava um hexadecimal por token. O tema, porém, troca em runtime: `accent: "#3DF2E0"` era a resposta certa apenas no tema escuro. Qualquer consumidor que usasse esse valor para pintar um canvas ou alimentar um gráfico pintava ciano com o usuário no tema claro. Não era duplicação a sincronizar — era uma API correta pela metade.
+
+O mesmo valia para motion: `duration.reveal` dizia `0.64` (640 ms) enquanto o CSS que de fato animava usava `600ms`, e as curvas estavam no formato de arrays do Framer Motion, dependência removida na 2.5.0.
+
+### Removido
+
+- `cores` não exporta mais valores hexadecimais. Passa a exportar `var(--token)`.
+- `motionDurations`, `motionEase` e `blinkMs` — o arquivo `lib/motion.ts` era apenas um alias que criava dois nomes públicos para a mesma coisa. `blinkMs` não era usado por ninguém.
+- `fadeUp`, `fadeIn` e `scaleIn` — devolviam props de Framer Motion, que não é mais dependência do pacote desde a 2.5.0.
+- `bordaForte`: era o unico token sem semantica propria — a borda que delimita um campo agora e `bordaCampo` (`--input`), com os 3:1 que a WCAG exige.
 
 ### Adicionado
+
+- `lerToken(el, token, fallback?)` — lê uma custom property já resolvida pelo navegador, correta para o tema ativo. É o caminho para APIs que não entendem `var()`: canvas, WebGL, bibliotecas de gráfico.
+- `tokensDeCor` e `tokensDeMotion` — nomes das custom properties, para uso com `lerToken`.
+- `duracoes` (`micro`, `rapida`, `entrada`, `secao`) e `curvas` (`expo`, `power`, `suave`), como referências CSS.
+- Token semântico `--warning` / `--warning-foreground` nos dois temas, com contraste verificado. O sistema tinha erro, mas não tinha aviso.
+- `--subtle-foreground` e `--primary-hover` nos dois temas. Eram usados como `textoSutil` e `accentForte` do lado do TypeScript sem nunca terem existido no CSS — agora existem, com valor calculado. O antigo `textoSutil` (`#5C6B7E`) ficava em 3,53:1 sobre o fundo e reprovava em AA; o novo passa em 5,64:1 sobre fundo, card e superfície elevada.
+- `src/testes/tokens-fonte-unica.test.ts` — falha o build se aparecer hexadecimal, duração ou curva literal fora de `globals.css`, e se o mapa do TypeScript apontar para um token inexistente ou deixar um token semântico de fora.
+
+### Alterado
+
+- Nomes dos tokens de cor alinhados ao vocabulário do CSS, cobrindo agora todos os semânticos:
+
+  | antes             | agora                                                 |
+  | ----------------- | ----------------------------------------------------- |
+  | `fundo`           | `fundo`                                               |
+  | `textoPrimario`   | `texto`                                               |
+  | `superficie`      | `superficie` / `superficieTexto`                      |
+  | `accent`          | `primaria` / `primariaTexto`                          |
+  | `textoSecundario` | `neutraTexto`                                         |
+  | `borda`           | `borda`, `bordaCampo`, `foco`                         |
+  | `alerta`          | `alerta` / `alertaTexto`                              |
+  | `erro`            | `erro` / `erroTexto`                                  |
+  | —                 | `flutuante`, `secundaria`, `destaque` e seus `*Texto` |
+
+- Variáveis de motion renomeadas e movidas de `utilitarios.css` para `globals.css`, onde moram os tokens: `--mf-ease-expo-out` → `--mf-ease-expo`, `--mf-dur-entrada` → `--mf-duration-reveal`, `--mf-dur-entrada-lenta` → `--mf-duration-section`. `utilitarios.css` agora só consome.
+- `NodeNetwork` lê `--primary` via `lerToken` em vez de `--cyan` com fallback hexadecimal.
+
+### Migração
+
+```diff
+- import { cores } from "@mf/ui";
+- <div style={{ background: cores.fundo }} />        // "#0B0F14", só no tema escuro
++ import { cores } from "@mf/ui";
++ <div style={{ background: cores.fundo }} />        // "var(--background)", nos dois
+
+- ctx.fillStyle = cores.accent;
++ ctx.fillStyle = lerToken(canvas, tokensDeCor.primaria);
+
+- transition: `opacity ${motionDurations.reveal}s ${motionEase.expoOut}`
++ transition: `opacity ${duracoes.entrada} ${curvas.expo}`
+```
+
+Quem usava `fadeUp`/`fadeIn`/`scaleIn` deve migrar para as classes de entrada de `utilitarios.css` (`mf-entrada`, `mf-entrada-up`) ou para o componente `Reveal`.
+
+### Também nesta versão
+
+#### Ferramental do repositório
 
 - `LICENSE` (MIT), `CHANGELOG.md`, `CONTRIBUTING.md` e `.editorconfig`.
 - Integração contínua: `typecheck`, `lint`, testes, build e verificação de que o `dist/` commitado corresponde ao `src/`.
@@ -14,11 +76,15 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - `src/testes/contraste.test.ts` — trava de acessibilidade: nenhum par de cor dos temas entra no `master` abaixo do mínimo WCAG 2.1 AA.
 - `sideEffects` e `engines` no `package.json`; scripts `typecheck`, `lint`, `format` e `test:coverage`.
 
-### Corrigido
+#### Acessibilidade e correções
 
 - **`Reveal` não chama mais `setState` dentro do efeito.** O corpo do efeito disparava uma renderização em cascata por instância; as classes agora entram e saem por `classList`, sincronizando o DOM com o `IntersectionObserver`. Comportamento preservado — o servidor continua renderizando sem a classe de escondido.
 - **Modal de case em `Projects`.** O container era um `div` sem papel com `onMouseDown`; o handler passou para o backdrop, que já é `aria-hidden`, e o `stopPropagation` do diálogo deixou de ser necessário. O glifo literal do botão de fechar virou o ícone `X` do `lucide-react`.
 - **Acessibilidade dos temas.** Nove pares de cor reprovavam na WCAG 2.1 AA. No tema claro, o texto dentro do botão primário estava em 2,86:1 (mínimo 4,5) e o anel de foco em 2,69:1 (mínimo 3,0). No tema escuro, `--destructive` sobre o fundo estava em 3,94:1 e `--input` em 1,32:1. Todos os 30 pares verificados passam agora.
+
+### Conhecido, para a próxima
+
+`globals.css` ainda mantém um vocabulário legado ao lado do semântico — `--cyan`, `--cyan-dim`, `--cyan-glow`, `--gray-text`, `--surface`, `--surface-raised`, `--line`. No tema claro, `--cyan` guarda laranja. Unificar isso toca vários componentes e sai em release própria.
 
 ## [2.7.0] — 2026-09-03
 

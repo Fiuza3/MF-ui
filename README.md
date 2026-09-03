@@ -6,7 +6,7 @@
 Tokens, primitivos e blocos de seção reutilizáveis — extraídos do site
 [mfdesenvolvimento.online](https://mfdesenvolvimento.online) e prontos para qualquer projeto React.
 
-[![versão](https://img.shields.io/badge/versão-2.7.0-FF6B00?style=flat-square)](https://github.com/Fiuza3/MF-ui/tags)
+[![versão](https://img.shields.io/badge/versão-3.0.0-FF6B00?style=flat-square)](https://github.com/Fiuza3/MF-ui/tags)
 [![React](https://img.shields.io/badge/React-19+-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 [![Tailwind](https://img.shields.io/badge/Tailwind-v4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -24,11 +24,11 @@ se propaga para todos eles com um bump de versão.
 
 O pacote entrega três camadas:
 
-| Camada         | O que é                                              | Exemplos                                    |
-| -------------- | ---------------------------------------------------- | ------------------------------------------- |
-| **Tokens**     | Cores, tipografia e curvas de motion, em CSS e em TS | `cores`, `familias`, `pesos`, `motionEase`  |
-| **Primitivos** | Componentes de UI atômicos, acessíveis (Radix + CVA) | `Button`, `Dialog`, `Table`, `Toast`        |
-| **Blocos**     | Seções inteiras de página, 100% dirigidas por props  | `Hero`, `Services`, `AppShell`, `DataTable` |
+| Camada         | O que é                                                     | Exemplos                                    |
+| -------------- | ----------------------------------------------------------- | ------------------------------------------- |
+| **Tokens**     | Cores, tipografia e motion — valor em CSS, referência em TS | `cores`, `familias`, `pesos`, `duracoes`    |
+| **Primitivos** | Componentes de UI atômicos, acessíveis (Radix + CVA)        | `Button`, `Dialog`, `Table`, `Toast`        |
+| **Blocos**     | Seções inteiras de página, 100% dirigidas por props         | `Hero`, `Services`, `AppShell`, `DataTable` |
 
 ### Princípios
 
@@ -36,6 +36,11 @@ O pacote entrega três camadas:
   dados, rotas ou subcomponentes de um projeto específico. É isso que os torna reutilizáveis.
 - **Tema por variável CSS.** Escuro e claro trocam valores das mesmas variáveis; nenhum
   componente precisa de código condicional.
+- **Uma fonte de valor.** Todo valor de token vive em `globals.css`. O TypeScript exporta
+  referências (`var(--token)`), nunca literais — uma constante com o valor congela um dos temas.
+  Um teste falha o build se aparecer hexadecimal, duração ou curva fora do `globals.css`.
+- **Contraste verificado.** Os dois temas passam por WCAG 2.1 AA a cada `pnpm test`; um token de
+  cor que derrube um par abaixo do mínimo quebra o build.
 - **Zero build no consumidor.** `dist/` é versionado no git, então instalar via `github:` já
   entrega o pacote compilado.
 - **Nomenclatura em português.** Pastas e tokens em pt-BR (`primitivos`, `blocos`, `cores`);
@@ -46,7 +51,7 @@ O pacote entrega três camadas:
 ## Instalação
 
 ```bash
-pnpm add github:Fiuza3/MF-ui#v2.7.0
+pnpm add github:Fiuza3/MF-ui#v3.0.0
 ```
 
 > Sempre fixe uma **tag**. `#master` funciona, mas quebra builds sem aviso.
@@ -96,15 +101,15 @@ import { Button, Card, Hero, Navbar, Footer } from "@mf/ui";
 
 Importe do subpath quando quiser um bundle menor ou evitar React (caso de `tokens`):
 
-| Subpath                  | Conteúdo                                                  |
-| ------------------------ | --------------------------------------------------------- |
-| `@mf/ui`                 | tudo (tokens TS, primitivos, blocos, marca, `cn`, motion) |
-| `@mf/ui/primitivos`      | componentes atômicos                                      |
-| `@mf/ui/blocos`          | seções de landing page                                    |
-| `@mf/ui/blocos-app`      | blocos de painel interno                                  |
-| `@mf/ui/tokens`          | `cores`, `familias`, `pesos` — sem React                  |
-| `@mf/ui/globals.css`     | variáveis de tema + `@theme inline`                       |
-| `@mf/ui/utilitarios.css` | utilitários CSS genéricos                                 |
+| Subpath                  | Conteúdo                                                                      |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| `@mf/ui`                 | tudo (tokens TS, primitivos, blocos, marca, `cn`, motion)                     |
+| `@mf/ui/primitivos`      | componentes atômicos                                                          |
+| `@mf/ui/blocos`          | seções de landing page                                                        |
+| `@mf/ui/blocos-app`      | blocos de painel interno                                                      |
+| `@mf/ui/tokens`          | `cores`, `tokensDeCor`, `duracoes`, `curvas`, `familias`, `pesos` — sem React |
+| `@mf/ui/globals.css`     | variáveis de tema + `@theme inline`                                           |
+| `@mf/ui/utilitarios.css` | utilitários CSS genéricos                                                     |
 
 ---
 
@@ -148,7 +153,7 @@ compor estilos em outros elementos. `Card` é composicional: `CardHeader`, `Card
 ### Marca e utilidades — `@mf/ui`
 
 `Logo` · `LogoAnimado` · `Navbar` · `Footer` · `Reveal` · `NodeNetwork` · `cn()` ·
-`motionEase` / `motionDurations` / `blinkMs` · constantes de proporção do logo
+`lerToken()` · constantes de proporção do logo
 (`RATIO_AVANCO_LOGO`, `RATIO_ALTURA_LOGO`, `RATIO_PADDING_LOGO`).
 
 ---
@@ -178,17 +183,43 @@ O tema **escuro é o padrão** (`:root` / `.dark`). Para o tema claro (creme + l
 a classe `light` no `<html>` — por exemplo via `next-themes`. As mesmas variáveis CSS trocam de
 valor; nenhum componente muda.
 
-Tokens de cor disponíveis em `@mf/ui/tokens`:
+### Usando um token
+
+Em CSS ou Tailwind, use a variável direto (`bg-primary`, `text-muted-foreground`, `var(--ring)`).
+
+Em estilo inline, `cores` já entrega a referência pronta:
+
+```tsx
+import { cores } from "@mf/ui/tokens";
+
+<div style={{ borderColor: cores.borda }} />; // → var(--border)
+```
+
+Quando a API não entende `var()` — canvas, WebGL, uma lib de gráfico — leia o valor resolvido no
+tema ativo:
+
+```tsx
+import { lerToken, tokensDeCor } from "@mf/ui";
+
+const cor = lerToken(elemento, tokensDeCor.primaria); // hex do tema atual
+```
+
+Tokens disponíveis:
 
 ```
-fundo · superficie · superficieElevada · borda · bordaForte
-textoPrimario · textoSecundario · textoSutil
-accent · accentForte · accentSutil
-alerta · erro
+fundo · texto · textoSutil
+superficie · superficieTexto · superficieElevada · flutuante · flutuanteTexto
+primaria · primariaTexto · primariaHover · primariaSutil
+secundaria · secundariaTexto · neutra · neutraTexto · destaque · destaqueTexto
+alerta · alertaTexto · erro · erroTexto
+borda · bordaCampo · foco
 ```
 
-Os valores do tema claro vivem em `src/tokens/globals.css` (bloco `.light`) e são um ponto de
-partida creme/laranja — refináveis direto no navegador.
+Motion segue o mesmo desenho: `duracoes.micro | rapida | entrada | secao` e
+`curvas.expo | power | suave`.
+
+Os valores dos dois temas vivem em `src/tokens/globals.css`. Mudar um deles muda o sistema
+inteiro, e o teste de contraste avisa na hora se a mudança quebrar acessibilidade.
 
 ---
 
@@ -212,11 +243,11 @@ partida creme/laranja — refináveis direto no navegador.
 ```bash
 pnpm build && pnpm test
 # bump da versão em package.json
-git add dist package.json && git commit -m "chore(release): v2.x.x"
-git tag v2.x.x && git push origin master v2.x.x
+git add dist package.json && git commit -m "chore(release): vX.Y.Z"
+git tag vX.Y.Z && git push origin master vX.Y.Z
 ```
 
-Depois, no projeto consumidor: `pnpm add github:Fiuza3/MF-ui#v2.x.x`.
+Depois, no projeto consumidor: `pnpm add github:Fiuza3/MF-ui#vX.Y.Z`.
 
 ### Estrutura
 
@@ -227,7 +258,7 @@ src/
 ├─ componentes/  marca e navegação (Logo, Navbar, Footer, Reveal, NodeNetwork)
 ├─ blocos/       seções de site
 ├─ blocos-app/   blocos de painel interno
-├─ lib/          cn(), motion
+├─ lib/          cn(), lerToken()
 └─ testes/       Vitest
 ```
 
