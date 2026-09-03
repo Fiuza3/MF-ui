@@ -43,8 +43,9 @@
   },
   "files": [
     "dist",
-    "src/tokens/globals.css",
-    "src/tokens/utilitarios.css"
+    "src",
+    "!src/testes",
+    "!src/blocos-app/__tests__"
   ],
   "scripts": {
     "build": "tsup",

@@ -76,6 +76,11 @@ precisa instalá-los.
 ```css
 @import "@mf/ui/globals.css";      /* tokens + temas .dark / .light */
 @import "@mf/ui/utilitarios.css";  /* dot-grid, noise, glow, scrollbar, marquee */
+
+/* O Tailwind precisa varrer o fonte do pacote para gerar as utilities que os
+   componentes usam. Apontar para o dist gera candidatos malformados a partir
+   do JS empacotado e quebra o parser de CSS do consumidor. */
+@source "../node_modules/@mf/ui/src/**/*.tsx";
 ```
  
 ---
