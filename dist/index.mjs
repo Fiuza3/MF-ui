@@ -441,6 +441,130 @@ function Footer({
     }
   );
 }
+
+// src/componentes/NodeNetwork.tsx
+import * as React from "react";
+import { jsx as jsx5 } from "react/jsx-runtime";
+function lerCor(el, override) {
+  if (override) return override;
+  const cyan = getComputedStyle(el).getPropertyValue("--cyan").trim();
+  return cyan || "#3DF2E0";
+}
+function NodeNetwork({
+  count = 52,
+  maxDistance = 160,
+  speed = 0.45,
+  color,
+  className
+}) {
+  const canvasRef = React.useRef(null);
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    const el = canvas;
+    const ctx = context;
+    let corAtual = lerCor(el, color);
+    let largura = 0;
+    let altura = 0;
+    let animId = 0;
+    const nodes = [];
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      largura = el.offsetWidth;
+      altura = el.offsetHeight;
+      el.width = largura * dpr;
+      el.height = altura * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      nodes.length = 0;
+      for (let i = 0; i < count; i++) {
+        nodes.push({
+          x: Math.random() * largura,
+          y: Math.random() * altura,
+          vx: (Math.random() - 0.5) * speed,
+          vy: (Math.random() - 0.5) * speed
+        });
+      }
+    }
+    function mover() {
+      for (const n of nodes) {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0) n.x = largura;
+        else if (n.x > largura) n.x = 0;
+        if (n.y < 0) n.y = altura;
+        else if (n.y > altura) n.y = 0;
+      }
+    }
+    function desenharLigacoes() {
+      ctx.strokeStyle = corAtual;
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist >= maxDistance) continue;
+          ctx.globalAlpha = (1 - dist / maxDistance) * 0.28;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    function desenharNos() {
+      ctx.fillStyle = corAtual;
+      ctx.globalAlpha = 0.55;
+      for (const n of nodes) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function desenhar() {
+      ctx.clearRect(0, 0, largura, altura);
+      desenharLigacoes();
+      desenharNos();
+    }
+    function tick() {
+      mover();
+      desenhar();
+      animId = requestAnimationFrame(tick);
+    }
+    const ro = new ResizeObserver(resize);
+    ro.observe(el);
+    resize();
+    const mo = new MutationObserver(() => {
+      corAtual = lerCor(el, color);
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) desenhar();
+    else animId = requestAnimationFrame(tick);
+    return () => {
+      ro.disconnect();
+      mo.disconnect();
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, [count, maxDistance, speed, color]);
+  return /* @__PURE__ */ jsx5(
+    "canvas",
+    {
+      ref: canvasRef,
+      "aria-hidden": "true",
+      className,
+      style: {
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none"
+      }
+    }
+  );
+}
 export {
   About,
   Accordion,
@@ -495,6 +619,7 @@ export {
   Logo,
   LogoAnimado,
   Navbar,
+  NodeNetwork,
   PageHeader,
   Pagination,
   PaginationContent,

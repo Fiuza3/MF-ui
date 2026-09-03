@@ -6,7 +6,7 @@
 Tokens, primitivos e blocos de seção reutilizáveis — extraídos do site
 [mfdesenvolvimento.online](https://mfdesenvolvimento.online) e prontos para qualquer projeto React.
  
-[![versão](https://img.shields.io/badge/versão-2.5.0-FF6B00?style=flat-square)](https://github.com/Fiuza3/MF-ui/tags)
+[![versão](https://img.shields.io/badge/versão-2.6.0-FF6B00?style=flat-square)](https://github.com/Fiuza3/MF-ui/tags)
 [![React](https://img.shields.io/badge/React-19+-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 [![Tailwind](https://img.shields.io/badge/Tailwind-v4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -45,7 +45,7 @@ O pacote entrega três camadas:
 ## Instalação
  
 ```bash
-pnpm add github:Fiuza3/MF-ui#v2.5.0
+pnpm add github:Fiuza3/MF-ui#v2.6.0
 ```
  
 > Sempre fixe uma **tag**. `#master` funciona, mas quebra builds sem aviso.
@@ -141,7 +141,7 @@ compor estilos em outros elementos. `Card` é composicional: `CardHeader`, `Card
  
 ### Marca e utilidades — `@mf/ui`
  
-`Logo` · `LogoAnimado` · `Navbar` · `Footer` · `Reveal` · `cn()` ·
+`Logo` · `LogoAnimado` · `Navbar` · `Footer` · `Reveal` · `NodeNetwork` · `cn()` ·
 `motionEase` / `motionDurations` / `blinkMs` · constantes de proporção do logo
 (`RATIO_AVANCO_LOGO`, `RATIO_ALTURA_LOGO`, `RATIO_PADDING_LOGO`).
  
@@ -218,7 +218,7 @@ Depois, no projeto consumidor: `pnpm add github:Fiuza3/MF-ui#v2.x.x`.
 src/
 ├─ tokens/       cores, tipografia, globals.css, utilitarios.css
 ├─ primitivos/   componentes atômicos (Radix + CVA)
-├─ componentes/  marca e navegação (Logo, Navbar, Footer, Reveal)
+├─ componentes/  marca e navegação (Logo, Navbar, Footer, Reveal, NodeNetwork)
 ├─ blocos/       seções de site
 ├─ blocos-app/   blocos de painel interno
 ├─ lib/          cn(), motion

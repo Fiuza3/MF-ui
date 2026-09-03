@@ -79,6 +79,26 @@ type RevealProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLElement>, "className" | "children">;
 declare function Reveal({ as, variant, delayMs, margin, className, children, ...rest }: RevealProps): react_jsx_runtime.JSX.Element;
 
+type NodeNetworkProps = {
+    /** Quantidade de nós. Padrão: 52. */
+    count?: number;
+    /** Distância máxima (px) para ligar dois nós com uma linha. Padrão: 160. */
+    maxDistance?: number;
+    /** Velocidade dos nós. Padrão: 0.45. */
+    speed?: number;
+    /**
+     * Cor das linhas e nós. Por padrão lê o token `--cyan` em runtime,
+     * acompanhando tema claro/escuro automaticamente.
+     */
+    color?: string;
+    className?: string;
+};
+/**
+ * Fundo decorativo: rede de partículas conectadas (canvas).
+ * Lê `--cyan` em runtime e reage à troca de tema (.light/.dark no <html>).
+ */
+declare function NodeNetwork({ count, maxDistance, speed, color, className, }: NodeNetworkProps): react_jsx_runtime.JSX.Element;
+
 declare function cn(...inputs: ClassValue[]): string;
 
-export { Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn };
+export { Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, NodeNetwork, type NodeNetworkProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn };
