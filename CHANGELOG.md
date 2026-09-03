@@ -16,6 +16,8 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 
 ### Corrigido
 
+- **`Reveal` não chama mais `setState` dentro do efeito.** O corpo do efeito disparava uma renderização em cascata por instância; as classes agora entram e saem por `classList`, sincronizando o DOM com o `IntersectionObserver`. Comportamento preservado — o servidor continua renderizando sem a classe de escondido.
+- **Modal de case em `Projects`.** O container era um `div` sem papel com `onMouseDown`; o handler passou para o backdrop, que já é `aria-hidden`, e o `stopPropagation` do diálogo deixou de ser necessário. O glifo literal do botão de fechar virou o ícone `X` do `lucide-react`.
 - **Acessibilidade dos temas.** Nove pares de cor reprovavam na WCAG 2.1 AA. No tema claro, o texto dentro do botão primário estava em 2,86:1 (mínimo 4,5) e o anel de foco em 2,69:1 (mínimo 3,0). No tema escuro, `--destructive` sobre o fundo estava em 3,94:1 e `--input` em 1,32:1. Todos os 30 pares verificados passam agora.
 
 ## [2.7.0] — 2026-09-03
