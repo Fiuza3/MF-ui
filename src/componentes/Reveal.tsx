@@ -13,7 +13,11 @@ export type RevealProps = {
 
 /* O servidor renderiza SEM classe de escondido — se o JS nunca rodar,
    o conteudo continua visivel. Esconder e responsabilidade exclusiva
-   do efeito pos-mount. */
+   do efeito pos-mount.
+
+   As classes entram e saem por classList, nao por estado: o efeito aqui
+   sincroniza o DOM com um observer externo, e um setState no corpo do
+   efeito custaria uma renderizacao em cascata a cada Reveal da pagina. */
 export function Reveal({
   as = "div",
   variant = "up",
@@ -24,7 +28,7 @@ export function Reveal({
   ...rest
 }: RevealProps) {
   const ref = React.useRef<HTMLElement | null>(null);
-  const [state, setState] = React.useState<"ssr" | "hidden" | "visible">("ssr");
+  const escondido = variant === "left" ? "mf-reveal-hidden-left" : "mf-reveal-hidden";
 
   React.useEffect(() => {
     const el = ref.current;
@@ -32,30 +36,35 @@ export function Reveal({
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || typeof window.IntersectionObserver === "undefined") return;
 
-    setState("hidden");
+    el.classList.add(escondido);
+
     const observer = new window.IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          setState("visible");
+          el.classList.remove(escondido);
+          el.classList.add("mf-reveal-visible");
           observer.disconnect();
         }
       },
-      { rootMargin: margin }
+      { rootMargin: margin },
     );
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [margin]);
+
+    return () => {
+      observer.disconnect();
+      el.classList.remove(escondido, "mf-reveal-visible");
+    };
+  }, [margin, escondido]);
 
   const Tag = as as React.ElementType;
-  const escondido = variant === "left" ? "mf-reveal-hidden-left" : "mf-reveal-hidden";
-  const revealClass =
-    state === "hidden" ? escondido : state === "visible" ? "mf-reveal-visible" : "";
 
   return (
     <Tag
       ref={ref}
-      className={[className, revealClass].filter(Boolean).join(" ")}
-      style={delayMs ? ({ "--mf-entrada-delay": `${delayMs}ms` } as React.CSSProperties) : undefined}
+      className={className}
+      style={
+        delayMs ? ({ "--mf-entrada-delay": `${delayMs}ms` } as React.CSSProperties) : undefined
+      }
       {...rest}
     >
       {children}
