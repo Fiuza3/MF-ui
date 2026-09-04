@@ -227,7 +227,7 @@ function Services({ eyebrow, title, description, services }) {
       children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-16", children: [
         /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(Reveal, { margin: "-60px", className: "mb-8 lg:mb-10", children: [
           /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: services.map((service, i) => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ServiceCard, { service, index: i }, service.id)) })
@@ -398,7 +398,7 @@ function Projects({ eyebrow, title, description, projects }) {
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(Reveal, { margin: "-80px", className: "mb-8 lg:mb-10", children: [
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { className: "text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
         ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "project-carousel relative overflow-hidden", children: [
@@ -504,7 +504,7 @@ function Process({ eyebrow, title, description, steps }) {
       children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
         /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(Reveal, { margin: "-80px", className: "mb-8 lg:mb-10", children: [
           /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
           /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5", children: steps.map((step, index) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(PipelineCard, { step, index }, step.numero)) })
@@ -536,7 +536,7 @@ function Stack({ eyebrow, title, description, grupos }) {
       children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
         /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(Reveal, { margin: "-80px", className: "mb-10 lg:mb-12", children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h2", { className: "text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "grid gap-6 lg:grid-cols-[1fr_1.15fr] xl:grid-cols-[0.95fr_1.25fr]", children: [
@@ -778,7 +778,7 @@ function About({ eyebrow, title, paragrafos, slotLateral }) {
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.86fr)] lg:items-start 2xl:grid-cols-[minmax(0,1.7fr)_minmax(460px,0.8fr)]", children: [
       /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(Reveal, { as: "div", margin: "-80px", children: [
         /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mb-5 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: eyebrow }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h2", { className: "text-[length:var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground", children: title }),
         /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "mt-10 grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]", children: paragrafos.map((paragrafo, index) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
           Reveal,
           {
@@ -819,7 +819,7 @@ function Contact({ eyebrow, title, description, cta, email, slotFormulario }) {
         /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: [
           /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(Reveal, { as: "div", margin: "-80px", className: "mb-10 lg:mb-12", children: [
             /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { lang: "en", children: eyebrow }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h2", { className: "text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h2", { className: "text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground", children: title }),
             /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "mt-4 max-w-3xl text-base leading-relaxed text-gray-text", children: description })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "grid gap-10 lg:grid-cols-[0.72fr_1.55fr] lg:items-start 2xl:grid-cols-[0.58fr_1.7fr]", children: [

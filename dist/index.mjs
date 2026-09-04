@@ -1,17 +1,6 @@
 'use client'
 
 import {
-  About,
-  Contact,
-  Hero,
-  Process,
-  Projects,
-  Reveal,
-  Services,
-  Stack,
-  Testimonials
-} from "./chunk-7WG3BK7Z.mjs";
-import {
   AppShell,
   CopyField,
   DataTable,
@@ -20,15 +9,6 @@ import {
   PageHeader,
   StatCard
 } from "./chunk-Y7TXQSF4.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-3YMTV7XD.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -132,6 +112,26 @@ import {
   TableRow,
   buttonVariants
 } from "./chunk-W74KDTUE.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-3YMTV7XD.mjs";
+import {
+  About,
+  Contact,
+  Hero,
+  Process,
+  Projects,
+  Reveal,
+  Services,
+  Stack,
+  Testimonials
+} from "./chunk-LUZW5OOZ.mjs";
 import {
   cn
 } from "./chunk-TE62FXIV.mjs";
