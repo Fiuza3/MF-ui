@@ -237,7 +237,7 @@ export function Projects({ eyebrow, title, description, projects }: ProjectsProp
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <Reveal margin="-80px" className="mb-8 lg:mb-10">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
-          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+          <h2 className="text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
             {title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>

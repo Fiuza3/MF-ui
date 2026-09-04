@@ -4,6 +4,16 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [3.0.1] — 2026-09-04
+
+### Corrigido
+
+- **O título de seção de seis blocos renderizava no tamanho do corpo.** `About`, `Contact`, `Process`, `Projects`, `Services` e `Stack` escreviam `text-[var(--text-h2)]`. Para o Tailwind, `text-` serve para cor e para tamanho: diante de um `var()` ele decide por cor e gera `color: var(--text-h2)` — declaração inválida, nenhum `font-size`, e o `<h2>` herda 16px. Em todo consumidor, em todas as páginas. Agora é `text-[length:var(--text-h2)]`.
+
+### Adicionado
+
+- `classes-tailwind.test.ts`: falha o build se um token de tipografia, espaçamento ou line-height entrar como `text-[var(--token)]` sem o prefixo `length:`.
+
 ## [3.0.0] — 2026-09-03
 
 Esta versão elimina as fontes de verdade duplicadas do sistema. `globals.css` passa a ser o único lugar onde um valor de token existe; o TypeScript exporta referências.

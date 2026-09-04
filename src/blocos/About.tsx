@@ -22,7 +22,7 @@ export function About({ eyebrow, title, paragrafos, slotLateral }: AboutProps) {
               {eyebrow}
             </p>
 
-            <h2 className="text-[var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground">
+            <h2 className="text-[length:var(--text-h2)] font-black leading-[0.94] tracking-tight text-foreground">
               {title}
             </h2>
 

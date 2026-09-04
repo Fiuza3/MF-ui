@@ -26,7 +26,7 @@ export function Contact({ eyebrow, title, description, cta, email, slotFormulari
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
             <span lang="en">{eyebrow}</span>
           </p>
-          <h2 className="text-[var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+          <h2 className="text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
             {title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
