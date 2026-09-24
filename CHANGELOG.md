@@ -4,6 +4,15 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [3.0.2] — 2026-09-24
+
+Só empacotamento — nenhuma mudança de API ou de `dist/`.
+
+### Alterado
+
+- **Publicado no GitHub Packages como `@fiuza3/mf-ui`.** A instalação via `github:Fiuza3/MF-ui` deixa de ser o caminho suportado: a Vercel não clona repositório privado por SSH e o install dos consumidores travava. O import continua `@mf/ui` com alias npm (`"@mf/ui": "npm:@fiuza3/mf-ui@3.0.2"`). Instalação e token em [README](README.md#instalação).
+- Publicação automática pelo workflow `Publish` a cada tag `v*`, com checagem de que a tag bate com a versão e `prepublishOnly` rodando typecheck, testes e build.
+
 ## [3.0.1] — 2026-09-04
 
 ### Corrigido
