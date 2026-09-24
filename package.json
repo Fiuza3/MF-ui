@@ -1,13 +1,15 @@
 {
-  "name": "@mf/ui",
+  "name": "@fiuza3/mf-ui",
   "version": "2.7.0",
   "description": "Design system compartilhado da MF Desenvolvimento",
   "author": "Marcus Fiuza <devfiuza@gmail.com>",
   "license": "UNLICENSED",
-  "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fiuza3/mf-ui.git"
+    "url": "git+https://github.com/Fiuza3/MF-ui.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -51,7 +53,8 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepublishOnly": "pnpm test && pnpm build"
   },
   "peerDependencies": {
     "@radix-ui/react-accordion": ">=1.2",
