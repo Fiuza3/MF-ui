@@ -50,11 +50,28 @@ O pacote entrega três camadas:
 
 ## Instalação
 
-```bash
-pnpm add github:Fiuza3/MF-ui#v3.0.0
-```
+O pacote é publicado como `@fiuza3/mf-ui` no GitHub Packages (registry privado). O nome de
+import continua `@mf/ui` via alias npm.
 
-> Sempre fixe uma **tag**. `#master` funciona, mas quebra builds sem aviso.
+1. Crie um **classic PAT** com escopo **`read:packages`** apenas (o fine-grained ainda não
+   funciona com o registry npm do GitHub Packages).
+2. Exponha o token como variável de ambiente `NPM_TOKEN` — no Windows, variável de usuário; na
+   Vercel/CI, variável do projeto marcada como sensível. Nunca em arquivo versionado.
+3. No projeto consumidor, crie o `.npmrc`:
+
+   ```ini
+   @fiuza3:registry=https://npm.pkg.github.com
+   //npm.pkg.github.com/:_authToken=${NPM_TOKEN}
+   ```
+
+4. Instale fixando a versão exata:
+
+   ```bash
+   pnpm add @mf/ui@npm:@fiuza3/mf-ui@3.0.2
+   ```
+
+> Sempre fixe versão **exata**. A dist-tag `latest` acompanha a 3.x; a linha 2.x é publicada
+> sob a dist-tag `release-2x`.
 
 ### Peer dependencies
 
@@ -234,20 +251,12 @@ inteiro, e o teste de contraste avisa na hora se a mudança quebrar acessibilida
 
 **Editando o DS enquanto vê num projeto:** use link local — no projeto consumidor,
 `pnpm link ../mf-ui`.
-**Em produção / outros projetos:** use a dep `github:` apontando para uma tag.
+**Em produção / outros projetos:** instale do registry com versão exata (ver [Instalação](#instalação)).
 
 ### Publicando uma versão
 
-`dist/` é versionado, então o release é um commit + uma tag:
-
-```bash
-pnpm build && pnpm test
-# bump da versão em package.json
-git add dist package.json && git commit -m "chore(release): vX.Y.Z"
-git tag vX.Y.Z && git push origin master vX.Y.Z
-```
-
-Depois, no projeto consumidor: `pnpm add github:Fiuza3/MF-ui#vX.Y.Z`.
+Bump → tag → o workflow `Publish` publica no GitHub Packages. Passo a passo em
+[CONTRIBUTING.md](CONTRIBUTING.md#publicando-uma-versão).
 
 ### Estrutura
 
