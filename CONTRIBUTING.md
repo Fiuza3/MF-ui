@@ -56,16 +56,31 @@ fix(blocos): Hero perdia o slot quando stats vinha vazio
 
 ## Publicando uma versão
 
-`dist/` é versionado, então o release é commit + tag:
+O pacote vai para o GitHub Packages como `@fiuza3/mf-ui`. Quem publica é o workflow
+`.github/workflows/publish.yml`, disparado pela tag — ninguém roda `pnpm publish` na mão.
 
 ```bash
 pnpm lint && pnpm typecheck && pnpm test && pnpm build
 # bump da versão em package.json, fecha a seção no CHANGELOG
 git add dist package.json CHANGELOG.md
-git commit -m "chore(release): v2.x.x"
-git tag v2.x.x && git push origin master v2.x.x
+git commit -m "chore(release): vX.Y.Z"
+git push origin master          # via PR, com o CI verde
+git tag vX.Y.Z && git push origin vX.Y.Z
+```
+
+O workflow falha se a tag não bater com `package.json#version`, e o `prepublishOnly` roda
+typecheck, testes e build antes de enviar — um `dist/` quebrado não chega ao registry.
+Versão publicada não pode ser republicada: corrigir é lançar o patch seguinte.
+
+Confira a publicação:
+
+```bash
+npm view @fiuza3/mf-ui versions --registry=https://npm.pkg.github.com
 ```
 
 Depois, publique a release da tag no GitHub com as notas da seção correspondente do changelog.
+
+**Linha 2.x:** correções vão no branch `release/2.x`, que publica sob a dist-tag `release-2x` para não
+tirar a `latest` da 3.x.
 
 **SemVer vale de verdade aqui.** Remover ou renomear um export é `major`. Componente ou prop novos são `minor`. Correção que não muda API é `patch`.
