@@ -1,0 +1,61 @@
+# Publica @fiuza3/mf-ui no GitHub Packages a cada tag v*.
+#
+# Por que registry e não dependência git: a Vercel não tem chave SSH nem
+# acesso a repositório privado. O lockfile dos consumidores resolvia o pacote
+# como git@github.com:Fiuza3/MF-ui.git e o install travava — o deploy nunca
+# terminava. Pelo registry, o consumidor autentica com um token read:packages
+# em variável de ambiente e nenhuma credencial vai parar no lockfile.
+name: Publish
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publicar:
+    name: publicar no GitHub Packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: "@fiuza3"
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      # Disparo manual também passa por aqui: rodar o workflow a partir de um
+      # branch publicaria o que estiver no package.json, sem tag que o marque.
+      - name: Tag corresponde ao package.json
+        run: |
+          versao="$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_REF_NAME" != "v$versao" ]; then
+            echo "::error::Ref '$GITHUB_REF_NAME' diverge de package.json#version ($versao). Publique a partir da tag v$versao."
+            exit 1
+          fi
+
+      # Sem a dist-tag própria, um patch 2.x publicado depois da 3.x roubaria a
+      # `latest` e quem instalasse sem versão receberia a linha antiga.
+      - name: Publicar
+        run: pnpm publish --no-git-checks --tag release-2x
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
