@@ -13,13 +13,15 @@ export type LogoAnimadoProps = {
   className?: string;
 };
 
+const MARCA = "MF Desenvolvimento";
+
 export function LogoAnimado({
   tamanho = 24,
   cor = "var(--cyan)",
   opacidadeColchetes,
   compacto = false,
   onClick,
-  label = "MF Desenvolvimento",
+  label = MARCA,
   className,
 }: LogoAnimadoProps) {
   const cw = tamanho * RATIO_AVANCO_LOGO;
@@ -38,7 +40,7 @@ export function LogoAnimado({
       height={altura}
       style={{ width: "auto", overflow: "visible" }}
       xmlns="http://www.w3.org/2000/svg"
-      className={`transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`}
+      className={`transition-[filter] duration-300 ${onClick ? "group-hover/logo:[filter:drop-shadow(0_0_9px_var(--cyan-glow))]" : ""} ${className ?? ""}`}
     >
       <text
         className="mf-entrada mf-entrada-fade"
@@ -61,11 +63,10 @@ export function LogoAnimado({
     return (
       <button
         type="button"
-        aria-label={`${label} — MF Desenvolvimento`}
+        aria-label={label === MARCA ? MARCA : `${label} — ${MARCA}`}
         onClick={onClick}
-        className="group inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
+        className="group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
       >
-        <span className="sr-only">{label}</span>
         {svg}
       </button>
     );

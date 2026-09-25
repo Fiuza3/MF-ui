@@ -25,4 +25,19 @@ describe("LogoAnimado", () => {
     expect(texto?.getAttribute("opacity")).not.toBe("0");
     expect(/opacity:\s*0\s*(;|$)/.test(texto?.getAttribute("style") ?? "")).toBe(false);
   });
+
+  it("com o rótulo padrão não repete a marca no nome acessível", () => {
+    render(<LogoAnimado onClick={() => {}} />);
+
+    expect(screen.getByRole("button")).toHaveAccessibleName("MF Desenvolvimento");
+  });
+
+  // O brilho de hover sem onClick sugeria clique num elemento que não é interativo.
+  it("só brilha no hover quando é clicável", () => {
+    const { container, rerender } = render(<LogoAnimado />);
+    expect(container.innerHTML).not.toMatch(/hover:\[filter/);
+
+    rerender(<LogoAnimado onClick={() => {}} />);
+    expect(container.innerHTML).toMatch(/hover\/logo:\[filter/);
+  });
 });
