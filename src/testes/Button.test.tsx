@@ -19,7 +19,7 @@ describe("Button", () => {
   it.each<[ButtonVariant, string]>([
     ["default", "bg-primary"],
     ["outline", "border"],
-    ["ghost", "hover:bg-accent"],
+    ["ghost", "hover:bg-foreground/10"],
     ["destructive", "bg-destructive"],
     ["secondary", "bg-secondary"],
   ])("variante %s aplica classe correta", (variant, expectedClass) => {

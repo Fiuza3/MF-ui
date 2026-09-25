@@ -13,7 +13,7 @@ function OverlayClose({ className }: { className?: string }) {
       aria-label="Fechar"
       className={cn(
         "text-muted-foreground absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-md transition-colors outline-none",
-        "hover:bg-accent hover:text-accent-foreground",
+        "hover:bg-foreground/10 hover:text-foreground",
         "focus-visible:ring-ring/50 focus-visible:ring-[3px]",
         "disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         className,

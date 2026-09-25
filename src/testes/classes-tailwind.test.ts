@@ -60,3 +60,26 @@ describe("classes do Tailwind", () => {
     expect(infratores, "Use o par *-foreground do token de fundo").toEqual([]);
   });
 });
+
+// Aqui --accent é a cor da marca ("destaque" em cores.ts), não o cinza de hover
+// do shadcn de onde os primitivos vieram. hover/focus em accent pintava item de
+// menu, ghost e paginação de ciano/laranja cheio — com ícone a 1,1:1 e página em
+// hover idêntica à página atual.
+describe("estado interativo", () => {
+  it("hover e foco de item não usam o accent da marca como fundo", () => {
+    const infratores: string[] = [];
+
+    for (const caminho of arquivos()) {
+      if (caminho.includes(".stories.") || /[\\/](testes|__tests__)[\\/]/.test(caminho)) continue;
+      readFileSync(caminho, "utf8")
+        .split("\n")
+        .forEach((linha, i) => {
+          if (/(?:hover|focus|data-\[state=open\]):bg-accent(?![\w-])/.test(linha)) {
+            infratores.push(`${caminho.replace(raiz, "src")}:${i + 1}`);
+          }
+        });
+    }
+
+    expect(infratores, "Use hover:bg-foreground/10 hover:text-foreground").toEqual([]);
+  });
+});

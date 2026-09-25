@@ -43,7 +43,7 @@ function PaginationLink({ className, isActive, ...props }: PaginationLinkProps) 
       data-active={isActive}
       className={cn(
         "inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm font-medium tabular-nums transition-colors",
-        "hover:bg-accent hover:text-accent-foreground",
+        "hover:bg-foreground/10 hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         "disabled:pointer-events-none disabled:opacity-50",
         isActive && "bg-primary text-primary-foreground hover:bg-primary/90",

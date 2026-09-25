@@ -86,7 +86,7 @@ function ToastAction({ className, ...props }: React.ComponentProps<typeof ToastP
     <ToastPrimitive.Action
       data-slot="toast-action"
       className={cn(
-        "shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-foreground/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         className,
       )}
       {...props}
