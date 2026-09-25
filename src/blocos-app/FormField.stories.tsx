@@ -9,7 +9,7 @@ const meta = {
     label: "Telefone",
     htmlFor: "telefone",
     error: "",
-    children: <Input id="telefone" placeholder="(11) 99999-0000" />,
+    children: <Input placeholder="(11) 99999-0000" />,
   },
   argTypes: { children: { control: false } },
   decorators: [
@@ -28,6 +28,6 @@ export const Playground: Story = {};
 export const ComErro: Story = {
   args: {
     error: "Informe um telefone com DDD.",
-    children: <Input id="telefone" defaultValue="9999" aria-invalid />,
+    children: <Input defaultValue="9999" />,
   },
 };

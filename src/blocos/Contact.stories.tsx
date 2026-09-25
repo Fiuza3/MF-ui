@@ -32,11 +32,11 @@ export const ComFormulario: Story = {
   args: {
     slotFormulario: (
       <form className="grid gap-4" onSubmit={(e) => e.preventDefault()}>
-        <FormField label="Nome" htmlFor="contato-nome">
-          <Input id="contato-nome" />
+        <FormField label="Nome">
+          <Input />
         </FormField>
-        <FormField label="Mensagem" htmlFor="contato-msg">
-          <Textarea id="contato-msg" />
+        <FormField label="Mensagem">
+          <Textarea />
         </FormField>
         <Button type="submit">enviar</Button>
       </form>
