@@ -46,4 +46,20 @@ describe("Table", () => {
     );
     expect(container.querySelector("table")).toBeTruthy();
   });
+
+  // Com o wrapper já rolando na horizontal, quebrar célula só piora: "R$" numa
+  // linha e "1.200,00" na outra, inclusive no total.
+  it("célula não quebra linha; a tabela rola dentro do wrapper", () => {
+    render(
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell>R$ 1.200,00</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>,
+    );
+
+    expect(screen.getByRole("cell").className.split(/\s+/)).toContain("whitespace-nowrap");
+  });
 });

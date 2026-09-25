@@ -64,6 +64,12 @@ describe("CSS entregue pelo pacote", () => {
     expect(body).toMatch(/font-family:\s*var\(--font-sans\)/);
   });
 
+  // Tailwind v4 tirou o cursor: pointer de <button>; sem a base, Button, Checkbox,
+  // Tabs e Accordion ficavam com seta enquanto só o Switch mostrava a mãozinha.
+  it("controle clicável mostra cursor de mão, desabilitado não", () => {
+    expect(css).toMatch(/button:not\(:disabled\)[^{]*\{[^}]*cursor:\s*pointer/);
+  });
+
   // O tema é a classe no <html>; sem @custom-variant o Tailwind v4 liga `dark:`
   // ao prefers-color-scheme, e o tema claro herda ajustes do escuro quando o SO
   // do visitante está em modo escuro.

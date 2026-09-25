@@ -69,7 +69,9 @@ describe("Dialog e Sheet", () => {
     render(<DialogAberto />);
     const dialog = screen.getByRole("dialog");
 
-    expect(dialog.className).toMatch(/\[&_\[data-slot=dialog-header\]\]:pr-/);
+    // Simétrico no celular, onde o cabeçalho é centralizado; só à direita a partir de sm.
+    expect(dialog.className).toMatch(/(^|\s)\[&_\[data-slot=dialog-header\]\]:px-/);
+    expect(dialog.className).toMatch(/sm:\[&_\[data-slot=dialog-header\]\]:pl-0/);
   });
 });
 
@@ -93,6 +95,20 @@ describe("Toast", () => {
 
     expect(classes(fechar)).not.toContain("opacity-0");
     expect(classes(fechar)).toContain("pointer-fine:opacity-0");
+  });
+
+  // Sem âncora horizontal abaixo de sm, o viewport ficava na posição estática do pai
+  // e o toast saía da tela pela direita no celular.
+  it("o viewport fica ancorado nas duas bordas no celular", async () => {
+    render(
+      <ToastComponentProvider>
+        <DispararToast variant="default" />
+      </ToastComponentProvider>,
+    );
+    await screen.findByRole("button", { name: "Fechar" });
+    const viewport = document.querySelector("[data-slot=toast-viewport]");
+
+    expect(viewport?.className.split(/\s+/)).toContain("inset-x-0");
   });
 
   it("no destrutivo, descrição e fechar herdam a cor do par destrutivo", async () => {
