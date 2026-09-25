@@ -248,6 +248,16 @@ inteiro, e o teste de contraste avisa na hora se a mudança quebrar acessibilida
 | `pnpm dev`        | build em watch                        |
 | `pnpm test`       | roda a suíte Vitest                   |
 | `pnpm test:watch` | Vitest em watch                       |
+| `pnpm storybook`  | vitrine local em `localhost:6006`     |
+
+### Storybook
+
+Cada componente tem um `*.stories.tsx` ao lado do fonte. As stories ficam fora do pacote
+publicado e do tsconfig de build, e são checadas pelo `tsconfig.storybook.json`. O tema
+escuro/claro troca pela toolbar.
+
+A vitrine é publicada na Vercel a partir da `master` (config em [vercel.json](vercel.json)).
+Componente novo precisa de story no mesmo PR.
 
 **Editando o DS enquanto vê num projeto:** use link local — no projeto consumidor,
 `pnpm link ../mf-ui`.
