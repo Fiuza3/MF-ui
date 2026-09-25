@@ -12,23 +12,28 @@ const meta = {
     icon: <MessageSquare />,
   },
   argTypes: { icon: { control: false } },
-  decorators: [
-    (Story) => (
-      <div className="w-72">
-        <Story />
-      </div>
-    ),
-  ],
 } satisfies Meta<typeof StatCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {};
+const cartaoUnico: NonNullable<Story["decorators"]> = [
+  (Story) => (
+    <div className="w-72">
+      <Story />
+    </div>
+  ),
+];
+
+export const Playground: Story = { decorators: cartaoUnico };
 export const Queda: Story = {
+  decorators: cartaoUnico,
   args: { label: "Taxa de entrega", value: "91%", delta: { value: "-3pp", direction: "down" } },
 };
-export const SemVariacao: Story = { args: { delta: undefined, icon: undefined } };
+export const SemVariacao: Story = {
+  decorators: cartaoUnico,
+  args: { delta: undefined, icon: undefined },
+};
 
 export const Grade: Story = {
   decorators: [
