@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Reveal } from "../componentes/Reveal";
+import { propsDeLink } from "../lib/link-externo";
 
 export type ContactProps = {
   eyebrow: string;
@@ -36,8 +37,7 @@ export function Contact({ eyebrow, title, description, cta, email, slotFormulari
           <Reveal as="div" margin="-80px" className="grid gap-4">
             <a
               href={cta.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...propsDeLink(cta.href)}
               className="group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan">

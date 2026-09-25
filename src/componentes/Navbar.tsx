@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { propsDeLink } from "../lib/link-externo";
 import { LogoAnimado } from "./LogoAnimado";
 
 export type NavLink = {
@@ -75,8 +76,7 @@ export function Navbar({
             {ctaHref && (
               <a
                 href={ctaHref}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...propsDeLink(ctaHref)}
                 className="ml-2 rounded border border-[var(--cyan)] px-4 py-1.5 font-mono text-sm text-[var(--cyan)] hover:bg-[var(--cyan)] hover:text-[var(--background)] transition-all duration-200"
               >
                 {ctaLabel}
@@ -120,8 +120,7 @@ export function Navbar({
             {ctaHref && (
               <a
                 href={ctaHref}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...propsDeLink(ctaHref)}
                 className="mt-4 rounded border border-[var(--cyan)] px-4 py-2 text-center font-mono text-sm text-[var(--cyan)] hover:bg-[var(--cyan)] hover:text-[var(--background)] transition-all"
               >
                 {ctaLabel}
