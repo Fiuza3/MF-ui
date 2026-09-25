@@ -58,6 +58,28 @@ describe("PaginationControl", () => {
     expect(screen.getByRole("button", { name: "3" })).not.toHaveAttribute("aria-current");
   });
 
+  // jsdom nao faz layout: o que da para travar e o contrato que causou o bug —
+  // largura fixa fazia "Anterior" e paginas de 3 digitos vazarem sobre os vizinhos.
+  it("nenhum botao tem largura fixa, so largura minima", () => {
+    render(<PaginationControl page={100} totalPages={120} onPageChange={() => {}} />);
+
+    for (const botao of screen.getAllByRole("button")) {
+      expect(botao.className).not.toMatch(/(^|\s)(size|w)-9(\s|$)/);
+      expect(botao.className).toMatch(/(^|\s)min-w-9(\s|$)/);
+    }
+  });
+
+  it("no mobile so a janela ao redor da atual fica visivel, para caber em 320px", () => {
+    render(<PaginationControl page={5} totalPages={10} onPageChange={() => {}} />);
+
+    const itens = screen.getAllByRole("listitem");
+    const escondidosNoMobile = itens
+      .filter((li) => li.className.split(" ").includes("hidden"))
+      .map((li) => li.textContent?.trim());
+
+    expect(escondidosNoMobile).toEqual(["1", "Mais páginas", "Mais páginas", "10"]);
+  });
+
   it("emite a pagina escolhida no clique", async () => {
     const user = userEvent.setup();
     const onPageChange = vi.fn();

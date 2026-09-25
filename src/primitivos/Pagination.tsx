@@ -42,7 +42,7 @@ function PaginationLink({ className, isActive, ...props }: PaginationLinkProps) 
       data-slot="pagination-link"
       data-active={isActive}
       className={cn(
-        "inline-flex size-9 items-center justify-center rounded-md text-sm font-medium transition-colors",
+        "inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm font-medium tabular-nums transition-colors",
         "hover:bg-accent hover:text-accent-foreground",
         "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         "disabled:pointer-events-none disabled:opacity-50",
@@ -85,7 +85,7 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span"
     <span
       aria-hidden="true"
       data-slot="pagination-ellipsis"
-      className={cn("flex size-9 items-center justify-center", className)}
+      className={cn("flex h-9 min-w-9 items-center justify-center", className)}
       {...props}
     >
       <MoreHorizontalIcon className="size-4" />
@@ -120,6 +120,10 @@ export type PaginationControlProps = {
   className?: string;
 };
 
+// Abaixo de sm, 7 páginas + setas somam ~360px e estouram um celular de 375px;
+// só a janela atual±1 fica, o que cabe até em 320px.
+const SO_A_PARTIR_DE_SM = "hidden sm:block";
+
 /** Paginação completa e controlada — usada diretamente ou via DataTable. */
 function PaginationControl({ page, totalPages, onPageChange, className }: PaginationControlProps) {
   if (totalPages <= 1) return null;
@@ -135,11 +139,14 @@ function PaginationControl({ page, totalPages, onPageChange, className }: Pagina
 
         {paginasVisiveis.map((p, index) =>
           p === "ellipsis" ? (
-            <PaginationItem key={`ellipsis-${index}`}>
+            <PaginationItem key={`ellipsis-${index}`} className={SO_A_PARTIR_DE_SM}>
               <PaginationEllipsis />
             </PaginationItem>
           ) : (
-            <PaginationItem key={p}>
+            <PaginationItem
+              key={p}
+              className={Math.abs(p - page) > 1 ? SO_A_PARTIR_DE_SM : undefined}
+            >
               <PaginationLink isActive={p === page} onClick={() => onPageChange(p)}>
                 {p}
               </PaginationLink>
