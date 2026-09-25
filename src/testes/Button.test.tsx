@@ -26,4 +26,34 @@ describe("Button", () => {
     render(<Button variant={variant}>x</Button>);
     expect(screen.getByRole("button").className).toContain(expectedClass);
   });
+
+  it("loading desabilita, sinaliza aria-busy e mostra o spinner acessível", () => {
+    render(<Button loading>Salvar</Button>);
+    const botao = screen.getByRole("button", { name: /Salvar/ });
+
+    expect(botao).toBeDisabled();
+    expect(botao).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByRole("status", { name: "Carregando" })).toBeInTheDocument();
+  });
+
+  it("sem loading não tem spinner nem aria-busy", () => {
+    render(<Button>Salvar</Button>);
+
+    expect(screen.getByRole("button")).not.toHaveAttribute("aria-busy");
+    expect(screen.queryByRole("status")).toBeNull();
+  });
+
+  // asChild entrega um único filho ao Slot: não dá para injetar o spinner sem
+  // quebrar o link. O estado vai por aria, e o clique é bloqueado.
+  it("loading com asChild sinaliza sem injetar filho", () => {
+    render(
+      <Button asChild loading>
+        <a href="#x">Ir</a>
+      </Button>,
+    );
+    const link = screen.getByRole("link", { name: "Ir" });
+
+    expect(link).toHaveAttribute("aria-busy", "true");
+    expect(link).toHaveAttribute("aria-disabled", "true");
+  });
 });
