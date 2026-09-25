@@ -30,7 +30,8 @@ function PipelineCard({ step, index }: { step: ProcessStep; index: number }) {
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background: "radial-gradient(circle at 0% 0%, rgba(61,242,224,0.07), transparent 52%)",
+          background:
+            "radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--cyan) 7%, transparent), transparent 52%)",
         }}
         aria-hidden="true"
       />
@@ -86,7 +87,7 @@ export function Process({ eyebrow, title, description, steps }: ProcessProps) {
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </Reveal>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(14rem,1fr))]">
           {steps.map((step, index) => (
             <PipelineCard key={step.numero} step={step} index={index} />
           ))}

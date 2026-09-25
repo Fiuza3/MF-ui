@@ -38,6 +38,24 @@ const ARQUIVOS = arquivosDeCodigo(RAIZ).filter(
 );
 
 describe("globals.css e a unica fonte de valor", () => {
+  // rgba(61,242,224,…) é o ciano do escuro congelado: no tema claro o brilho de
+  // hover de Services/Process virava verde-água sobre creme.
+  it("nenhum rgb()/rgba() literal fora de globals.css", () => {
+    const infratores: string[] = [];
+
+    for (const caminho of ARQUIVOS) {
+      readFileSync(caminho, "utf8")
+        .split("\n")
+        .forEach((linha, i) => {
+          if (/\brgba?\(\s*\d/.test(linha)) {
+            infratores.push(`${relative(process.cwd(), caminho)}:${i + 1}`);
+          }
+        });
+    }
+
+    expect(infratores, "Use color-mix(in srgb, var(--token) N%, transparent)").toEqual([]);
+  });
+
   it("nenhum hexadecimal de cor fora de globals.css", () => {
     const infratores: string[] = [];
 

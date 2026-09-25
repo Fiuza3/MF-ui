@@ -30,7 +30,8 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background: "radial-gradient(circle at 24% 0%, rgba(61,242,224,0.08), transparent 46%)",
+          background:
+            "radial-gradient(circle at 24% 0%, color-mix(in srgb, var(--cyan) 8%, transparent), transparent 46%)",
         }}
         aria-hidden="true"
       />

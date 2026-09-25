@@ -40,7 +40,7 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
         </Reveal>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr] xl:grid-cols-[0.95fr_1.25fr]">
-          <div className="grid gap-3">
+          <div className="grid content-start gap-3">
             {grupos.map((grupo, index) => {
               const selected = active.categoria === grupo.categoria;
               return (

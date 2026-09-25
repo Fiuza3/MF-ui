@@ -19,15 +19,7 @@ export type HeroProps = {
   slotLabel?: string;
 };
 
-export function Hero({
-  eyebrow,
-  title,
-  description,
-  cta,
-  stats,
-  slot,
-  slotLabel = "live process",
-}: HeroProps) {
+export function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" }: HeroProps) {
   return (
     <section
       id="hero"
@@ -75,9 +67,11 @@ export function Hero({
                 style={{ "--mf-entrada-delay": "560ms" } as React.CSSProperties}
                 className="mf-entrada mf-entrada-up"
               >
-                <div className="absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block">
-                  {slotLabel}
-                </div>
+                {slotLabel && (
+                  <div className="absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block">
+                    {slotLabel}
+                  </div>
+                )}
                 {slot}
               </div>
             </div>
@@ -86,7 +80,7 @@ export function Hero({
 
         <div
           style={{ "--mf-entrada-delay": "500ms" } as React.CSSProperties}
-          className="mf-entrada mf-entrada-up mt-16 grid grid-cols-2 gap-5 border-t border-line pt-6 sm:grid-cols-4 lg:mt-24"
+          className="mf-entrada mf-entrada-up mt-16 grid grid-cols-2 gap-5 border-t border-line pt-6 sm:grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] lg:mt-24"
         >
           {stats.map((stat) => (
             <div key={stat.label}>
