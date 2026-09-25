@@ -82,11 +82,14 @@ type FormFieldProps = {
     error?: React.ReactNode;
     children: React.ReactNode;
     className?: string;
+    /** Id do controle. Sem ele, o FormField gera um e aplica no filho. */
     htmlFor?: string;
 };
 /**
  * Envelope genérico de campo de formulário: label + slot de input + mensagem de erro.
- * O input em si (Input, Select, Textarea, ...) é passado via `children`.
+ * O input em si (Input, Textarea, SelectTrigger, ...) é passado via `children`, e recebe
+ * id, aria-invalid e aria-describedby direto — é no controle que o estilo de erro e o
+ * leitor de tela olham, não numa div em volta.
  */
 declare function FormField({ label, error, children, className, htmlFor }: FormFieldProps): react_jsx_runtime.JSX.Element;
 

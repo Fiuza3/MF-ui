@@ -17,7 +17,7 @@ type HeroProps = {
     slot?: React.ReactNode;
     slotLabel?: string;
 };
-declare function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel, }: HeroProps): react_jsx_runtime.JSX.Element;
+declare function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel }: HeroProps): react_jsx_runtime.JSX.Element;
 
 type ServiceItem = {
     id: string;
@@ -40,8 +40,8 @@ type ProjectItem = {
     description?: string;
     tags?: string[];
     mockup?: React.ReactNode;
+    /** Link do projeto no ar — vira "ver projeto" no card. */
     href?: string;
-    /** optional metadata shown in cards */
     ano?: number;
     categoria?: string;
     metrica?: string;

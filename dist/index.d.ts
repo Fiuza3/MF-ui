@@ -95,7 +95,7 @@ type NodeNetworkProps = {
 };
 /**
  * Fundo decorativo: rede de partículas conectadas (canvas).
- * Lê `--cyan` em runtime e reage à troca de tema (.light/.dark no <html>).
+ * Lê `--primary` em runtime e reage à troca de tema (.light/.dark no <html>).
  */
 declare function NodeNetwork({ count, maxDistance, speed, color, className, }: NodeNetworkProps): react_jsx_runtime.JSX.Element;
 

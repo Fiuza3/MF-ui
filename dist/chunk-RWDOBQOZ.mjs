@@ -7,6 +7,10 @@ import {
   Input,
   Label,
   PaginationControl,
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
   Skeleton,
   Table,
   TableBody,
@@ -14,12 +18,14 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "./chunk-W74KDTUE.mjs";
+} from "./chunk-QQFS2L2R.mjs";
 import {
   cn
-} from "./chunk-TE62FXIV.mjs";
+} from "./chunk-UYJYUDH4.mjs";
 
 // src/blocos-app/AppShell.tsx
+import * as React from "react";
+import { MenuIcon } from "lucide-react";
 import { jsx, jsxs } from "react/jsx-runtime";
 function AppShell({ sidebar, topbar, children, className }) {
   return /* @__PURE__ */ jsxs("div", { className: cn("bg-background text-foreground flex min-h-svh w-full", className), children: [
@@ -27,21 +33,46 @@ function AppShell({ sidebar, topbar, children, className }) {
       "aside",
       {
         "data-slot": "app-shell-sidebar",
-        className: "border-border bg-card hidden w-64 shrink-0 border-r lg:block",
+        className: "border-border bg-card sticky top-0 hidden h-svh w-64 shrink-0 overflow-y-auto border-r lg:block",
         children: sidebar
       }
     ),
     /* @__PURE__ */ jsxs("div", { className: "flex min-w-0 flex-1 flex-col", children: [
-      /* @__PURE__ */ jsx(
+      /* @__PURE__ */ jsxs(
         "header",
         {
           "data-slot": "app-shell-topbar",
-          className: "border-border bg-card/80 sticky top-0 z-40 border-b backdrop-blur",
-          children: topbar
+          className: "border-border bg-card/80 sticky top-0 z-40 flex h-14 items-center gap-2 border-b px-4 backdrop-blur lg:px-6",
+          children: [
+            /* @__PURE__ */ jsx(MenuMobile, { sidebar }),
+            /* @__PURE__ */ jsx("div", { className: "flex min-w-0 flex-1 items-center", children: topbar })
+          ]
         }
       ),
-      /* @__PURE__ */ jsx("main", { "data-slot": "app-shell-content", className: "flex-1 overflow-x-hidden", children })
+      /* @__PURE__ */ jsx("main", { "data-slot": "app-shell-content", className: "flex-1 overflow-x-clip", children })
     ] })
+  ] });
+}
+function MenuMobile({ sidebar }) {
+  const [aberto, setAberto] = React.useState(false);
+  function fecharAoNavegar(event) {
+    if (event.target instanceof Element && event.target.closest("a[href]")) setAberto(false);
+  }
+  return /* @__PURE__ */ jsxs(Sheet, { open: aberto, onOpenChange: setAberto, children: [
+    /* @__PURE__ */ jsx(SheetTrigger, { asChild: true, children: /* @__PURE__ */ jsx(Button, { variant: "ghost", size: "icon", "aria-label": "Abrir menu", className: "-ml-2 lg:hidden", children: /* @__PURE__ */ jsx(MenuIcon, {}) }) }),
+    /* @__PURE__ */ jsxs(
+      SheetContent,
+      {
+        side: "left",
+        "aria-describedby": void 0,
+        className: "bg-card w-64 gap-0 p-0",
+        onClickCapture: fecharAoNavegar,
+        children: [
+          /* @__PURE__ */ jsx(SheetTitle, { className: "sr-only", children: "Menu" }),
+          sidebar
+        ]
+      }
+    )
   ] });
 }
 
@@ -84,12 +115,12 @@ function DataTable({
   onPageChange,
   className
 }) {
-  const mostrarPaginacao = page !== void 0 && totalPages !== void 0 && onPageChange;
+  const mostrarPaginacao = !loading && page !== void 0 && totalPages !== void 0 && onPageChange;
   return /* @__PURE__ */ jsxs3("div", { "data-slot": "data-table", className: cn("flex flex-col gap-4", className), children: [
-    /* @__PURE__ */ jsxs3(Table, { children: [
+    /* @__PURE__ */ jsxs3(Table, { "aria-busy": loading || void 0, children: [
       /* @__PURE__ */ jsx3(TableHeader, { children: /* @__PURE__ */ jsx3(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ jsx3(TableHead, { className: coluna.className, children: coluna.header }, coluna.key)) }) }),
       /* @__PURE__ */ jsxs3(TableBody, { children: [
-        loading && Array.from({ length: loadingRowCount }, (_, index) => /* @__PURE__ */ jsx3(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ jsx3(TableCell, { children: /* @__PURE__ */ jsx3(Skeleton, { className: "h-4 w-full max-w-40" }) }, coluna.key)) }, `skeleton-${index}`)),
+        loading && Array.from({ length: loadingRowCount }, (_, index) => /* @__PURE__ */ jsx3(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ jsx3(TableCell, { className: coluna.className, children: /* @__PURE__ */ jsx3(Skeleton, { className: "h-4 w-full max-w-40" }) }, coluna.key)) }, `skeleton-${index}`)),
         !loading && rows.map((row, index) => /* @__PURE__ */ jsx3(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ jsx3(TableCell, { className: coluna.className, children: coluna.render(row) }, coluna.key)) }, getRowKey ? getRowKey(row, index) : index))
       ] })
     ] }),
@@ -99,11 +130,17 @@ function DataTable({
 }
 
 // src/blocos-app/StatCard.tsx
+import { ArrowDownRightIcon, ArrowUpRightIcon } from "lucide-react";
 import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
 var deltaCorPorDirecao = {
   up: "text-primary",
   down: "text-destructive",
   neutral: "text-muted-foreground"
+};
+var setaPorDirecao = {
+  up: /* @__PURE__ */ jsx4(ArrowUpRightIcon, { "aria-hidden": "true" }),
+  down: /* @__PURE__ */ jsx4(ArrowDownRightIcon, { "aria-hidden": "true" }),
+  neutral: null
 };
 function StatCard({ label, value, icon, delta, className }) {
   const direcao = delta?.direction ?? "neutral";
@@ -111,7 +148,20 @@ function StatCard({ label, value, icon, delta, className }) {
     /* @__PURE__ */ jsxs4("div", { className: "flex min-w-0 flex-col gap-1", children: [
       /* @__PURE__ */ jsx4("p", { className: "text-muted-foreground text-xs font-medium uppercase tracking-wide", children: label }),
       /* @__PURE__ */ jsx4("p", { className: "text-foreground text-2xl font-semibold tabular-nums", children: value }),
-      delta && /* @__PURE__ */ jsx4("p", { className: cn("text-xs font-medium", deltaCorPorDirecao[direcao]), children: delta.value })
+      delta && /* @__PURE__ */ jsxs4(
+        "p",
+        {
+          "data-direction": direcao,
+          className: cn(
+            "inline-flex items-center gap-0.5 text-xs font-medium [&_svg]:size-3.5 [&_svg]:shrink-0",
+            deltaCorPorDirecao[direcao]
+          ),
+          children: [
+            setaPorDirecao[direcao],
+            delta.value
+          ]
+        }
+      )
     ] }),
     icon && /* @__PURE__ */ jsx4(
       "div",
@@ -132,15 +182,22 @@ function PageHeader({ title, breadcrumb, actions, className }) {
     {
       "data-slot": "page-header",
       className: cn(
-        "flex flex-col gap-4 border-b border-border px-6 py-5 sm:flex-row sm:items-center sm:justify-between",
+        "flex flex-col gap-4 border-b border-border px-4 py-5 lg:px-6 sm:flex-row sm:items-center sm:justify-between",
         className
       ),
       children: [
         /* @__PURE__ */ jsxs5("div", { className: "flex min-w-0 flex-col gap-1.5", children: [
-          breadcrumb && breadcrumb.length > 0 && /* @__PURE__ */ jsx5("nav", { "aria-label": "Breadcrumb", children: /* @__PURE__ */ jsx5("ol", { className: "text-muted-foreground flex flex-wrap items-center gap-1.5 text-xs", children: breadcrumb.map((item, index) => {
+          breadcrumb && breadcrumb.length > 0 && /* @__PURE__ */ jsx5("nav", { "aria-label": "Trilha de navega\xE7\xE3o", children: /* @__PURE__ */ jsx5("ol", { className: "text-muted-foreground flex flex-wrap items-center gap-1.5 text-xs", children: breadcrumb.map((item, index) => {
             const isLast = index === breadcrumb.length - 1;
             return /* @__PURE__ */ jsxs5("li", { className: "flex items-center gap-1.5", children: [
-              item.href && !isLast ? /* @__PURE__ */ jsx5("a", { href: item.href, className: "hover:text-foreground transition-colors", children: item.label }) : /* @__PURE__ */ jsx5(
+              item.href && !isLast ? /* @__PURE__ */ jsx5(
+                "a",
+                {
+                  href: item.href,
+                  className: "hover:text-foreground focus-visible:ring-ring/50 inline-flex min-h-6 items-center rounded-sm transition-colors outline-none focus-visible:ring-[3px]",
+                  children: item.label
+                }
+              ) : /* @__PURE__ */ jsx5(
                 "span",
                 {
                   "aria-current": isLast ? "page" : void 0,
@@ -151,41 +208,69 @@ function PageHeader({ title, breadcrumb, actions, className }) {
               !isLast && /* @__PURE__ */ jsx5("span", { "aria-hidden": "true", children: "/" })
             ] }, index);
           }) }) }),
-          /* @__PURE__ */ jsx5("h1", { className: "text-foreground truncate text-xl font-semibold", children: title })
+          /* @__PURE__ */ jsx5("h1", { className: "text-foreground text-xl font-semibold text-balance sm:truncate", children: title })
         ] }),
-        actions && /* @__PURE__ */ jsx5("div", { "data-slot": "page-header-actions", className: "flex shrink-0 items-center gap-2", children: actions })
+        actions && /* @__PURE__ */ jsx5("div", { "data-slot": "page-header-actions", className: "flex shrink-0 flex-wrap items-center gap-2", children: actions })
       ]
     }
   );
 }
 
 // src/blocos-app/FormField.tsx
+import * as React2 from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { jsx as jsx6, jsxs as jsxs6 } from "react/jsx-runtime";
 function FormField({ label, error, children, className, htmlFor }) {
-  const errorId = htmlFor ? `${htmlFor}-error` : void 0;
+  const idGerado = React2.useId();
+  const controlId = htmlFor ?? idGerado;
+  const errorId = `${controlId}-error`;
+  const propsDoControle = {
+    id: controlId,
+    "aria-invalid": error ? true : void 0,
+    "aria-describedby": error ? errorId : void 0
+  };
   return /* @__PURE__ */ jsxs6("div", { "data-slot": "form-field", className: cn("flex flex-col gap-1.5", className), children: [
-    /* @__PURE__ */ jsx6(Label, { htmlFor, children: label }),
-    /* @__PURE__ */ jsx6("div", { "aria-invalid": Boolean(error), "aria-describedby": error ? errorId : void 0, children }),
+    /* @__PURE__ */ jsx6(Label, { htmlFor: controlId, children: label }),
+    React2.isValidElement(children) ? /* @__PURE__ */ jsx6(Slot, { ...propsDoControle, children }) : children,
     error && /* @__PURE__ */ jsx6("p", { id: errorId, role: "alert", className: "text-destructive text-xs font-medium", children: error })
   ] });
 }
 
 // src/blocos-app/CopyField.tsx
-import * as React from "react";
+import * as React3 from "react";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { jsx as jsx7, jsxs as jsxs7 } from "react/jsx-runtime";
-function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
-  const [copiado, setCopiado] = React.useState(false);
-  const inputId = React.useId();
-  async function copiarValor() {
-    await navigator.clipboard.writeText(value);
-    setCopiado(true);
-    window.setTimeout(() => setCopiado(false), feedbackDurationMs);
+var MENSAGEM = {
+  ocioso: "",
+  copiado: "Copiado",
+  falhou: "N\xE3o foi poss\xEDvel copiar. O valor est\xE1 selecionado: copie manualmente."
+};
+async function copiarTexto(texto) {
+  try {
+    await navigator.clipboard.writeText(texto);
+    return true;
+  } catch {
+    return false;
   }
+}
+function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
+  const [estado, setEstado] = React3.useState("ocioso");
+  const inputRef = React3.useRef(null);
+  const timerRef = React3.useRef(void 0);
+  const inputId = React3.useId();
+  React3.useEffect(() => () => window.clearTimeout(timerRef.current), []);
+  async function copiarValor() {
+    window.clearTimeout(timerRef.current);
+    const copiou = await copiarTexto(value);
+    if (!copiou) inputRef.current?.select();
+    setEstado(copiou ? "copiado" : "falhou");
+    timerRef.current = window.setTimeout(() => setEstado("ocioso"), feedbackDurationMs);
+  }
+  const copiado = estado === "copiado";
   return /* @__PURE__ */ jsxs7("div", { "data-slot": "copy-field", className: cn("flex flex-col gap-1.5", className), children: [
     label && /* @__PURE__ */ jsx7(Label, { htmlFor: inputId, children: label }),
     /* @__PURE__ */ jsxs7("div", { className: "flex items-center gap-2", children: [
-      /* @__PURE__ */ jsx7(Input, { id: inputId, readOnly: true, value, className: "font-mono" }),
+      /* @__PURE__ */ jsx7(Input, { ref: inputRef, id: inputId, readOnly: true, value, className: "font-mono" }),
       /* @__PURE__ */ jsx7(
         Button,
         {
@@ -197,7 +282,15 @@ function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
           children: copiado ? /* @__PURE__ */ jsx7(CheckIcon, { className: "text-primary" }) : /* @__PURE__ */ jsx7(CopyIcon, {})
         }
       )
-    ] })
+    ] }),
+    /* @__PURE__ */ jsx7(
+      "p",
+      {
+        role: "status",
+        className: estado === "falhou" ? "text-muted-foreground text-xs" : "sr-only",
+        children: MENSAGEM[estado]
+      }
+    )
   ] });
 }
 
@@ -210,4 +303,4 @@ export {
   FormField,
   CopyField
 };
-//# sourceMappingURL=chunk-Y7TXQSF4.mjs.map
+//# sourceMappingURL=chunk-RWDOBQOZ.mjs.map

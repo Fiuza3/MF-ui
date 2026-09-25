@@ -1,6 +1,18 @@
 'use client'
 
 import {
+  About,
+  Contact,
+  Hero,
+  Process,
+  Projects,
+  Reveal,
+  Services,
+  Stack,
+  Testimonials,
+  propsDeLink
+} from "./chunk-V2BFDAEY.mjs";
+import {
   AppShell,
   CopyField,
   DataTable,
@@ -8,7 +20,16 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-Y7TXQSF4.mjs";
+} from "./chunk-RWDOBQOZ.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-3YMTV7XD.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -16,16 +37,6 @@ import {
   AccordionTrigger,
   Badge,
   Checkbox,
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -52,14 +63,6 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
   Switch,
   Tabs,
   TabsContent,
@@ -81,7 +84,19 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-7CPPQH6B.mjs";
+} from "./chunk-5BZROXOJ.mjs";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger
+} from "./chunk-Y2JANCN3.mjs";
 import {
   Button,
   Card,
@@ -101,6 +116,14 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
   Skeleton,
   Table,
   TableBody,
@@ -111,30 +134,10 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-W74KDTUE.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-3YMTV7XD.mjs";
-import {
-  About,
-  Contact,
-  Hero,
-  Process,
-  Projects,
-  Reveal,
-  Services,
-  Stack,
-  Testimonials
-} from "./chunk-LUZW5OOZ.mjs";
+} from "./chunk-QQFS2L2R.mjs";
 import {
   cn
-} from "./chunk-TE62FXIV.mjs";
+} from "./chunk-UYJYUDH4.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -186,13 +189,14 @@ function Logo({
 
 // src/componentes/LogoAnimado.tsx
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
+var MARCA = "MF Desenvolvimento";
 function LogoAnimado({
   tamanho = 24,
   cor = "var(--cyan)",
   opacidadeColchetes,
   compacto = false,
   onClick,
-  label = "MF Desenvolvimento",
+  label = MARCA,
   className
 }) {
   const cw = tamanho * RATIO_AVANCO_LOGO;
@@ -209,7 +213,7 @@ function LogoAnimado({
       height: altura,
       style: { width: "auto", overflow: "visible" },
       xmlns: "http://www.w3.org/2000/svg",
-      className: `transition-[filter] duration-300 hover:[filter:drop-shadow(0_0_9px_var(--cyan-glow))] ${className ?? ""}`,
+      className: `transition-[filter] duration-300 ${onClick ? "group-hover/logo:[filter:drop-shadow(0_0_9px_var(--cyan-glow))]" : ""} ${className ?? ""}`,
       children: /* @__PURE__ */ jsxs2(
         "text",
         {
@@ -231,17 +235,14 @@ function LogoAnimado({
     }
   );
   if (onClick) {
-    return /* @__PURE__ */ jsxs2(
+    return /* @__PURE__ */ jsx2(
       "button",
       {
         type: "button",
-        "aria-label": `${label} \u2014 MF Desenvolvimento`,
+        "aria-label": label === MARCA ? MARCA : `${label} \u2014 ${MARCA}`,
         onClick,
-        className: "group inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
-        children: [
-          /* @__PURE__ */ jsx2("span", { className: "sr-only", children: label }),
-          svg
-        ]
+        className: "group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
+        children: svg
       }
     );
   }
@@ -249,8 +250,19 @@ function LogoAnimado({
 }
 
 // src/componentes/Navbar.tsx
-import { useEffect, useRef, useState } from "react";
-import { Fragment, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
+import { useEffect, useId, useRef, useState } from "react";
+
+// src/lib/comportamento-de-scroll.ts
+function comportamentoDeScroll() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+}
+
+// src/componentes/Navbar.tsx
+import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
+var FOCO = "focus-visible:ring-cyan/70 focus-visible:ring-2 focus-visible:outline-none";
+function propsDoLinkDeMenu(link) {
+  return link.externo ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
 function Navbar({
   links = [],
   ctaHref,
@@ -259,113 +271,151 @@ function Navbar({
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef(null);
   const hamburgerRef = useRef(null);
+  const menuId = useId();
+  useScrollado(setIsScrolled);
+  useFecharMenu({ aberto: menuOpen, setAberto: setMenuOpen, headerRef, hamburgerRef });
+  return /* @__PURE__ */ jsxs3(
+    "header",
+    {
+      ref: headerRef,
+      className: `fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled || menuOpen ? "border-line bg-background/90 border-b backdrop-blur-md" : "bg-transparent"}`,
+      children: [
+        /* @__PURE__ */ jsxs3("div", { className: "flex w-full items-center justify-between px-5 py-4 sm:px-8 lg:px-10", children: [
+          /* @__PURE__ */ jsx3(
+            LogoAnimado,
+            {
+              compacto: isScrolled,
+              onClick: onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: comportamentoDeScroll() })),
+              label: "Ir para o topo"
+            }
+          ),
+          /* @__PURE__ */ jsx3(NavDesktop, { links, ctaHref, ctaLabel }),
+          /* @__PURE__ */ jsx3(
+            Hamburguer,
+            {
+              ref: hamburgerRef,
+              aberto: menuOpen,
+              controla: menuId,
+              alternar: () => setMenuOpen(!menuOpen)
+            }
+          )
+        ] }),
+        menuOpen && /* @__PURE__ */ jsx3(
+          NavMobile,
+          {
+            id: menuId,
+            links,
+            ctaHref,
+            ctaLabel,
+            fechar: () => setMenuOpen(false)
+          }
+        )
+      ]
+    }
+  );
+}
+function useScrollado(setIsScrolled) {
   useEffect(() => {
     const handler = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
-  }, []);
+  }, [setIsScrolled]);
+}
+function useFecharMenu({ aberto, setAberto, headerRef, hamburgerRef }) {
   useEffect(() => {
+    if (!aberto) return;
+    const fechar = () => setAberto(false);
     const onKey = (e) => {
-      if (e.key === "Escape" && menuOpen) {
-        setMenuOpen(false);
-        hamburgerRef.current?.focus();
-      }
+      if (e.key !== "Escape") return;
+      fechar();
+      hamburgerRef.current?.focus();
+    };
+    const onPointer = (e) => {
+      if (e.target instanceof Node && !headerRef.current?.contains(e.target)) fechar();
     };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [menuOpen]);
-  const navClass = [
-    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-    isScrolled ? "border-b border-[var(--line)] bg-[var(--background)]/90 backdrop-blur-md" : "bg-transparent"
-  ].join(" ");
-  return /* @__PURE__ */ jsxs3(Fragment, { children: [
-    /* @__PURE__ */ jsx3("header", { className: navClass, children: /* @__PURE__ */ jsxs3("div", { className: "flex w-full items-center justify-between px-5 py-4 sm:px-8 lg:px-10", children: [
-      /* @__PURE__ */ jsx3(
-        LogoAnimado,
-        {
-          compacto: isScrolled,
-          onClick: onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: "smooth" })),
-          label: "Ir para o topo"
-        }
-      ),
-      /* @__PURE__ */ jsxs3("nav", { "aria-label": "Navega\xE7\xE3o principal", className: "hidden md:flex items-center gap-8", children: [
-        links.map((link) => /* @__PURE__ */ jsx3(
-          "a",
-          {
-            href: link.href,
-            target: link.externo ? "_blank" : void 0,
-            rel: link.externo ? "noopener noreferrer" : void 0,
-            className: "rounded px-1 py-0.5 text-sm text-[var(--gray-text)] hover:text-[var(--foreground)] transition-colors font-mono tracking-wide focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cyan)]/70",
-            children: link.label
-          },
-          link.href
-        )),
-        ctaHref && /* @__PURE__ */ jsx3(
-          "a",
-          {
-            href: ctaHref,
-            target: "_blank",
-            rel: "noopener noreferrer",
-            className: "ml-2 rounded border border-[var(--cyan)] px-4 py-1.5 font-mono text-sm text-[var(--cyan)] hover:bg-[var(--cyan)] hover:text-[var(--background)] transition-all duration-200",
-            children: ctaLabel
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxs3(
-        "button",
-        {
-          ref: hamburgerRef,
-          "aria-label": menuOpen ? "Fechar menu" : "Abrir menu",
-          "aria-expanded": menuOpen,
-          onClick: () => setMenuOpen(!menuOpen),
-          className: "flex flex-col gap-1.5 rounded p-2 md:hidden",
-          children: [
-            /* @__PURE__ */ jsx3(
-              "span",
-              {
-                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "translate-y-2 rotate-45" : ""}`
-              }
-            ),
-            /* @__PURE__ */ jsx3(
-              "span",
-              {
-                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "opacity-0" : ""}`
-              }
-            ),
-            /* @__PURE__ */ jsx3(
-              "span",
-              {
-                className: `block h-px w-6 bg-[var(--foreground)] transition-all ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`
-              }
-            )
-          ]
-        }
-      )
-    ] }) }),
-    menuOpen && /* @__PURE__ */ jsx3("div", { className: "mf-entrada mf-entrada-down fixed inset-x-0 top-[65px] z-40 border-b border-[var(--line)] bg-[var(--background)]/95 backdrop-blur-md md:hidden", children: /* @__PURE__ */ jsxs3("nav", { "aria-label": "Menu mobile", className: "flex flex-col gap-1 px-6 py-6", children: [
-      links.map((link) => /* @__PURE__ */ jsx3(
-        "a",
-        {
-          href: link.href,
-          onClick: () => setMenuOpen(false),
-          className: "rounded py-2 font-mono text-sm text-[var(--gray-text)] hover:text-[var(--foreground)] transition-colors",
-          children: link.label
-        },
-        link.href
-      )),
-      ctaHref && /* @__PURE__ */ jsx3(
-        "a",
-        {
-          href: ctaHref,
-          target: "_blank",
-          rel: "noopener noreferrer",
-          className: "mt-4 rounded border border-[var(--cyan)] px-4 py-2 text-center font-mono text-sm text-[var(--cyan)] hover:bg-[var(--cyan)] hover:text-[var(--background)] transition-all",
-          children: ctaLabel
-        }
-      )
-    ] }) })
+    document.addEventListener("pointerdown", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+    };
+  }, [aberto, setAberto, headerRef, hamburgerRef]);
+}
+function NavDesktop({ links, ctaHref, ctaLabel }) {
+  return /* @__PURE__ */ jsxs3("nav", { "aria-label": "Navega\xE7\xE3o principal", className: "hidden items-center gap-8 md:flex", children: [
+    links.map((link) => /* @__PURE__ */ jsx3(
+      "a",
+      {
+        href: link.href,
+        ...propsDoLinkDeMenu(link),
+        className: `text-gray-text hover:text-foreground rounded px-1 py-0.5 font-mono text-sm tracking-wide transition-colors ${FOCO}`,
+        children: link.label
+      },
+      link.href
+    )),
+    ctaHref && /* @__PURE__ */ jsx3(
+      "a",
+      {
+        href: ctaHref,
+        ...propsDeLink(ctaHref),
+        className: `border-cyan text-cyan hover:bg-cyan hover:text-background ml-2 rounded border px-4 py-1.5 font-mono text-sm transition-all duration-200 ${FOCO}`,
+        children: ctaLabel
+      }
+    )
   ] });
+}
+function NavMobile({
+  id,
+  links,
+  ctaHref,
+  ctaLabel,
+  fechar
+}) {
+  return /* @__PURE__ */ jsx3("div", { className: "mf-entrada mf-entrada-down border-line bg-background absolute inset-x-0 top-full border-b md:hidden", children: /* @__PURE__ */ jsxs3("nav", { id, "aria-label": "Menu mobile", className: "flex flex-col gap-1 px-6 py-6", children: [
+    links.map((link) => /* @__PURE__ */ jsx3(
+      "a",
+      {
+        href: link.href,
+        ...propsDoLinkDeMenu(link),
+        onClick: fechar,
+        className: `text-gray-text hover:text-foreground rounded py-2 font-mono text-sm transition-colors ${FOCO}`,
+        children: link.label
+      },
+      link.href
+    )),
+    ctaHref && /* @__PURE__ */ jsx3(
+      "a",
+      {
+        href: ctaHref,
+        ...propsDeLink(ctaHref),
+        onClick: fechar,
+        className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
+        children: ctaLabel
+      }
+    )
+  ] }) });
+}
+function Hamburguer({ ref, aberto, controla, alternar }) {
+  const barra = "bg-foreground block h-px w-6 transition-all";
+  return /* @__PURE__ */ jsxs3(
+    "button",
+    {
+      ref,
+      type: "button",
+      "aria-label": aberto ? "Fechar menu" : "Abrir menu",
+      "aria-expanded": aberto,
+      "aria-controls": controla,
+      onClick: alternar,
+      className: `flex flex-col gap-1.5 rounded p-2 md:hidden ${FOCO}`,
+      children: [
+        /* @__PURE__ */ jsx3("span", { className: `${barra} ${aberto ? "translate-y-[7px] rotate-45" : ""}` }),
+        /* @__PURE__ */ jsx3("span", { className: `${barra} ${aberto ? "opacity-0" : ""}` }),
+        /* @__PURE__ */ jsx3("span", { className: `${barra} ${aberto ? "-translate-y-[7px] -rotate-45" : ""}` })
+      ]
+    }
+  );
 }
 
 // src/componentes/Footer.tsx
@@ -382,17 +432,17 @@ function Footer({
   return /* @__PURE__ */ jsxs4(
     "footer",
     {
-      className: "relative overflow-hidden border-t border-[var(--line)] py-16 lg:py-24",
+      className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       "aria-label": "Rodap\xE9 do site",
       children: [
-        /* @__PURE__ */ jsx4("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--cyan)]/60 to-transparent" }),
-        /* @__PURE__ */ jsx4("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs4("div", { className: "grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end", children: [
-          /* @__PURE__ */ jsxs4("div", { children: [
+        /* @__PURE__ */ jsx4("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
+        /* @__PURE__ */ jsx4("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs4("div", { className: "grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end", children: [
+          /* @__PURE__ */ jsxs4("div", { className: "@container min-w-0", children: [
             /* @__PURE__ */ jsx4("div", { className: "mb-8", children: /* @__PURE__ */ jsx4(
               LogoAnimado,
               {
                 label: "Voltar ao topo",
-                onClick: onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: "smooth" }))
+                onClick: onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: comportamentoDeScroll() }))
               }
             ) }),
             /* @__PURE__ */ jsx4(
@@ -400,30 +450,30 @@ function Footer({
               {
                 "aria-hidden": "true",
                 role: "presentation",
-                className: "select-none font-mono text-[clamp(5rem,24vw,24rem)] font-black leading-[0.76] tracking-tighter text-[var(--cyan)]/10",
+                className: "select-none font-mono text-[clamp(3rem,31cqi,24rem)] font-black leading-[0.76] tracking-tighter text-cyan/10",
                 children: "<MF/>"
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs4("div", { className: "grid gap-8 font-mono", children: [
-            (email || localizacao || cnpj) && /* @__PURE__ */ jsxs4("div", { className: "rounded border border-[var(--line)] bg-[var(--surface)] p-5", children: [
-              /* @__PURE__ */ jsx4("p", { className: "text-[10px] uppercase tracking-[0.28em] text-[var(--gray-text)]", children: "runtime summary" }),
+          /* @__PURE__ */ jsxs4("div", { className: "grid min-w-0 gap-8 font-mono", children: [
+            (email || localizacao || cnpj) && /* @__PURE__ */ jsxs4("div", { className: "rounded border border-line bg-surface p-5", children: [
+              /* @__PURE__ */ jsx4("p", { className: "text-[10px] uppercase tracking-[0.28em] text-gray-text", children: "runtime summary" }),
               /* @__PURE__ */ jsxs4("div", { className: "mt-5 grid gap-3 text-sm", children: [
-                localizacao && /* @__PURE__ */ jsxs4("p", { className: "flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2", children: [
-                  /* @__PURE__ */ jsx4("span", { className: "text-[var(--gray-text)]", children: "location" }),
-                  /* @__PURE__ */ jsx4("span", { className: "text-[var(--foreground)]", children: localizacao })
+                localizacao && /* @__PURE__ */ jsxs4("p", { className: "flex items-baseline justify-between gap-4 border-b border-line pb-2", children: [
+                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: "location" }),
+                  /* @__PURE__ */ jsx4("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: localizacao })
                 ] }),
-                cnpj && /* @__PURE__ */ jsxs4("p", { className: "flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2", children: [
-                  /* @__PURE__ */ jsx4("span", { className: "text-[var(--gray-text)]", children: "cnpj" }),
-                  /* @__PURE__ */ jsx4("span", { className: "text-[var(--foreground)]", children: cnpj })
+                cnpj && /* @__PURE__ */ jsxs4("p", { className: "flex items-baseline justify-between gap-4 border-b border-line pb-2", children: [
+                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: "cnpj" }),
+                  /* @__PURE__ */ jsx4("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: cnpj })
                 ] }),
-                email && /* @__PURE__ */ jsxs4("p", { className: "flex items-center justify-between gap-4", children: [
-                  /* @__PURE__ */ jsx4("span", { className: "text-[var(--gray-text)]", children: "contact" }),
+                email && /* @__PURE__ */ jsxs4("p", { className: "flex items-baseline justify-between gap-4", children: [
+                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: "contact" }),
                   /* @__PURE__ */ jsx4(
                     "a",
                     {
                       href: `mailto:${email}`,
-                      className: "text-[var(--cyan)] hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cyan)]/70",
+                      className: "text-cyan hover:text-foreground focus-visible:ring-cyan/70 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-2 focus-visible:outline-none",
                       children: email
                     }
                   )
@@ -434,12 +484,12 @@ function Footer({
               "a",
               {
                 href: link.href,
-                className: "rounded border border-[var(--line)] px-3 py-2 text-xs text-[var(--gray-text)] transition-colors hover:border-[var(--cyan)]/60 hover:text-[var(--foreground)]",
+                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-cyan/70 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none",
                 children: link.label
               },
               link.href
             )) }),
-            /* @__PURE__ */ jsxs4("div", { className: "flex flex-col gap-3 border-t border-[var(--line)] pt-6 text-xs text-[var(--gray-text)] sm:flex-row sm:items-center sm:justify-between", children: [
+            /* @__PURE__ */ jsxs4("div", { className: "flex flex-col gap-3 border-line text-gray-text border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between", children: [
               /* @__PURE__ */ jsxs4("p", { children: [
                 "\xA9 ",
                 year,
@@ -447,7 +497,7 @@ function Footer({
                 nomeEmpresa
               ] }),
               /* @__PURE__ */ jsxs4("p", { children: [
-                /* @__PURE__ */ jsx4("span", { className: "text-[var(--cyan)]", children: "$" }),
+                /* @__PURE__ */ jsx4("span", { className: "text-cyan", children: "$" }),
                 " process.exit(0)"
               ] })
             ] })
@@ -490,6 +540,7 @@ function NodeNetwork({
     if (!context) return;
     const el = canvas;
     const ctx = context;
+    const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let corAtual = lerCor(el, color);
     let largura = 0;
     let altura = 0;
@@ -511,6 +562,7 @@ function NodeNetwork({
           vy: (Math.random() - 0.5) * speed
         });
       }
+      if (reduzido) desenhar();
     }
     function mover() {
       for (const n of nodes) {
@@ -564,10 +616,10 @@ function NodeNetwork({
     resize();
     const mo = new MutationObserver(() => {
       corAtual = lerCor(el, color);
+      if (reduzido) desenhar();
     });
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) desenhar();
-    else animId = requestAnimationFrame(tick);
+    if (!reduzido) animId = requestAnimationFrame(tick);
     return () => {
       ro.disconnect();
       mo.disconnect();
