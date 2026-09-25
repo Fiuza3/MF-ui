@@ -74,4 +74,40 @@ describe("NodeNetwork", () => {
 
     expect(contextoFalso.arc).toHaveBeenCalled();
   });
+
+  // O primeiro callback do ResizeObserver chega depois do desenho síncrono e o
+  // resize() refaz el.width, o que apaga o canvas: sem redesenhar, a rede sumia.
+  it("com movimento reduzido, redesenha depois de redimensionar", () => {
+    definirMovimentoReduzido(true);
+    const callbacks: (() => void)[] = [];
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        constructor(cb: () => void) {
+          callbacks.push(cb);
+        }
+        observe() {}
+        disconnect() {}
+      },
+    );
+
+    render(<NodeNetwork />);
+    contextoFalso.arc.mockClear();
+    for (const cb of callbacks) cb();
+
+    expect(contextoFalso.arc).toHaveBeenCalled();
+    vi.unstubAllGlobals();
+  });
+
+  it("com movimento reduzido, redesenha na troca de tema", async () => {
+    definirMovimentoReduzido(true);
+    render(<NodeNetwork />);
+    contextoFalso.arc.mockClear();
+
+    document.documentElement.classList.add("light");
+    await new Promise((r) => setTimeout(r, 0));
+    document.documentElement.classList.remove("light");
+
+    expect(contextoFalso.arc).toHaveBeenCalled();
+  });
 });

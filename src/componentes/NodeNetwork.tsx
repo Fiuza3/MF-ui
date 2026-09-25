@@ -29,7 +29,7 @@ function lerCor(el: HTMLElement, override?: string): string {
 
 /**
  * Fundo decorativo: rede de partículas conectadas (canvas).
- * Lê `--cyan` em runtime e reage à troca de tema (.light/.dark no <html>).
+ * Lê `--primary` em runtime e reage à troca de tema (.light/.dark no <html>).
  */
 export function NodeNetwork({
   count = 52,
@@ -48,6 +48,9 @@ export function NodeNetwork({
     const el = canvas;
     const ctx = context;
 
+    // Movimento reduzido: quadro estático, redesenhado a cada resize e troca de tema
+    // — mudar el.width apaga o canvas, e sem o loop ninguém repinta.
+    const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let corAtual = lerCor(el, color);
     let largura = 0;
     let altura = 0;
@@ -73,6 +76,7 @@ export function NodeNetwork({
           vy: (Math.random() - 0.5) * speed,
         });
       }
+      if (reduzido) desenhar();
     }
 
     function mover() {
@@ -134,12 +138,11 @@ export function NodeNetwork({
     // Reage à troca de tema: re-lê o token quando a classe do <html> muda.
     const mo = new MutationObserver(() => {
       corAtual = lerCor(el, color);
+      if (reduzido) desenhar();
     });
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
-    // Movimento reduzido: um quadro estático preserva o desenho sem animar.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) desenhar();
-    else animId = requestAnimationFrame(tick);
+    if (!reduzido) animId = requestAnimationFrame(tick);
 
     return () => {
       ro.disconnect();
