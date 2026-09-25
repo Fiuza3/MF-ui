@@ -33,7 +33,10 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
                 return (
                   <li key={index} className="flex items-center gap-1.5">
                     {item.href && !isLast ? (
-                      <a href={item.href} className="hover:text-foreground transition-colors">
+                      <a
+                        href={item.href}
+                        className="hover:text-foreground focus-visible:ring-ring/50 rounded-sm transition-colors outline-none focus-visible:ring-[3px]"
+                      >
                         {item.label}
                       </a>
                     ) : (
@@ -51,11 +54,11 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
             </ol>
           </nav>
         )}
-        <h1 className="text-foreground truncate text-xl font-semibold">{title}</h1>
+        <h1 className="text-foreground text-xl font-semibold text-balance sm:truncate">{title}</h1>
       </div>
 
       {actions && (
-        <div data-slot="page-header-actions" className="flex shrink-0 items-center gap-2">
+        <div data-slot="page-header-actions" className="flex shrink-0 flex-wrap items-center gap-2">
           {actions}
         </div>
       )}

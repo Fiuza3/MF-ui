@@ -25,4 +25,33 @@ describe("PageHeader", () => {
 
     expect(screen.getByRole("button", { name: "Novo cliente" })).toBeTruthy();
   });
+
+  // Em 375px, duas ou três ações lado a lado sem quebra empurravam a página para o lado.
+  it("ações quebram linha em vez de estourar a largura", () => {
+    const { container } = render(
+      <PageHeader title="Clientes" actions={<button type="button">Novo cliente</button>} />,
+    );
+    const acoes = container.querySelector("[data-slot=page-header-actions]");
+
+    expect(acoes?.className).toMatch(/(^|\s)flex-wrap(\s|$)/);
+  });
+
+  it("no celular o título quebra linha; só trunca a partir de sm", () => {
+    render(<PageHeader title="Clientes" />);
+    const titulo = screen.getByRole("heading", { name: "Clientes" });
+
+    expect(titulo.className).not.toMatch(/(^|\s)truncate(\s|$)/);
+    expect(titulo.className).toMatch(/(^|\s)sm:truncate(\s|$)/);
+  });
+
+  it("link do breadcrumb tem anel de foco de teclado", () => {
+    render(
+      <PageHeader
+        title="Clientes"
+        breadcrumb={[{ label: "Início", href: "/" }, { label: "Clientes" }]}
+      />,
+    );
+
+    expect(screen.getByRole("link", { name: "Início" }).className).toMatch(/focus-visible:ring/);
+  });
 });
