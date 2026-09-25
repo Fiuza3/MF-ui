@@ -34,7 +34,8 @@ const toastVariants = cva(
       variant: {
         default: "bg-popover text-popover-foreground border-border",
         success: "bg-popover text-popover-foreground border-primary/40",
-        destructive: "bg-destructive text-destructive-foreground border-destructive",
+        destructive:
+          "bg-destructive text-destructive-foreground border-destructive [&_[data-slot=toast-description]]:text-destructive-foreground/85 [&_[data-slot=toast-action]]:border-destructive-foreground/40 [&_[data-slot=toast-action]]:hover:bg-destructive-foreground/10 [&_[data-slot=toast-action]]:hover:text-destructive-foreground",
       },
     },
     defaultVariants: {
@@ -99,7 +100,9 @@ function ToastClose({ className, ...props }: React.ComponentProps<typeof ToastPr
       data-slot="toast-close"
       aria-label="Fechar"
       className={cn(
-        "shrink-0 rounded-md p-1 text-foreground/60 opacity-0 transition-opacity hover:text-foreground focus-visible:opacity-100 focus-visible:outline-none group-hover:opacity-100",
+        "inline-flex size-8 shrink-0 items-center justify-center rounded-md text-current opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        // Sem hover em tela de toque: só esconde onde o ponteiro consegue revelar.
+        "pointer-fine:opacity-0 pointer-fine:group-hover:opacity-70 pointer-fine:hover:opacity-100 pointer-fine:focus-visible:opacity-100",
         className,
       )}
       {...props}
