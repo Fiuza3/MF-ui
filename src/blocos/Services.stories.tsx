@@ -18,7 +18,7 @@ const meta = {
         items: ["Next.js", "Postgres", "Stripe"],
       },
       {
-        id: "integracoes",
+        id: "integrações",
         tag: "02",
         title: "Integrações",
         description: "WhatsApp, SMS, gateways de pagamento e ERPs.",

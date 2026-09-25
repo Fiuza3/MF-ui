@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, Palette, Settings, User } from "lucide-react";
 import { Button } from "./Button";
 import {
   DropdownMenu,
@@ -42,7 +42,9 @@ export const MenuDeConta: Story = {
         </DropdownMenuItem>
         <DropdownMenuCheckboxItem checked>Notificações</DropdownMenuCheckboxItem>
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Tema</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>
+            <Palette /> Tema
+          </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuItem>Escuro</DropdownMenuItem>
             <DropdownMenuItem>Claro</DropdownMenuItem>
