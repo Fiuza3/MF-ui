@@ -16,22 +16,49 @@ export type CopyFieldProps = {
   feedbackDurationMs?: number;
 };
 
+type EstadoCopia = "ocioso" | "copiado" | "falhou";
+
+const MENSAGEM: Record<EstadoCopia, string> = {
+  ocioso: "",
+  copiado: "Copiado",
+  falhou: "Não foi possível copiar. O valor está selecionado: copie manualmente.",
+};
+
+// A Clipboard API rejeita fora de HTTPS e sem permissão — falha é caminho
+// esperado, não exceção.
+async function copiarTexto(texto: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(texto);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /** Campo somente-leitura com botão de copiar para a área de transferência. */
 function CopyField({ value, label, className, feedbackDurationMs = 2000 }: CopyFieldProps) {
-  const [copiado, setCopiado] = React.useState(false);
+  const [estado, setEstado] = React.useState<EstadoCopia>("ocioso");
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const timerRef = React.useRef<number | undefined>(undefined);
   const inputId = React.useId();
 
+  React.useEffect(() => () => window.clearTimeout(timerRef.current), []);
+
   async function copiarValor() {
-    await navigator.clipboard.writeText(value);
-    setCopiado(true);
-    window.setTimeout(() => setCopiado(false), feedbackDurationMs);
+    window.clearTimeout(timerRef.current);
+    const copiou = await copiarTexto(value);
+    if (!copiou) inputRef.current?.select();
+    setEstado(copiou ? "copiado" : "falhou");
+    timerRef.current = window.setTimeout(() => setEstado("ocioso"), feedbackDurationMs);
   }
+
+  const copiado = estado === "copiado";
 
   return (
     <div data-slot="copy-field" className={cn("flex flex-col gap-1.5", className)}>
       {label && <Label htmlFor={inputId}>{label}</Label>}
       <div className="flex items-center gap-2">
-        <Input id={inputId} readOnly value={value} className="font-mono" />
+        <Input ref={inputRef} id={inputId} readOnly value={value} className="font-mono" />
         <Button
           type="button"
           variant="outline"
@@ -42,6 +69,12 @@ function CopyField({ value, label, className, feedbackDurationMs = 2000 }: CopyF
           {copiado ? <CheckIcon className="text-primary" /> : <CopyIcon />}
         </Button>
       </div>
+      <p
+        role="status"
+        className={estado === "falhou" ? "text-muted-foreground text-xs" : "sr-only"}
+      >
+        {MENSAGEM[estado]}
+      </p>
     </div>
   );
 }
