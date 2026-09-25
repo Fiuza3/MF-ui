@@ -20,4 +20,31 @@ describe("Footer", () => {
     expect(screen.getByText("BH, MG")).toBeDefined();
     expect(screen.getByText("65.019.152/0001-81")).toBeDefined();
   });
+  // Trilhas `fr` têm mínimo `auto`: a marca d'água em 24vw (~880px em 1280) e o
+  // e-mail sem ponto de quebra empurravam a coluna da direita para fora da tela.
+  it("colunas podem encolher abaixo do conteúdo", () => {
+    const { container } = render(<Footer email="contato@mfdesenvolvimento.online" />);
+    const grade = container.querySelector("footer .grid");
+
+    expect(grade?.className).toMatch(/lg:grid-cols-\[minmax\(0,/);
+    for (const coluna of Array.from(grade?.children ?? [])) {
+      expect(coluna.className.split(/\s+/)).toContain("min-w-0");
+    }
+  });
+
+  it("marca d'água se mede pela coluna, não pela viewport", () => {
+    const { container } = render(<Footer />);
+    const marca = container.querySelector("[aria-hidden=true].select-none");
+
+    expect(marca?.className).toMatch(/cqi/);
+    expect(marca?.parentElement?.className.split(/\s+/)).toContain("@container");
+  });
+
+  it("e-mail longo pode quebrar em vez de alargar a coluna", () => {
+    render(<Footer email="contato@mfdesenvolvimento.online" />);
+
+    expect(
+      screen.getByRole("link", { name: "contato@mfdesenvolvimento.online" }).className,
+    ).toMatch(/break-all|\[overflow-wrap:anywhere\]/);
+  });
 });

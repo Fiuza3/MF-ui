@@ -1,5 +1,6 @@
 "use client";
 
+import { comportamentoDeScroll } from "../lib/comportamento-de-scroll";
 import { LogoAnimado } from "./LogoAnimado";
 
 export type FooterLink = {
@@ -28,54 +29,62 @@ export function Footer({
 
   return (
     <footer
-      className="relative overflow-hidden border-t border-[var(--line)] py-16 lg:py-24"
+      className="relative overflow-hidden border-t border-line py-16 lg:py-24"
       aria-label="Rodapé do site"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--cyan)]/60 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" />
 
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
-        <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
-          <div>
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end">
+          {/* @container: a marca d'água se mede pela coluna (cqi), nunca pela viewport. */}
+          <div className="@container min-w-0">
             <div className="mb-8">
               <LogoAnimado
                 label="Voltar ao topo"
-                onClick={onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: "smooth" }))}
+                onClick={
+                  onLogoClick ??
+                  (() => window.scrollTo({ top: 0, behavior: comportamentoDeScroll() }))
+                }
               />
             </div>
             <p
               aria-hidden="true"
               role="presentation"
-              className="select-none font-mono text-[clamp(5rem,24vw,24rem)] font-black leading-[0.76] tracking-tighter text-[var(--cyan)]/10"
+              className="select-none font-mono text-[clamp(3rem,31cqi,24rem)] font-black leading-[0.76] tracking-tighter text-cyan/10"
             >
               {"<MF/>"}
             </p>
           </div>
 
-          <div className="grid gap-8 font-mono">
+          <div className="grid min-w-0 gap-8 font-mono">
             {(email || localizacao || cnpj) && (
-              <div className="rounded border border-[var(--line)] bg-[var(--surface)] p-5">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--gray-text)]">
+              <div className="rounded border border-line bg-surface p-5">
+                <p className="text-[10px] uppercase tracking-[0.28em] text-gray-text">
                   runtime summary
                 </p>
                 <div className="mt-5 grid gap-3 text-sm">
                   {localizacao && (
-                    <p className="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2">
-                      <span className="text-[var(--gray-text)]">location</span>
-                      <span className="text-[var(--foreground)]">{localizacao}</span>
+                    <p className="flex items-baseline justify-between gap-4 border-b border-line pb-2">
+                      <span className="text-gray-text shrink-0">location</span>
+                      <span className="text-foreground min-w-0 text-right [overflow-wrap:anywhere]">
+                        {localizacao}
+                      </span>
                     </p>
                   )}
                   {cnpj && (
-                    <p className="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-2">
-                      <span className="text-[var(--gray-text)]">cnpj</span>
-                      <span className="text-[var(--foreground)]">{cnpj}</span>
+                    <p className="flex items-baseline justify-between gap-4 border-b border-line pb-2">
+                      <span className="text-gray-text shrink-0">cnpj</span>
+                      <span className="text-foreground min-w-0 text-right [overflow-wrap:anywhere]">
+                        {cnpj}
+                      </span>
                     </p>
                   )}
                   {email && (
-                    <p className="flex items-center justify-between gap-4">
-                      <span className="text-[var(--gray-text)]">contact</span>
+                    <p className="flex items-baseline justify-between gap-4">
+                      <span className="text-gray-text shrink-0">contact</span>
                       <a
                         href={`mailto:${email}`}
-                        className="text-[var(--cyan)] hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cyan)]/70"
+                        className="text-cyan hover:text-foreground focus-visible:ring-cyan/70 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-2 focus-visible:outline-none"
                       >
                         {email}
                       </a>
@@ -91,7 +100,7 @@ export function Footer({
                   <a
                     key={link.href}
                     href={link.href}
-                    className="rounded border border-[var(--line)] px-3 py-2 text-xs text-[var(--gray-text)] transition-colors hover:border-[var(--cyan)]/60 hover:text-[var(--foreground)]"
+                    className="border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-cyan/70 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none"
                   >
                     {link.label}
                   </a>
@@ -99,12 +108,12 @@ export function Footer({
               </nav>
             )}
 
-            <div className="flex flex-col gap-3 border-t border-[var(--line)] pt-6 text-xs text-[var(--gray-text)] sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 border-line text-gray-text border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
               <p>
                 © {year} {nomeEmpresa}
               </p>
               <p>
-                <span className="text-[var(--cyan)]">$</span> process.exit(0)
+                <span className="text-cyan">$</span> process.exit(0)
               </p>
             </div>
           </div>
