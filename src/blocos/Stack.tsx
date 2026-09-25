@@ -12,6 +12,23 @@ export type StackGrupo = {
   comando?: string;
   /** optional description shown in the detail panel */
   description?: string;
+  /** Resposta do "explain --when-to-use" deste grupo. Sem ela, vale rotulos.explicacao. */
+  explicacao?: string;
+};
+
+export type StackRotulos = {
+  camada: string;
+  ativo: string;
+  explicar: string;
+  explicacao: string;
+};
+
+const ROTULOS_PADRAO: StackRotulos = {
+  camada: "layer",
+  ativo: "active",
+  explicar: "explain --when-to-use",
+  explicacao:
+    "uso essa camada quando ela diminui incerteza operacional, não para preencher logo em carrossel.",
 };
 
 export type StackProps = {
@@ -19,10 +36,17 @@ export type StackProps = {
   title: React.ReactNode;
   description: React.ReactNode;
   grupos: StackGrupo[];
+  /** Rótulos da estética de terminal. O padrão é o texto do site da MF. */
+  rotulos?: Partial<StackRotulos>;
 };
 
-export function Stack({ eyebrow, title, description, grupos }: StackProps) {
-  const [active, setActive] = useState(grupos[0]);
+export function Stack({ eyebrow, title, description, grupos, rotulos }: StackProps) {
+  // Guarda a categoria, não o objeto: com grupos novos vindos do consumidor, o
+  // painel mostrava o grupo antigo guardado no estado.
+  const [categoriaAtiva, setCategoriaAtiva] = useState(grupos[0]?.categoria);
+  const active = grupos.find((g) => g.categoria === categoriaAtiva) ?? grupos[0];
+  const r = { ...ROTULOS_PADRAO, ...rotulos };
+  if (!active) return null;
 
   return (
     <section
@@ -51,8 +75,8 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
                   margin="-80px"
                   delayMs={index * 50}
                   type="button"
-                  onClick={() => setActive(grupo)}
-                  onMouseEnter={() => setActive(grupo)}
+                  onClick={() => setCategoriaAtiva(grupo.categoria)}
+                  onMouseEnter={() => setCategoriaAtiva(grupo.categoria)}
                   aria-pressed={selected}
                   className={cn(
                     "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 sm:grid-cols-[auto_1fr]",
@@ -89,14 +113,14 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
               <div className="flex items-start justify-between gap-6">
                 <div>
                   <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
-                    layer / {active.categoria.toLowerCase()}
+                    {r.camada} / {active.categoria.toLowerCase()}
                   </p>
                   <h3 className="mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground">
                     {active.categoria}
                   </h3>
                 </div>
                 <span className="hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block">
-                  active
+                  {r.ativo}
                 </span>
               </div>
 
@@ -129,12 +153,11 @@ export function Stack({ eyebrow, title, description, grupos }: StackProps) {
               {active.comando && (
                 <div className="mt-8 border-t border-line pt-5 font-mono">
                   <p className="text-sm text-foreground">
-                    <span className="text-cyan">$</span> explain --when-to-use{" "}
+                    <span className="text-cyan">$</span> {r.explicar}{" "}
                     {active.categoria.toLowerCase()}
                   </p>
                   <p className="mt-2 text-xs leading-relaxed text-gray-text">
-                    <span className="text-cyan/70">&gt;</span> uso essa camada quando ela diminui
-                    incerteza operacional, não para preencher logo em carrossel.
+                    <span className="text-cyan/70">&gt;</span> {active.explicacao ?? r.explicacao}
                   </p>
                 </div>
               )}
