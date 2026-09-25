@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { MailIcon, MessageCircleIcon } from "lucide-react";
 import { Reveal } from "../componentes/Reveal";
 import { propsDeLink } from "../lib/link-externo";
 
@@ -24,26 +25,24 @@ export function Contact({ eyebrow, title, description, cta, email, slotFormulari
 
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <Reveal as="div" margin="-80px" className="mb-10 lg:mb-12">
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">
-            <span lang="en">{eyebrow}</span>
-          </p>
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
           <h2 className="text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
             {title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
         </Reveal>
 
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.55fr] lg:items-start 2xl:grid-cols-[0.58fr_1.7fr]">
-          <Reveal as="div" margin="-80px" className="grid gap-4">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.55fr)] lg:items-start 2xl:grid-cols-[minmax(0,0.58fr)_minmax(0,1.7fr)]">
+          <Reveal as="div" margin="-80px" className="grid min-w-0 gap-4">
             <a
               href={cta.href}
               {...propsDeLink(cta.href)}
               className="group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan">
-                <span aria-hidden="true">💬</span>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan">
+                <MessageCircleIcon className="size-4" aria-hidden="true" />
               </span>
-              <div>
+              <div className="min-w-0">
                 <p className="font-mono text-sm text-foreground">{cta.label}</p>
                 <p className="mt-1 text-xs text-gray-text">para quando o escopo já está claro</p>
               </div>
@@ -54,11 +53,13 @@ export function Contact({ eyebrow, title, description, cta, email, slotFormulari
                 href={`mailto:${email}`}
                 className="group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan">
-                  <span aria-hidden="true">✉</span>
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan">
+                  <MailIcon className="size-4" aria-hidden="true" />
                 </span>
-                <div>
-                  <p className="font-mono text-sm text-foreground">{email}</p>
+                <div className="min-w-0">
+                  <p className="font-mono text-sm text-foreground [overflow-wrap:anywhere]">
+                    {email}
+                  </p>
                   <p className="mt-1 text-xs text-gray-text">para materiais e projetos maiores</p>
                 </div>
               </a>
@@ -76,7 +77,7 @@ export function Contact({ eyebrow, title, description, cta, email, slotFormulari
           </Reveal>
 
           {slotFormulario && (
-            <Reveal as="div" margin="-80px" delayMs={80}>
+            <Reveal as="div" margin="-80px" delayMs={80} className="min-w-0">
               {slotFormulario}
             </Reveal>
           )}

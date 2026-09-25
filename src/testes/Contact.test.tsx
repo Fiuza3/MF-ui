@@ -34,4 +34,41 @@ describe("Contact", () => {
     );
     expect(escondidos).toHaveLength(0);
   });
+
+  function renderizar() {
+    return render(
+      <Contact
+        eyebrow="contato"
+        title="Vamos conversar"
+        description="Resposta em 1 dia útil."
+        cta={{ label: "WhatsApp", href: "#whatsapp" }}
+        email="contato@mfdesenvolvimento.online"
+      />,
+    );
+  }
+
+  // Item de grid tem min-width:auto: o e-mail em mono sem ponto de quebra
+  // definia a largura mínima e empurrava os cards para fora em 375px.
+  it("colunas podem encolher e o e-mail quebra em vez de alargar", () => {
+    const { container } = renderizar();
+    const grade = container.querySelector("section > div > .grid");
+
+    expect(grade?.className).toMatch(/(^|\s)grid-cols-\[minmax\(0,1fr\)\]/);
+    expect(screen.getByText("contato@mfdesenvolvimento.online").className).toMatch(
+      /\[overflow-wrap:anywhere\]/,
+    );
+  });
+
+  it("não declara inglês num eyebrow que o consumidor escreve", () => {
+    const { container } = renderizar();
+
+    expect(container.querySelector("[lang=en]")).toBeNull();
+  });
+
+  it("ícones dos canais são SVG da lib, não emoji", () => {
+    renderizar();
+
+    expect(screen.queryByText("💬")).toBeNull();
+    expect(screen.getByRole("link", { name: /WhatsApp/ }).querySelector("svg")).not.toBeNull();
+  });
 });
