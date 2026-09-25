@@ -106,6 +106,11 @@ precisa instalá-los.
 @source "../node_modules/@mf/ui/src/**/*.tsx";
 ```
 
+Não é preciso mais nada. O `globals.css` já traz as animações (`tw-animate-css`), a borda
+base, o `body` com fundo/cor/fonte do tema, o cursor de botão e a variante `dark:` ligada à
+classe de tema. O `utilitarios.css` traz o CSS próprio dos blocos de site. Tudo fica em
+`@layer base`, então o CSS do app continua vencendo quando precisar sobrescrever.
+
 ---
 
 ## Uso

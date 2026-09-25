@@ -4,6 +4,42 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+Auditoria componente a componente: todo bloco deve funcionar só com `tailwindcss` + `globals.css` + `utilitarios.css`, sem CSS extra no consumidor. Sugestão de versão: **3.1.0**. Não há mudança de assinatura, mas há mudança visual e de comportamento (ver "Atenção ao atualizar").
+
+### Atenção ao atualizar
+
+- **`dark:` agora segue a classe de tema, não o sistema operacional.** Antes, um visitante com o Windows em modo escuro via os ajustes `dark:` por cima do tema claro. Se algum app dependia disso, ele estava com bug.
+- **Hover e foco de itens (Button `ghost`/`outline`, DropdownMenu, Select, Pagination, fechar de overlay) usam cinza neutro, não o `accent` da marca.** Em `accent` o contraste chegava a 1,1:1. `--accent` continua sendo a cor de destaque para uso livre.
+- **`globals.css` agora entrega `tw-animate-css`, a borda base, o `body` base e o cursor de botão.** Quem importava `tw-animate-css` ou declarava `* { border-color }` por conta própria pode remover. As regras do pacote ficam em `@layer base`, então as do app continuam vencendo.
+- **`FormField` aplica `id`, `aria-invalid` e `aria-describedby` direto no controle filho**, e gera o `id` se `htmlFor` não vier. Não é mais preciso repetir esses atributos no `Input`.
+
+### Corrigido
+
+- Animações de Dialog, Sheet, Select, Tooltip, DropdownMenu, Toast e Accordion eram classes sem CSS: os componentes abriam e fechavam "no tranco".
+- Blocos `Hero`, `Projects` e `Stack` dependiam de CSS que só existia no site da MF: o carrossel do Projects não andava e o fundo do Hero sumia. O CSS agora vem em `blocos.css`, importado por `utilitarios.css`.
+- `Pagination`: "Anterior" sobrepunha os números (largura fixa); no celular estourava a tela ou escondia o total. Agora mostra primeira, atual e última com elipses.
+- Overflow horizontal em 375px no `Contact`, no `Footer` (em 1280px a coluna da direita também era cortada) e no viewport do `Toast`.
+- `AppShell` ficava sem navegação abaixo de 1024px: ganhou menu em painel. Também corrigido o `overflow-x-hidden` do conteúdo, que quebrava `sticky` do consumidor.
+- `Projects`: o modal feito à mão não travava o scroll nem devolvia o foco. Agora usa o `Dialog` da lib. Cards sem mockup não têm mais o buraco de ~250px, e `href`/`categoria` passam a aparecer.
+- Acessibilidade:
+  - `Testimonials` respeita `prefers-reduced-motion`, pausa no foco e não anuncia em autoplay;
+  - `NodeNetwork` não some com movimento reduzido;
+  - `Navbar` ganhou `aria-controls`, fecha ao clicar fora e o menu mobile respeita `externo`;
+  - `CopyField` trata falha do clipboard;
+  - `DataTable` sinaliza `aria-busy`;
+  - `StatCard` indica direção com seta, não só com cor;
+  - rótulos em pt-BR: fechar dos overlays, breadcrumb, `lang` errado no `Contact`.
+- Contraste: destrutivo usa o par de tokens validado em vez de `text-white`; aba ativa e `Skeleton` visíveis no tema claro; sombras próprias para o tema claro.
+- CTAs de `Navbar`, `Hero` e `Contact` abriam âncora interna em nova aba.
+
+### Adicionado
+
+- `css-entregue.test.ts` compila o CSS como o consumidor e falha se um componente usar classe sem CSS no pacote.
+- Regras de teste contra `text-white`/`text-black`, `rgb()`/`rgba()` literal e hover em `accent`.
+- Storybook com todos os componentes, publicado na Vercel.
+
 ## [3.0.2] — 2026-09-24
 
 Só empacotamento — nenhuma mudança de API ou de `dist/`.
