@@ -40,4 +40,23 @@ describe("classes do Tailwind", () => {
       "Use text-[length:var(--token)] — sem o length: o Tailwind gera color: e o tamanho some",
     ).toEqual([]);
   });
+
+  // text-white sobre bg-destructive passava por fora do par que o contraste.test
+  // valida: no tema escuro dava 2,6:1 (coral + branco), abaixo do AA.
+  it("cor de texto sempre vem de token, nunca de text-white/text-black", () => {
+    const infratores: string[] = [];
+
+    for (const caminho of arquivos()) {
+      if (caminho.includes(".stories.")) continue;
+      readFileSync(caminho, "utf8")
+        .split("\n")
+        .forEach((linha, i) => {
+          if (/(?<![\w-])text-(white|black)(?![\w-])/.test(linha)) {
+            infratores.push(`${caminho.replace(raiz, "src")}:${i + 1}`);
+          }
+        });
+    }
+
+    expect(infratores, "Use o par *-foreground do token de fundo").toEqual([]);
+  });
 });
