@@ -44,7 +44,7 @@ const meta = {
           description: "Ajuste os filtros ou cadastre um cliente novo.",
         }}
         page={page}
-        totalPages={totalPages}
+        totalPages={vazia ? 1 : totalPages}
         onPageChange={setPage}
       />
     );

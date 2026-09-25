@@ -20,13 +20,13 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
     <div
       data-slot="page-header"
       className={cn(
-        "flex flex-col gap-4 border-b border-border px-6 py-5 sm:flex-row sm:items-center sm:justify-between",
+        "flex flex-col gap-4 border-b border-border px-4 py-5 lg:px-6 sm:flex-row sm:items-center sm:justify-between",
         className,
       )}
     >
       <div className="flex min-w-0 flex-col gap-1.5">
         {breadcrumb && breadcrumb.length > 0 && (
-          <nav aria-label="Breadcrumb">
+          <nav aria-label="Trilha de navegação">
             <ol className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-xs">
               {breadcrumb.map((item, index) => {
                 const isLast = index === breadcrumb.length - 1;
@@ -35,7 +35,7 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
                     {item.href && !isLast ? (
                       <a
                         href={item.href}
-                        className="hover:text-foreground focus-visible:ring-ring/50 rounded-sm transition-colors outline-none focus-visible:ring-[3px]"
+                        className="hover:text-foreground focus-visible:ring-ring/50 inline-flex min-h-6 items-center rounded-sm transition-colors outline-none focus-visible:ring-[3px]"
                       >
                         {item.label}
                       </a>

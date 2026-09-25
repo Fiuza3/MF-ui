@@ -40,7 +40,7 @@ const meta = {
     children: (
       <>
         <PageHeader title="Painel" />
-        <div className="grid gap-4 p-6 sm:grid-cols-3">
+        <div className="grid gap-4 p-4 sm:grid-cols-3 lg:p-6">
           <StatCard label="Clientes ativos" value="312" delta={{ value: "+8", direction: "up" }} />
           <StatCard label="Mensagens" value="48.213" />
           <StatCard

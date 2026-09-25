@@ -16,7 +16,7 @@ describe("PageHeader", () => {
       />,
     );
 
-    expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toBeTruthy();
+    expect(screen.getByRole("navigation", { name: "Trilha de navegação" })).toBeTruthy();
     expect(screen.getByText("Início")).toBeTruthy();
   });
 

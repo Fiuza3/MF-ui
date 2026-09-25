@@ -48,7 +48,8 @@ function DataTable<TRow>({
   onPageChange,
   className,
 }: DataTableProps<TRow>) {
-  const mostrarPaginacao = page !== undefined && totalPages !== undefined && onPageChange;
+  const mostrarPaginacao =
+    !loading && page !== undefined && totalPages !== undefined && onPageChange;
 
   return (
     <div data-slot="data-table" className={cn("flex flex-col gap-4", className)}>
@@ -67,7 +68,7 @@ function DataTable<TRow>({
             Array.from({ length: loadingRowCount }, (_, index) => (
               <TableRow key={`skeleton-${index}`}>
                 {columns.map((coluna) => (
-                  <TableCell key={coluna.key}>
+                  <TableCell key={coluna.key} className={coluna.className}>
                     <Skeleton className="h-4 w-full max-w-40" />
                   </TableCell>
                 ))}

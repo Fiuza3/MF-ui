@@ -58,4 +58,14 @@ describe("AppShell", () => {
     expect(aside?.className).toMatch(/(^|\s)sticky(\s|$)/);
     expect(aside?.className).toMatch(/(^|\s)overflow-y-auto(\s|$)/);
   });
+
+  // overflow-x:hidden força overflow-y:auto: o main virava contêiner de scroll que
+  // nunca rola, e todo sticky do consumidor (cabeçalho de tabela) grudava nele.
+  it("o conteúdo corta na horizontal sem virar contêiner de scroll", () => {
+    const { container } = render(<Shell />);
+    const main = container.querySelector("[data-slot=app-shell-content]");
+
+    expect(main?.className.split(" ")).toContain("overflow-x-clip");
+    expect(main?.className.split(" ")).not.toContain("overflow-x-hidden");
+  });
 });

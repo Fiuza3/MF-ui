@@ -73,4 +73,33 @@ describe("DataTable", () => {
 
     expect(screen.queryByRole("navigation", { name: "Paginação" })).toBeNull();
   });
+  // Coluna text-right/w-* trocava de alinhamento e largura entre carregando e carregado.
+  it("skeleton respeita o className da coluna", () => {
+    const { container } = render(
+      <DataTable
+        columns={[{ key: "valor", header: "Valor", render: () => "R$ 1", className: "text-right" }]}
+        rows={[]}
+        loading
+        loadingRowCount={1}
+      />,
+    );
+    const celula = container.querySelector("[data-slot=skeleton]")?.closest("td");
+
+    expect(celula?.className.split(/\s+/)).toContain("text-right");
+  });
+
+  it("não oferece paginação enquanto carrega", () => {
+    render(
+      <DataTable
+        columns={colunas}
+        rows={[]}
+        loading
+        page={1}
+        totalPages={5}
+        onPageChange={() => {}}
+      />,
+    );
+
+    expect(screen.queryByRole("navigation", { name: "Paginação" })).toBeNull();
+  });
 });

@@ -38,7 +38,7 @@ function AppShell({ sidebar, topbar, children, className }: AppShellProps) {
           <div className="flex min-w-0 flex-1 items-center">{topbar}</div>
         </header>
 
-        <main data-slot="app-shell-content" className="flex-1 overflow-x-hidden">
+        <main data-slot="app-shell-content" className="flex-1 overflow-x-clip">
           {children}
         </main>
       </div>
