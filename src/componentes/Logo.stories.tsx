@@ -25,7 +25,7 @@ export const Animado: Story = {
 
 export const Escala: Story = {
   render: () => (
-    <div className="flex items-end gap-6">
+    <div className="flex flex-wrap items-end gap-6">
       {[16, 24, 40, 64, 96].map((tamanho) => (
         <Logo key={tamanho} tamanho={tamanho} />
       ))}

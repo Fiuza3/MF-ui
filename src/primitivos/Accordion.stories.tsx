@@ -11,7 +11,7 @@ const meta = {
   title: "Primitivos/Accordion",
   component: Accordion,
   subcomponents: { AccordionItem, AccordionTrigger, AccordionContent },
-  args: { type: "single", collapsible: true },
+  args: { type: "single" },
   render: (args) => (
     <Accordion {...args} className="w-[min(24rem,calc(100vw-2rem))]">
       {perguntas.map((item) => (
@@ -27,5 +27,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Unico: Story = {};
+export const Unico: Story = { args: { type: "single", collapsible: true } };
 export const Multiplo: Story = { args: { type: "multiple" } };
