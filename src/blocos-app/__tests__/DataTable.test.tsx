@@ -41,6 +41,14 @@ describe("DataTable", () => {
     expect(container.querySelectorAll('[data-slot="skeleton"]').length).toBe(3);
   });
 
+  it("sinaliza carregamento para leitor de tela e desliga ao terminar", () => {
+    const { rerender } = render(<DataTable columns={colunas} rows={[]} loading />);
+    expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
+
+    rerender(<DataTable columns={colunas} rows={[]} loading={false} />);
+    expect(screen.getByRole("table")).not.toHaveAttribute("aria-busy");
+  });
+
   it("dispara onPageChange ao clicar em uma página", async () => {
     const user = userEvent.setup();
     const onPageChange = vi.fn();

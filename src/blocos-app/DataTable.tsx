@@ -52,7 +52,7 @@ function DataTable<TRow>({
 
   return (
     <div data-slot="data-table" className={cn("flex flex-col gap-4", className)}>
-      <Table>
+      <Table aria-busy={loading || undefined}>
         <TableHeader>
           <TableRow>
             {columns.map((coluna) => (
