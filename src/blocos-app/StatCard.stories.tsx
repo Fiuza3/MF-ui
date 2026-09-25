@@ -42,7 +42,7 @@ export const Grade: Story = {
     <div className="grid gap-4 sm:grid-cols-3">
       <StatCard label="Clientes ativos" value="312" delta={{ value: "+8", direction: "up" }} />
       <StatCard label="Receita" value="R$ 41,2 mil" delta={{ value: "estável" }} />
-      <StatCard label="Churn" value="2,1%" delta={{ value: "+0,4pp", direction: "down" }} />
+      <StatCard label="Taxa de entrega" value="96%" delta={{ value: "-1pp", direction: "down" }} />
     </div>
   ),
 };

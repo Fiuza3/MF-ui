@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ArrowDownRightIcon, ArrowUpRightIcon } from "lucide-react";
 
 import { cn } from "../lib/cn";
 import { Card, CardContent } from "../primitivos/Card";
@@ -22,6 +23,12 @@ const deltaCorPorDirecao: Record<NonNullable<StatCardDelta["direction"]>, string
   neutral: "text-muted-foreground",
 };
 
+const setaPorDirecao: Record<NonNullable<StatCardDelta["direction"]>, React.ReactNode> = {
+  up: <ArrowUpRightIcon aria-hidden="true" />,
+  down: <ArrowDownRightIcon aria-hidden="true" />,
+  neutral: null,
+};
+
 /** Cartão de métrica única (label + valor + variação opcional) para dashboards. */
 function StatCard({ label, value, icon, delta, className }: StatCardProps) {
   const direcao = delta?.direction ?? "neutral";
@@ -35,7 +42,16 @@ function StatCard({ label, value, icon, delta, className }: StatCardProps) {
           </p>
           <p className="text-foreground text-2xl font-semibold tabular-nums">{value}</p>
           {delta && (
-            <p className={cn("text-xs font-medium", deltaCorPorDirecao[direcao])}>{delta.value}</p>
+            <p
+              data-direction={direcao}
+              className={cn(
+                "inline-flex items-center gap-0.5 text-xs font-medium [&_svg]:size-3.5 [&_svg]:shrink-0",
+                deltaCorPorDirecao[direcao],
+              )}
+            >
+              {setaPorDirecao[direcao]}
+              {delta.value}
+            </p>
           )}
         </div>
         {icon && (
