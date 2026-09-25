@@ -3,6 +3,11 @@
    mas não geram CSS — o componente abre "no tranco" sem erro nenhum. */
 @import "tw-animate-css";
 
+/* Escuro é o padrão e o claro é opt-in via .light — o `dark:` precisa seguir
+   essa classe. No default do Tailwind ele segue o SO, e um visitante com
+   Windows em modo escuro veria os ajustes do escuro por cima do tema claro. */
+@custom-variant dark (&:where(:not(.light, .light *)));
+
 /* Fonte do logo <MF/> — subset de Geist Mono 700 (8 glifos, ~1KB) embutido
    para o logo renderizar IDÊNTICO em todo consumer, sem depender de fontes
    carregadas pelo app nem do sistema operacional do visitante. */

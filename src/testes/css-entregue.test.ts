@@ -63,4 +63,15 @@ describe("CSS entregue pelo pacote", () => {
     expect(body).toMatch(/color:\s*var\(--foreground\)/);
     expect(body).toMatch(/font-family:\s*var\(--font-sans\)/);
   });
+
+  // O tema é a classe no <html>; sem @custom-variant o Tailwind v4 liga `dark:`
+  // ao prefers-color-scheme, e o tema claro herda ajustes do escuro quando o SO
+  // do visitante está em modo escuro.
+  it("dark: segue a classe de tema, não a preferência do sistema operacional", async () => {
+    const compilador = await compile(ENTRADA, { base: raiz, onDependency: () => {} });
+    const saida = compilador.build(["dark:bg-input"]);
+
+    expect(saida).not.toMatch(/prefers-color-scheme/);
+    expect(saida).toMatch(/\.light/);
+  });
 });
