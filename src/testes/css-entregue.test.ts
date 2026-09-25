@@ -16,7 +16,7 @@ const ENTRADA = '@import "tailwindcss";\n@import "./tokens/globals.css";';
 
 // Famílias que o core do Tailwind não tem; qualquer uso delas depende do pacote.
 const FORA_DO_CORE =
-  /(?<![\w-])((?:data-\[[^\]]+\]:)?(?:animate-(?:in|out)|fade-(?:in|out)-\d+|zoom-(?:in|out)-\d+|slide-(?:in|out)-from-[a-z]+(?:-\d+)?|animate-accordion-(?:up|down)))(?![\w-])/g;
+  /(?<![\w-])((?:data-\[[^\]]+\]:)?(?:animate-(?:in|out)|fade-(?:in|out)-\d+|zoom-(?:in|out)-\d+|slide-(?:in|out)-(?:from|to)-[a-z]+(?:-\d+|-full)?|animate-accordion-(?:up|down)))(?![\w-])/g;
 
 function classesForaDoCore(): string[] {
   const achadas = new Set<string>();
