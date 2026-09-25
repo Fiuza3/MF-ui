@@ -12,9 +12,36 @@ export type ContactProps = {
   cta: { label: string; href: string };
   email?: string;
   slotFormulario?: React.ReactNode;
+  /** Legendas e card de modo de contratação. `modoValor: ""` esconde o card. */
+  rotulos?: Partial<ContactRotulos>;
 };
 
-export function Contact({ eyebrow, title, description, cta, email, slotFormulario }: ContactProps) {
+export type ContactRotulos = {
+  legendaCta: string;
+  legendaEmail: string;
+  modo: string;
+  modoValor: string;
+  modoDescricao: string;
+};
+
+const ROTULOS_PADRAO: ContactRotulos = {
+  legendaCta: "para quando o escopo já está claro",
+  legendaEmail: "para materiais e projetos maiores",
+  modo: "contract mode",
+  modoValor: "PJ / NFS-e / remoto",
+  modoDescricao: "O objetivo é sair da primeira conversa com risco, escopo e próximo passo claros.",
+};
+
+export function Contact({
+  eyebrow,
+  title,
+  description,
+  cta,
+  email,
+  slotFormulario,
+  rotulos,
+}: ContactProps) {
+  const r = { ...ROTULOS_PADRAO, ...rotulos };
   return (
     <section
       id="contato"
@@ -44,7 +71,7 @@ export function Contact({ eyebrow, title, description, cta, email, slotFormulari
               </span>
               <div className="min-w-0">
                 <p className="font-mono text-sm text-foreground">{cta.label}</p>
-                <p className="mt-1 text-xs text-gray-text">para quando o escopo já está claro</p>
+                <p className="mt-1 text-xs text-gray-text">{r.legendaCta}</p>
               </div>
             </a>
 
@@ -60,20 +87,18 @@ export function Contact({ eyebrow, title, description, cta, email, slotFormulari
                   <p className="font-mono text-sm text-foreground [overflow-wrap:anywhere]">
                     {email}
                   </p>
-                  <p className="mt-1 text-xs text-gray-text">para materiais e projetos maiores</p>
+                  <p className="mt-1 text-xs text-gray-text">{r.legendaEmail}</p>
                 </div>
               </a>
             )}
 
-            <div className="rounded border border-line bg-surface p-5 font-mono">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-gray-text">
-                contract mode
-              </p>
-              <p className="mt-4 text-sm text-foreground">PJ / NFS-e / remoto</p>
-              <p className="mt-2 text-xs leading-relaxed text-gray-text">
-                O objetivo é sair da primeira conversa com risco, escopo e próximo passo claros.
-              </p>
-            </div>
+            {r.modoValor && (
+              <div className="rounded border border-line bg-surface p-5 font-mono">
+                <p className="text-[10px] uppercase tracking-[0.24em] text-gray-text">{r.modo}</p>
+                <p className="mt-4 text-sm text-foreground">{r.modoValor}</p>
+                <p className="mt-2 text-xs leading-relaxed text-gray-text">{r.modoDescricao}</p>
+              </div>
+            )}
           </Reveal>
 
           {slotFormulario && (

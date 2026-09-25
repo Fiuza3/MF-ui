@@ -71,4 +71,17 @@ describe("Contact", () => {
     expect(screen.queryByText("💬")).toBeNull();
     expect(screen.getByRole("link", { name: /WhatsApp/ }).querySelector("svg")).not.toBeNull();
   });
+
+  it("legendas e o card de modo têm padrão, podem ser trocados e o card pode sumir", () => {
+    const base = { eyebrow: "e", title: "t", description: "d", cta: { label: "Zap", href: "#z" } };
+    const { rerender } = render(<Contact {...base} />);
+    expect(screen.getByText("contract mode")).toBeInTheDocument();
+
+    rerender(<Contact {...base} rotulos={{ modo: "contrato", legendaCta: "resposta rápida" }} />);
+    expect(screen.getByText("contrato")).toBeInTheDocument();
+    expect(screen.getByText("resposta rápida")).toBeInTheDocument();
+
+    rerender(<Contact {...base} rotulos={{ modoValor: "" }} />);
+    expect(screen.queryByText("contract mode")).toBeNull();
+  });
 });
