@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npx --yes pnpm@11 install --frozen-lockfile",
+  "buildCommand": "npx --yes pnpm@11 build-storybook",
+  "outputDirectory": "storybook-static",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
+}
