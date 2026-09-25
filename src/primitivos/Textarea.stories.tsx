@@ -8,7 +8,7 @@ const meta = {
   argTypes: { "aria-invalid": { control: "boolean" } },
   decorators: [
     (Story) => (
-      <div className="w-96">
+      <div className="w-[min(24rem,calc(100vw-2rem))]">
         <Story />
       </div>
     ),

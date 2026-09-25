@@ -13,7 +13,7 @@ const meta = {
   subcomponents: { AccordionItem, AccordionTrigger, AccordionContent },
   args: { type: "single", collapsible: true },
   render: (args) => (
-    <Accordion {...args} className="w-96">
+    <Accordion {...args} className="w-[min(24rem,calc(100vw-2rem))]">
       {perguntas.map((item) => (
         <AccordionItem key={item.id} value={item.id}>
           <AccordionTrigger>{item.pergunta}</AccordionTrigger>

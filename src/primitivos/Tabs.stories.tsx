@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Padrao: Story = {
   render: (args) => (
-    <Tabs {...args} className="w-96">
+    <Tabs {...args} className="w-[min(24rem,calc(100vw-2rem))]">
       <TabsList>
         <TabsTrigger value="visao-geral">Visão geral</TabsTrigger>
         <TabsTrigger value="faturas">Faturas</TabsTrigger>

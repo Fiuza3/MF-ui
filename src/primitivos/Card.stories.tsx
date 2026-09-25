@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Completo: Story = {
   render: (args) => (
-    <Card {...args} className="w-96">
+    <Card {...args} className="w-[min(24rem,calc(100vw-2rem))]">
       <CardHeader>
         <CardTitle>Plano mensal</CardTitle>
         <CardDescription>Manutenção e evolução contínua do sistema.</CardDescription>

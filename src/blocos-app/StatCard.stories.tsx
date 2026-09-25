@@ -33,13 +33,13 @@ export const SemVariacao: Story = { args: { delta: undefined, icon: undefined } 
 export const Grade: Story = {
   decorators: [
     (Story) => (
-      <div className="w-[48rem]">
+      <div className="w-[min(48rem,calc(100vw-2rem))]">
         <Story />
       </div>
     ),
   ],
   render: () => (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid gap-4 sm:grid-cols-3">
       <StatCard label="Clientes ativos" value="312" delta={{ value: "+8", direction: "up" }} />
       <StatCard label="Receita" value="R$ 41,2 mil" delta={{ value: "estável" }} />
       <StatCard label="Churn" value="2,1%" delta={{ value: "+0,4pp", direction: "down" }} />
