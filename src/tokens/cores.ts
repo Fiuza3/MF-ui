@@ -34,6 +34,8 @@ const NOMES = {
 
   alerta: "--warning",
   alertaTexto: "--warning-foreground",
+  sucesso: "--success",
+  sucessoTexto: "--success-foreground",
   erro: "--destructive",
   erroTexto: "--destructive-foreground",
 

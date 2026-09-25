@@ -30,7 +30,7 @@
   --popover-foreground: #f7fafc;
   --primary: #3df2e0;
   --primary-foreground: #0b0f14;
-  --secondary: #141c26;
+  --secondary: #28384b;
   --secondary-foreground: #f7fafc;
   --muted: #141c26;
   --muted-foreground: #a0aec0;
@@ -42,6 +42,8 @@
   --primary-hover: #5df5e6;
   --warning: #ffbd2e;
   --warning-foreground: #0b0f14;
+  --success: #4ade80;
+  --success-foreground: #0b0f14;
   --border: #1e2a38;
   --input: #546b82;
   --ring: #3df2e0;
@@ -69,7 +71,7 @@
   --popover-foreground: #1a1410;
   --primary: #b04e14;
   --primary-foreground: #fbf7ef;
-  --secondary: #efe7d6;
+  --secondary: #d4c2a1;
   --secondary-foreground: #1a1410;
   --muted: #efe7d6;
   --muted-foreground: #6b5e4a;
@@ -81,6 +83,8 @@
   --primary-hover: #96400c;
   --warning: #8a5a00;
   --warning-foreground: #fbf7ef;
+  --success: #276b32;
+  --success-foreground: #fbf7ef;
   --border: #e0d6c4;
   --input: #94825f;
   --ring: #b04e14;
@@ -139,6 +143,8 @@
   --color-primary-hover: var(--primary-hover);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

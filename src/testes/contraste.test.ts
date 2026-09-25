@@ -28,6 +28,9 @@ function contraste(a: string, b: string): number {
 
 const TEXTO_AA = 4.5; // WCAG 2.1 SC 1.4.3 — texto normal
 const UI_AA = 3.0; // WCAG 2.1 SC 1.4.11 — componentes e estados de foco
+// Fundo de botão sem borda precisa se separar da página. Não é número da WCAG:
+// é o piso medido em que o secondary deixou de parecer "botão fantasma" (era 1,1:1).
+const SUPERFICIE_DISTINTA = 1.5;
 
 /** [frente, fundo, mínimo, descrição] */
 const PARES: Array<[string, string, number, string]> = [
@@ -47,6 +50,10 @@ const PARES: Array<[string, string, number, string]> = [
   ["--warning-foreground", "--warning", TEXTO_AA, "texto dentro do aviso"],
   ["--warning", "--background", TEXTO_AA, "texto de aviso sobre o fundo"],
   ["--destructive", "--background", TEXTO_AA, "texto de erro sobre o fundo"],
+  ["--success-foreground", "--success", TEXTO_AA, "texto dentro do sucesso"],
+  ["--success", "--background", TEXTO_AA, "texto de sucesso sobre o fundo"],
+  ["--success", "--card", TEXTO_AA, "variação positiva sobre card"],
+  ["--secondary", "--background", SUPERFICIE_DISTINTA, "botão secundário distinguível do fundo"],
   ["--ring", "--background", UI_AA, "anel de foco sobre o fundo"],
   ["--ring", "--card", UI_AA, "anel de foco sobre card"],
   ["--input", "--background", UI_AA, "borda de campo sobre o fundo"],
