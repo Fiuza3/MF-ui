@@ -24,16 +24,18 @@ const meta = {
           <Logo />
         </div>
         {itensMenu.map(({ label, icon: Icone }) => (
-          <Button key={label} variant="ghost" className="justify-start">
-            <Icone /> {label}
+          <Button key={label} asChild variant="ghost" className="justify-start">
+            <a href={`#${label.toLowerCase()}`}>
+              <Icone /> {label}
+            </a>
           </Button>
         ))}
       </nav>
     ),
     topbar: (
-      <div className="flex w-full items-center justify-end px-6 text-sm text-muted-foreground">
+      <span className="ml-auto truncate text-sm text-muted-foreground">
         marcus@mfdesenvolvimento.online
-      </div>
+      </span>
     ),
     children: (
       <>
