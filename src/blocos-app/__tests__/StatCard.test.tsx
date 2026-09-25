@@ -39,6 +39,30 @@ describe("StatCard", () => {
     expect(container.querySelector("[data-direction=neutral] svg")).toBeNull();
   });
 
+  it("subir é positivo por padrão e usa a cor de sucesso", () => {
+    const { container } = render(
+      <StatCard label="Receita" value="R$ 1" delta={{ value: "+12%", direction: "up" }} />,
+    );
+
+    expect(container.querySelector("[data-direction=up]")?.className).toMatch(/text-success/);
+  });
+
+  // Churn e custo: subir é ruim. A seta segue o número, a cor segue o significado.
+  it("tom separa o significado da direção para métrica invertida", () => {
+    const { container } = render(
+      <StatCard
+        label="Churn"
+        value="2,1%"
+        delta={{ value: "+0,4pp", direction: "up", tom: "negativo" }}
+      />,
+    );
+    const delta = container.querySelector("[data-direction=up]");
+
+    expect(delta?.querySelector("svg")).toBeTruthy();
+    expect(delta?.className).toMatch(/text-destructive/);
+    expect(delta?.className).not.toMatch(/text-success/);
+  });
+
   it("renderiza o icon quando informado", () => {
     const { container } = render(
       <StatCard label="Receita" value="R$ 42.000" icon={<svg data-testid="icon" />} />,

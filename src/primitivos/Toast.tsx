@@ -33,7 +33,7 @@ const toastVariants = cva(
     variants: {
       variant: {
         default: "bg-popover text-popover-foreground border-border",
-        success: "bg-popover text-popover-foreground border-primary/40",
+        success: "bg-popover text-popover-foreground border-success/60",
         destructive:
           "bg-destructive text-destructive-foreground border-destructive [&_[data-slot=toast-description]]:text-destructive-foreground/85 [&_[data-slot=toast-action]]:border-destructive-foreground/40 [&_[data-slot=toast-action]]:hover:bg-destructive-foreground/10 [&_[data-slot=toast-action]]:hover:text-destructive-foreground",
       },

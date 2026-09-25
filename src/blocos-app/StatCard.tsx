@@ -7,6 +7,11 @@ import { Card, CardContent } from "../primitivos/Card";
 export type StatCardDelta = {
   value: React.ReactNode;
   direction?: "up" | "down" | "neutral";
+  /**
+   * Significado da variação. Por padrão subir é positivo; em métrica invertida
+   * (churn, custo, tempo de resposta) passe `tom: "negativo"` com `direction: "up"`.
+   */
+  tom?: "positivo" | "negativo" | "neutro";
 };
 
 export type StatCardProps = {
@@ -17,10 +22,18 @@ export type StatCardProps = {
   className?: string;
 };
 
-const deltaCorPorDirecao: Record<NonNullable<StatCardDelta["direction"]>, string> = {
-  up: "text-primary",
-  down: "text-destructive",
-  neutral: "text-muted-foreground",
+type Tom = NonNullable<StatCardDelta["tom"]>;
+
+const tomPorDirecao: Record<NonNullable<StatCardDelta["direction"]>, Tom> = {
+  up: "positivo",
+  down: "negativo",
+  neutral: "neutro",
+};
+
+const corPorTom: Record<Tom, string> = {
+  positivo: "text-success",
+  negativo: "text-destructive",
+  neutro: "text-muted-foreground",
 };
 
 const setaPorDirecao: Record<NonNullable<StatCardDelta["direction"]>, React.ReactNode> = {
@@ -32,6 +45,7 @@ const setaPorDirecao: Record<NonNullable<StatCardDelta["direction"]>, React.Reac
 /** Cartão de métrica única (label + valor + variação opcional) para dashboards. */
 function StatCard({ label, value, icon, delta, className }: StatCardProps) {
   const direcao = delta?.direction ?? "neutral";
+  const tom = delta?.tom ?? tomPorDirecao[direcao];
 
   return (
     <Card className={cn("gap-1 py-5", className)}>
@@ -46,7 +60,7 @@ function StatCard({ label, value, icon, delta, className }: StatCardProps) {
               data-direction={direcao}
               className={cn(
                 "inline-flex items-center gap-0.5 text-xs font-medium [&_svg]:size-3.5 [&_svg]:shrink-0",
-                deltaCorPorDirecao[direcao],
+                corPorTom[tom],
               )}
             >
               {setaPorDirecao[direcao]}

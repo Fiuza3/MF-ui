@@ -30,6 +30,16 @@ export const Queda: Story = {
   decorators: cartaoUnico,
   args: { label: "Taxa de entrega", value: "91%", delta: { value: "-3pp", direction: "down" } },
 };
+// Métrica invertida: o churn subiu (seta ↑), e isso é ruim (cor de erro).
+export const MetricaInvertida: Story = {
+  decorators: cartaoUnico,
+  args: {
+    label: "Churn",
+    value: "2,1%",
+    delta: { value: "+0,4pp", direction: "up", tom: "negativo" },
+  },
+};
+
 export const SemVariacao: Story = {
   decorators: cartaoUnico,
   args: { delta: undefined, icon: undefined },
