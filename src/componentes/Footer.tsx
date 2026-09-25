@@ -15,6 +15,24 @@ export type FooterProps = {
   cnpj?: string;
   nomeEmpresa?: string;
   onLogoClick?: () => void;
+  /** Rótulos da estética de terminal. O padrão é o texto do site da MF. */
+  rotulos?: Partial<FooterRotulos>;
+};
+
+export type FooterRotulos = {
+  resumo: string;
+  local: string;
+  cnpj: string;
+  contato: string;
+  saida: string;
+};
+
+const ROTULOS_PADRAO: FooterRotulos = {
+  resumo: "runtime summary",
+  local: "location",
+  cnpj: "cnpj",
+  contato: "contact",
+  saida: "process.exit(0)",
 };
 
 export function Footer({
@@ -24,8 +42,10 @@ export function Footer({
   cnpj,
   nomeEmpresa = "MF Desenvolvimento",
   onLogoClick,
+  rotulos,
 }: FooterProps) {
   const year = new Date().getFullYear();
+  const r = { ...ROTULOS_PADRAO, ...rotulos };
 
   return (
     <footer
@@ -59,13 +79,11 @@ export function Footer({
           <div className="grid min-w-0 gap-8 font-mono">
             {(email || localizacao || cnpj) && (
               <div className="rounded border border-line bg-surface p-5">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-gray-text">
-                  runtime summary
-                </p>
+                <p className="text-[10px] uppercase tracking-[0.28em] text-gray-text">{r.resumo}</p>
                 <div className="mt-5 grid gap-3 text-sm">
                   {localizacao && (
                     <p className="flex items-baseline justify-between gap-4 border-b border-line pb-2">
-                      <span className="text-gray-text shrink-0">location</span>
+                      <span className="text-gray-text shrink-0">{r.local}</span>
                       <span className="text-foreground min-w-0 text-right [overflow-wrap:anywhere]">
                         {localizacao}
                       </span>
@@ -73,7 +91,7 @@ export function Footer({
                   )}
                   {cnpj && (
                     <p className="flex items-baseline justify-between gap-4 border-b border-line pb-2">
-                      <span className="text-gray-text shrink-0">cnpj</span>
+                      <span className="text-gray-text shrink-0">{r.cnpj}</span>
                       <span className="text-foreground min-w-0 text-right [overflow-wrap:anywhere]">
                         {cnpj}
                       </span>
@@ -81,7 +99,7 @@ export function Footer({
                   )}
                   {email && (
                     <p className="flex items-baseline justify-between gap-4">
-                      <span className="text-gray-text shrink-0">contact</span>
+                      <span className="text-gray-text shrink-0">{r.contato}</span>
                       <a
                         href={`mailto:${email}`}
                         className="text-cyan hover:text-foreground focus-visible:ring-cyan/70 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-2 focus-visible:outline-none"
@@ -113,7 +131,7 @@ export function Footer({
                 © {year} {nomeEmpresa}
               </p>
               <p>
-                <span className="text-cyan">$</span> process.exit(0)
+                <span className="text-cyan">$</span> {r.saida}
               </p>
             </div>
           </div>

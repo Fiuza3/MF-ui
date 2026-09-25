@@ -47,4 +47,22 @@ describe("Footer", () => {
       screen.getByRole("link", { name: "contato@mfdesenvolvimento.online" }).className,
     ).toMatch(/break-all|\[overflow-wrap:anywhere\]/);
   });
+
+  it("rótulos de terminal têm padrão e podem ser trocados", () => {
+    const { rerender } = render(<Footer email="a@b.co" localizacao="BH" />);
+    expect(screen.getByText("runtime summary")).toBeInTheDocument();
+    expect(screen.getByText("location")).toBeInTheDocument();
+
+    rerender(
+      <Footer
+        email="a@b.co"
+        localizacao="BH"
+        rotulos={{ resumo: "resumo", local: "local", contato: "contato", saida: "fim" }}
+      />,
+    );
+    expect(screen.getByText("resumo")).toBeInTheDocument();
+    expect(screen.getByText("local")).toBeInTheDocument();
+    expect(screen.getByText("fim")).toBeInTheDocument();
+    expect(screen.queryByText("runtime summary")).toBeNull();
+  });
 });
