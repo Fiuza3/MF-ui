@@ -18,11 +18,14 @@ describe("PaginationControl", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("lista todas as paginas quando cabem sem elipse", () => {
+  it("no desktop lista todas as paginas quando cabem sem elipse", () => {
     render(<PaginationControl page={3} totalPages={7} onPageChange={() => {}} />);
+    const elipsesNoDesktop = screen
+      .queryAllByText("Mais páginas")
+      .filter((el) => !el.closest("li")?.className.split(" ").includes("sm:hidden"));
 
     expect(paginasVisiveis()).toEqual(["1", "2", "3", "4", "5", "6", "7"]);
-    expect(screen.queryByText("Mais páginas")).toBeNull();
+    expect(elipsesNoDesktop).toEqual([]);
   });
 
   it("no meio de um total grande mantem primeira, ultima e uma janela ao redor", () => {
@@ -69,15 +72,25 @@ describe("PaginationControl", () => {
     }
   });
 
-  it("no mobile so a janela ao redor da atual fica visivel, para caber em 320px", () => {
-    render(<PaginationControl page={5} totalPages={10} onPageChange={() => {}} />);
+  // Abaixo de sm cabem ~7 itens em 320px. Esconder primeira/última/elipse fazia
+  // o usuário perder a noção do total ("‹ 1 2 ›" com 12 páginas); some só a vizinha.
+  function visiveisNoMobile(): string[] {
+    return screen
+      .getAllByRole("listitem")
+      .filter((li) => !li.className.split(" ").includes("hidden"))
+      .map((li) => li.textContent?.trim() ?? "");
+  }
 
-    const itens = screen.getAllByRole("listitem");
-    const escondidosNoMobile = itens
-      .filter((li) => li.className.split(" ").includes("hidden"))
-      .map((li) => li.textContent?.trim());
+  it.each([
+    [5, 10, ["Anterior", "1", "Mais páginas", "5", "Mais páginas", "10", "Próxima"]],
+    [1, 12, ["Anterior", "1", "2", "Mais páginas", "12", "Próxima"]],
+    [4, 7, ["Anterior", "1", "Mais páginas", "4", "Mais páginas", "7", "Próxima"]],
+    [2, 3, ["Anterior", "1", "2", "3", "Próxima"]],
+    [3, 5, ["Anterior", "1", "2", "3", "4", "5", "Próxima"]],
+  ])("no mobile, página %i de %i mostra %j", (page, totalPages, esperado) => {
+    render(<PaginationControl page={page} totalPages={totalPages} onPageChange={() => {}} />);
 
-    expect(escondidosNoMobile).toEqual(["1", "Mais páginas", "Mais páginas", "10"]);
+    expect(visiveisNoMobile()).toEqual(esperado);
   });
 
   it("emite a pagina escolhida no clique", async () => {

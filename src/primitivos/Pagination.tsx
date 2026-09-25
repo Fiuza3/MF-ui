@@ -120,15 +120,61 @@ export type PaginationControlProps = {
   className?: string;
 };
 
-// Abaixo de sm, 7 páginas + setas somam ~360px e estouram um celular de 375px;
-// só a janela atual±1 fica, o que cabe até em 320px.
-const SO_A_PARTIR_DE_SM = "hidden sm:block";
+// Onde cada item aparece. Abaixo de sm cabem ~7 itens em 320px (setas incluídas):
+// até 5 páginas mostra tudo; acima disso fica "1 … atual … última", para o usuário
+// não perder a noção do total.
+type Onde = "sempre" | "desktop" | "mobile";
+
+type ItemPaginacao =
+  { tipo: "pagina"; pagina: number; onde: Onde } | { tipo: "elipse"; chave: string; onde: Onde };
+
+const CLASSE_POR_ONDE: Record<Onde, string | undefined> = {
+  sempre: undefined,
+  desktop: "hidden sm:block",
+  mobile: "sm:hidden",
+};
+
+const MAX_PAGINAS_NO_MOBILE = 5;
+
+function montarItens(paginaAtual: number, totalPaginas: number): ItemPaginacao[] {
+  const lista = gerarPaginasVisiveis(paginaAtual, totalPaginas);
+  const cabeTudo = lista.length <= MAX_PAGINAS_NO_MOBILE;
+  const noMobile = new Set([1, paginaAtual, totalPaginas]);
+  const itens: ItemPaginacao[] = [];
+  let ultimaNoMobile = 0;
+
+  for (const p of lista) {
+    if (p === "ellipsis") {
+      itens.push({
+        tipo: "elipse",
+        chave: `e${itens.length}`,
+        onde: cabeTudo ? "sempre" : "desktop",
+      });
+    } else if (cabeTudo || !noMobile.has(p)) {
+      itens.push({ tipo: "pagina", pagina: p, onde: cabeTudo ? "sempre" : "desktop" });
+    } else {
+      if (ultimaNoMobile && p > ultimaNoMobile + 1) marcarElipseNoMobile(itens, ultimaNoMobile);
+      itens.push({ tipo: "pagina", pagina: p, onde: "sempre" });
+      ultimaNoMobile = p;
+    }
+  }
+  return itens;
+}
+
+/** Reaproveita a elipse do desktop no trecho pulado; se não houver, cria uma só do mobile. */
+function marcarElipseNoMobile(itens: ItemPaginacao[], desde: number) {
+  const inicio = itens.findIndex((i) => i.tipo === "pagina" && i.pagina === desde) + 1;
+  const elipse = itens.slice(inicio).find((i) => i.tipo === "elipse");
+  if (elipse) {
+    elipse.onde = "sempre";
+    return;
+  }
+  itens.push({ tipo: "elipse", chave: `m${desde}`, onde: "mobile" });
+}
 
 /** Paginação completa e controlada — usada diretamente ou via DataTable. */
 function PaginationControl({ page, totalPages, onPageChange, className }: PaginationControlProps) {
   if (totalPages <= 1) return null;
-
-  const paginasVisiveis = gerarPaginasVisiveis(page, totalPages);
 
   return (
     <Pagination className={className}>
@@ -137,18 +183,18 @@ function PaginationControl({ page, totalPages, onPageChange, className }: Pagina
           <PaginationPrevious disabled={page <= 1} onClick={() => onPageChange(page - 1)} />
         </PaginationItem>
 
-        {paginasVisiveis.map((p, index) =>
-          p === "ellipsis" ? (
-            <PaginationItem key={`ellipsis-${index}`} className={SO_A_PARTIR_DE_SM}>
+        {montarItens(page, totalPages).map((item) =>
+          item.tipo === "elipse" ? (
+            <PaginationItem key={item.chave} className={CLASSE_POR_ONDE[item.onde]}>
               <PaginationEllipsis />
             </PaginationItem>
           ) : (
-            <PaginationItem
-              key={p}
-              className={Math.abs(p - page) > 1 ? SO_A_PARTIR_DE_SM : undefined}
-            >
-              <PaginationLink isActive={p === page} onClick={() => onPageChange(p)}>
-                {p}
+            <PaginationItem key={item.pagina} className={CLASSE_POR_ONDE[item.onde]}>
+              <PaginationLink
+                isActive={item.pagina === page}
+                onClick={() => onPageChange(item.pagina)}
+              >
+                {item.pagina}
               </PaginationLink>
             </PaginationItem>
           ),
