@@ -20,6 +20,11 @@ function arquivos(): string[] {
   return globSync("**/*.tsx", { cwd: raiz }).map((f) => resolve(raiz, f));
 }
 
+/** Código de componente publicado: fora stories e testes, que podem citar classes proibidas. */
+function ehComponente(caminho: string): boolean {
+  return !caminho.includes(".stories.") && !/[\\/](testes|__tests__)[\\/]/.test(caminho);
+}
+
 const TOKENS_DE_TAMANHO = /text-\[var\(--(text|leading|spacing)-/;
 
 describe("classes do Tailwind", () => {
@@ -47,7 +52,7 @@ describe("classes do Tailwind", () => {
     const infratores: string[] = [];
 
     for (const caminho of arquivos()) {
-      if (caminho.includes(".stories.")) continue;
+      if (!ehComponente(caminho)) continue;
       readFileSync(caminho, "utf8")
         .split("\n")
         .forEach((linha, i) => {
@@ -70,7 +75,7 @@ describe("estado interativo", () => {
     const infratores: string[] = [];
 
     for (const caminho of arquivos()) {
-      if (caminho.includes(".stories.") || /[\\/](testes|__tests__)[\\/]/.test(caminho)) continue;
+      if (!ehComponente(caminho)) continue;
       readFileSync(caminho, "utf8")
         .split("\n")
         .forEach((linha, i) => {
@@ -81,5 +86,26 @@ describe("estado interativo", () => {
     }
 
     expect(infratores, "Use hover:bg-foreground/10 hover:text-foreground").toEqual([]);
+  });
+});
+
+// Primitivos usavam anel de 3px em --ring/50 e blocos 2px em --cyan/70: o mesmo
+// foco de teclado com duas aparências na mesma página.
+describe("anel de foco", () => {
+  it("todo anel de foco usa 3px em --ring, sem variação por família", () => {
+    const infratores: string[] = [];
+
+    for (const caminho of arquivos()) {
+      if (!ehComponente(caminho)) continue;
+      readFileSync(caminho, "utf8")
+        .split("\n")
+        .forEach((linha, i) => {
+          if (/focus-visible:ring-(?:2|cyan)(?![\w-])|focus-visible:ring-cyan\//.test(linha)) {
+            infratores.push(`${caminho.replace(raiz, "src")}:${i + 1}`);
+          }
+        });
+    }
+
+    expect(infratores, "Use focus-visible:ring-[3px] focus-visible:ring-ring/50").toEqual([]);
   });
 });

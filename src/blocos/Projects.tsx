@@ -29,7 +29,7 @@ export type ProjectsProps = {
 
 const ROTULO = "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text";
 const TAG = "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text";
-const FOCO = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70";
+const FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
 
 function rotuloDoFrame(project: ProjectItem, index: number): string {
   return [`frame ${String(index + 1).padStart(2, "0")}`, project.ano, project.categoria]

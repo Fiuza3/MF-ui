@@ -18,7 +18,7 @@ export type NavbarProps = {
   onLogoClick?: () => void;
 };
 
-const FOCO = "focus-visible:ring-cyan/70 focus-visible:ring-2 focus-visible:outline-none";
+const FOCO = "focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none";
 
 function propsDoLinkDeMenu(link: NavLink) {
   return link.externo ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};

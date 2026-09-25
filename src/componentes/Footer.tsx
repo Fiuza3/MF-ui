@@ -102,7 +102,7 @@ export function Footer({
                       <span className="text-gray-text shrink-0">{r.contato}</span>
                       <a
                         href={`mailto:${email}`}
-                        className="text-cyan hover:text-foreground focus-visible:ring-cyan/70 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-2 focus-visible:outline-none"
+                        className="text-cyan hover:text-foreground focus-visible:ring-ring/50 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-[3px] focus-visible:outline-none"
                       >
                         {email}
                       </a>
@@ -118,7 +118,7 @@ export function Footer({
                   <a
                     key={link.href}
                     href={link.href}
-                    className="border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-cyan/70 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                    className="border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring/50 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
                   >
                     {link.label}
                   </a>
