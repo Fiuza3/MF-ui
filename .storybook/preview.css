@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "../src/tokens/globals.css";
+@import "../src/tokens/utilitarios.css";
+
+/* Stories ficam fora do pacote publicado, mas usam utilities que os
+   componentes não usam — sem isso o Tailwind não gera essas classes. */
+@source "../src";
+
+/* Os consumers carregam Geist via next/font; aqui vem do Google Fonts no preview-head. */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
