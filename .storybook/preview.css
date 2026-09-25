@@ -5,20 +5,3 @@
 /* Stories ficam fora do pacote publicado, mas usam utilities que os
    componentes não usam — sem isso o Tailwind não gera essas classes. */
 @source "../src";
-
-/* Os consumers carregam Geist via next/font; aqui vem do Google Fonts no preview-head. */
-/* Base que os consumers declaram no próprio globals (padrão shadcn); o pacote
-   não publica, então sem isso toda borda cai no currentColor do Tailwind v4. */
-@layer base {
-  *,
-  ::before,
-  ::after {
-    border-color: var(--border);
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
-}

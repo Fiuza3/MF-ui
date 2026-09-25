@@ -1,3 +1,8 @@
+/* Dialog, Select, Toast, Tooltip e Accordion animam com as utilities deste
+   pacote. Vem daqui, e não do app, porque sem ele as classes existem no JSX
+   mas não geram CSS — o componente abre "no tranco" sem erro nenhum. */
+@import "tw-animate-css";
+
 /* Fonte do logo <MF/> — subset de Geist Mono 700 (8 glifos, ~1KB) embutido
    para o logo renderizar IDÊNTICO em todo consumer, sem depender de fontes
    carregadas pelo app nem do sistema operacional do visitante. */
@@ -186,4 +191,20 @@
   --shadow-md: 0 4px 16px oklch(0 0 0 / 0.4);
   --shadow-lg: 0 8px 32px oklch(0 0 0 / 0.5);
   --shadow-glow: 0 0 20px var(--cyan-glow), 0 0 60px var(--cyan-dim);
+}
+
+/* Tailwind v4 pinta `border` sem cor com currentColor: sem esta base, todo
+   Card/Input/Table do pacote ganha borda da cor do texto em vez do token. */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
 }
