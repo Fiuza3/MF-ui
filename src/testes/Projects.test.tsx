@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Projects } from "../blocos/Projects";
 
 describe("Projects", () => {
@@ -71,5 +72,76 @@ describe("Projects", () => {
       (el.getAttribute("style") ?? "").includes("opacity:0"),
     );
     expect(escondidos).toHaveLength(0);
+  });
+
+  function renderizar(itens = projects) {
+    return render(
+      <Projects eyebrow="projetos" title="Cases" description="Recortes." projects={itens} />,
+    );
+  }
+
+  function abrirCaseDe(titulo: string): HTMLElement {
+    const card = screen
+      .getAllByTestId("project-item")
+      .find((el) => within(el).queryByRole("heading", { name: titulo }));
+    if (!card) throw new Error(`card de ${titulo} não encontrado`);
+    return within(card).getByRole("button", { name: "abrir case" });
+  }
+
+  // O modal caseiro não travava o scroll, não tinha portal e não devolvia o foco.
+  it("o case abre como diálogo nomeado pelo título e devolve o foco ao fechar", async () => {
+    const user = userEvent.setup();
+    renderizar();
+    const botao = abrirCaseDe("Plataforma de RH");
+
+    await user.click(botao);
+    expect(screen.getByRole("dialog", { name: "Plataforma de RH" })).toBeInTheDocument();
+
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(botao).toHaveFocus();
+  });
+
+  it("o diálogo do case é o Dialog da lib, com fechar padrão", async () => {
+    const user = userEvent.setup();
+    renderizar();
+
+    await user.click(abrirCaseDe("Plataforma de RH"));
+    const dialogo = screen.getByRole("dialog");
+
+    expect(dialogo).toHaveAttribute("data-slot", "dialog-content");
+    expect(within(dialogo).getByRole("button", { name: "Fechar" })).toBeInTheDocument();
+    expect(dialogo).toHaveTextContent("métrica");
+  });
+
+  // Sem mockup, min-h + justify-between deixava ~250px vazios no meio do card.
+  it("altura mínima do card só existe quando há mockup", () => {
+    const { container } = renderizar([
+      { title: "Sem mockup" },
+      { title: "Com mockup", mockup: <div>tela</div> },
+    ]);
+    const [semMockup, comMockup] = Array.from(
+      container.querySelectorAll("[data-testid=project-item] article"),
+    );
+
+    expect(semMockup?.className).not.toMatch(/min-h-\[/);
+    expect(comMockup?.className).toMatch(/min-h-\[/);
+  });
+
+  it("href e categoria informados aparecem no card", () => {
+    renderizar([{ title: "Site", href: "https://exemplo.com", categoria: "Web" }]);
+    const card = screen.getByTestId("project-item");
+
+    expect(within(card).getByRole("link", { name: /ver projeto/i })).toHaveAttribute(
+      "href",
+      "https://exemplo.com",
+    );
+    expect(card).toHaveTextContent("Web");
+  });
+
+  it("o trilho de cases é um grupo nomeado em português", () => {
+    renderizar();
+
+    expect(screen.getByRole("group", { name: "Sequência de cases" })).toBeInTheDocument();
   });
 });

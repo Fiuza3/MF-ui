@@ -1,17 +1,19 @@
 "use client";
 
 import * as React from "react";
-import { useState, useEffect, useRef } from "react";
-import { X } from "lucide-react";
+import { useRef, useState, type RefObject } from "react";
+import { ArrowUpRightIcon } from "lucide-react";
 import { Reveal } from "../componentes/Reveal";
+import { propsDeLink } from "../lib/link-externo";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../primitivos/Dialog";
 
 export type ProjectItem = {
   title: string;
   description?: string;
   tags?: string[];
   mockup?: React.ReactNode;
+  /** Link do projeto no ar — vira "ver projeto" no card. */
   href?: string;
-  /** optional metadata shown in cards */
   ano?: number;
   categoria?: string;
   metrica?: string;
@@ -25,229 +27,192 @@ export type ProjectsProps = {
   projects: ProjectItem[];
 };
 
-interface ModalProject {
-  title: string;
-  description?: string;
-  tags?: string[];
-  ano?: number;
-  metrica?: string;
-  resultado?: string;
+const ROTULO = "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text";
+const TAG = "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text";
+const FOCO = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70";
+
+function rotuloDoFrame(project: ProjectItem, index: number): string {
+  return [`frame ${String(index + 1).padStart(2, "0")}`, project.ano, project.categoria]
+    .filter(Boolean)
+    .join(" / ");
 }
 
-function ProjectModal({ project, onClose }: { project: ModalProject; onClose: () => void }) {
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-
-      if (event.key === "Tab" && dialogRef.current) {
-        const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
-        );
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-
-        if (!first || !last) return;
-
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    window.setTimeout(() => closeRef.current?.focus(), 30);
-
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
-
+function Tags({ tags }: { tags: string[] }) {
   return (
-    <div className="mf-entrada mf-entrada-up fixed inset-0 z-[80] flex items-center justify-center p-5">
-      {/* O backdrop e quem fecha ao clique. Poe-lo aqui, e nao no container,
-          dispensa o stopPropagation do dialogo e mantem o container sem
-          handler — um div sem papel nao deve responder a mouse ou teclado. */}
-      <div
-        className="absolute inset-0 bg-background/85 backdrop-blur-md"
-        aria-hidden="true"
-        onMouseDown={onClose}
-      />
-      <div
-        ref={dialogRef}
-        className="mf-entrada mf-entrada-up relative z-10 w-full max-w-3xl rounded border border-line bg-surface p-6 shadow-2xl shadow-cyan/5 lg:p-8"
-        role="dialog"
-        aria-modal="true"
-        aria-label={`Case tecnico: ${project.title}`}
-      >
-        <button
-          ref={closeRef}
-          type="button"
-          onClick={onClose}
-          aria-label="Fechar case"
-          className="absolute right-4 top-4 rounded border border-line p-2 text-gray-text transition-colors hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
-        >
-          <X className="size-4" aria-hidden="true" />
-        </button>
-
-        <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
-          case.log{project.ano ? ` / ${project.ano}` : ""}
-        </p>
-        <h3 className="mt-4 max-w-2xl text-3xl font-black tracking-tight text-foreground lg:text-5xl">
-          {project.title}
-        </h3>
-        {project.description && (
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-text">
-            {project.description}
-          </p>
-        )}
-
-        {(project.metrica || project.resultado) && (
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {project.metrica && (
-              <div className="rounded border border-line bg-background/50 p-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
-                  metrica
-                </p>
-                <p className="mt-3 font-mono text-xl text-cyan">{project.metrica}</p>
-              </div>
-            )}
-            {project.resultado && (
-              <div className="rounded border border-line bg-background/50 p-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
-                  resultado
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-foreground">{project.resultado}</p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {project.tags && project.tags.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded border border-line px-2 py-1 font-mono text-xs text-gray-text"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span key={tag} className={TAG}>
+          {tag}
+        </span>
+      ))}
     </div>
   );
 }
 
-function ProjectFrame({
+function Metrica({ rotulo, valor }: { rotulo: string; valor: string }) {
+  return (
+    <div className="border-line bg-background/50 rounded border p-4">
+      <p className={ROTULO}>{rotulo}</p>
+      <p className="text-cyan mt-3 font-mono text-xl">{valor}</p>
+    </div>
+  );
+}
+
+// Sem DialogTrigger o Radix não sabe quem abriu o case: a origem vem de fora
+// para o foco voltar ao "abrir case" ao fechar.
+function CaseTecnico({
   project,
-  index,
-  onOpen,
+  origem,
 }: {
   project: ProjectItem;
-  index: number;
-  onOpen: (project: ProjectItem) => void;
+  origem: RefObject<HTMLElement | null>;
 }) {
+  return (
+    <DialogContent
+      onCloseAutoFocus={(evento) => {
+        evento.preventDefault();
+        origem.current?.focus();
+      }}
+      className="bg-surface border-line rounded p-6 sm:max-w-3xl lg:p-8"
+    >
+      <div className="pr-10">
+        <p className="text-cyan font-mono text-xs tracking-[0.28em] uppercase">
+          case.log{project.ano ? ` / ${project.ano}` : ""}
+        </p>
+        <DialogTitle className="text-foreground mt-4 max-w-2xl text-3xl leading-none font-black tracking-tight lg:text-5xl">
+          {project.title}
+        </DialogTitle>
+      </div>
+      {project.description && (
+        <DialogDescription className="text-gray-text max-w-2xl text-base leading-relaxed">
+          {project.description}
+        </DialogDescription>
+      )}
+      {(project.metrica || project.resultado) && (
+        <div className="mt-2 grid gap-4 sm:grid-cols-2">
+          {project.metrica && <Metrica rotulo="métrica" valor={project.metrica} />}
+          {project.resultado && (
+            <div className="border-line bg-background/50 rounded border p-4">
+              <p className={ROTULO}>resultado</p>
+              <p className="text-foreground mt-3 text-sm leading-relaxed">{project.resultado}</p>
+            </div>
+          )}
+        </div>
+      )}
+      {project.tags && project.tags.length > 0 && <Tags tags={project.tags} />}
+    </DialogContent>
+  );
+}
+
+type FrameProps = { project: ProjectItem; index: number; onOpen: (project: ProjectItem) => void };
+
+function ProjectFrame({ project, index, onOpen }: FrameProps) {
+  // min-h só com mockup: sem ele, min-h + justify-between abria ~250px vazios no meio.
+  const altura = project.mockup ? "min-h-[540px] sm:min-h-[620px]" : "";
   return (
     <Reveal
       as="article"
       margin="-80px"
       delayMs={index * 60}
-      className="project-frame group flex min-h-[540px] w-[88vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 sm:min-h-[620px] sm:w-[76vw] lg:w-[56vw] lg:p-8 xl:w-[52vw] 2xl:w-[44vw]"
+      className={`project-frame group border-line bg-surface hover:border-cyan/60 flex w-[88vw] shrink-0 scroll-ml-5 flex-col justify-between rounded border p-5 transition-colors sm:w-[76vw] lg:w-[56vw] lg:p-8 xl:w-[52vw] 2xl:w-[44vw] ${altura}`}
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.15fr] lg:items-start">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">
-            frame {String(index + 1).padStart(2, "0")}
-            {project.ano ? ` / ${project.ano}` : ""}
+          <p className="text-cyan font-mono text-xs tracking-[0.28em] uppercase">
+            {rotuloDoFrame(project, index)}
           </p>
-          <h3 className="mt-5 max-w-2xl text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.88] tracking-tight text-foreground">
+          <h3 className="text-foreground mt-5 max-w-2xl text-[clamp(2.2rem,5vw,5.8rem)] leading-[0.88] font-black tracking-tight">
             {project.title}
           </h3>
           {project.description && (
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-text">
+            <p className="text-gray-text mt-6 max-w-xl text-base leading-relaxed">
               {project.description}
             </p>
           )}
         </div>
-
         {project.mockup && (
           <div
-            className="project-mockup relative overflow-hidden rounded border border-line bg-background/70 p-4"
+            className="project-mockup border-line bg-background/70 relative overflow-hidden rounded border p-4"
             aria-hidden="true"
           >
             {project.mockup}
           </div>
         )}
       </div>
+      <RodapeDoFrame project={project} onOpen={onOpen} />
+    </Reveal>
+  );
+}
 
-      <div className="mt-8 grid gap-5 border-t border-line pt-6 md:grid-cols-[0.9fr_1fr_auto] md:items-end">
-        {project.metrica && (
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
-              metrica forte
-            </p>
-            <p className="mt-2 font-mono text-xl text-cyan lg:text-2xl">{project.metrica}</p>
-          </div>
-        )}
-        {project.tags && project.tags.length > 0 && (
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text">
-              stack
-            </p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded border border-line px-2 py-1 font-mono text-xs text-gray-text"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+function RodapeDoFrame({ project, onOpen }: Omit<FrameProps, "index">) {
+  return (
+    <div className="border-line mt-8 grid gap-5 border-t pt-6 md:grid-cols-[0.9fr_1fr_auto] md:items-end">
+      {project.metrica && (
+        <div>
+          <p className={ROTULO}>métrica forte</p>
+          <p className="text-cyan mt-2 font-mono text-xl lg:text-2xl">{project.metrica}</p>
+        </div>
+      )}
+      {project.tags && project.tags.length > 0 && (
+        <div>
+          <p className={`${ROTULO} mb-2`}>stack</p>
+          <Tags tags={project.tags} />
+        </div>
+      )}
+      <div className="flex flex-wrap gap-2 md:col-start-3 md:justify-end">
+        {project.href && (
+          <a
+            href={project.href}
+            {...propsDeLink(project.href)}
+            className={`border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex items-center gap-1.5 rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO}`}
+          >
+            ver projeto <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+          </a>
         )}
         <button
           type="button"
           onClick={() => onOpen(project)}
-          className="rounded border border-cyan px-4 py-3 font-mono text-xs font-bold uppercase tracking-[0.18em] text-cyan transition-colors hover:bg-cyan hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70"
+          className={`border-cyan text-cyan hover:bg-cyan hover:text-background rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO}`}
         >
           abrir case
         </button>
       </div>
-    </Reveal>
+    </div>
   );
 }
 
 export function Projects({ eyebrow, title, description, projects }: ProjectsProps) {
   const [selected, setSelected] = useState<ProjectItem | null>(null);
+  const origemRef = useRef<HTMLElement | null>(null);
+  const abrir = (project: ProjectItem) => {
+    origemRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setSelected(project);
+  };
   const loopedProjects = [...projects, ...projects];
 
   return (
     <section
       id="projetos"
       aria-label="Projetos"
-      className="relative overflow-hidden border-t border-line py-16 lg:py-24"
+      className="border-line relative overflow-hidden border-t py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <Reveal margin="-80px" className="mb-8 lg:mb-10">
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.34em] text-cyan">{eyebrow}</p>
-          <h2 className="text-[length:var(--text-h2)] font-black leading-[0.96] tracking-tight text-foreground">
+          <p className="text-cyan mb-4 font-mono text-xs tracking-[0.34em] uppercase">{eyebrow}</p>
+          <h2 className="text-foreground text-[length:var(--text-h2)] leading-[0.96] font-black tracking-tight">
             {title}
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-text">{description}</p>
+          <p className="text-gray-text mt-4 max-w-3xl text-base leading-relaxed">{description}</p>
         </Reveal>
       </div>
 
       <div className="project-carousel relative overflow-hidden">
         <div
+          role="group"
+          aria-roledescription="carrossel"
+          aria-label="Sequência de cases"
           className="project-carousel-track flex w-max gap-4 px-5 pb-4 sm:px-8 lg:px-10 2xl:px-14"
-          aria-label="Sequencia de cases"
         >
           {loopedProjects.map((project, index) => {
             const isClone = index >= projects.length;
@@ -257,27 +222,26 @@ export function Projects({ eyebrow, title, description, projects }: ProjectsProp
                 data-testid={isClone ? "project-clone" : "project-item"}
                 {...(isClone ? { inert: true } : {})}
               >
-                <ProjectFrame
-                  project={project}
-                  index={index % projects.length}
-                  onOpen={setSelected}
-                />
+                <ProjectFrame project={project} index={index % projects.length} onOpen={abrir} />
               </div>
             );
           })}
         </div>
 
+        {/* Fade esquerdo do tamanho do padding: suaviza o card que sai sem cobrir o que está parado. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 hidden w-32 bg-gradient-to-r from-background to-transparent lg:block"
+          className="from-background pointer-events-none absolute inset-y-0 left-0 hidden w-10 bg-gradient-to-r to-transparent lg:block 2xl:w-14"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-32 bg-gradient-to-l from-background to-transparent lg:block"
+          className="from-background pointer-events-none absolute inset-y-0 right-0 hidden w-32 bg-gradient-to-l to-transparent lg:block"
         />
       </div>
 
-      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+      <Dialog open={selected !== null} onOpenChange={(aberto) => !aberto && setSelected(null)}>
+        {selected && <CaseTecnico project={selected} origem={origemRef} />}
+      </Dialog>
     </section>
   );
 }
