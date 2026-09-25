@@ -40,6 +40,8 @@ describe("pacote publicado", () => {
   it("mantem os CSS de tokens acessiveis pelos subpath exports", () => {
     expect(caminhos).toContain("src/tokens/globals.css");
     expect(caminhos).toContain("src/tokens/utilitarios.css");
+    // utilitarios.css importa blocos.css: fora do pacote, o @import quebra no consumidor.
+    expect(caminhos).toContain("src/tokens/blocos.css");
   });
 
   it("nao publica os testes para dentro do consumidor", () => {

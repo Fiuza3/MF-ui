@@ -1,5 +1,7 @@
 /* src/tokens/utilitarios.css — utilitários genéricos do design system */
 
+@import "./blocos.css";
+
 ::-webkit-scrollbar {
   width: 4px;
 }

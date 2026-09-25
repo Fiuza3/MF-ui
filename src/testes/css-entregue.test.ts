@@ -75,3 +75,33 @@ describe("CSS entregue pelo pacote", () => {
     expect(saida).toMatch(/\.light/);
   });
 });
+
+// Os blocos vieram do site da MF, e o CSS das classes próprias deles ficou no
+// globals.css do site: fora dele o carrossel do Projects parava e o fundo do
+// Hero sumia, sem erro nenhum.
+describe("classes próprias dos blocos", () => {
+  const PROPRIAS = /(?<![\w-])((?:hero|project|stack|process|service)-[a-z-]+)(?![\w-])/g;
+  const ENTRADA_COMPLETA = `${ENTRADA}\n@import "./tokens/utilitarios.css";`;
+
+  function classesProprias(): string[] {
+    const achadas = new Set<string>();
+    for (const arquivo of globSync("{blocos,componentes}/*.tsx", { cwd: raiz })) {
+      if (arquivo.includes(".stories.")) continue;
+      const conteudo = readFileSync(resolve(raiz, arquivo), "utf8");
+      for (const [, aspas, crase] of conteudo.matchAll(/className=(?:"([^"]*)"|\{`([^`]*)`\})/g)) {
+        for (const [, classe] of (aspas ?? crase ?? "").matchAll(PROPRIAS)) achadas.add(classe);
+      }
+    }
+    return [...achadas].sort();
+  }
+
+  it("toda classe própria usada num bloco tem CSS no pacote", async () => {
+    const classes = classesProprias();
+    const compilador = await compile(ENTRADA_COMPLETA, { base: raiz, onDependency: () => {} });
+    const css = compilador.build(classes);
+    const mortas = classes.filter((classe) => !css.includes(`.${classe}`));
+
+    expect(classes.length).toBeGreaterThan(5);
+    expect(mortas, "classe usada em bloco sem CSS no pacote").toEqual([]);
+  });
+});
