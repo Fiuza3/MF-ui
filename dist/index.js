@@ -3045,13 +3045,16 @@ function Contact({
 var React4 = __toESM(require("react"));
 var import_lucide_react12 = require("lucide-react");
 var import_jsx_runtime37 = require("react/jsx-runtime");
-function AppShell({ sidebar, topbar, children, className }) {
+function AppShell({ sidebar, topbar, children, className, larguraSidebar = "w-64" }) {
   return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: cn("bg-background text-foreground flex min-h-svh w-full", className), children: [
     /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
       "aside",
       {
         "data-slot": "app-shell-sidebar",
-        className: "border-border bg-card sticky top-0 hidden h-svh w-64 shrink-0 overflow-y-auto border-r lg:block",
+        className: cn(
+          "border-border bg-card sticky top-0 hidden h-svh shrink-0 overflow-y-auto border-r lg:block",
+          larguraSidebar
+        ),
         children: sidebar
       }
     ),

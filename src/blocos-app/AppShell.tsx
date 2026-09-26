@@ -12,6 +12,15 @@ export type AppShellProps = {
   topbar: React.ReactNode;
   children: React.ReactNode;
   className?: string;
+  /**
+   * Largura da sidebar em tela larga, como classe do Tailwind. Padrão `w-64`.
+   *
+   * Existe porque painel de ferramenta às vezes quer trilho de ícones em vez
+   * de menu com rótulo, e 256px de trilho é desperdício de tela. A gaveta do
+   * celular **não** acompanha: lá o espaço é o da tela inteira e rótulo é o
+   * que torna o menu utilizável com o polegar.
+   */
+  larguraSidebar?: string;
 };
 
 /**
@@ -19,12 +28,15 @@ export type AppShellProps = {
  * conteúdo scrollável. Sidebar/topbar/children são 100% controlados por props —
  * este bloco não conhece nada do domínio da aplicação que o consome.
  */
-function AppShell({ sidebar, topbar, children, className }: AppShellProps) {
+function AppShell({ sidebar, topbar, children, className, larguraSidebar = "w-64" }: AppShellProps) {
   return (
     <div className={cn("bg-background text-foreground flex min-h-svh w-full", className)}>
       <aside
         data-slot="app-shell-sidebar"
-        className="border-border bg-card sticky top-0 hidden h-svh w-64 shrink-0 overflow-y-auto border-r lg:block"
+        className={cn(
+          "border-border bg-card sticky top-0 hidden h-svh shrink-0 overflow-y-auto border-r lg:block",
+          larguraSidebar,
+        )}
       >
         {sidebar}
       </aside>

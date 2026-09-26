@@ -231,4 +231,39 @@
     color: var(--foreground);
     font-family: var(--font-sans), system-ui, sans-serif;
   }
+  /*
+   * Piso de 44px no toque.
+   *
+   * O padrão dos controles é `h-9` (36px) e o `sm` é `h-8` (32px) — bons para
+   * mouse, abaixo do mínimo de toque em qualquer diretriz de acessibilidade.
+   * Medido num painel real em 360px: TODA tela reprovava, e a causa era o
+   * pacote, não as telas.
+   *
+   * `pointer: coarse` e não largura de tela: o que decide é o dedo, não o
+   * tamanho do monitor. Tablet grande com toque entra; janela estreita no
+   * desktop com mouse não — lá a precisão é do ponteiro e 36px é confortável.
+   *
+   * `min-height` e não `height`: não estica quem já é maior, e não briga com
+   * utilitária de altura no call site.
+   */
+  @media (pointer: coarse) {
+    button,
+    [role="button"],
+    a[href],
+    input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+    select,
+    textarea,
+    [role="tab"],
+    [role="menuitem"],
+    [role="option"] {
+      min-height: 44px;
+    }
+
+    /* Alvo quadrado (ícone) precisa dos dois lados, senão vira uma tira. */
+    button:where([class*="size-"]),
+    [role="button"]:where([class*="size-"]) {
+      min-width: 44px;
+    }
+  }
+
 }

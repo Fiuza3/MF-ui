@@ -27,13 +27,16 @@ import {
 import * as React from "react";
 import { MenuIcon } from "lucide-react";
 import { jsx, jsxs } from "react/jsx-runtime";
-function AppShell({ sidebar, topbar, children, className }) {
+function AppShell({ sidebar, topbar, children, className, larguraSidebar = "w-64" }) {
   return /* @__PURE__ */ jsxs("div", { className: cn("bg-background text-foreground flex min-h-svh w-full", className), children: [
     /* @__PURE__ */ jsx(
       "aside",
       {
         "data-slot": "app-shell-sidebar",
-        className: "border-border bg-card sticky top-0 hidden h-svh w-64 shrink-0 overflow-y-auto border-r lg:block",
+        className: cn(
+          "border-border bg-card sticky top-0 hidden h-svh shrink-0 overflow-y-auto border-r lg:block",
+          larguraSidebar
+        ),
         children: sidebar
       }
     ),
@@ -309,4 +312,4 @@ export {
   FormField,
   CopyField
 };
-//# sourceMappingURL=chunk-GKA3WS3V.mjs.map
+//# sourceMappingURL=chunk-XXXALVG4.mjs.map
