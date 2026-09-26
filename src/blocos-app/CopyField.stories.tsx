@@ -21,5 +21,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {};
+export const Playground: Story = {
+  args: {
+    label: "Webhook",
+  },
+};
 export const SemLabel: Story = { args: { label: undefined } };
