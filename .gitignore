@@ -2,3 +2,9 @@ node_modules/
 *.tsbuildinfo
 storybook-static/
 *storybook.log
+
+# Segredo nunca entra no repositorio. O .env daqui ja guardou um token do
+# GitHub em texto puro sem estar ignorado -- bastava um `git add -A`.
+.env
+.env.*
+!.env.example
