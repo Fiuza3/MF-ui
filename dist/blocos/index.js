@@ -79,7 +79,7 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                       {
                         href: cta.href,
                         ...propsDeLink(cta.href),
-                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
+                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
                         children: [
                           cta.label,
                           /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
@@ -346,7 +346,7 @@ function DialogDescription({
 var import_jsx_runtime6 = require("react/jsx-runtime");
 var ROTULO = "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text";
 var TAG = "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text";
-var FOCO = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70";
+var FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
 function rotuloDoFrame(project, index) {
   return [`frame ${String(index + 1).padStart(2, "0")}`, project.ano, project.categoria].filter(Boolean).join(" / ");
 }
@@ -587,8 +587,17 @@ function Process({ eyebrow, title, description, steps }) {
 // src/blocos/Stack.tsx
 var import_react2 = require("react");
 var import_jsx_runtime8 = require("react/jsx-runtime");
-function Stack({ eyebrow, title, description, grupos }) {
-  const [active, setActive] = (0, import_react2.useState)(grupos[0]);
+var ROTULOS_PADRAO = {
+  camada: "layer",
+  ativo: "active",
+  explicar: "explain --when-to-use",
+  explicacao: "uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
+};
+function Stack({ eyebrow, title, description, grupos, rotulos }) {
+  const [categoriaAtiva, setCategoriaAtiva] = (0, import_react2.useState)(grupos[0]?.categoria);
+  const active = grupos.find((g) => g.categoria === categoriaAtiva) ?? grupos[0];
+  const r = { ...ROTULOS_PADRAO, ...rotulos };
+  if (!active) return null;
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "section",
     {
@@ -612,11 +621,11 @@ function Stack({ eyebrow, title, description, grupos }) {
                 margin: "-80px",
                 delayMs: index * 50,
                 type: "button",
-                onClick: () => setActive(grupo),
-                onMouseEnter: () => setActive(grupo),
+                onClick: () => setCategoriaAtiva(grupo.categoria),
+                onMouseEnter: () => setCategoriaAtiva(grupo.categoria),
                 "aria-pressed": selected,
                 className: cn(
-                  "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 sm:grid-cols-[auto_1fr]",
+                  "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:grid-cols-[auto_1fr]",
                   selected ? "border-cyan bg-cyan/10" : "border-line bg-surface hover:border-cyan/50"
                 ),
                 children: [
@@ -646,12 +655,13 @@ function Stack({ eyebrow, title, description, grupos }) {
             /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-start justify-between gap-6", children: [
               /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: [
-                  "layer / ",
+                  r.camada,
+                  " / ",
                   active.categoria.toLowerCase()
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { className: "mt-4 text-[clamp(2.2rem,5vw,5.8rem)] font-black leading-[0.9] tracking-tight text-foreground", children: active.categoria })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: "active" })
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "hidden rounded border border-line px-3 py-1 font-mono text-xs text-gray-text sm:block", children: r.ativo })
             ] }),
             active.description && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "mt-6 max-w-3xl text-base leading-relaxed text-gray-text", children: active.description }),
             /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "stack-map-grid mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3", children: active.itens.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
@@ -677,13 +687,15 @@ function Stack({ eyebrow, title, description, grupos }) {
             active.comando && /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "mt-8 border-t border-line pt-5 font-mono", children: [
               /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { className: "text-sm text-foreground", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-cyan", children: "$" }),
-                " explain --when-to-use",
+                " ",
+                r.explicar,
                 " ",
                 active.categoria.toLowerCase()
               ] }),
               /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-cyan/70", children: ">" }),
-                " uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
+                " ",
+                active.explicacao ?? r.explicacao
               ] })
             ] })
           ] }, active.categoria) })
@@ -716,7 +728,7 @@ function usePrefereMovimentoReduzido() {
 // src/blocos/Testimonials.tsx
 var import_jsx_runtime9 = require("react/jsx-runtime");
 var AUTOPLAY_MS = 5e3;
-var BOTAO = "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 [&_svg]:size-4";
+var BOTAO = "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 [&_svg]:size-4";
 function useApresentacao(total) {
   const reduzido = usePrefereMovimentoReduzido();
   const [atual, setAtual] = (0, import_react4.useState)(0);
@@ -835,7 +847,7 @@ function Controles({
         "aria-current": i === atual,
         "aria-label": `Ir para depoimento ${i + 1}`,
         onClick: () => setAtual(i),
-        className: "focus-visible:ring-cyan/70 flex h-11 w-11 items-center justify-center rounded focus-visible:ring-2 focus-visible:outline-none",
+        className: "focus-visible:ring-ring/50 flex h-11 w-11 items-center justify-center rounded focus-visible:ring-[3px] focus-visible:outline-none",
         children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
           "span",
           {
@@ -901,7 +913,23 @@ function About({ eyebrow, title, paragrafos, slotLateral }) {
 // src/blocos/Contact.tsx
 var import_lucide_react4 = require("lucide-react");
 var import_jsx_runtime11 = require("react/jsx-runtime");
-function Contact({ eyebrow, title, description, cta, email, slotFormulario }) {
+var ROTULOS_PADRAO2 = {
+  legendaCta: "para quando o escopo j\xE1 est\xE1 claro",
+  legendaEmail: "para materiais e projetos maiores",
+  modo: "contract mode",
+  modoValor: "PJ / NFS-e / remoto",
+  modoDescricao: "O objetivo \xE9 sair da primeira conversa com risco, escopo e pr\xF3ximo passo claros."
+};
+function Contact({
+  eyebrow,
+  title,
+  description,
+  cta,
+  email,
+  slotFormulario,
+  rotulos
+}) {
+  const r = { ...ROTULOS_PADRAO2, ...rotulos };
   return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
     "section",
     {
@@ -923,12 +951,12 @@ function Contact({ eyebrow, title, description, cta, email, slotFormulario }) {
                 {
                   href: cta.href,
                   ...propsDeLink(cta.href),
-                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
+                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
                   children: [
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react4.MessageCircleIcon, { className: "size-4", "aria-hidden": "true" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "min-w-0", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "font-mono text-sm text-foreground", children: cta.label }),
-                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: "para quando o escopo j\xE1 est\xE1 claro" })
+                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: r.legendaCta })
                     ] })
                   ]
                 }
@@ -937,20 +965,20 @@ function Contact({ eyebrow, title, description, cta, email, slotFormulario }) {
                 "a",
                 {
                   href: `mailto:${email}`,
-                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
+                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
                   children: [
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react4.MailIcon, { className: "size-4", "aria-hidden": "true" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "min-w-0", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "font-mono text-sm text-foreground [overflow-wrap:anywhere]", children: email }),
-                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: "para materiais e projetos maiores" })
+                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-1 text-xs text-gray-text", children: r.legendaEmail })
                     ] })
                   ]
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "rounded border border-line bg-surface p-5 font-mono", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-[10px] uppercase tracking-[0.24em] text-gray-text", children: "contract mode" }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-4 text-sm text-foreground", children: "PJ / NFS-e / remoto" }),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: "O objetivo \xE9 sair da primeira conversa com risco, escopo e pr\xF3ximo passo claros." })
+              r.modoValor && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "rounded border border-line bg-surface p-5 font-mono", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-[10px] uppercase tracking-[0.24em] text-gray-text", children: r.modo }),
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-4 text-sm text-foreground", children: r.modoValor }),
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: r.modoDescricao })
               ] })
             ] }),
             slotFormulario && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Reveal, { as: "div", margin: "-80px", delayMs: 80, className: "min-w-0", children: slotFormulario })

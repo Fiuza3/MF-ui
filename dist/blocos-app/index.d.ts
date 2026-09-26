@@ -53,6 +53,11 @@ declare function DataTable<TRow>({ columns, rows, getRowKey, loading, loadingRow
 type StatCardDelta = {
     value: React.ReactNode;
     direction?: "up" | "down" | "neutral";
+    /**
+     * Significado da variação. Por padrão subir é positivo; em métrica invertida
+     * (churn, custo, tempo de resposta) passe `tom: "negativo"` com `direction: "up"`.
+     */
+    tom?: "positivo" | "negativo" | "neutro";
 };
 type StatCardProps = {
     label: React.ReactNode;

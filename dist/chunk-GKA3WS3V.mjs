@@ -18,7 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "./chunk-QQFS2L2R.mjs";
+} from "./chunk-4FVOKC5M.mjs";
 import {
   cn
 } from "./chunk-UYJYUDH4.mjs";
@@ -132,10 +132,15 @@ function DataTable({
 // src/blocos-app/StatCard.tsx
 import { ArrowDownRightIcon, ArrowUpRightIcon } from "lucide-react";
 import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
-var deltaCorPorDirecao = {
-  up: "text-primary",
-  down: "text-destructive",
-  neutral: "text-muted-foreground"
+var tomPorDirecao = {
+  up: "positivo",
+  down: "negativo",
+  neutral: "neutro"
+};
+var corPorTom = {
+  positivo: "text-success",
+  negativo: "text-destructive",
+  neutro: "text-muted-foreground"
 };
 var setaPorDirecao = {
   up: /* @__PURE__ */ jsx4(ArrowUpRightIcon, { "aria-hidden": "true" }),
@@ -144,6 +149,7 @@ var setaPorDirecao = {
 };
 function StatCard({ label, value, icon, delta, className }) {
   const direcao = delta?.direction ?? "neutral";
+  const tom = delta?.tom ?? tomPorDirecao[direcao];
   return /* @__PURE__ */ jsx4(Card, { className: cn("gap-1 py-5", className), children: /* @__PURE__ */ jsxs4(CardContent, { className: "flex items-start justify-between gap-3", children: [
     /* @__PURE__ */ jsxs4("div", { className: "flex min-w-0 flex-col gap-1", children: [
       /* @__PURE__ */ jsx4("p", { className: "text-muted-foreground text-xs font-medium uppercase tracking-wide", children: label }),
@@ -154,7 +160,7 @@ function StatCard({ label, value, icon, delta, className }) {
           "data-direction": direcao,
           className: cn(
             "inline-flex items-center gap-0.5 text-xs font-medium [&_svg]:size-3.5 [&_svg]:shrink-0",
-            deltaCorPorDirecao[direcao]
+            corPorTom[tom]
           ),
           children: [
             setaPorDirecao[direcao],
@@ -303,4 +309,4 @@ export {
   FormField,
   CopyField
 };
-//# sourceMappingURL=chunk-RWDOBQOZ.mjs.map
+//# sourceMappingURL=chunk-GKA3WS3V.mjs.map

@@ -8,9 +8,27 @@ import {
 // src/primitivos/Button.tsx
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
+
+// src/primitivos/Spinner.tsx
+import { Loader2Icon } from "lucide-react";
 import { jsx } from "react/jsx-runtime";
+function Spinner({ className, ...props }) {
+  return /* @__PURE__ */ jsx(
+    Loader2Icon,
+    {
+      role: "status",
+      "aria-label": "Carregando",
+      "data-slot": "spinner",
+      className: cn("size-4 animate-spin motion-reduce:animate-none", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Button.tsx
+import { jsx as jsx2, jsxs } from "react/jsx-runtime";
 var buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -23,9 +41,13 @@ var buttonVariants = cva(
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        // xs/icon-xs existem para ferramenta densa (painel, admin), onde o sm
+        // ainda empurra a linha da tabela. Fora desse contexto, use sm.
+        xs: "h-7 rounded-md gap-1 px-2 text-xs has-[>svg]:px-1.5",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
+        "icon-xs": "size-7",
         "icon-sm": "size-8",
         "icon-lg": "size-10"
       }
@@ -41,23 +63,44 @@ function Button({
   variant,
   size,
   asChild = false,
+  loading = false,
+  disabled,
+  children,
   ...props
 }) {
-  const Comp = asChild ? Slot : "button";
-  return /* @__PURE__ */ jsx(
-    Comp,
+  const estado = loading ? { "aria-busy": true, "aria-disabled": true } : {};
+  if (asChild) {
+    return /* @__PURE__ */ jsx2(
+      Slot,
+      {
+        "data-slot": "button",
+        className: cn(buttonVariants({ variant, size, className })),
+        ...estado,
+        ...props,
+        children
+      }
+    );
+  }
+  return /* @__PURE__ */ jsxs(
+    "button",
     {
       "data-slot": "button",
       className: cn(buttonVariants({ variant, size, className })),
-      ...props
+      disabled: disabled || loading,
+      ...estado,
+      ...props,
+      children: [
+        loading && /* @__PURE__ */ jsx2(Spinner, {}),
+        children
+      ]
     }
   );
 }
 
 // src/primitivos/Card.tsx
-import { jsx as jsx2 } from "react/jsx-runtime";
+import { jsx as jsx3 } from "react/jsx-runtime";
 function Card({ className, ...props }) {
-  return /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsx3(
     "div",
     {
       "data-slot": "card",
@@ -70,7 +113,7 @@ function Card({ className, ...props }) {
   );
 }
 function CardHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsx3(
     "div",
     {
       "data-slot": "card-header",
@@ -83,7 +126,7 @@ function CardHeader({ className, ...props }) {
   );
 }
 function CardTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsx3(
     "div",
     {
       "data-slot": "card-title",
@@ -93,7 +136,7 @@ function CardTitle({ className, ...props }) {
   );
 }
 function CardDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsx3(
     "div",
     {
       "data-slot": "card-description",
@@ -103,7 +146,7 @@ function CardDescription({ className, ...props }) {
   );
 }
 function CardAction({ className, ...props }) {
-  return /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsx3(
     "div",
     {
       "data-slot": "card-action",
@@ -113,10 +156,10 @@ function CardAction({ className, ...props }) {
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx2("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
+  return /* @__PURE__ */ jsx3("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
 }
 function CardFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsx3(
     "div",
     {
       "data-slot": "card-footer",
@@ -127,9 +170,9 @@ function CardFooter({ className, ...props }) {
 }
 
 // src/primitivos/Input.tsx
-import { jsx as jsx3 } from "react/jsx-runtime";
+import { jsx as jsx4 } from "react/jsx-runtime";
 function Input({ className, type, ...props }) {
-  return /* @__PURE__ */ jsx3(
+  return /* @__PURE__ */ jsx4(
     "input",
     {
       type,
@@ -147,9 +190,9 @@ function Input({ className, type, ...props }) {
 
 // src/primitivos/Label.tsx
 import * as LabelPrimitive from "@radix-ui/react-label";
-import { jsx as jsx4 } from "react/jsx-runtime";
+import { jsx as jsx5 } from "react/jsx-runtime";
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ jsx4(
+  return /* @__PURE__ */ jsx5(
     LabelPrimitive.Root,
     {
       "data-slot": "label",
@@ -164,24 +207,24 @@ function Label({ className, ...props }) {
 
 // src/primitivos/Sheet.tsx
 import * as SheetPrimitive from "@radix-ui/react-dialog";
-import { jsx as jsx5, jsxs } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
 function Sheet({ ...props }) {
-  return /* @__PURE__ */ jsx5(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
+  return /* @__PURE__ */ jsx6(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
 }
 function SheetTrigger({ ...props }) {
-  return /* @__PURE__ */ jsx5(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
+  return /* @__PURE__ */ jsx6(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
 }
 function SheetClose({ ...props }) {
-  return /* @__PURE__ */ jsx5(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
+  return /* @__PURE__ */ jsx6(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
 }
 function SheetPortal({ ...props }) {
-  return /* @__PURE__ */ jsx5(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
+  return /* @__PURE__ */ jsx6(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
 }
 function SheetOverlay({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ jsx5(
+  return /* @__PURE__ */ jsx6(
     SheetPrimitive.Overlay,
     {
       "data-slot": "sheet-overlay",
@@ -199,9 +242,9 @@ function SheetContent({
   side = "right",
   ...props
 }) {
-  return /* @__PURE__ */ jsxs(SheetPortal, { children: [
-    /* @__PURE__ */ jsx5(SheetOverlay, {}),
-    /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxs2(SheetPortal, { children: [
+    /* @__PURE__ */ jsx6(SheetOverlay, {}),
+    /* @__PURE__ */ jsxs2(
       SheetPrimitive.Content,
       {
         "data-slot": "sheet-content",
@@ -216,17 +259,17 @@ function SheetContent({
         ...props,
         children: [
           children,
-          /* @__PURE__ */ jsx5(OverlayClose, {})
+          /* @__PURE__ */ jsx6(OverlayClose, {})
         ]
       }
     )
   ] });
 }
 function SheetHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx5("div", { "data-slot": "sheet-header", className: cn("flex flex-col gap-2 p-4", className), ...props });
+  return /* @__PURE__ */ jsx6("div", { "data-slot": "sheet-header", className: cn("flex flex-col gap-2 p-4", className), ...props });
 }
 function SheetFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx5(
+  return /* @__PURE__ */ jsx6(
     "div",
     {
       "data-slot": "sheet-footer",
@@ -236,7 +279,7 @@ function SheetFooter({ className, ...props }) {
   );
 }
 function SheetTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx5(
+  return /* @__PURE__ */ jsx6(
     SheetPrimitive.Title,
     {
       "data-slot": "sheet-title",
@@ -249,7 +292,7 @@ function SheetDescription({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ jsx5(
+  return /* @__PURE__ */ jsx6(
     SheetPrimitive.Description,
     {
       "data-slot": "sheet-description",
@@ -260,9 +303,9 @@ function SheetDescription({
 }
 
 // src/primitivos/Skeleton.tsx
-import { jsx as jsx6 } from "react/jsx-runtime";
+import { jsx as jsx7 } from "react/jsx-runtime";
 function Skeleton({ className, ...props }) {
-  return /* @__PURE__ */ jsx6(
+  return /* @__PURE__ */ jsx7(
     "div",
     {
       "data-slot": "skeleton",
@@ -273,9 +316,9 @@ function Skeleton({ className, ...props }) {
 }
 
 // src/primitivos/Table.tsx
-import { jsx as jsx7 } from "react/jsx-runtime";
+import { jsx as jsx8 } from "react/jsx-runtime";
 function Table({ className, ...props }) {
-  return /* @__PURE__ */ jsx7("div", { "data-slot": "table-wrapper", className: "relative w-full overflow-x-auto", children: /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8("div", { "data-slot": "table-wrapper", className: "relative w-full overflow-x-auto", children: /* @__PURE__ */ jsx8(
     "table",
     {
       "data-slot": "table",
@@ -285,10 +328,10 @@ function Table({ className, ...props }) {
   ) });
 }
 function TableHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx7("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
+  return /* @__PURE__ */ jsx8("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
 }
 function TableBody({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "tbody",
     {
       "data-slot": "table-body",
@@ -298,7 +341,7 @@ function TableBody({ className, ...props }) {
   );
 }
 function TableFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "tfoot",
     {
       "data-slot": "table-footer",
@@ -308,7 +351,7 @@ function TableFooter({ className, ...props }) {
   );
 }
 function TableRow({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "tr",
     {
       "data-slot": "table-row",
@@ -321,7 +364,7 @@ function TableRow({ className, ...props }) {
   );
 }
 function TableHead({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "th",
     {
       "data-slot": "table-head",
@@ -334,7 +377,7 @@ function TableHead({ className, ...props }) {
   );
 }
 function TableCell({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "td",
     {
       "data-slot": "table-cell",
@@ -347,7 +390,7 @@ function TableCell({ className, ...props }) {
   );
 }
 function TableCaption({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "caption",
     {
       "data-slot": "table-caption",
@@ -359,9 +402,9 @@ function TableCaption({ className, ...props }) {
 
 // src/primitivos/Pagination.tsx
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
-import { jsx as jsx8, jsxs as jsxs2 } from "react/jsx-runtime";
+import { jsx as jsx9, jsxs as jsxs3 } from "react/jsx-runtime";
 function Pagination({ className, ...props }) {
-  return /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsx9(
     "nav",
     {
       "aria-label": "Pagina\xE7\xE3o",
@@ -372,7 +415,7 @@ function Pagination({ className, ...props }) {
   );
 }
 function PaginationContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsx9(
     "ul",
     {
       "data-slot": "pagination-content",
@@ -382,10 +425,10 @@ function PaginationContent({ className, ...props }) {
   );
 }
 function PaginationItem({ ...props }) {
-  return /* @__PURE__ */ jsx8("li", { "data-slot": "pagination-item", ...props });
+  return /* @__PURE__ */ jsx9("li", { "data-slot": "pagination-item", ...props });
 }
 function PaginationLink({ className, isActive, ...props }) {
-  return /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsx9(
     "button",
     {
       type: "button",
@@ -405,35 +448,35 @@ function PaginationLink({ className, isActive, ...props }) {
   );
 }
 function PaginationPrevious({ className, ...props }) {
-  return /* @__PURE__ */ jsxs2(
+  return /* @__PURE__ */ jsxs3(
     PaginationLink,
     {
       "aria-label": "P\xE1gina anterior",
       className: cn("gap-1 px-2.5", className),
       ...props,
       children: [
-        /* @__PURE__ */ jsx8(ChevronLeftIcon, { className: "size-4" }),
-        /* @__PURE__ */ jsx8("span", { className: "hidden sm:inline", children: "Anterior" })
+        /* @__PURE__ */ jsx9(ChevronLeftIcon, { className: "size-4" }),
+        /* @__PURE__ */ jsx9("span", { className: "hidden sm:inline", children: "Anterior" })
       ]
     }
   );
 }
 function PaginationNext({ className, ...props }) {
-  return /* @__PURE__ */ jsxs2(
+  return /* @__PURE__ */ jsxs3(
     PaginationLink,
     {
       "aria-label": "Pr\xF3xima p\xE1gina",
       className: cn("gap-1 px-2.5", className),
       ...props,
       children: [
-        /* @__PURE__ */ jsx8("span", { className: "hidden sm:inline", children: "Pr\xF3xima" }),
-        /* @__PURE__ */ jsx8(ChevronRightIcon, { className: "size-4" })
+        /* @__PURE__ */ jsx9("span", { className: "hidden sm:inline", children: "Pr\xF3xima" }),
+        /* @__PURE__ */ jsx9(ChevronRightIcon, { className: "size-4" })
       ]
     }
   );
 }
 function PaginationEllipsis({ className, ...props }) {
-  return /* @__PURE__ */ jsxs2(
+  return /* @__PURE__ */ jsxs3(
     "span",
     {
       "aria-hidden": "true",
@@ -441,8 +484,8 @@ function PaginationEllipsis({ className, ...props }) {
       className: cn("flex h-9 min-w-9 items-center justify-center", className),
       ...props,
       children: [
-        /* @__PURE__ */ jsx8(MoreHorizontalIcon, { className: "size-4" }),
-        /* @__PURE__ */ jsx8("span", { className: "sr-only", children: "Mais p\xE1ginas" })
+        /* @__PURE__ */ jsx9(MoreHorizontalIcon, { className: "size-4" }),
+        /* @__PURE__ */ jsx9("span", { className: "sr-only", children: "Mais p\xE1ginas" })
       ]
     }
   );
@@ -501,10 +544,10 @@ function marcarElipseNoMobile(itens, desde) {
 }
 function PaginationControl({ page, totalPages, onPageChange, className }) {
   if (totalPages <= 1) return null;
-  return /* @__PURE__ */ jsx8(Pagination, { className, children: /* @__PURE__ */ jsxs2(PaginationContent, { children: [
-    /* @__PURE__ */ jsx8(PaginationItem, { children: /* @__PURE__ */ jsx8(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
+  return /* @__PURE__ */ jsx9(Pagination, { className, children: /* @__PURE__ */ jsxs3(PaginationContent, { children: [
+    /* @__PURE__ */ jsx9(PaginationItem, { children: /* @__PURE__ */ jsx9(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
     montarItens(page, totalPages).map(
-      (item) => item.tipo === "elipse" ? /* @__PURE__ */ jsx8(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ jsx8(PaginationEllipsis, {}) }, item.chave) : /* @__PURE__ */ jsx8(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ jsx8(
+      (item) => item.tipo === "elipse" ? /* @__PURE__ */ jsx9(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ jsx9(PaginationEllipsis, {}) }, item.chave) : /* @__PURE__ */ jsx9(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ jsx9(
         PaginationLink,
         {
           isActive: item.pagina === page,
@@ -513,7 +556,7 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
         }
       ) }, item.pagina)
     ),
-    /* @__PURE__ */ jsx8(PaginationItem, { children: /* @__PURE__ */ jsx8(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
+    /* @__PURE__ */ jsx9(PaginationItem, { children: /* @__PURE__ */ jsx9(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
   ] }) });
 }
 
@@ -555,4 +598,4 @@ export {
   PaginationEllipsis,
   PaginationControl
 };
-//# sourceMappingURL=chunk-QQFS2L2R.mjs.map
+//# sourceMappingURL=chunk-4FVOKC5M.mjs.map

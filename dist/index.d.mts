@@ -66,8 +66,17 @@ type FooterProps = {
     cnpj?: string;
     nomeEmpresa?: string;
     onLogoClick?: () => void;
+    /** Rótulos da estética de terminal. O padrão é o texto do site da MF. */
+    rotulos?: Partial<FooterRotulos>;
 };
-declare function Footer({ links, email, localizacao, cnpj, nomeEmpresa, onLogoClick, }: FooterProps): react_jsx_runtime.JSX.Element;
+type FooterRotulos = {
+    resumo: string;
+    local: string;
+    cnpj: string;
+    contato: string;
+    saida: string;
+};
+declare function Footer({ links, email, localizacao, cnpj, nomeEmpresa, onLogoClick, rotulos, }: FooterProps): react_jsx_runtime.JSX.Element;
 
 type RevealProps = {
     as?: keyof React.JSX.IntrinsicElements;

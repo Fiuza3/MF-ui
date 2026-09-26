@@ -193,14 +193,21 @@ function SelectValue({ ...props }) {
 function SelectTrigger({
   className,
   children,
+  size = "default",
   ...props
 }) {
+  const alturas = {
+    default: "h-9 px-3 py-2 text-sm",
+    sm: "h-8 px-3 py-1.5 text-sm",
+    xs: "h-7 px-2 py-1 text-xs"
+  };
   return /* @__PURE__ */ jsxs3(
     SelectPrimitive.Trigger,
     {
       "data-slot": "select-trigger",
       className: cn(
-        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:ring-destructive/40 flex h-9 w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:ring-destructive/40 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+        alturas[size],
         className
       ),
       ...props,
@@ -639,7 +646,7 @@ var toastVariants = cva2(
     variants: {
       variant: {
         default: "bg-popover text-popover-foreground border-border",
-        success: "bg-popover text-popover-foreground border-primary/40",
+        success: "bg-popover text-popover-foreground border-success/60",
         destructive: "bg-destructive text-destructive-foreground border-destructive [&_[data-slot=toast-description]]:text-destructive-foreground/85 [&_[data-slot=toast-action]]:border-destructive-foreground/40 [&_[data-slot=toast-action]]:hover:bg-destructive-foreground/10 [&_[data-slot=toast-action]]:hover:text-destructive-foreground"
       }
     },
@@ -819,4 +826,4 @@ export {
   ToastComponentProvider,
   useToast
 };
-//# sourceMappingURL=chunk-5BZROXOJ.mjs.map
+//# sourceMappingURL=chunk-42J2QLUV.mjs.map

@@ -78,14 +78,24 @@ type StackGrupo = {
     comando?: string;
     /** optional description shown in the detail panel */
     description?: string;
+    /** Resposta do "explain --when-to-use" deste grupo. Sem ela, vale rotulos.explicacao. */
+    explicacao?: string;
+};
+type StackRotulos = {
+    camada: string;
+    ativo: string;
+    explicar: string;
+    explicacao: string;
 };
 type StackProps = {
     eyebrow: string;
     title: React.ReactNode;
     description: React.ReactNode;
     grupos: StackGrupo[];
+    /** Rótulos da estética de terminal. O padrão é o texto do site da MF. */
+    rotulos?: Partial<StackRotulos>;
 };
-declare function Stack({ eyebrow, title, description, grupos }: StackProps): react_jsx_runtime.JSX.Element;
+declare function Stack({ eyebrow, title, description, grupos, rotulos }: StackProps): react_jsx_runtime.JSX.Element | null;
 
 type Depoimento = {
     texto: string;
@@ -118,7 +128,16 @@ type ContactProps = {
     };
     email?: string;
     slotFormulario?: React.ReactNode;
+    /** Legendas e card de modo de contratação. `modoValor: ""` esconde o card. */
+    rotulos?: Partial<ContactRotulos>;
 };
-declare function Contact({ eyebrow, title, description, cta, email, slotFormulario }: ContactProps): react_jsx_runtime.JSX.Element;
+type ContactRotulos = {
+    legendaCta: string;
+    legendaEmail: string;
+    modo: string;
+    modoValor: string;
+    modoDescricao: string;
+};
+declare function Contact({ eyebrow, title, description, cta, email, slotFormulario, rotulos, }: ContactProps): react_jsx_runtime.JSX.Element;
 
 export { About, type AboutProps, Contact, type ContactProps, type Depoimento, Hero, type HeroProps, type HeroStat, Process, type ProcessProps, type ProcessStep, type ProjectItem, Projects, type ProjectsProps, type ServiceItem, Services, type ServicesProps, Stack, type StackGrupo, type StackProps, Testimonials, type TestimonialsProps };

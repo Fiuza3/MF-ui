@@ -52,6 +52,8 @@ var NOMES = {
   destaqueTexto: "--accent-foreground",
   alerta: "--warning",
   alertaTexto: "--warning-foreground",
+  sucesso: "--success",
+  sucessoTexto: "--success-foreground",
   erro: "--destructive",
   erroTexto: "--destructive-foreground",
   borda: "--border",

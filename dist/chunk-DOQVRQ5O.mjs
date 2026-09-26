@@ -20,6 +20,8 @@ var NOMES = {
   destaqueTexto: "--accent-foreground",
   alerta: "--warning",
   alertaTexto: "--warning-foreground",
+  sucesso: "--success",
+  sucessoTexto: "--success-foreground",
   erro: "--destructive",
   erroTexto: "--destructive-foreground",
   borda: "--border",
@@ -73,4 +75,4 @@ export {
   duracoes,
   curvas
 };
-//# sourceMappingURL=chunk-3YMTV7XD.mjs.map
+//# sourceMappingURL=chunk-DOQVRQ5O.mjs.map

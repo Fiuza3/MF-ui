@@ -44,7 +44,7 @@ module.exports = __toCommonJS(blocos_app_exports);
 
 // src/blocos-app/AppShell.tsx
 var React = __toESM(require("react"));
-var import_lucide_react2 = require("lucide-react");
+var import_lucide_react3 = require("lucide-react");
 
 // src/lib/cn.ts
 var import_clsx = require("clsx");
@@ -56,9 +56,27 @@ function cn(...inputs) {
 // src/primitivos/Button.tsx
 var import_react_slot = require("@radix-ui/react-slot");
 var import_class_variance_authority = require("class-variance-authority");
+
+// src/primitivos/Spinner.tsx
+var import_lucide_react = require("lucide-react");
 var import_jsx_runtime = require("react/jsx-runtime");
+function Spinner({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+    import_lucide_react.Loader2Icon,
+    {
+      role: "status",
+      "aria-label": "Carregando",
+      "data-slot": "spinner",
+      className: cn("size-4 animate-spin motion-reduce:animate-none", className),
+      ...props
+    }
+  );
+}
+
+// src/primitivos/Button.tsx
+var import_jsx_runtime2 = require("react/jsx-runtime");
 var buttonVariants = (0, import_class_variance_authority.cva)(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -71,9 +89,13 @@ var buttonVariants = (0, import_class_variance_authority.cva)(
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        // xs/icon-xs existem para ferramenta densa (painel, admin), onde o sm
+        // ainda empurra a linha da tabela. Fora desse contexto, use sm.
+        xs: "h-7 rounded-md gap-1 px-2 text-xs has-[>svg]:px-1.5",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
+        "icon-xs": "size-7",
         "icon-sm": "size-8",
         "icon-lg": "size-10"
       }
@@ -89,15 +111,36 @@ function Button({
   variant,
   size,
   asChild = false,
+  loading = false,
+  disabled,
+  children,
   ...props
 }) {
-  const Comp = asChild ? import_react_slot.Slot : "button";
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-    Comp,
+  const estado = loading ? { "aria-busy": true, "aria-disabled": true } : {};
+  if (asChild) {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      import_react_slot.Slot,
+      {
+        "data-slot": "button",
+        className: cn(buttonVariants({ variant, size, className })),
+        ...estado,
+        ...props,
+        children
+      }
+    );
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+    "button",
     {
       "data-slot": "button",
       className: cn(buttonVariants({ variant, size, className })),
-      ...props
+      disabled: disabled || loading,
+      ...estado,
+      ...props,
+      children: [
+        loading && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Spinner, {}),
+        children
+      ]
     }
   );
 }
@@ -107,10 +150,10 @@ var SheetPrimitive = __toESM(require("@radix-ui/react-dialog"));
 
 // src/primitivos/OverlayClose.tsx
 var DialogPrimitive = __toESM(require("@radix-ui/react-dialog"));
-var import_lucide_react = require("lucide-react");
-var import_jsx_runtime2 = require("react/jsx-runtime");
+var import_lucide_react2 = require("lucide-react");
+var import_jsx_runtime3 = require("react/jsx-runtime");
 function OverlayClose({ className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
     DialogPrimitive.Close,
     {
       "aria-label": "Fechar",
@@ -121,27 +164,27 @@ function OverlayClose({ className }) {
         "disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         className
       ),
-      children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_lucide_react.XIcon, {})
+      children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_lucide_react2.XIcon, {})
     }
   );
 }
 
 // src/primitivos/Sheet.tsx
-var import_jsx_runtime3 = require("react/jsx-runtime");
+var import_jsx_runtime4 = require("react/jsx-runtime");
 function Sheet({ ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
 }
 function SheetTrigger({ ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
 }
 function SheetPortal({ ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
 }
 function SheetOverlay({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
     SheetPrimitive.Overlay,
     {
       "data-slot": "sheet-overlay",
@@ -159,9 +202,9 @@ function SheetContent({
   side = "right",
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(SheetPortal, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(SheetOverlay, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(SheetPortal, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SheetOverlay, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
       SheetPrimitive.Content,
       {
         "data-slot": "sheet-content",
@@ -176,14 +219,14 @@ function SheetContent({
         ...props,
         children: [
           children,
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(OverlayClose, {})
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(OverlayClose, {})
         ]
       }
     )
   ] });
 }
 function SheetTitle({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
     SheetPrimitive.Title,
     {
       "data-slot": "sheet-title",
@@ -194,10 +237,10 @@ function SheetTitle({ className, ...props }) {
 }
 
 // src/blocos-app/AppShell.tsx
-var import_jsx_runtime4 = require("react/jsx-runtime");
+var import_jsx_runtime5 = require("react/jsx-runtime");
 function AppShell({ sidebar, topbar, children, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: cn("bg-background text-foreground flex min-h-svh w-full", className), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: cn("bg-background text-foreground flex min-h-svh w-full", className), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
       "aside",
       {
         "data-slot": "app-shell-sidebar",
@@ -205,19 +248,19 @@ function AppShell({ sidebar, topbar, children, className }) {
         children: sidebar
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex min-w-0 flex-1 flex-col", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex min-w-0 flex-1 flex-col", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
         "header",
         {
           "data-slot": "app-shell-topbar",
           className: "border-border bg-card/80 sticky top-0 z-40 flex h-14 items-center gap-2 border-b px-4 backdrop-blur lg:px-6",
           children: [
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(MenuMobile, { sidebar }),
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "flex min-w-0 flex-1 items-center", children: topbar })
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(MenuMobile, { sidebar }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex min-w-0 flex-1 items-center", children: topbar })
           ]
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("main", { "data-slot": "app-shell-content", className: "flex-1 overflow-x-clip", children })
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("main", { "data-slot": "app-shell-content", className: "flex-1 overflow-x-clip", children })
     ] })
   ] });
 }
@@ -226,9 +269,9 @@ function MenuMobile({ sidebar }) {
   function fecharAoNavegar(event) {
     if (event.target instanceof Element && event.target.closest("a[href]")) setAberto(false);
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(Sheet, { open: aberto, onOpenChange: setAberto, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SheetTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button, { variant: "ghost", size: "icon", "aria-label": "Abrir menu", className: "-ml-2 lg:hidden", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_lucide_react2.MenuIcon, {}) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(Sheet, { open: aberto, onOpenChange: setAberto, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(SheetTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Button, { variant: "ghost", size: "icon", "aria-label": "Abrir menu", className: "-ml-2 lg:hidden", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_lucide_react3.MenuIcon, {}) }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
       SheetContent,
       {
         side: "left",
@@ -236,7 +279,7 @@ function MenuMobile({ sidebar }) {
         className: "bg-card w-64 gap-0 p-0",
         onClickCapture: fecharAoNavegar,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SheetTitle, { className: "sr-only", children: "Menu" }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(SheetTitle, { className: "sr-only", children: "Menu" }),
           sidebar
         ]
       }
@@ -245,9 +288,9 @@ function MenuMobile({ sidebar }) {
 }
 
 // src/primitivos/Table.tsx
-var import_jsx_runtime5 = require("react/jsx-runtime");
+var import_jsx_runtime6 = require("react/jsx-runtime");
 function Table({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { "data-slot": "table-wrapper", className: "relative w-full overflow-x-auto", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { "data-slot": "table-wrapper", className: "relative w-full overflow-x-auto", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
     "table",
     {
       "data-slot": "table",
@@ -257,10 +300,10 @@ function Table({ className, ...props }) {
   ) });
 }
 function TableHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("thead", { "data-slot": "table-header", className: cn("[&_tr]:border-b", className), ...props });
 }
 function TableBody({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
     "tbody",
     {
       "data-slot": "table-body",
@@ -270,7 +313,7 @@ function TableBody({ className, ...props }) {
   );
 }
 function TableRow({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
     "tr",
     {
       "data-slot": "table-row",
@@ -283,7 +326,7 @@ function TableRow({ className, ...props }) {
   );
 }
 function TableHead({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
     "th",
     {
       "data-slot": "table-head",
@@ -296,7 +339,7 @@ function TableHead({ className, ...props }) {
   );
 }
 function TableCell({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
     "td",
     {
       "data-slot": "table-cell",
@@ -310,9 +353,9 @@ function TableCell({ className, ...props }) {
 }
 
 // src/primitivos/Skeleton.tsx
-var import_jsx_runtime6 = require("react/jsx-runtime");
+var import_jsx_runtime7 = require("react/jsx-runtime");
 function Skeleton({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "div",
     {
       "data-slot": "skeleton",
@@ -323,10 +366,10 @@ function Skeleton({ className, ...props }) {
 }
 
 // src/primitivos/Pagination.tsx
-var import_lucide_react3 = require("lucide-react");
-var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_lucide_react4 = require("lucide-react");
+var import_jsx_runtime8 = require("react/jsx-runtime");
 function Pagination({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "nav",
     {
       "aria-label": "Pagina\xE7\xE3o",
@@ -337,7 +380,7 @@ function Pagination({ className, ...props }) {
   );
 }
 function PaginationContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "ul",
     {
       "data-slot": "pagination-content",
@@ -347,10 +390,10 @@ function PaginationContent({ className, ...props }) {
   );
 }
 function PaginationItem({ ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("li", { "data-slot": "pagination-item", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("li", { "data-slot": "pagination-item", ...props });
 }
 function PaginationLink({ className, isActive, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "button",
     {
       type: "button",
@@ -370,35 +413,35 @@ function PaginationLink({ className, isActive, ...props }) {
   );
 }
 function PaginationPrevious({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
     PaginationLink,
     {
       "aria-label": "P\xE1gina anterior",
       className: cn("gap-1 px-2.5", className),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react3.ChevronLeftIcon, { className: "size-4" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "hidden sm:inline", children: "Anterior" })
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react4.ChevronLeftIcon, { className: "size-4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "hidden sm:inline", children: "Anterior" })
       ]
     }
   );
 }
 function PaginationNext({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
     PaginationLink,
     {
       "aria-label": "Pr\xF3xima p\xE1gina",
       className: cn("gap-1 px-2.5", className),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "hidden sm:inline", children: "Pr\xF3xima" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react3.ChevronRightIcon, { className: "size-4" })
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "hidden sm:inline", children: "Pr\xF3xima" }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react4.ChevronRightIcon, { className: "size-4" })
       ]
     }
   );
 }
 function PaginationEllipsis({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
     "span",
     {
       "aria-hidden": "true",
@@ -406,8 +449,8 @@ function PaginationEllipsis({ className, ...props }) {
       className: cn("flex h-9 min-w-9 items-center justify-center", className),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react3.MoreHorizontalIcon, { className: "size-4" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "sr-only", children: "Mais p\xE1ginas" })
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react4.MoreHorizontalIcon, { className: "size-4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "sr-only", children: "Mais p\xE1ginas" })
       ]
     }
   );
@@ -466,10 +509,10 @@ function marcarElipseNoMobile(itens, desde) {
 }
 function PaginationControl({ page, totalPages, onPageChange, className }) {
   if (totalPages <= 1) return null;
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Pagination, { className, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(PaginationContent, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Pagination, { className, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(PaginationContent, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PaginationPrevious, { disabled: page <= 1, onClick: () => onPageChange(page - 1) }) }),
     montarItens(page, totalPages).map(
-      (item) => item.tipo === "elipse" ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PaginationEllipsis, {}) }, item.chave) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      (item) => item.tipo === "elipse" ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PaginationEllipsis, {}) }, item.chave) : /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PaginationItem, { className: CLASSE_POR_ONDE[item.onde], children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
         PaginationLink,
         {
           isActive: item.pagina === page,
@@ -478,14 +521,14 @@ function PaginationControl({ page, totalPages, onPageChange, className }) {
         }
       ) }, item.pagina)
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PaginationItem, { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PaginationNext, { disabled: page >= totalPages, onClick: () => onPageChange(page + 1) }) })
   ] }) });
 }
 
 // src/blocos-app/EmptyState.tsx
-var import_jsx_runtime8 = require("react/jsx-runtime");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 function EmptyState({ icon, title, description, action, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
     "div",
     {
       "data-slot": "empty-state",
@@ -495,17 +538,17 @@ function EmptyState({ icon, title, description, action, className }) {
         className
       ),
       children: [
-        icon && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { "data-slot": "empty-state-icon", className: "text-muted-foreground [&_svg]:size-10", children: icon }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "text-foreground text-sm font-medium", children: title }),
-        description && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "text-muted-foreground max-w-sm text-sm", children: description }),
-        action && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "mt-2", children: action })
+        icon && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { "data-slot": "empty-state-icon", className: "text-muted-foreground [&_svg]:size-10", children: icon }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-foreground text-sm font-medium", children: title }),
+        description && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-muted-foreground max-w-sm text-sm", children: description }),
+        action && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "mt-2", children: action })
       ]
     }
   );
 }
 
 // src/blocos-app/DataTable.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 function isEmptyStateProps(value) {
   return typeof value === "object" && value !== null && "title" in value;
 }
@@ -522,26 +565,26 @@ function DataTable({
   className
 }) {
   const mostrarPaginacao = !loading && page !== void 0 && totalPages !== void 0 && onPageChange;
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { "data-slot": "data-table", className: cn("flex flex-col gap-4", className), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(Table, { "aria-busy": loading || void 0, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TableHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TableHead, { className: coluna.className, children: coluna.header }, coluna.key)) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(TableBody, { children: [
-        loading && Array.from({ length: loadingRowCount }, (_, index) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TableCell, { className: coluna.className, children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Skeleton, { className: "h-4 w-full max-w-40" }) }, coluna.key)) }, `skeleton-${index}`)),
-        !loading && rows.map((row, index) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TableCell, { className: coluna.className, children: coluna.render(row) }, coluna.key)) }, getRowKey ? getRowKey(row, index) : index))
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { "data-slot": "data-table", className: cn("flex flex-col gap-4", className), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(Table, { "aria-busy": loading || void 0, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TableHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TableHead, { className: coluna.className, children: coluna.header }, coluna.key)) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(TableBody, { children: [
+        loading && Array.from({ length: loadingRowCount }, (_, index) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TableCell, { className: coluna.className, children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Skeleton, { className: "h-4 w-full max-w-40" }) }, coluna.key)) }, `skeleton-${index}`)),
+        !loading && rows.map((row, index) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TableRow, { children: columns.map((coluna) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TableCell, { className: coluna.className, children: coluna.render(row) }, coluna.key)) }, getRowKey ? getRowKey(row, index) : index))
       ] })
     ] }),
-    !loading && rows.length === 0 && emptyState && (isEmptyStateProps(emptyState) ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(EmptyState, { ...emptyState }) : emptyState),
-    mostrarPaginacao && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(PaginationControl, { page, totalPages, onPageChange })
+    !loading && rows.length === 0 && emptyState && (isEmptyStateProps(emptyState) ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(EmptyState, { ...emptyState }) : emptyState),
+    mostrarPaginacao && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(PaginationControl, { page, totalPages, onPageChange })
   ] });
 }
 
 // src/blocos-app/StatCard.tsx
-var import_lucide_react4 = require("lucide-react");
+var import_lucide_react5 = require("lucide-react");
 
 // src/primitivos/Card.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function Card({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     "div",
     {
       "data-slot": "card",
@@ -554,34 +597,40 @@ function Card({ className, ...props }) {
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { "data-slot": "card-content", className: cn("px-6", className), ...props });
 }
 
 // src/blocos-app/StatCard.tsx
-var import_jsx_runtime11 = require("react/jsx-runtime");
-var deltaCorPorDirecao = {
-  up: "text-primary",
-  down: "text-destructive",
-  neutral: "text-muted-foreground"
+var import_jsx_runtime12 = require("react/jsx-runtime");
+var tomPorDirecao = {
+  up: "positivo",
+  down: "negativo",
+  neutral: "neutro"
+};
+var corPorTom = {
+  positivo: "text-success",
+  negativo: "text-destructive",
+  neutro: "text-muted-foreground"
 };
 var setaPorDirecao = {
-  up: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react4.ArrowUpRightIcon, { "aria-hidden": "true" }),
-  down: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react4.ArrowDownRightIcon, { "aria-hidden": "true" }),
+  up: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react5.ArrowUpRightIcon, { "aria-hidden": "true" }),
+  down: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react5.ArrowDownRightIcon, { "aria-hidden": "true" }),
   neutral: null
 };
 function StatCard({ label, value, icon, delta, className }) {
   const direcao = delta?.direction ?? "neutral";
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Card, { className: cn("gap-1 py-5", className), children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(CardContent, { className: "flex items-start justify-between gap-3", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex min-w-0 flex-col gap-1", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-muted-foreground text-xs font-medium uppercase tracking-wide", children: label }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-foreground text-2xl font-semibold tabular-nums", children: value }),
-      delta && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+  const tom = delta?.tom ?? tomPorDirecao[direcao];
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Card, { className: cn("gap-1 py-5", className), children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(CardContent, { className: "flex items-start justify-between gap-3", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex min-w-0 flex-col gap-1", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-muted-foreground text-xs font-medium uppercase tracking-wide", children: label }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "text-foreground text-2xl font-semibold tabular-nums", children: value }),
+      delta && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
         "p",
         {
           "data-direction": direcao,
           className: cn(
             "inline-flex items-center gap-0.5 text-xs font-medium [&_svg]:size-3.5 [&_svg]:shrink-0",
-            deltaCorPorDirecao[direcao]
+            corPorTom[tom]
           ),
           children: [
             setaPorDirecao[direcao],
@@ -590,7 +639,7 @@ function StatCard({ label, value, icon, delta, className }) {
         }
       )
     ] }),
-    icon && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+    icon && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
       "div",
       {
         "data-slot": "stat-card-icon",
@@ -602,9 +651,9 @@ function StatCard({ label, value, icon, delta, className }) {
 }
 
 // src/blocos-app/PageHeader.tsx
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function PageHeader({ title, breadcrumb, actions, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
     "div",
     {
       "data-slot": "page-header",
@@ -613,18 +662,18 @@ function PageHeader({ title, breadcrumb, actions, className }) {
         className
       ),
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex min-w-0 flex-col gap-1.5", children: [
-          breadcrumb && breadcrumb.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("nav", { "aria-label": "Trilha de navega\xE7\xE3o", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("ol", { className: "text-muted-foreground flex flex-wrap items-center gap-1.5 text-xs", children: breadcrumb.map((item, index) => {
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "flex min-w-0 flex-col gap-1.5", children: [
+          breadcrumb && breadcrumb.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("nav", { "aria-label": "Trilha de navega\xE7\xE3o", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("ol", { className: "text-muted-foreground flex flex-wrap items-center gap-1.5 text-xs", children: breadcrumb.map((item, index) => {
             const isLast = index === breadcrumb.length - 1;
-            return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("li", { className: "flex items-center gap-1.5", children: [
-              item.href && !isLast ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+            return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("li", { className: "flex items-center gap-1.5", children: [
+              item.href && !isLast ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
                 "a",
                 {
                   href: item.href,
                   className: "hover:text-foreground focus-visible:ring-ring/50 inline-flex min-h-6 items-center rounded-sm transition-colors outline-none focus-visible:ring-[3px]",
                   children: item.label
                 }
-              ) : /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              ) : /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
                 "span",
                 {
                   "aria-current": isLast ? "page" : void 0,
@@ -632,12 +681,12 @@ function PageHeader({ title, breadcrumb, actions, className }) {
                   children: item.label
                 }
               ),
-              !isLast && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { "aria-hidden": "true", children: "/" })
+              !isLast && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { "aria-hidden": "true", children: "/" })
             ] }, index);
           }) }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h1", { className: "text-foreground text-xl font-semibold text-balance sm:truncate", children: title })
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("h1", { className: "text-foreground text-xl font-semibold text-balance sm:truncate", children: title })
         ] }),
-        actions && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { "data-slot": "page-header-actions", className: "flex shrink-0 flex-wrap items-center gap-2", children: actions })
+        actions && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { "data-slot": "page-header-actions", className: "flex shrink-0 flex-wrap items-center gap-2", children: actions })
       ]
     }
   );
@@ -649,9 +698,9 @@ var import_react_slot2 = require("@radix-ui/react-slot");
 
 // src/primitivos/Label.tsx
 var LabelPrimitive = __toESM(require("@radix-ui/react-label"));
-var import_jsx_runtime13 = require("react/jsx-runtime");
+var import_jsx_runtime14 = require("react/jsx-runtime");
 function Label({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
     LabelPrimitive.Root,
     {
       "data-slot": "label",
@@ -665,7 +714,7 @@ function Label({ className, ...props }) {
 }
 
 // src/blocos-app/FormField.tsx
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_jsx_runtime15 = require("react/jsx-runtime");
 function FormField({ label, error, children, className, htmlFor }) {
   const idGerado = React2.useId();
   const controlId = htmlFor ?? idGerado;
@@ -675,21 +724,21 @@ function FormField({ label, error, children, className, htmlFor }) {
     "aria-invalid": error ? true : void 0,
     "aria-describedby": error ? errorId : void 0
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { "data-slot": "form-field", className: cn("flex flex-col gap-1.5", className), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Label, { htmlFor: controlId, children: label }),
-    React2.isValidElement(children) ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react_slot2.Slot, { ...propsDoControle, children }) : children,
-    error && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("p", { id: errorId, role: "alert", className: "text-destructive text-xs font-medium", children: error })
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { "data-slot": "form-field", className: cn("flex flex-col gap-1.5", className), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Label, { htmlFor: controlId, children: label }),
+    React2.isValidElement(children) ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(import_react_slot2.Slot, { ...propsDoControle, children }) : children,
+    error && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { id: errorId, role: "alert", className: "text-destructive text-xs font-medium", children: error })
   ] });
 }
 
 // src/blocos-app/CopyField.tsx
 var React3 = __toESM(require("react"));
-var import_lucide_react5 = require("lucide-react");
+var import_lucide_react6 = require("lucide-react");
 
 // src/primitivos/Input.tsx
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_jsx_runtime16 = require("react/jsx-runtime");
 function Input({ className, type, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
     "input",
     {
       type,
@@ -706,7 +755,7 @@ function Input({ className, type, ...props }) {
 }
 
 // src/blocos-app/CopyField.tsx
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime17 = require("react/jsx-runtime");
 var MENSAGEM = {
   ocioso: "",
   copiado: "Copiado",
@@ -734,11 +783,11 @@ function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
     timerRef.current = window.setTimeout(() => setEstado("ocioso"), feedbackDurationMs);
   }
   const copiado = estado === "copiado";
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { "data-slot": "copy-field", className: cn("flex flex-col gap-1.5", className), children: [
-    label && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Label, { htmlFor: inputId, children: label }),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "flex items-center gap-2", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Input, { ref: inputRef, id: inputId, readOnly: true, value, className: "font-mono" }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { "data-slot": "copy-field", className: cn("flex flex-col gap-1.5", className), children: [
+    label && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Label, { htmlFor: inputId, children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "flex items-center gap-2", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Input, { ref: inputRef, id: inputId, readOnly: true, value, className: "font-mono" }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
         Button,
         {
           type: "button",
@@ -746,11 +795,11 @@ function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
           size: "icon",
           "aria-label": copiado ? "Valor copiado" : "Copiar valor",
           onClick: copiarValor,
-          children: copiado ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react5.CheckIcon, { className: "text-primary" }) : /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react5.CopyIcon, {})
+          children: copiado ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_lucide_react6.CheckIcon, { className: "text-primary" }) : /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_lucide_react6.CopyIcon, {})
         }
       )
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
       "p",
       {
         role: "status",

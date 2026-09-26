@@ -16,10 +16,12 @@ import * as ToastPrimitive from '@radix-ui/react-toast';
 
 declare const buttonVariants: (props?: ({
     variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
-    size?: "default" | "icon" | "sm" | "lg" | "icon-sm" | "icon-lg" | null | undefined;
+    size?: "default" | "icon" | "xs" | "sm" | "lg" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
-declare function Button({ className, variant, size, asChild, ...props }: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
+declare function Button({ className, variant, size, asChild, loading, disabled, children, ...props }: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    /** Desabilita e mostra um spinner antes do conteúdo. Com asChild, só sinaliza via aria. */
+    loading?: boolean;
 }): react_jsx_runtime.JSX.Element;
 
 declare function Card({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
@@ -82,7 +84,10 @@ declare function TooltipContent({ className, sideOffset, children, ...props }: R
 declare function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>): react_jsx_runtime.JSX.Element;
 declare function SelectGroup({ ...props }: React.ComponentProps<typeof SelectPrimitive.Group>): react_jsx_runtime.JSX.Element;
 declare function SelectValue({ ...props }: React.ComponentProps<typeof SelectPrimitive.Value>): react_jsx_runtime.JSX.Element;
-declare function SelectTrigger({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
+declare function SelectTrigger({ className, children, size, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+    /** `xs` acompanha o Button `xs` em ferramenta densa. */
+    size?: "default" | "sm" | "xs";
+}): react_jsx_runtime.JSX.Element;
 declare function SelectScrollUpButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>): react_jsx_runtime.JSX.Element;
 declare function SelectScrollDownButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>): react_jsx_runtime.JSX.Element;
 declare function SelectContent({ className, children, position, ...props }: React.ComponentProps<typeof SelectPrimitive.Content>): react_jsx_runtime.JSX.Element;

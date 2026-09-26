@@ -30,6 +30,8 @@ declare const NOMES: {
     readonly destaqueTexto: "--accent-foreground";
     readonly alerta: "--warning";
     readonly alertaTexto: "--warning-foreground";
+    readonly sucesso: "--success";
+    readonly sucessoTexto: "--success-foreground";
     readonly erro: "--destructive";
     readonly erroTexto: "--destructive-foreground";
     readonly borda: "--border";

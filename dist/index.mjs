@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-V2BFDAEY.mjs";
+} from "./chunk-7NOPLKKB.mjs";
 import {
   AppShell,
   CopyField,
@@ -20,16 +20,7 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-RWDOBQOZ.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-3YMTV7XD.mjs";
+} from "./chunk-GKA3WS3V.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -84,7 +75,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-5BZROXOJ.mjs";
+} from "./chunk-42J2QLUV.mjs";
 import {
   Dialog,
   DialogClose,
@@ -134,10 +125,19 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-QQFS2L2R.mjs";
+} from "./chunk-4FVOKC5M.mjs";
 import {
   cn
 } from "./chunk-UYJYUDH4.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-DOQVRQ5O.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -241,7 +241,7 @@ function LogoAnimado({
         type: "button",
         "aria-label": label === MARCA ? MARCA : `${label} \u2014 ${MARCA}`,
         onClick,
-        className: "group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-cyan/70",
+        className: "group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
         children: svg
       }
     );
@@ -259,7 +259,7 @@ function comportamentoDeScroll() {
 
 // src/componentes/Navbar.tsx
 import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
-var FOCO = "focus-visible:ring-cyan/70 focus-visible:ring-2 focus-visible:outline-none";
+var FOCO = "focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none";
 function propsDoLinkDeMenu(link) {
   return link.externo ? { target: "_blank", rel: "noopener noreferrer" } : {};
 }
@@ -420,15 +420,24 @@ function Hamburguer({ ref, aberto, controla, alternar }) {
 
 // src/componentes/Footer.tsx
 import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
+var ROTULOS_PADRAO = {
+  resumo: "runtime summary",
+  local: "location",
+  cnpj: "cnpj",
+  contato: "contact",
+  saida: "process.exit(0)"
+};
 function Footer({
   links = [],
   email,
   localizacao,
   cnpj,
   nomeEmpresa = "MF Desenvolvimento",
-  onLogoClick
+  onLogoClick,
+  rotulos
 }) {
   const year = (/* @__PURE__ */ new Date()).getFullYear();
+  const r = { ...ROTULOS_PADRAO, ...rotulos };
   return /* @__PURE__ */ jsxs4(
     "footer",
     {
@@ -457,23 +466,23 @@ function Footer({
           ] }),
           /* @__PURE__ */ jsxs4("div", { className: "grid min-w-0 gap-8 font-mono", children: [
             (email || localizacao || cnpj) && /* @__PURE__ */ jsxs4("div", { className: "rounded border border-line bg-surface p-5", children: [
-              /* @__PURE__ */ jsx4("p", { className: "text-[10px] uppercase tracking-[0.28em] text-gray-text", children: "runtime summary" }),
+              /* @__PURE__ */ jsx4("p", { className: "text-[10px] uppercase tracking-[0.28em] text-gray-text", children: r.resumo }),
               /* @__PURE__ */ jsxs4("div", { className: "mt-5 grid gap-3 text-sm", children: [
                 localizacao && /* @__PURE__ */ jsxs4("p", { className: "flex items-baseline justify-between gap-4 border-b border-line pb-2", children: [
-                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: "location" }),
+                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: r.local }),
                   /* @__PURE__ */ jsx4("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: localizacao })
                 ] }),
                 cnpj && /* @__PURE__ */ jsxs4("p", { className: "flex items-baseline justify-between gap-4 border-b border-line pb-2", children: [
-                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: "cnpj" }),
+                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: r.cnpj }),
                   /* @__PURE__ */ jsx4("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: cnpj })
                 ] }),
                 email && /* @__PURE__ */ jsxs4("p", { className: "flex items-baseline justify-between gap-4", children: [
-                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: "contact" }),
+                  /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: r.contato }),
                   /* @__PURE__ */ jsx4(
                     "a",
                     {
                       href: `mailto:${email}`,
-                      className: "text-cyan hover:text-foreground focus-visible:ring-cyan/70 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-2 focus-visible:outline-none",
+                      className: "text-cyan hover:text-foreground focus-visible:ring-ring/50 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-[3px] focus-visible:outline-none",
                       children: email
                     }
                   )
@@ -484,7 +493,7 @@ function Footer({
               "a",
               {
                 href: link.href,
-                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-cyan/70 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none",
+                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring/50 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
                 children: link.label
               },
               link.href
@@ -498,7 +507,8 @@ function Footer({
               ] }),
               /* @__PURE__ */ jsxs4("p", { children: [
                 /* @__PURE__ */ jsx4("span", { className: "text-cyan", children: "$" }),
-                " process.exit(0)"
+                " ",
+                r.saida
               ] })
             ] })
           ] })
