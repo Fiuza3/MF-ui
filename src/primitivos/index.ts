@@ -26,3 +26,5 @@ export * from "./Table";
 export * from "./Pagination";
 export * from "./DropdownMenu";
 export * from "./Toast";
+export { AnimatedIcon } from "./AnimatedIcon";
+export type { AnimatedIconProps, AnimatedIconAnimation, AnimatedIconTrigger } from "./AnimatedIcon";

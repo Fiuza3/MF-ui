@@ -1,0 +1,93 @@
+/* AnimatedIcon — só CSS anima; o componente apenas marca estado em data-*.
+   Cada animação é chaveada por data-trigger (hover | inview | always). Gatilho hover
+   também reage a .group:hover e .group:focus-within, para cards com link/botão interno. */
+
+.mf-anim-icon {
+  /* sem isto pulse/spin giram em torno do canto do viewBox, não do centro do ícone */
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* draw — dasharray só existe nos estados que o usam (pathLength=100 vem do componente);
+   parado, o traço é o original e paths longos não ficam com falhas. */
+.mf-anim-icon[data-anim="draw"][data-trigger="inview"][data-armed="true"]:not([data-active]) :is(path, circle, line, polyline, polygon, rect, ellipse) {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.mf-anim-icon[data-anim="draw"][data-trigger="inview"][data-active] :is(path, circle, line, polyline, polygon, rect, ellipse),
+.mf-anim-icon[data-anim="draw"][data-trigger="always"] :is(path, circle, line, polyline, polygon, rect, ellipse) {
+  stroke-dasharray: 100;
+  animation: mf-icon-draw var(--mf-duration-section) var(--mf-ease-expo) both;
+}
+
+.mf-anim-icon[data-anim="draw"][data-trigger="hover"]:hover :is(path, circle, line, polyline, polygon, rect, ellipse),
+.group:hover .mf-anim-icon[data-anim="draw"][data-trigger="hover"] :is(path, circle, line, polyline, polygon, rect, ellipse),
+.group:focus-within .mf-anim-icon[data-anim="draw"][data-trigger="hover"] :is(path, circle, line, polyline, polygon, rect, ellipse) {
+  stroke-dasharray: 100;
+  animation: mf-icon-draw var(--mf-duration-reveal) var(--mf-ease-expo) both;
+}
+
+/* pulse */
+.mf-anim-icon[data-anim="pulse"][data-trigger="always"],
+.mf-anim-icon[data-anim="pulse"][data-trigger="hover"]:hover,
+.group:hover .mf-anim-icon[data-anim="pulse"][data-trigger="hover"],
+.group:focus-within .mf-anim-icon[data-anim="pulse"][data-trigger="hover"] {
+  animation: mf-icon-pulse 1.6s var(--mf-ease-soft) infinite;
+}
+
+.mf-anim-icon[data-anim="pulse"][data-trigger="inview"][data-active] {
+  animation: mf-icon-pulse 1.6s var(--mf-ease-soft) 1;
+}
+
+/* nudge */
+.mf-anim-icon[data-anim="nudge"][data-trigger="hover"]:hover,
+.group:hover .mf-anim-icon[data-anim="nudge"][data-trigger="hover"],
+.group:focus-within .mf-anim-icon[data-anim="nudge"][data-trigger="hover"] {
+  transform: translateX(2px);
+  transition: transform var(--mf-duration-fast) var(--mf-ease-expo);
+}
+
+.mf-anim-icon[data-anim="nudge"][data-trigger="inview"][data-active] {
+  animation: mf-icon-nudge 0.8s var(--mf-ease-soft) 1;
+}
+
+.mf-anim-icon[data-anim="nudge"][data-trigger="always"] {
+  animation: mf-icon-nudge 1.6s var(--mf-ease-soft) infinite;
+}
+
+/* spin */
+.mf-anim-icon[data-anim="spin"][data-trigger="always"],
+.mf-anim-icon[data-anim="spin"][data-trigger="inview"][data-active],
+.mf-anim-icon[data-anim="spin"][data-trigger="hover"]:hover,
+.group:hover .mf-anim-icon[data-anim="spin"][data-trigger="hover"],
+.group:focus-within .mf-anim-icon[data-anim="spin"][data-trigger="hover"] {
+  animation: mf-icon-spin 0.9s linear infinite;
+}
+
+@keyframes mf-icon-draw {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes mf-icon-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+@keyframes mf-icon-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+@keyframes mf-icon-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mf-anim-icon,
+  .mf-anim-icon :is(path, circle, line, polyline, polygon, rect, ellipse) {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
