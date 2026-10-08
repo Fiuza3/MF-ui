@@ -65,7 +65,8 @@ describe("classes do Tailwind", () => {
     expect(infratores, "Use o par *-foreground do token de fundo").toEqual([]);
   });
 
-  const ANEL_COM_ALFA = /ring-ring\/\d+/;
+  // (?<!not-): `aria-invalid:not-focus-visible:ring-*/N` é a tinta de inválido sem foco, permitida.
+  const ANEL_COM_ALFA = /(?<!not-)focus-visible:ring-[\w-]+\/\d+/;
   // Casa 0–11px e 0.1–0.749rem; 0.75rem (12px) em diante passa.
   const FONTE_PEQUENA = /text-\[(?:(?:[0-9]|1[01])px|0?\.(?:[0-6]\d*|7(?:[0-4]\d*)?)rem)\]/;
 
@@ -81,8 +82,8 @@ describe("classes do Tailwind", () => {
     return achados;
   }
 
-  it("anel de foco nunca usa alfa (ring-ring/50 dá 2,19:1 no claro)", () => {
-    expect(infratoresDe(ANEL_COM_ALFA), "use focus-visible:ring-ring").toEqual([]);
+  it("anel de foco nunca usa alfa (ring-ring/50 dá 2,19:1; destructive/20 dá 1,36:1)", () => {
+    expect(infratoresDe(ANEL_COM_ALFA), "use focus-visible:ring-ring ou ring-destructive opaco").toEqual([]);
   });
 
   it("nenhuma fonte abaixo de 12px (0.75rem) — px fixo também não acompanha o zoom", () => {

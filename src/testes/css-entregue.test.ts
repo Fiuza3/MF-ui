@@ -70,6 +70,16 @@ describe("CSS entregue pelo pacote", () => {
     expect(css).toMatch(/button:not\(:disabled\)[^{]*\{[^}]*cursor:\s*pointer/);
   });
 
+  // aria-invalid:ring-destructive/20 vinha depois de focus-visible:ring-ring com a mesma
+  // especificidade e deixava o campo inválido focado com anel de 20% (ilegível).
+  it("tinta de campo inválido só vale sem foco (variante not-focus-visible compila)", async () => {
+    const compilador = await compile(ENTRADA, { base: raiz, onDependency: () => {} });
+    const saida = compilador.build(["aria-invalid:not-focus-visible:ring-destructive/20"]);
+
+    expect(saida).toMatch(/not\(\*:focus-visible\)|:not\([^)]*focus-visible/);
+    expect(saida).toContain("aria-invalid");
+  });
+
   // O tema é a classe no <html>; sem @custom-variant o Tailwind v4 liga `dark:`
   // ao prefers-color-scheme, e o tema claro herda ajustes do escuro quando o SO
   // do visitante está em modo escuro.
@@ -109,5 +119,32 @@ describe("classes próprias dos blocos", () => {
 
     expect(classes.length).toBeGreaterThan(5);
     expect(mortas, "classe usada em bloco sem CSS no pacote").toEqual([]);
+  });
+});
+
+// O animated-icon.css chega ao consumidor só via utilitarios.css; sem o @import o
+// AnimatedIcon renderiza sem animação alguma e sem erro. E o estado "escondido" do
+// draw só pode existir armado pelo JS — sem data-armed, ícone sumiria no SSR.
+describe("animated-icon.css", () => {
+  const css = () => readFileSync(resolve(raiz, "tokens/animated-icon.css"), "utf8");
+
+  it("é importado por utilitarios.css e compila no pacote", async () => {
+    const utilitarios = readFileSync(resolve(raiz, "tokens/utilitarios.css"), "utf8");
+    expect(utilitarios).toMatch(/@import\s+"\.\/animated-icon\.css"/);
+
+    const compilador = await compile(`${ENTRADA}\n@import "./tokens/utilitarios.css";`, {
+      base: raiz,
+      onDependency: () => {},
+    });
+    expect(compilador.build([])).toContain("mf-icon-draw");
+  }, 30_000);
+
+  it("o estado escondido (dashoffset 100) exige [data-armed=\"true\"]", () => {
+    // Keyframes (from/to) também declaram dashoffset; só interessam as regras de seletor.
+    const regras = [...css().matchAll(/([^{}]+)\{([^{}]*stroke-dashoffset:\s*100[^{}]*)\}/g)].filter(
+      ([, seletor]) => seletor!.includes(".mf-anim-icon"),
+    );
+    expect(regras.length).toBeGreaterThan(0);
+    for (const [, seletor] of regras) expect(seletor).toContain('[data-armed="true"]');
   });
 });
