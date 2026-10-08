@@ -1,5 +1,6 @@
 import { act, render, screen } from "@testing-library/react";
-import { CalculatorIcon } from "lucide-react";
+import { CalculatorIcon, ArrowRightIcon } from "lucide-react";
+import { createRef } from "react";
 import { renderToString } from "react-dom/server";
 import { AnimatedIcon } from "../primitivos/AnimatedIcon";
 
@@ -98,5 +99,37 @@ describe("AnimatedIcon", () => {
 
     const pulse = render(<AnimatedIcon icon={CalculatorIcon} animation="pulse" />);
     pulse.container.querySelectorAll("svg > *").forEach((forma) => expect(forma).not.toHaveAttribute("pathLength"));
+  });
+
+  it("ref do consumidor recebe o svg e o observer observa o mesmo svg", () => {
+    const observe = vi.fn();
+    vi.stubGlobal(
+      "IntersectionObserver",
+      vi.fn(function () {
+        return { observe, disconnect: vi.fn(), unobserve: vi.fn(), takeRecords: vi.fn() };
+      }),
+    );
+    const ref = createRef<SVGSVGElement>();
+    const { container } = render(<AnimatedIcon icon={CalculatorIcon} trigger="inview" ref={ref} />);
+    const svg = container.querySelector("svg")!;
+    expect(ref.current).toBe(svg);
+    expect(observe).toHaveBeenCalledWith(svg);
+  });
+
+  it("trocar icon antes da interseção re-observa o svg novo e reaplica pathLength", () => {
+    const observe = vi.fn();
+    vi.stubGlobal(
+      "IntersectionObserver",
+      vi.fn(function () {
+        return { observe, disconnect: vi.fn(), unobserve: vi.fn(), takeRecords: vi.fn() };
+      }),
+    );
+    const { container, rerender } = render(<AnimatedIcon icon={CalculatorIcon} trigger="inview" />);
+    rerender(<AnimatedIcon icon={ArrowRightIcon} trigger="inview" />);
+    const svg = container.querySelector("svg")!;
+    expect(observe).toHaveBeenLastCalledWith(svg);
+    const formas = svg.querySelectorAll(":scope > :is(path, circle, line, polyline, polygon, rect, ellipse)");
+    expect(formas.length).toBeGreaterThan(0);
+    formas.forEach((forma) => expect(forma).toHaveAttribute("pathLength", "100"));
   });
 });

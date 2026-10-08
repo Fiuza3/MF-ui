@@ -22,6 +22,8 @@ const meta = {
   },
 } satisfies Meta<typeof AnimatedIcon>;
 
+// `icon` é uma função e não atravessa Server → Client Component: use o AnimatedIcon dentro de um
+// client component ou crie um wrapper "use client".
 export default meta;
 type Story = StoryObj<typeof meta>;
 

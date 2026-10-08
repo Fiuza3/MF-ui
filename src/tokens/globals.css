@@ -118,6 +118,9 @@
   --mf-duration-fast: 240ms;
   --mf-duration-reveal: 600ms;
   --mf-duration-section: 900ms;
+  --mf-duration-pulse: 1.6s;
+  --mf-duration-nudge: 0.8s;
+  --mf-duration-spin: 0.9s;
 
   --mf-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --mf-ease-power: cubic-bezier(0.22, 1, 0.36, 1);
