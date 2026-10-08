@@ -3,7 +3,7 @@
 import {
   OverlayClose,
   cn
-} from "./chunk-UYJYUDH4.mjs";
+} from "./chunk-ZTAXVNYF.mjs";
 
 // src/primitivos/Dialog.tsx
 import * as DialogPrimitive from "@radix-ui/react-dialog";
@@ -118,4 +118,4 @@ export {
   DialogTitle,
   DialogDescription
 };
-//# sourceMappingURL=chunk-Y2JANCN3.mjs.map
+//# sourceMappingURL=chunk-65233P6I.mjs.map

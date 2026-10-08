@@ -13,6 +13,7 @@ import * as SwitchPrimitive from '@radix-ui/react-switch';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import * as ToastPrimitive from '@radix-ui/react-toast';
+import { LucideIcon } from 'lucide-react';
 
 declare const buttonVariants: (props?: ({
     variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
@@ -192,4 +193,15 @@ declare function ToastComponentProvider({ children }: {
 /** Hook de acesso à fila de toasts — precisa estar dentro de `<ToastComponentProvider>`. */
 declare function useToast(): ToastContextValue;
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, type PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastRoot as Toast, ToastAction, ToastClose, ToastComponentProvider, type ToastData, ToastDescription, ToastProvider, ToastTitle, type ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast };
+type AnimatedIconAnimation = "draw" | "pulse" | "nudge" | "spin";
+type AnimatedIconTrigger = "hover" | "inview" | "always";
+type AnimatedIconProps = Omit<React.ComponentProps<"svg">, "children"> & {
+    icon: LucideIcon;
+    animation?: AnimatedIconAnimation;
+    trigger?: AnimatedIconTrigger;
+    size?: number;
+    label?: string;
+};
+declare function AnimatedIcon({ icon: Icon, animation, trigger, size, label, className, ...props }: AnimatedIconProps): react_jsx_runtime.JSX.Element;
+
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AnimatedIcon, type AnimatedIconAnimation, type AnimatedIconProps, type AnimatedIconTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, type PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastRoot as Toast, ToastAction, ToastClose, ToastComponentProvider, type ToastData, ToastDescription, ToastProvider, ToastTitle, type ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast };

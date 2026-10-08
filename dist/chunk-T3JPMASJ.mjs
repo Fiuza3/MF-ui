@@ -3,7 +3,7 @@
 import {
   OverlayClose,
   cn
-} from "./chunk-UYJYUDH4.mjs";
+} from "./chunk-ZTAXVNYF.mjs";
 
 // src/primitivos/Button.tsx
 import { Slot } from "@radix-ui/react-slot";
@@ -28,7 +28,7 @@ function Spinner({ className, ...props }) {
 // src/primitivos/Button.tsx
 import { jsx as jsx2, jsxs } from "react/jsx-runtime";
 var buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -179,7 +179,7 @@ function Input({ className, type, ...props }) {
       "data-slot": "input",
       className: cn(
         "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:mr-3 file:inline-flex file:h-7 file:items-center file:rounded-sm file:border-0 file:bg-muted file:px-2 file:text-base file:font-medium md:file:text-sm disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px]",
         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
         className
       ),
@@ -438,7 +438,7 @@ function PaginationLink({ className, isActive, ...props }) {
       className: cn(
         "inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm font-medium tabular-nums transition-colors",
         "hover:bg-foreground/10 hover:text-foreground",
-        "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
         "disabled:pointer-events-none disabled:opacity-50",
         isActive && "bg-primary text-primary-foreground hover:bg-primary/90",
         className
@@ -598,4 +598,4 @@ export {
   PaginationEllipsis,
   PaginationControl
 };
-//# sourceMappingURL=chunk-4FVOKC5M.mjs.map
+//# sourceMappingURL=chunk-T3JPMASJ.mjs.map
