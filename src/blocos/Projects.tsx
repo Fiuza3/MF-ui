@@ -34,14 +34,16 @@ const FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:
 
 type BotaoDePausaProps = { pausado: boolean; onAlternar: () => void };
 
-// Oculto onde o carrossel já não anima (celular/toque: classe no CSS; movimento reduzido: não renderiza).
+// Rótulo fixo + aria-pressed (padrão APG de toggle): trocar o rótulo junto com o estado faria o leitor
+// de tela dizer "Retomar, pressionado", o oposto do que acontece. Só o ícone alterna.
+// Oculto onde o carrossel já não anima (toque e movimento reduzido: classe no CSS; reduzido também não renderiza).
 function BotaoDePausa({ pausado, onAlternar }: BotaoDePausaProps) {
   const Icone = pausado ? PlayIcon : PauseIcon;
   return (
     <button
       type="button"
       aria-pressed={pausado}
-      aria-label={pausado ? "Retomar carrossel" : "Pausar carrossel"}
+      aria-label="Pausar carrossel"
       onClick={onAlternar}
       className={`project-carousel-pausa border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex size-11 shrink-0 items-center justify-center rounded border transition-colors max-md:hidden ${FOCO}`}
     >

@@ -150,8 +150,9 @@
   }
 }
 
-/* Sem animação no toque, o botão de pausa não controla nada. */
-@media (pointer: coarse) {
+/* Sem animação no toque ou com movimento reduzido, o botão de pausa não controla nada
+   (o JS só remove o botão do DOM após hidratar; o CSS evita o flash no HTML do servidor). */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
   .project-carousel-pausa {
     display: none;
   }

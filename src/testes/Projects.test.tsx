@@ -146,7 +146,7 @@ describe("Projects", () => {
   });
 
   // WCAG 2.2.2: movimento automático por mais de 5s precisa de pausa explícita.
-  it("botão pausa e retoma o carrossel", async () => {
+  it("botão pausa e retoma o carrossel mantendo o rótulo fixo (só aria-pressed muda)", async () => {
     const user = userEvent.setup();
     renderizar();
     const botao = screen.getByRole("button", { name: "Pausar carrossel" });
@@ -154,10 +154,9 @@ describe("Projects", () => {
 
     await user.click(botao);
 
-    expect(screen.getByRole("button", { name: "Retomar carrossel" })).toHaveAttribute(
-      "aria-pressed",
-      "true",
-    );
+    expect(botao).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Pausar carrossel" })).toBe(botao);
+    expect(screen.queryByRole("button", { name: /retomar/i })).toBeNull();
     expect(document.querySelector(".project-carousel")).toHaveAttribute("data-paused", "true");
   });
 
