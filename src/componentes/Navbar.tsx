@@ -15,7 +15,8 @@ export type NavbarProps = {
   links?: NavLink[];
   ctaHref?: string;
   ctaLabel?: string;
-  /** Slot à direita (ex.: alternador de tema), antes do CTA no desktop e no fim do painel mobile. */
+  /** Slot à direita (ex.: alternador de tema), antes do CTA no desktop e no fim do painel mobile.
+   * Fica montado duas vezes com o painel mobile aberto: não use `id` fixo nele. */
   acoes?: ReactNode;
   /** Nome acessível do logo; troque quando ele não leva ao topo (ex.: páginas internas). */
   logoLabel?: string;
