@@ -141,11 +141,15 @@ Importe do subpath quando quiser um bundle menor ou evitar React (caso de `token
 
 `Button` · `Card` · `Badge` · `Input` · `Textarea` · `Label` · `Separator` · `Accordion` ·
 `Dialog` · `Sheet` · `Tooltip` · `Select` · `Checkbox` · `Switch` · `Tabs` · `Skeleton` ·
-`Table` · `Pagination` · `DropdownMenu` · `Toast`
+`Table` · `Pagination` · `DropdownMenu` · `Toast` · `AnimatedIcon`
 
 `Button` e `Badge` também exportam suas variantes CVA (`buttonVariants`, `badgeVariants`) para
 compor estilos em outros elementos. `Card` é composicional: `CardHeader`, `CardTitle`,
 `CardDescription`, `CardAction`, `CardContent`, `CardFooter`.
+
+`AnimatedIcon` recebe um ícone Lucide (`icon={CalculatorIcon}`) e anima só com CSS (`draw`, `pulse`,
+`nudge`, `spin` × `hover`, `inview`, `always`). `icon` é uma função e não atravessa a fronteira
+Server → Client Component: use dentro de um client component ou crie um wrapper `"use client"`.
 
 ### Blocos de site — `@mf/ui/blocos`
 
@@ -201,7 +205,7 @@ import { Hero } from "@mf/ui/blocos";
 
 ## Temas
 
-O tema **escuro é o padrão** (`:root` / `.dark`). Para o tema claro (creme + laranja), adicione
+O tema **escuro é o padrão** (`:root` / `.dark`). Para o tema claro (gelo + ciano profundo), adicione
 a classe `light` no `<html>` — por exemplo via `next-themes`. As mesmas variáveis CSS trocam de
 valor; nenhum componente muda.
 
@@ -233,9 +237,13 @@ fundo · texto · textoSutil
 superficie · superficieTexto · superficieElevada · flutuante · flutuanteTexto
 primaria · primariaTexto · primariaHover · primariaSutil
 secundaria · secundariaTexto · neutra · neutraTexto · destaque · destaqueTexto
+marca · marcaTexto
 alerta · alertaTexto · erro · erroTexto
 borda · bordaCampo · foco
 ```
+
+`marca`/`marcaTexto` (`--brand`/`--brand-foreground`) é o ciano brilhante de preenchimento, igual nos dois
+temas; não use `marca` como cor de texto no tema claro (1,32:1).
 
 Motion segue o mesmo desenho: `duracoes.micro | rapida | entrada | secao` e
 `curvas.expo | power | suave`.

@@ -11,20 +11,21 @@ Tema claro na família ciano da marca, anel de foco opaco, piso tipográfico de 
 ### Atenção ao atualizar
 
 - **O tema claro trocou creme + laranja por gelo + ciano profundo.** `--primary`, `--accent`, `--cyan` e `--ring` passam a `#0a6e68` (5,7:1 sobre o fundo — seguros para texto), com `--primary-foreground` branco. O ciano brilhante da marca não serve como texto no claro (1,32:1), então ganhou token próprio de preenchimento: **`--brand` / `--brand-foreground`** (`#3df2e0` com `#0b0f14`, 13,7:1, iguais nos dois temas). CTA de identidade: `bg-brand text-brand-foreground`.
-- **Anel de foco sem alfa.** `focus-visible:ring-ring/50` dava 2,19:1 no claro (WCAG 1.4.11 pede 3:1); todos os componentes usam `ring-ring` opaco. Quem tinha `ring-ring/50` no próprio app deve trocar também.
-- **Marca d'água do `Footer` virou SVG `aria-hidden`.** Visual igual, mas o texto decorativo de 1,21:1 sai do cálculo de contraste do axe/Lighthouse. O viewBox foi medido com a Geist Mono Black real (antes cortava ~9 unidades do topo dos glifos).
+- **Anel de foco sem alfa.** `focus-visible:ring-ring/50` dava 2,19:1 no claro (WCAG 1.4.11 pede 3:1); todos os componentes usam `ring-ring` opaco, e `destructive` usa `ring-destructive` opaco. A tinta de campo inválido (`aria-invalid`) só vale sem foco. Quem tinha `ring-ring/50` no próprio app deve trocar também.
+- **O CTA do `Hero` mudou de cor.** No tema claro deixa de ser laranja/creme e passa a ciano brilhante com texto quase preto, via `--brand` (no hover, borda e texto vão para `--cyan`). No escuro a aparência é a mesma.
+- **Marca d'água do `Footer` virou SVG `aria-hidden`.** As letras ficam ~15% maiores e o bloco mais alto (o dimensionamento por `@container` foi removido); o texto decorativo de 1,22:1 sai do cálculo de contraste do axe/Lighthouse. O viewBox foi medido com a Geist Mono Black real (antes cortava ~9 unidades do topo dos glifos).
 
 ### Adicionado
 
-- `AnimatedIcon` (primitivo): ícone Lucide animado só com CSS — `draw`, `pulse`, `nudge`, `spin` × gatilhos `hover` (próprio ou `.group`, incluindo foco), `inview` (IntersectionObserver nativo) e `always`. Nunca fica escondido sem JS, antes da hidratação ou sem IntersectionObserver; `prefers-reduced-motion` mostra o estado final.
-- `Navbar`: prop `acoes` (ex.: botão de tema), renderizada no desktop antes do CTA e no fim do painel mobile.
-- `Projects`: botão "Pausar carrossel"/"Retomar carrossel" (WCAG 2.2.2), persiste com hover; some com movimento reduzido e no toque, onde o carrossel já é trilho com scroll.
+- `AnimatedIcon` (primitivo): ícone Lucide animado só com CSS — `draw`, `pulse`, `nudge`, `spin` × gatilhos `hover` (próprio ou `.group`, incluindo foco), `inview` (IntersectionObserver nativo) e `always` (`pulse`/`nudge` com `always` rodam 3 ciclos, ≤ 5 s; só `spin` gira sem fim). Aceita `ref` do consumidor (inclusive via `asChild`), mas `icon` é uma função: não passe de Server Component. Nunca fica escondido sem JS, antes da hidratação ou sem IntersectionObserver; `prefers-reduced-motion` mostra o estado final.
+- `Navbar`: prop `acoes` (ex.: botão de tema), renderizada no desktop antes do CTA e no fim do painel mobile — fica montada duas vezes com o painel mobile aberto, então evite `id` fixo nela. Prop `logoLabel` para o nome acessível do logo quando ele não leva ao topo.
+- `Projects`: botão "Pausar carrossel" com `aria-pressed` (WCAG 2.2.2; só o ícone alterna), persiste com hover; some com movimento reduzido e no toque, onde o carrossel já é trilho com scroll.
 - Testes que travam regressão: anel com alfa, fonte abaixo de 12px (`classes-tailwind.test.ts`), pares `--brand`, `--accent` e foco/borda sobre `--muted` (`contraste.test.ts`).
 
 ### Corrigido
 
 - `Reveal`: conteúdo ainda invisível revela ao receber foco por teclado, em vez de receber foco com `opacity: 0`.
-- `text-[10px]`/`text-[11px]` em `Contact`, `Hero`, `Process`, `Projects` e `Services` → `text-xs`, com tracking de caixa-alta limitado a 0,2em.
+- `text-[10px]`/`text-[11px]` em `Contact`, `Footer`, `Hero`, `Process`, `Projects` e `Services` → `text-xs`, com tracking de caixa-alta limitado a 0,2em.
 
 ## [3.2.0] — 2026-09-26
 
