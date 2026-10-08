@@ -171,6 +171,14 @@
   transform: translateX(-18px);
 }
 
+/* Foco dentro do conteúdo ainda escondido o revela: sem isso o teclado pousa em
+   elemento com opacity 0 e o foco fica invisível. */
+.mf-reveal-hidden:focus-within,
+.mf-reveal-hidden-left:focus-within {
+  opacity: 1;
+  transform: none;
+}
+
 .mf-reveal-visible {
   opacity: 1;
   transform: none;
