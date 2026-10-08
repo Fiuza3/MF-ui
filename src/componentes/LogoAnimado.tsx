@@ -65,7 +65,7 @@ export function LogoAnimado({
         type="button"
         aria-label={label === MARCA ? MARCA : `${label} — ${MARCA}`}
         onClick={onClick}
-        className="group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+        className="group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
       >
         {svg}
       </button>

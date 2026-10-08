@@ -86,7 +86,7 @@ function ToastAction({ className, ...props }: React.ComponentProps<typeof ToastP
     <ToastPrimitive.Action
       data-slot="toast-action"
       className={cn(
-        "shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-foreground/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-foreground/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
         className,
       )}
       {...props}
@@ -100,7 +100,7 @@ function ToastClose({ className, ...props }: React.ComponentProps<typeof ToastPr
       data-slot="toast-close"
       aria-label="Fechar"
       className={cn(
-        "inline-flex size-8 shrink-0 items-center justify-center rounded-md text-current opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "inline-flex size-8 shrink-0 items-center justify-center rounded-md text-current opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
         // Sem hover em tela de toque: só esconde onde o ponteiro consegue revelar.
         "pointer-fine:opacity-0 pointer-fine:group-hover:opacity-70 pointer-fine:hover:opacity-100 pointer-fine:focus-visible:opacity-100",
         className,

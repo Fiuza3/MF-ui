@@ -64,6 +64,30 @@ describe("classes do Tailwind", () => {
 
     expect(infratores, "Use o par *-foreground do token de fundo").toEqual([]);
   });
+
+  const ANEL_COM_ALFA = /ring-ring\/\d+/;
+  // Casa 0–11px e 0.1–0.749rem; 0.75rem (12px) em diante passa.
+  const FONTE_PEQUENA = /text-\[(?:(?:[0-9]|1[01])px|0?\.(?:[0-6]\d*|7(?:[0-4]\d*)?)rem)\]/;
+
+  function infratoresDe(padrao: RegExp): string[] {
+    const achados: string[] = [];
+    for (const caminho of arquivos().filter(ehComponente)) {
+      readFileSync(caminho, "utf8")
+        .split("\n")
+        .forEach((linha, i) => {
+          if (padrao.test(linha)) achados.push(`${caminho.replace(raiz, "src")}:${i + 1}`);
+        });
+    }
+    return achados;
+  }
+
+  it("anel de foco nunca usa alfa (ring-ring/50 dá 2,19:1 no claro)", () => {
+    expect(infratoresDe(ANEL_COM_ALFA), "use focus-visible:ring-ring").toEqual([]);
+  });
+
+  it("nenhuma fonte abaixo de 12px (0.75rem) — px fixo também não acompanha o zoom", () => {
+    expect(infratoresDe(FONTE_PEQUENA), "use text-xs ou maior").toEqual([]);
+  });
 });
 
 // Aqui --accent é a cor da marca ("destaque" em cores.ts), não o cinza de hover
