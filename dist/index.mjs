@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-DHCYMUXB.mjs";
+} from "./chunk-HJRLSD6G.mjs";
 import {
   AppShell,
   CopyField,
