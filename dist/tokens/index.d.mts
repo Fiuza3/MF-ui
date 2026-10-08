@@ -21,6 +21,8 @@ declare const NOMES: {
     readonly primariaTexto: "--primary-foreground";
     readonly primariaHover: "--primary-hover";
     readonly primariaSutil: "--cyan-dim";
+    readonly marca: "--brand";
+    readonly marcaTexto: "--brand-foreground";
     readonly secundaria: "--secondary";
     readonly secundariaTexto: "--secondary-foreground";
     readonly neutra: "--muted";

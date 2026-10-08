@@ -79,13 +79,13 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                       {
                         href: cta.href,
                         ...propsDeLink(cta.href),
-                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:border-cyan hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                         children: [
                           cta.label,
                           /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
                             "span",
                             {
-                              className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan",
+                              className: "h-px w-8 bg-brand-foreground transition-colors group-hover:bg-cyan",
                               "aria-hidden": "true"
                             }
                           )
@@ -102,7 +102,7 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                 style: { "--mf-entrada-delay": "560ms" },
                 className: "mf-entrada mf-entrada-up",
                 children: [
-                  slotLabel && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block", children: slotLabel }),
+                  slotLabel && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -left-4 -top-4 hidden font-mono text-xs uppercase tracking-[0.2em] text-gray-text lg:block", children: slotLabel }),
                   slot
                 ]
               }
@@ -199,7 +199,7 @@ function ServiceCard({ service, index }) {
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
             /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between gap-4", children: [
               /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "font-mono text-xs text-cyan", children: service.tag }),
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "font-mono text-[10px] uppercase tracking-[0.22em] text-gray-text", children: service.id })
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "font-mono text-xs uppercase tracking-[0.2em] text-gray-text", children: service.id })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h3", { className: "mt-5 text-[clamp(1.6rem,3vw,3.2rem)] font-black leading-none tracking-tight text-foreground", children: service.title }),
             /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "mt-4 max-w-2xl text-sm leading-relaxed text-gray-text lg:text-base", children: service.description })
@@ -234,8 +234,24 @@ function Services({ eyebrow, title, description, services }) {
 }
 
 // src/blocos/Projects.tsx
-var import_react = require("react");
+var import_react2 = require("react");
 var import_lucide_react2 = require("lucide-react");
+
+// src/lib/movimento-reduzido.ts
+var import_react = require("react");
+var CONSULTA = "(prefers-reduced-motion: reduce)";
+function assinar(avisar) {
+  const lista = window.matchMedia(CONSULTA);
+  lista.addEventListener("change", avisar);
+  return () => lista.removeEventListener("change", avisar);
+}
+function usePrefereMovimentoReduzido() {
+  return (0, import_react.useSyncExternalStore)(
+    assinar,
+    () => window.matchMedia(CONSULTA).matches,
+    () => false
+  );
+}
 
 // src/primitivos/Dialog.tsx
 var DialogPrimitive2 = __toESM(require("@radix-ui/react-dialog"));
@@ -259,7 +275,7 @@ function OverlayClose({ className }) {
       className: cn(
         "text-muted-foreground absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-md transition-colors outline-none",
         "hover:bg-foreground/10 hover:text-foreground",
-        "focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "focus-visible:ring-ring focus-visible:ring-[3px]",
         "disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         className
       ),
@@ -344,9 +360,23 @@ function DialogDescription({
 
 // src/blocos/Projects.tsx
 var import_jsx_runtime6 = require("react/jsx-runtime");
-var ROTULO = "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text";
+var ROTULO = "font-mono text-xs uppercase tracking-[0.2em] text-gray-text";
 var TAG = "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text";
-var FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
+var FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring";
+function BotaoDePausa({ pausado, onAlternar }) {
+  const Icone = pausado ? import_lucide_react2.PlayIcon : import_lucide_react2.PauseIcon;
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+    "button",
+    {
+      type: "button",
+      "aria-pressed": pausado,
+      "aria-label": "Pausar carrossel",
+      onClick: onAlternar,
+      className: `project-carousel-pausa border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex size-11 shrink-0 items-center justify-center rounded border transition-colors max-md:hidden ${FOCO}`,
+      children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icone, { "aria-hidden": "true", className: "size-4" })
+    }
+  );
+}
 function rotuloDoFrame(project, index) {
   return [`frame ${String(index + 1).padStart(2, "0")}`, project.ano, project.categoria].filter(Boolean).join(" / ");
 }
@@ -458,12 +488,14 @@ function RodapeDoFrame({ project, onOpen }) {
   ] });
 }
 function Projects({ eyebrow, title, description, projects }) {
-  const [selected, setSelected] = (0, import_react.useState)(null);
-  const origemRef = (0, import_react.useRef)(null);
+  const [selected, setSelected] = (0, import_react2.useState)(null);
+  const origemRef = (0, import_react2.useRef)(null);
   const abrir = (project) => {
     origemRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setSelected(project);
   };
+  const [pausado, setPausado] = (0, import_react2.useState)(false);
+  const movimentoReduzido = usePrefereMovimentoReduzido();
   const loopedProjects = [...projects, ...projects];
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
     "section",
@@ -472,12 +504,15 @@ function Projects({ eyebrow, title, description, projects }) {
       "aria-label": "Projetos",
       className: "border-line relative overflow-hidden border-t py-16 lg:py-24",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(Reveal, { margin: "-80px", className: "mb-8 lg:mb-10", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-cyan mb-4 font-mono text-xs tracking-[0.34em] uppercase", children: eyebrow }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h2", { className: "text-foreground text-[length:var(--text-h2)] leading-[0.96] font-black tracking-tight", children: title }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-gray-text mt-4 max-w-3xl text-base leading-relaxed", children: description })
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(Reveal, { margin: "-80px", className: "mb-8 flex items-end justify-between gap-6 lg:mb-10", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "min-w-0 flex-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-cyan mb-4 font-mono text-xs tracking-[0.34em] uppercase", children: eyebrow }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h2", { className: "text-foreground text-[length:var(--text-h2)] leading-[0.96] font-black tracking-tight", children: title }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-gray-text mt-4 max-w-3xl text-base leading-relaxed", children: description })
+          ] }),
+          !movimentoReduzido && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(BotaoDePausa, { pausado, onAlternar: () => setPausado((p) => !p) })
         ] }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "project-carousel relative overflow-hidden", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "project-carousel relative overflow-hidden", "data-paused": pausado, children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
             "div",
             {
@@ -543,8 +578,8 @@ function PipelineCard({ step, index }) {
         ),
         /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "relative flex h-full flex-col", children: [
           /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-start justify-between gap-3", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: step.numero }),
-            step.duracao && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "shrink-0 rounded border border-line px-2 py-0.5 font-mono text-[10px] text-gray-text", children: step.duracao })
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "font-mono text-xs uppercase tracking-[0.2em] text-cyan", children: step.numero }),
+            step.duracao && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "shrink-0 rounded border border-line px-2 py-0.5 font-mono text-xs text-gray-text", children: step.duracao })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { className: "mt-3 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.05] tracking-tight text-foreground", children: step.title }),
           /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "mt-3 flex-1 text-sm leading-relaxed text-gray-text", children: step.description }),
@@ -554,7 +589,7 @@ function PipelineCard({ step, index }) {
               " ",
               step.commitLabel
             ] }),
-            step.commitOutput && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("p", { className: "mt-1 truncate text-[11px] text-gray-text", children: [
+            step.commitOutput && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("p", { className: "mt-1 truncate text-xs text-gray-text", children: [
               /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-cyan/60", children: ">" }),
               " ",
               step.commitOutput
@@ -585,7 +620,7 @@ function Process({ eyebrow, title, description, steps }) {
 }
 
 // src/blocos/Stack.tsx
-var import_react2 = require("react");
+var import_react3 = require("react");
 var import_jsx_runtime8 = require("react/jsx-runtime");
 var ROTULOS_PADRAO = {
   camada: "layer",
@@ -594,7 +629,7 @@ var ROTULOS_PADRAO = {
   explicacao: "uso essa camada quando ela diminui incerteza operacional, n\xE3o para preencher logo em carrossel."
 };
 function Stack({ eyebrow, title, description, grupos, rotulos }) {
-  const [categoriaAtiva, setCategoriaAtiva] = (0, import_react2.useState)(grupos[0]?.categoria);
+  const [categoriaAtiva, setCategoriaAtiva] = (0, import_react3.useState)(grupos[0]?.categoria);
   const active = grupos.find((g) => g.categoria === categoriaAtiva) ?? grupos[0];
   const r = { ...ROTULOS_PADRAO, ...rotulos };
   if (!active) return null;
@@ -625,7 +660,7 @@ function Stack({ eyebrow, title, description, grupos, rotulos }) {
                 onMouseEnter: () => setCategoriaAtiva(grupo.categoria),
                 "aria-pressed": selected,
                 className: cn(
-                  "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:grid-cols-[auto_1fr]",
+                  "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring sm:grid-cols-[auto_1fr]",
                   selected ? "border-cyan bg-cyan/10" : "border-line bg-surface hover:border-cyan/50"
                 ),
                 children: [
@@ -708,27 +743,9 @@ function Stack({ eyebrow, title, description, grupos, rotulos }) {
 // src/blocos/Testimonials.tsx
 var import_react4 = require("react");
 var import_lucide_react3 = require("lucide-react");
-
-// src/lib/movimento-reduzido.ts
-var import_react3 = require("react");
-var CONSULTA = "(prefers-reduced-motion: reduce)";
-function assinar(avisar) {
-  const lista = window.matchMedia(CONSULTA);
-  lista.addEventListener("change", avisar);
-  return () => lista.removeEventListener("change", avisar);
-}
-function usePrefereMovimentoReduzido() {
-  return (0, import_react3.useSyncExternalStore)(
-    assinar,
-    () => window.matchMedia(CONSULTA).matches,
-    () => false
-  );
-}
-
-// src/blocos/Testimonials.tsx
 var import_jsx_runtime9 = require("react/jsx-runtime");
 var AUTOPLAY_MS = 5e3;
-var BOTAO = "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 [&_svg]:size-4";
+var BOTAO = "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring [&_svg]:size-4";
 function useApresentacao(total) {
   const reduzido = usePrefereMovimentoReduzido();
   const [atual, setAtual] = (0, import_react4.useState)(0);
@@ -847,7 +864,7 @@ function Controles({
         "aria-current": i === atual,
         "aria-label": `Ir para depoimento ${i + 1}`,
         onClick: () => setAtual(i),
-        className: "focus-visible:ring-ring/50 flex h-11 w-11 items-center justify-center rounded focus-visible:ring-[3px] focus-visible:outline-none",
+        className: "focus-visible:ring-ring flex h-11 w-11 items-center justify-center rounded focus-visible:ring-[3px] focus-visible:outline-none",
         children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
           "span",
           {
@@ -951,7 +968,7 @@ function Contact({
                 {
                   href: cta.href,
                   ...propsDeLink(cta.href),
-                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                   children: [
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react4.MessageCircleIcon, { className: "size-4", "aria-hidden": "true" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "min-w-0", children: [
@@ -965,7 +982,7 @@ function Contact({
                 "a",
                 {
                   href: `mailto:${email}`,
-                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                   children: [
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react4.MailIcon, { className: "size-4", "aria-hidden": "true" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "min-w-0", children: [
@@ -976,7 +993,7 @@ function Contact({
                 }
               ),
               r.modoValor && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "rounded border border-line bg-surface p-5 font-mono", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-[10px] uppercase tracking-[0.24em] text-gray-text", children: r.modo }),
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "text-xs uppercase tracking-[0.2em] text-gray-text", children: r.modo }),
                 /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-4 text-sm text-foreground", children: r.modoValor }),
                 /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: r.modoDescricao })
               ] })

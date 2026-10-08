@@ -22,7 +22,7 @@ export type TestimonialsProps = {
 };
 
 const BOTAO =
-  "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 [&_svg]:size-4";
+  "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring [&_svg]:size-4";
 
 /**
  * Pausado quando o usuário pediu, quando o ponteiro ou o foco estão no carrossel
@@ -165,7 +165,7 @@ function Controles({
             aria-current={i === atual}
             aria-label={`Ir para depoimento ${i + 1}`}
             onClick={() => setAtual(i)}
-            className="focus-visible:ring-ring/50 flex h-11 w-11 items-center justify-center rounded focus-visible:ring-[3px] focus-visible:outline-none"
+            className="focus-visible:ring-ring flex h-11 w-11 items-center justify-center rounded focus-visible:ring-[3px] focus-visible:outline-none"
           >
             <span
               className={`block rounded-full transition-all duration-300 ${

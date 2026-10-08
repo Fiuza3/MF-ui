@@ -56,8 +56,7 @@ export function Footer({
 
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
         <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end">
-          {/* @container: a marca d'água se mede pela coluna (cqi), nunca pela viewport. */}
-          <div className="@container min-w-0">
+          <div className="min-w-0">
             <div className="mb-8">
               <LogoAnimado
                 label="Voltar ao topo"
@@ -67,19 +66,34 @@ export function Footer({
                 }
               />
             </div>
-            <p
+            {/* SVG e não <p>: como texto no DOM, axe e Lighthouse reprovam a marca d'água
+                (1,21:1) em toda página com rodapé. O viewBox faz ela escalar pela largura
+                da coluna, nunca pela viewport; max-w repete o teto de 24rem de fonte. viewBox medido
+                com Geist Mono Black 100px: tinta x 6..274, de 75 acima a 11 abaixo da linha de
+                base (a "/" desce) — baseline 77 e altura 90 evitam cortar o topo. */}
+            <svg
               aria-hidden="true"
-              role="presentation"
-              className="select-none font-mono text-[clamp(3rem,31cqi,24rem)] font-black leading-[0.76] tracking-tighter text-cyan/10"
+              focusable="false"
+              overflow="visible"
+              viewBox="0 0 280 90"
+              className="w-full max-w-[67.2rem] select-none"
             >
-              {"<MF/>"}
-            </p>
+              <text
+                x="0"
+                y="77"
+                className="fill-cyan/10 font-mono font-black"
+                fontSize="100"
+                letterSpacing="-5"
+              >
+                {"<MF/>"}
+              </text>
+            </svg>
           </div>
 
           <div className="grid min-w-0 gap-8 font-mono">
             {(email || localizacao || cnpj) && (
               <div className="rounded border border-line bg-surface p-5">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-gray-text">{r.resumo}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-text">{r.resumo}</p>
                 <div className="mt-5 grid gap-3 text-sm">
                   {localizacao && (
                     <p className="flex items-baseline justify-between gap-4 border-b border-line pb-2">
@@ -102,7 +116,7 @@ export function Footer({
                       <span className="text-gray-text shrink-0">{r.contato}</span>
                       <a
                         href={`mailto:${email}`}
-                        className="text-cyan hover:text-foreground focus-visible:ring-ring/50 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-[3px] focus-visible:outline-none"
+                        className="text-cyan hover:text-foreground focus-visible:ring-ring min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-[3px] focus-visible:outline-none"
                       >
                         {email}
                       </a>
@@ -118,7 +132,7 @@ export function Footer({
                   <a
                     key={link.href}
                     href={link.href}
-                    className="border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring/50 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
+                    className="border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
                   >
                     {link.label}
                   </a>

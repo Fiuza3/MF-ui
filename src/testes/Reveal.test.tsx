@@ -1,5 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, act } from "@testing-library/react";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { Reveal } from "../componentes/Reveal";
 
 type ObserverCallback = (entries: { isIntersecting: boolean }[]) => void;
@@ -49,5 +51,14 @@ describe("Reveal", () => {
     act(() => observerCallback?.([{ isIntersecting: true }]));
     expect(el.className).toContain("mf-reveal-visible");
     expect(el.className).not.toContain("mf-reveal-hidden");
+  });
+
+  it("conteúdo escondido é revelado ao receber foco (sem foco invisível)", () => {
+    const css = readFileSync(resolve(process.cwd(), "src/tokens/utilitarios.css"), "utf8");
+    expect(css).toMatch(
+      /\.mf-reveal-hidden:focus-within,\s*\.mf-reveal-hidden-left:focus-within\s*\{[^}]*opacity:\s*1/,
+    );
+    render(<Reveal>conteudo</Reveal>);
+    expect(screen.getByText("conteudo").className).toContain("mf-reveal-hidden");
   });
 });

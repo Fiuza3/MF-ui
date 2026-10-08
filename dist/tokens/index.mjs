@@ -6,7 +6,7 @@ import {
   pesos,
   tokensDeCor,
   tokensDeMotion
-} from "../chunk-DOQVRQ5O.mjs";
+} from "../chunk-IVHAI5QT.mjs";
 export {
   cores,
   curvas,

@@ -1,6 +1,7 @@
 /* src/tokens/utilitarios.css — utilitários genéricos do design system */
 
 @import "./blocos.css";
+@import "./animated-icon.css";
 
 ::-webkit-scrollbar {
   width: 4px;
@@ -169,6 +170,14 @@
 .mf-reveal-hidden-left {
   opacity: 0;
   transform: translateX(-18px);
+}
+
+/* Foco dentro do conteúdo ainda escondido o revela: sem isso o teclado pousa em
+   elemento com opacity 0 e o foco fica invisível. */
+.mf-reveal-hidden:focus-within,
+.mf-reveal-hidden-left:focus-within {
+  opacity: 1;
+  transform: none;
 }
 
 .mf-reveal-visible {

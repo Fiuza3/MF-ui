@@ -5,10 +5,10 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle
-} from "./chunk-Y2JANCN3.mjs";
+} from "./chunk-65233P6I.mjs";
 import {
   cn
-} from "./chunk-UYJYUDH4.mjs";
+} from "./chunk-ZTAXVNYF.mjs";
 
 // src/lib/link-externo.ts
 var URL_ABSOLUTA = /^https?:\/\//i;
@@ -46,13 +46,13 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                       {
                         href: cta.href,
                         ...propsDeLink(cta.href),
-                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:border-cyan hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                         children: [
                           cta.label,
                           /* @__PURE__ */ jsx(
                             "span",
                             {
-                              className: "h-px w-8 bg-background transition-colors group-hover:bg-cyan",
+                              className: "h-px w-8 bg-brand-foreground transition-colors group-hover:bg-cyan",
                               "aria-hidden": "true"
                             }
                           )
@@ -69,7 +69,7 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                 style: { "--mf-entrada-delay": "560ms" },
                 className: "mf-entrada mf-entrada-up",
                 children: [
-                  slotLabel && /* @__PURE__ */ jsx("div", { className: "absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block", children: slotLabel }),
+                  slotLabel && /* @__PURE__ */ jsx("div", { className: "absolute -left-4 -top-4 hidden font-mono text-xs uppercase tracking-[0.2em] text-gray-text lg:block", children: slotLabel }),
                   slot
                 ]
               }
@@ -166,7 +166,7 @@ function ServiceCard({ service, index }) {
           /* @__PURE__ */ jsxs2("div", { children: [
             /* @__PURE__ */ jsxs2("div", { className: "flex items-center justify-between gap-4", children: [
               /* @__PURE__ */ jsx3("span", { className: "font-mono text-xs text-cyan", children: service.tag }),
-              /* @__PURE__ */ jsx3("span", { className: "font-mono text-[10px] uppercase tracking-[0.22em] text-gray-text", children: service.id })
+              /* @__PURE__ */ jsx3("span", { className: "font-mono text-xs uppercase tracking-[0.2em] text-gray-text", children: service.id })
             ] }),
             /* @__PURE__ */ jsx3("h3", { className: "mt-5 text-[clamp(1.6rem,3vw,3.2rem)] font-black leading-none tracking-tight text-foreground", children: service.title }),
             /* @__PURE__ */ jsx3("p", { className: "mt-4 max-w-2xl text-sm leading-relaxed text-gray-text lg:text-base", children: service.description })
@@ -202,11 +202,43 @@ function Services({ eyebrow, title, description, services }) {
 
 // src/blocos/Projects.tsx
 import { useRef as useRef2, useState } from "react";
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowUpRightIcon, PauseIcon, PlayIcon } from "lucide-react";
+
+// src/lib/movimento-reduzido.ts
+import { useSyncExternalStore } from "react";
+var CONSULTA = "(prefers-reduced-motion: reduce)";
+function assinar(avisar) {
+  const lista = window.matchMedia(CONSULTA);
+  lista.addEventListener("change", avisar);
+  return () => lista.removeEventListener("change", avisar);
+}
+function usePrefereMovimentoReduzido() {
+  return useSyncExternalStore(
+    assinar,
+    () => window.matchMedia(CONSULTA).matches,
+    () => false
+  );
+}
+
+// src/blocos/Projects.tsx
 import { jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
-var ROTULO = "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text";
+var ROTULO = "font-mono text-xs uppercase tracking-[0.2em] text-gray-text";
 var TAG = "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text";
-var FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
+var FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring";
+function BotaoDePausa({ pausado, onAlternar }) {
+  const Icone = pausado ? PlayIcon : PauseIcon;
+  return /* @__PURE__ */ jsx4(
+    "button",
+    {
+      type: "button",
+      "aria-pressed": pausado,
+      "aria-label": "Pausar carrossel",
+      onClick: onAlternar,
+      className: `project-carousel-pausa border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex size-11 shrink-0 items-center justify-center rounded border transition-colors max-md:hidden ${FOCO}`,
+      children: /* @__PURE__ */ jsx4(Icone, { "aria-hidden": "true", className: "size-4" })
+    }
+  );
+}
 function rotuloDoFrame(project, index) {
   return [`frame ${String(index + 1).padStart(2, "0")}`, project.ano, project.categoria].filter(Boolean).join(" / ");
 }
@@ -324,6 +356,8 @@ function Projects({ eyebrow, title, description, projects }) {
     origemRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setSelected(project);
   };
+  const [pausado, setPausado] = useState(false);
+  const movimentoReduzido = usePrefereMovimentoReduzido();
   const loopedProjects = [...projects, ...projects];
   return /* @__PURE__ */ jsxs3(
     "section",
@@ -332,12 +366,15 @@ function Projects({ eyebrow, title, description, projects }) {
       "aria-label": "Projetos",
       className: "border-line relative overflow-hidden border-t py-16 lg:py-24",
       children: [
-        /* @__PURE__ */ jsx4("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs3(Reveal, { margin: "-80px", className: "mb-8 lg:mb-10", children: [
-          /* @__PURE__ */ jsx4("p", { className: "text-cyan mb-4 font-mono text-xs tracking-[0.34em] uppercase", children: eyebrow }),
-          /* @__PURE__ */ jsx4("h2", { className: "text-foreground text-[length:var(--text-h2)] leading-[0.96] font-black tracking-tight", children: title }),
-          /* @__PURE__ */ jsx4("p", { className: "text-gray-text mt-4 max-w-3xl text-base leading-relaxed", children: description })
+        /* @__PURE__ */ jsx4("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs3(Reveal, { margin: "-80px", className: "mb-8 flex items-end justify-between gap-6 lg:mb-10", children: [
+          /* @__PURE__ */ jsxs3("div", { className: "min-w-0 flex-1", children: [
+            /* @__PURE__ */ jsx4("p", { className: "text-cyan mb-4 font-mono text-xs tracking-[0.34em] uppercase", children: eyebrow }),
+            /* @__PURE__ */ jsx4("h2", { className: "text-foreground text-[length:var(--text-h2)] leading-[0.96] font-black tracking-tight", children: title }),
+            /* @__PURE__ */ jsx4("p", { className: "text-gray-text mt-4 max-w-3xl text-base leading-relaxed", children: description })
+          ] }),
+          !movimentoReduzido && /* @__PURE__ */ jsx4(BotaoDePausa, { pausado, onAlternar: () => setPausado((p) => !p) })
         ] }) }),
-        /* @__PURE__ */ jsxs3("div", { className: "project-carousel relative overflow-hidden", children: [
+        /* @__PURE__ */ jsxs3("div", { className: "project-carousel relative overflow-hidden", "data-paused": pausado, children: [
           /* @__PURE__ */ jsx4(
             "div",
             {
@@ -403,8 +440,8 @@ function PipelineCard({ step, index }) {
         ),
         /* @__PURE__ */ jsxs4("div", { className: "relative flex h-full flex-col", children: [
           /* @__PURE__ */ jsxs4("div", { className: "flex items-start justify-between gap-3", children: [
-            /* @__PURE__ */ jsx5("p", { className: "font-mono text-xs uppercase tracking-[0.28em] text-cyan", children: step.numero }),
-            step.duracao && /* @__PURE__ */ jsx5("span", { className: "shrink-0 rounded border border-line px-2 py-0.5 font-mono text-[10px] text-gray-text", children: step.duracao })
+            /* @__PURE__ */ jsx5("p", { className: "font-mono text-xs uppercase tracking-[0.2em] text-cyan", children: step.numero }),
+            step.duracao && /* @__PURE__ */ jsx5("span", { className: "shrink-0 rounded border border-line px-2 py-0.5 font-mono text-xs text-gray-text", children: step.duracao })
           ] }),
           /* @__PURE__ */ jsx5("h3", { className: "mt-3 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.05] tracking-tight text-foreground", children: step.title }),
           /* @__PURE__ */ jsx5("p", { className: "mt-3 flex-1 text-sm leading-relaxed text-gray-text", children: step.description }),
@@ -414,7 +451,7 @@ function PipelineCard({ step, index }) {
               " ",
               step.commitLabel
             ] }),
-            step.commitOutput && /* @__PURE__ */ jsxs4("p", { className: "mt-1 truncate text-[11px] text-gray-text", children: [
+            step.commitOutput && /* @__PURE__ */ jsxs4("p", { className: "mt-1 truncate text-xs text-gray-text", children: [
               /* @__PURE__ */ jsx5("span", { className: "text-cyan/60", children: ">" }),
               " ",
               step.commitOutput
@@ -485,7 +522,7 @@ function Stack({ eyebrow, title, description, grupos, rotulos }) {
                 onMouseEnter: () => setCategoriaAtiva(grupo.categoria),
                 "aria-pressed": selected,
                 className: cn(
-                  "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:grid-cols-[auto_1fr]",
+                  "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring sm:grid-cols-[auto_1fr]",
                   selected ? "border-cyan bg-cyan/10" : "border-line bg-surface hover:border-cyan/50"
                 ),
                 children: [
@@ -567,28 +604,10 @@ function Stack({ eyebrow, title, description, grupos, rotulos }) {
 
 // src/blocos/Testimonials.tsx
 import { useCallback, useEffect as useEffect2, useState as useState3 } from "react";
-import { ChevronLeftIcon, ChevronRightIcon, PauseIcon, PlayIcon } from "lucide-react";
-
-// src/lib/movimento-reduzido.ts
-import { useSyncExternalStore } from "react";
-var CONSULTA = "(prefers-reduced-motion: reduce)";
-function assinar(avisar) {
-  const lista = window.matchMedia(CONSULTA);
-  lista.addEventListener("change", avisar);
-  return () => lista.removeEventListener("change", avisar);
-}
-function usePrefereMovimentoReduzido() {
-  return useSyncExternalStore(
-    assinar,
-    () => window.matchMedia(CONSULTA).matches,
-    () => false
-  );
-}
-
-// src/blocos/Testimonials.tsx
+import { ChevronLeftIcon, ChevronRightIcon, PauseIcon as PauseIcon2, PlayIcon as PlayIcon2 } from "lucide-react";
 import { Fragment, jsx as jsx7, jsxs as jsxs6 } from "react/jsx-runtime";
 var AUTOPLAY_MS = 5e3;
-var BOTAO = "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 [&_svg]:size-4";
+var BOTAO = "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line text-gray-text transition-all hover:border-cyan hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring [&_svg]:size-4";
 function useApresentacao(total) {
   const reduzido = usePrefereMovimentoReduzido();
   const [atual, setAtual] = useState3(0);
@@ -707,7 +726,7 @@ function Controles({
         "aria-current": i === atual,
         "aria-label": `Ir para depoimento ${i + 1}`,
         onClick: () => setAtual(i),
-        className: "focus-visible:ring-ring/50 flex h-11 w-11 items-center justify-center rounded focus-visible:ring-[3px] focus-visible:outline-none",
+        className: "focus-visible:ring-ring flex h-11 w-11 items-center justify-center rounded focus-visible:ring-[3px] focus-visible:outline-none",
         children: /* @__PURE__ */ jsx7(
           "span",
           {
@@ -724,7 +743,7 @@ function Controles({
         onClick: alternarPausa,
         "aria-label": pausadoPeloUsuario ? "Retomar apresenta\xE7\xE3o" : "Pausar apresenta\xE7\xE3o",
         className: BOTAO,
-        children: pausadoPeloUsuario ? /* @__PURE__ */ jsx7(PlayIcon, { "aria-hidden": "true" }) : /* @__PURE__ */ jsx7(PauseIcon, { "aria-hidden": "true" })
+        children: pausadoPeloUsuario ? /* @__PURE__ */ jsx7(PlayIcon2, { "aria-hidden": "true" }) : /* @__PURE__ */ jsx7(PauseIcon2, { "aria-hidden": "true" })
       }
     ),
     /* @__PURE__ */ jsxs6("span", { className: "text-gray-text ml-auto shrink-0 font-mono text-xs whitespace-nowrap", children: [
@@ -811,7 +830,7 @@ function Contact({
                 {
                   href: cta.href,
                   ...propsDeLink(cta.href),
-                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                   children: [
                     /* @__PURE__ */ jsx9("span", { className: "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ jsx9(MessageCircleIcon, { className: "size-4", "aria-hidden": "true" }) }),
                     /* @__PURE__ */ jsxs8("div", { className: "min-w-0", children: [
@@ -825,7 +844,7 @@ function Contact({
                 "a",
                 {
                   href: `mailto:${email}`,
-                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                  className: "group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                   children: [
                     /* @__PURE__ */ jsx9("span", { className: "flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan", children: /* @__PURE__ */ jsx9(MailIcon, { className: "size-4", "aria-hidden": "true" }) }),
                     /* @__PURE__ */ jsxs8("div", { className: "min-w-0", children: [
@@ -836,7 +855,7 @@ function Contact({
                 }
               ),
               r.modoValor && /* @__PURE__ */ jsxs8("div", { className: "rounded border border-line bg-surface p-5 font-mono", children: [
-                /* @__PURE__ */ jsx9("p", { className: "text-[10px] uppercase tracking-[0.24em] text-gray-text", children: r.modo }),
+                /* @__PURE__ */ jsx9("p", { className: "text-xs uppercase tracking-[0.2em] text-gray-text", children: r.modo }),
                 /* @__PURE__ */ jsx9("p", { className: "mt-4 text-sm text-foreground", children: r.modoValor }),
                 /* @__PURE__ */ jsx9("p", { className: "mt-2 text-xs leading-relaxed text-gray-text", children: r.modoDescricao })
               ] })
@@ -861,4 +880,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-7NOPLKKB.mjs.map
+//# sourceMappingURL=chunk-76S4CKHT.mjs.map

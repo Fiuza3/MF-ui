@@ -52,6 +52,10 @@
   --elevation-md: 0 4px 16px oklch(0 0 0 / 0.4);
   --elevation-lg: 0 8px 32px oklch(0 0 0 / 0.5);
 
+  /* Ciano da marca como preenchimento de CTA. Igual nos dois temas: no claro o
+     ciano não serve como texto (1,32:1 sobre o fundo), só como fundo de botão. */
+  --brand: #3df2e0;
+  --brand-foreground: #0b0f14;
   --cyan: #3df2e0;
   --cyan-dim: rgba(61, 242, 224, 0.1);
   --cyan-glow: rgba(61, 242, 224, 0.25);
@@ -61,46 +65,49 @@
   --line: #1e2a38;
 }
 
-/* Tema claro — creme + laranja. */
+/* Tema claro — gelo + ciano profundo. Texto de destaque usa #0a6e68 (5,7:1);
+   o ciano brilhante da marca só aparece como preenchimento (--brand). */
 .light {
-  --background: #f5f0e6;
-  --foreground: #1a1410;
-  --card: #fbf7ef;
-  --card-foreground: #1a1410;
-  --popover: #fbf7ef;
-  --popover-foreground: #1a1410;
-  --primary: #b04e14;
-  --primary-foreground: #fbf7ef;
-  --secondary: #d4c2a1;
-  --secondary-foreground: #1a1410;
-  --muted: #efe7d6;
-  --muted-foreground: #6b5e4a;
-  --accent: #b04e14;
-  --accent-foreground: #fbf7ef;
+  --background: #f6f8fa;
+  --foreground: #0b0f14;
+  --card: #ffffff;
+  --card-foreground: #0b0f14;
+  --popover: #ffffff;
+  --popover-foreground: #0b0f14;
+  --primary: #0a6e68;
+  --primary-foreground: #ffffff;
+  --secondary: #b8cadb;
+  --secondary-foreground: #0b0f14;
+  --muted: #eef2f6;
+  --muted-foreground: #4a5668;
+  --accent: #0a6e68;
+  --accent-foreground: #ffffff;
   --destructive: #c2301c;
-  --destructive-foreground: #fbf7ef;
-  --subtle-foreground: #726449;
-  --primary-hover: #96400c;
+  --destructive-foreground: #ffffff;
+  --subtle-foreground: #5b6779;
+  --primary-hover: #085a55;
   --warning: #8a5a00;
-  --warning-foreground: #fbf7ef;
+  --warning-foreground: #ffffff;
   --success: #276b32;
-  --success-foreground: #fbf7ef;
-  --border: #e0d6c4;
-  --input: #94825f;
-  --ring: #b04e14;
+  --success-foreground: #ffffff;
+  --border: #dce3ea;
+  --input: #7a8797;
+  --ring: #0a6e68;
   --radius: 0.375rem;
-  /* Sombra quente e rala: preto puro no creme vira mancha cinza. */
-  --elevation-sm: 0 1px 3px oklch(0.35 0.04 60 / 0.1);
-  --elevation-md: 0 4px 16px oklch(0.35 0.04 60 / 0.12);
-  --elevation-lg: 0 12px 32px oklch(0.35 0.04 60 / 0.16);
+  /* Sombra fria e rala: preto puro no gelo vira mancha. */
+  --elevation-sm: 0 1px 3px oklch(0.35 0.02 250 / 0.1);
+  --elevation-md: 0 4px 16px oklch(0.35 0.02 250 / 0.12);
+  --elevation-lg: 0 12px 32px oklch(0.35 0.02 250 / 0.16);
 
-  --cyan: #b04e14;
-  --cyan-dim: rgba(176, 78, 20, 0.1);
-  --cyan-glow: rgba(176, 78, 20, 0.25);
-  --gray-text: #6b5e4a;
-  --surface: #fbf7ef;
-  --surface-raised: #efe7d6;
-  --line: #e0d6c4;
+  --brand: #3df2e0;
+  --brand-foreground: #0b0f14;
+  --cyan: #0a6e68;
+  --cyan-dim: rgba(10, 110, 104, 0.1);
+  --cyan-glow: rgba(10, 110, 104, 0.25);
+  --gray-text: #4a5668;
+  --surface: #ffffff;
+  --surface-raised: #eef2f6;
+  --line: #dce3ea;
 }
 
 /* Motion — duracoes e curvas. Nao mudam com o tema, por isso ficam fora dos
@@ -111,6 +118,9 @@
   --mf-duration-fast: 240ms;
   --mf-duration-reveal: 600ms;
   --mf-duration-section: 900ms;
+  --mf-duration-pulse: 1.6s;
+  --mf-duration-nudge: 0.8s;
+  --mf-duration-spin: 0.9s;
 
   --mf-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --mf-ease-power: cubic-bezier(0.22, 1, 0.36, 1);
@@ -129,6 +139,8 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);

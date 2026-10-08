@@ -79,7 +79,7 @@ export function Stack({ eyebrow, title, description, grupos, rotulos }: StackPro
                   onMouseEnter={() => setCategoriaAtiva(grupo.categoria)}
                   aria-pressed={selected}
                   className={cn(
-                    "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:grid-cols-[auto_1fr]",
+                    "group grid gap-5 rounded border p-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring sm:grid-cols-[auto_1fr]",
                     selected
                       ? "border-cyan bg-cyan/10"
                       : "border-line bg-surface hover:border-cyan/50",

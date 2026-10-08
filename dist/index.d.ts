@@ -1,7 +1,8 @@
 export { Cores, NomeDeCor, NomeDeCurva, NomeDeDuracao, cores, curvas, duracoes, familias, pesos, tokensDeCor, tokensDeMotion } from './tokens/index.js';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React from 'react';
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toast, ToastAction, ToastClose, ToastComponentProvider, ToastData, ToastDescription, ToastProvider, ToastTitle, ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast } from './primitivos/index.js';
+import { ReactNode } from 'react';
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AnimatedIcon, AnimatedIconAnimation, AnimatedIconProps, AnimatedIconTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toast, ToastAction, ToastClose, ToastComponentProvider, ToastData, ToastDescription, ToastProvider, ToastTitle, ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast } from './primitivos/index.js';
 import { ClassValue } from 'clsx';
 export { About, AboutProps, Contact, ContactProps, Depoimento, Hero, HeroProps, HeroStat, Process, ProcessProps, ProcessStep, ProjectItem, Projects, ProjectsProps, ServiceItem, Services, ServicesProps, Stack, StackGrupo, StackProps, Testimonials, TestimonialsProps } from './blocos/index.js';
 export { AppShell, AppShellProps, CopyField, CopyFieldProps, DataTable, DataTableColumn, DataTableProps, EmptyState, EmptyStateProps, FormField, FormFieldProps, PageHeader, PageHeaderBreadcrumbItem, PageHeaderProps, StatCard, StatCardDelta, StatCardProps } from './blocos-app/index.js';
@@ -18,6 +19,7 @@ import '@radix-ui/react-switch';
 import '@radix-ui/react-tabs';
 import '@radix-ui/react-dropdown-menu';
 import '@radix-ui/react-toast';
+import 'lucide-react';
 
 type LogoProps = {
     tamanho?: number;
@@ -51,9 +53,14 @@ type NavbarProps = {
     links?: NavLink[];
     ctaHref?: string;
     ctaLabel?: string;
+    /** Slot à direita (ex.: alternador de tema), antes do CTA no desktop e no fim do painel mobile.
+     * Fica montado duas vezes com o painel mobile aberto: não use `id` fixo nele. */
+    acoes?: ReactNode;
+    /** Nome acessível do logo; troque quando ele não leva ao topo (ex.: páginas internas). */
+    logoLabel?: string;
     onLogoClick?: () => void;
 };
-declare function Navbar({ links, ctaHref, ctaLabel, onLogoClick, }: NavbarProps): react_jsx_runtime.JSX.Element;
+declare function Navbar({ links, ctaHref, ctaLabel, acoes, logoLabel, onLogoClick, }: NavbarProps): react_jsx_runtime.JSX.Element;
 
 type FooterLink = {
     href: string;

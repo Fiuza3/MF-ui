@@ -84,6 +84,11 @@ describe("globals.css e a unica fonte de valor", () => {
       conteudo.split("\n").forEach((linha, i) => {
         // `0ms` e o valor neutro de delay e nao e um token.
         const tempos = (linha.match(/\b\d+(?:\.\d+)?ms\b/g) ?? []).filter((t) => t !== "0ms");
+        // Segundos: o animated-icon.css nasceu sem literal algum; os loops antigos
+        // (hero-scan, marquee, carrossel) ficam fora desta trava por ora.
+        if (caminho.endsWith("animated-icon.css")) {
+          tempos.push(...(linha.match(/(?<![\w.-])\d+(?:\.\d+)?s\b/g) ?? []));
+        }
         const curvas = linha.match(/cubic-bezier\([^)]*\)/g) ?? [];
         const achados = [...tempos, ...curvas];
         if (achados.length) {

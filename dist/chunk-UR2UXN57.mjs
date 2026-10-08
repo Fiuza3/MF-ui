@@ -18,10 +18,10 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from "./chunk-4FVOKC5M.mjs";
+} from "./chunk-NNHV4ONZ.mjs";
 import {
   cn
-} from "./chunk-UYJYUDH4.mjs";
+} from "./chunk-ZTAXVNYF.mjs";
 
 // src/blocos-app/AppShell.tsx
 import * as React from "react";
@@ -203,7 +203,7 @@ function PageHeader({ title, breadcrumb, actions, className }) {
                 "a",
                 {
                   href: item.href,
-                  className: "hover:text-foreground focus-visible:ring-ring/50 inline-flex min-h-6 items-center rounded-sm transition-colors outline-none focus-visible:ring-[3px]",
+                  className: "hover:text-foreground focus-visible:ring-ring inline-flex min-h-6 items-center rounded-sm transition-colors outline-none focus-visible:ring-[3px]",
                   children: item.label
                 }
               ) : /* @__PURE__ */ jsx5(
@@ -312,4 +312,4 @@ export {
   FormField,
   CopyField
 };
-//# sourceMappingURL=chunk-XXXALVG4.mjs.map
+//# sourceMappingURL=chunk-UR2UXN57.mjs.map

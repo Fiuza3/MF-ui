@@ -43,6 +43,8 @@ var NOMES = {
   primariaTexto: "--primary-foreground",
   primariaHover: "--primary-hover",
   primariaSutil: "--cyan-dim",
+  marca: "--brand",
+  marcaTexto: "--brand-foreground",
   secundaria: "--secondary",
   secundariaTexto: "--secondary-foreground",
   neutra: "--muted",

@@ -38,9 +38,9 @@ function PipelineCard({ step, index }: { step: ProcessStep; index: number }) {
 
       <div className="relative flex h-full flex-col">
         <div className="flex items-start justify-between gap-3">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan">{step.numero}</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-cyan">{step.numero}</p>
           {step.duracao && (
-            <span className="shrink-0 rounded border border-line px-2 py-0.5 font-mono text-[10px] text-gray-text">
+            <span className="shrink-0 rounded border border-line px-2 py-0.5 font-mono text-xs text-gray-text">
               {step.duracao}
             </span>
           )}
@@ -60,7 +60,7 @@ function PipelineCard({ step, index }: { step: ProcessStep; index: number }) {
               </p>
             )}
             {step.commitOutput && (
-              <p className="mt-1 truncate text-[11px] text-gray-text">
+              <p className="mt-1 truncate text-xs text-gray-text">
                 <span className="text-cyan/60">&gt;</span> {step.commitOutput}
               </p>
             )}

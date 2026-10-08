@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-7NOPLKKB.mjs";
+} from "./chunk-76S4CKHT.mjs";
 import {
   AppShell,
   CopyField,
@@ -20,12 +20,13 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-XXXALVG4.mjs";
+} from "./chunk-UR2UXN57.mjs";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  AnimatedIcon,
   Badge,
   Checkbox,
   DropdownMenu,
@@ -75,7 +76,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-42J2QLUV.mjs";
+} from "./chunk-JFVZUKHL.mjs";
 import {
   Dialog,
   DialogClose,
@@ -87,7 +88,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger
-} from "./chunk-Y2JANCN3.mjs";
+} from "./chunk-65233P6I.mjs";
 import {
   Button,
   Card,
@@ -125,10 +126,10 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-4FVOKC5M.mjs";
+} from "./chunk-NNHV4ONZ.mjs";
 import {
   cn
-} from "./chunk-UYJYUDH4.mjs";
+} from "./chunk-ZTAXVNYF.mjs";
 import {
   cores,
   curvas,
@@ -137,7 +138,7 @@ import {
   pesos,
   tokensDeCor,
   tokensDeMotion
-} from "./chunk-DOQVRQ5O.mjs";
+} from "./chunk-IVHAI5QT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -241,7 +242,7 @@ function LogoAnimado({
         type: "button",
         "aria-label": label === MARCA ? MARCA : `${label} \u2014 ${MARCA}`,
         onClick,
-        className: "group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        className: "group/logo inline-flex items-center rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
         children: svg
       }
     );
@@ -259,7 +260,7 @@ function comportamentoDeScroll() {
 
 // src/componentes/Navbar.tsx
 import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
-var FOCO = "focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none";
+var FOCO = "focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none";
 function propsDoLinkDeMenu(link) {
   return link.externo ? { target: "_blank", rel: "noopener noreferrer" } : {};
 }
@@ -267,6 +268,8 @@ function Navbar({
   links = [],
   ctaHref,
   ctaLabel = "Fale comigo",
+  acoes,
+  logoLabel = "Ir para o topo",
   onLogoClick
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -288,10 +291,10 @@ function Navbar({
             {
               compacto: isScrolled,
               onClick: onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: comportamentoDeScroll() })),
-              label: "Ir para o topo"
+              label: logoLabel
             }
           ),
-          /* @__PURE__ */ jsx3(NavDesktop, { links, ctaHref, ctaLabel }),
+          /* @__PURE__ */ jsx3(NavDesktop, { links, ctaHref, ctaLabel, acoes }),
           /* @__PURE__ */ jsx3(
             Hamburguer,
             {
@@ -309,6 +312,7 @@ function Navbar({
             links,
             ctaHref,
             ctaLabel,
+            acoes,
             fechar: () => setMenuOpen(false)
           }
         )
@@ -343,7 +347,7 @@ function useFecharMenu({ aberto, setAberto, headerRef, hamburgerRef }) {
     };
   }, [aberto, setAberto, headerRef, hamburgerRef]);
 }
-function NavDesktop({ links, ctaHref, ctaLabel }) {
+function NavDesktop({ links, ctaHref, ctaLabel, acoes }) {
   return /* @__PURE__ */ jsxs3("nav", { "aria-label": "Navega\xE7\xE3o principal", className: "hidden items-center gap-8 md:flex", children: [
     links.map((link) => /* @__PURE__ */ jsx3(
       "a",
@@ -355,6 +359,7 @@ function NavDesktop({ links, ctaHref, ctaLabel }) {
       },
       link.href
     )),
+    acoes && /* @__PURE__ */ jsx3("div", { className: "flex items-center gap-2", children: acoes }),
     ctaHref && /* @__PURE__ */ jsx3(
       "a",
       {
@@ -371,6 +376,7 @@ function NavMobile({
   links,
   ctaHref,
   ctaLabel,
+  acoes,
   fechar
 }) {
   return /* @__PURE__ */ jsx3("div", { className: "mf-entrada mf-entrada-down border-line bg-background absolute inset-x-0 top-full border-b md:hidden", children: /* @__PURE__ */ jsxs3("nav", { id, "aria-label": "Menu mobile", className: "flex flex-col gap-1 px-6 py-6", children: [
@@ -394,7 +400,8 @@ function NavMobile({
         className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
         children: ctaLabel
       }
-    )
+    ),
+    acoes && /* @__PURE__ */ jsx3("div", { className: "mt-4 flex items-center gap-2", children: acoes })
   ] }) });
 }
 function Hamburguer({ ref, aberto, controla, alternar }) {
@@ -446,7 +453,7 @@ function Footer({
       children: [
         /* @__PURE__ */ jsx4("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
         /* @__PURE__ */ jsx4("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs4("div", { className: "grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end", children: [
-          /* @__PURE__ */ jsxs4("div", { className: "@container min-w-0", children: [
+          /* @__PURE__ */ jsxs4("div", { className: "min-w-0", children: [
             /* @__PURE__ */ jsx4("div", { className: "mb-8", children: /* @__PURE__ */ jsx4(
               LogoAnimado,
               {
@@ -455,18 +462,30 @@ function Footer({
               }
             ) }),
             /* @__PURE__ */ jsx4(
-              "p",
+              "svg",
               {
                 "aria-hidden": "true",
-                role: "presentation",
-                className: "select-none font-mono text-[clamp(3rem,31cqi,24rem)] font-black leading-[0.76] tracking-tighter text-cyan/10",
-                children: "<MF/>"
+                focusable: "false",
+                overflow: "visible",
+                viewBox: "0 0 280 90",
+                className: "w-full max-w-[67.2rem] select-none",
+                children: /* @__PURE__ */ jsx4(
+                  "text",
+                  {
+                    x: "0",
+                    y: "77",
+                    className: "fill-cyan/10 font-mono font-black",
+                    fontSize: "100",
+                    letterSpacing: "-5",
+                    children: "<MF/>"
+                  }
+                )
               }
             )
           ] }),
           /* @__PURE__ */ jsxs4("div", { className: "grid min-w-0 gap-8 font-mono", children: [
             (email || localizacao || cnpj) && /* @__PURE__ */ jsxs4("div", { className: "rounded border border-line bg-surface p-5", children: [
-              /* @__PURE__ */ jsx4("p", { className: "text-[10px] uppercase tracking-[0.28em] text-gray-text", children: r.resumo }),
+              /* @__PURE__ */ jsx4("p", { className: "text-xs uppercase tracking-[0.2em] text-gray-text", children: r.resumo }),
               /* @__PURE__ */ jsxs4("div", { className: "mt-5 grid gap-3 text-sm", children: [
                 localizacao && /* @__PURE__ */ jsxs4("p", { className: "flex items-baseline justify-between gap-4 border-b border-line pb-2", children: [
                   /* @__PURE__ */ jsx4("span", { className: "text-gray-text shrink-0", children: r.local }),
@@ -482,7 +501,7 @@ function Footer({
                     "a",
                     {
                       href: `mailto:${email}`,
-                      className: "text-cyan hover:text-foreground focus-visible:ring-ring/50 min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-[3px] focus-visible:outline-none",
+                      className: "text-cyan hover:text-foreground focus-visible:ring-ring min-w-0 rounded-sm text-right [overflow-wrap:anywhere] focus-visible:ring-[3px] focus-visible:outline-none",
                       children: email
                     }
                   )
@@ -493,7 +512,7 @@ function Footer({
               "a",
               {
                 href: link.href,
-                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring/50 rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
+                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
                 children: link.label
               },
               link.href
@@ -658,6 +677,7 @@ export {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  AnimatedIcon,
   AppShell,
   Badge,
   Button,

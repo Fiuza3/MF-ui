@@ -35,7 +35,7 @@ function PageHeader({ title, breadcrumb, actions, className }: PageHeaderProps) 
                     {item.href && !isLast ? (
                       <a
                         href={item.href}
-                        className="hover:text-foreground focus-visible:ring-ring/50 inline-flex min-h-6 items-center rounded-sm transition-colors outline-none focus-visible:ring-[3px]"
+                        className="hover:text-foreground focus-visible:ring-ring inline-flex min-h-6 items-center rounded-sm transition-colors outline-none focus-visible:ring-[3px]"
                       >
                         {item.label}
                       </a>

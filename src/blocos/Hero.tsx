@@ -50,11 +50,11 @@ export function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel 
               <a
                 href={cta.href}
                 {...propsDeLink(cta.href)}
-                className="group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-cyan bg-cyan px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-background transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                className="group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:border-cyan hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
               >
                 {cta.label}
                 <span
-                  className="h-px w-8 bg-background transition-colors group-hover:bg-cyan"
+                  className="h-px w-8 bg-brand-foreground transition-colors group-hover:bg-cyan"
                   aria-hidden="true"
                 />
               </a>
@@ -68,7 +68,7 @@ export function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel 
                 className="mf-entrada mf-entrada-up"
               >
                 {slotLabel && (
-                  <div className="absolute -left-4 -top-4 hidden font-mono text-[10px] uppercase tracking-[0.25em] text-gray-text lg:block">
+                  <div className="absolute -left-4 -top-4 hidden font-mono text-xs uppercase tracking-[0.2em] text-gray-text lg:block">
                     {slotLabel}
                   </div>
                 )}

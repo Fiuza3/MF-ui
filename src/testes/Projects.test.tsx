@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Projects } from "../blocos/Projects";
@@ -143,5 +143,52 @@ describe("Projects", () => {
     renderizar();
 
     expect(screen.getByRole("group", { name: "Sequência de cases" })).toBeInTheDocument();
+  });
+
+  // WCAG 2.2.2: movimento automático por mais de 5s precisa de pausa explícita.
+  it("botão pausa e retoma o carrossel mantendo o rótulo fixo (só aria-pressed muda)", async () => {
+    const user = userEvent.setup();
+    renderizar();
+    const botao = screen.getByRole("button", { name: "Pausar carrossel" });
+    expect(botao).toHaveAttribute("aria-pressed", "false");
+
+    await user.click(botao);
+
+    expect(botao).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Pausar carrossel" })).toBe(botao);
+    expect(screen.queryByRole("button", { name: /retomar/i })).toBeNull();
+    expect(document.querySelector(".project-carousel")).toHaveAttribute("data-paused", "true");
+  });
+
+  it("continua pausado depois de hover e saída do mouse", async () => {
+    const user = userEvent.setup();
+    renderizar();
+    await user.click(screen.getByRole("button", { name: "Pausar carrossel" }));
+    const carrossel = document.querySelector(".project-carousel")!;
+
+    await user.hover(carrossel);
+    await user.unhover(carrossel);
+
+    expect(carrossel).toHaveAttribute("data-paused", "true");
+  });
+
+  describe("com movimento reduzido", () => {
+    const original = window.matchMedia;
+    afterEach(() => {
+      window.matchMedia = original;
+    });
+
+    it("não mostra o botão de pausa", () => {
+      window.matchMedia = vi.fn().mockImplementation((q: string) => ({
+        matches: q.includes("prefers-reduced-motion"),
+        media: q,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }));
+      renderizar();
+
+      expect(screen.getByRole("group", { name: "Sequência de cases" })).toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: /carrossel/i })).toBeNull();
+    });
   });
 });

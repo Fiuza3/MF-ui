@@ -40,7 +40,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
         <div>
           <div className="flex items-center justify-between gap-4">
             <span className="font-mono text-xs text-cyan">{service.tag}</span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-gray-text">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-gray-text">
               {service.id}
             </span>
           </div>

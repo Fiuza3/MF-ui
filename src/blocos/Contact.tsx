@@ -64,7 +64,7 @@ export function Contact({
             <a
               href={cta.href}
               {...propsDeLink(cta.href)}
-              className="group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+              className="group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan">
                 <MessageCircleIcon className="size-4" aria-hidden="true" />
@@ -78,7 +78,7 @@ export function Contact({
             {email && (
               <a
                 href={`mailto:${email}`}
-                className="group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                className="group flex items-center gap-4 rounded border border-line bg-surface p-5 transition-colors hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring"
               >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-line bg-background text-gray-text transition-colors group-hover:border-cyan group-hover:text-cyan">
                   <MailIcon className="size-4" aria-hidden="true" />
@@ -94,7 +94,7 @@ export function Contact({
 
             {r.modoValor && (
               <div className="rounded border border-line bg-surface p-5 font-mono">
-                <p className="text-[10px] uppercase tracking-[0.24em] text-gray-text">{r.modo}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-text">{r.modo}</p>
                 <p className="mt-4 text-sm text-foreground">{r.modoValor}</p>
                 <p className="mt-2 text-xs leading-relaxed text-gray-text">{r.modoDescricao}</p>
               </div>
