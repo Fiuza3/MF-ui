@@ -78,4 +78,22 @@ describe("Navbar", () => {
 
     expect(within(menu).getByRole("link", { name: "GitHub" })).toHaveAttribute("target", "_blank");
   });
+
+  it("renderiza as ações no desktop e no painel mobile", async () => {
+    const user = userEvent.setup();
+    render(<Navbar links={links} acoes={<button type="button">Tema</button>} />);
+    expect(screen.getAllByRole("button", { name: "Tema" })).toHaveLength(1);
+    await user.click(screen.getByRole("button", { name: /abrir menu/i }));
+    expect(screen.getAllByRole("button", { name: "Tema" }).length).toBeGreaterThanOrEqual(2);
+  });
+
+  // O LogoAnimado acrescenta " — MF Desenvolvimento" ao rótulo, então o nome é prefixo.
+  it("o logo usa logoLabel como nome acessível e mantém o padrão sem a prop", () => {
+    const { unmount } = render(<Navbar links={links} logoLabel="Ir para a página inicial" />);
+    expect(screen.getByRole("button", { name: /^Ir para a página inicial/ })).toBeTruthy();
+    unmount();
+
+    render(<Navbar links={links} />);
+    expect(screen.getByRole("button", { name: /^Ir para o topo/ })).toBeTruthy();
+  });
 });

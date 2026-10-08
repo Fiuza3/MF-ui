@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type RefObject } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from "react";
 import { comportamentoDeScroll } from "../lib/comportamento-de-scroll";
 import { propsDeLink } from "../lib/link-externo";
 import { LogoAnimado } from "./LogoAnimado";
@@ -15,10 +15,14 @@ export type NavbarProps = {
   links?: NavLink[];
   ctaHref?: string;
   ctaLabel?: string;
+  /** Slot à direita (ex.: alternador de tema), antes do CTA no desktop e no fim do painel mobile. */
+  acoes?: ReactNode;
+  /** Nome acessível do logo; troque quando ele não leva ao topo (ex.: páginas internas). */
+  logoLabel?: string;
   onLogoClick?: () => void;
 };
 
-const FOCO = "focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none";
+const FOCO = "focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none";
 
 function propsDoLinkDeMenu(link: NavLink) {
   return link.externo ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
@@ -28,6 +32,8 @@ export function Navbar({
   links = [],
   ctaHref,
   ctaLabel = "Fale comigo",
+  acoes,
+  logoLabel = "Ir para o topo",
   onLogoClick,
 }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,9 +60,9 @@ export function Navbar({
           onClick={
             onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: comportamentoDeScroll() }))
           }
-          label="Ir para o topo"
+          label={logoLabel}
         />
-        <NavDesktop links={links} ctaHref={ctaHref} ctaLabel={ctaLabel} />
+        <NavDesktop links={links} ctaHref={ctaHref} ctaLabel={ctaLabel} acoes={acoes} />
         <Hamburguer
           ref={hamburgerRef}
           aberto={menuOpen}
@@ -71,6 +77,7 @@ export function Navbar({
           links={links}
           ctaHref={ctaHref}
           ctaLabel={ctaLabel}
+          acoes={acoes}
           fechar={() => setMenuOpen(false)}
         />
       )}
@@ -115,9 +122,9 @@ function useFecharMenu({ aberto, setAberto, headerRef, hamburgerRef }: FecharMen
   }, [aberto, setAberto, headerRef, hamburgerRef]);
 }
 
-type NavConteudo = { links: NavLink[]; ctaHref?: string; ctaLabel: string };
+type NavConteudo = { links: NavLink[]; ctaHref?: string; ctaLabel: string; acoes?: ReactNode };
 
-function NavDesktop({ links, ctaHref, ctaLabel }: NavConteudo) {
+function NavDesktop({ links, ctaHref, ctaLabel, acoes }: NavConteudo) {
   return (
     <nav aria-label="Navegação principal" className="hidden items-center gap-8 md:flex">
       {links.map((link) => (
@@ -130,6 +137,7 @@ function NavDesktop({ links, ctaHref, ctaLabel }: NavConteudo) {
           {link.label}
         </a>
       ))}
+      {acoes && <div className="flex items-center gap-2">{acoes}</div>}
       {ctaHref && (
         <a
           href={ctaHref}
@@ -148,6 +156,7 @@ function NavMobile({
   links,
   ctaHref,
   ctaLabel,
+  acoes,
   fechar,
 }: NavConteudo & { id: string; fechar: () => void }) {
   return (
@@ -174,6 +183,7 @@ function NavMobile({
             {ctaLabel}
           </a>
         )}
+        {acoes && <div className="mt-4 flex items-center gap-2">{acoes}</div>}
       </nav>
     </div>
   );
