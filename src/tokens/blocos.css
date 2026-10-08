@@ -101,7 +101,8 @@
 }
 
 .project-carousel:hover .project-carousel-track,
-.project-carousel:focus-within .project-carousel-track {
+.project-carousel:focus-within .project-carousel-track,
+.project-carousel[data-paused="true"] .project-carousel-track {
   animation-play-state: paused;
 }
 
@@ -146,6 +147,13 @@
 
   .project-carousel-track {
     animation: none;
+  }
+}
+
+/* Sem animação no toque, o botão de pausa não controla nada. */
+@media (pointer: coarse) {
+  .project-carousel-pausa {
+    display: none;
   }
 }
 

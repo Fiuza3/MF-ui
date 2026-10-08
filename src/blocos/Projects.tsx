@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import { useRef, useState, type RefObject } from "react";
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowUpRightIcon, PauseIcon, PlayIcon } from "lucide-react";
 import { Reveal } from "../componentes/Reveal";
 import { propsDeLink } from "../lib/link-externo";
+import { usePrefereMovimentoReduzido } from "../lib/movimento-reduzido";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../primitivos/Dialog";
 
 export type ProjectItem = {
@@ -27,9 +28,27 @@ export type ProjectsProps = {
   projects: ProjectItem[];
 };
 
-const ROTULO = "font-mono text-[10px] uppercase tracking-[0.24em] text-gray-text";
+const ROTULO = "font-mono text-xs uppercase tracking-[0.2em] text-gray-text";
 const TAG = "rounded border border-line px-2 py-1 font-mono text-xs text-gray-text";
-const FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
+const FOCO = "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring";
+
+type BotaoDePausaProps = { pausado: boolean; onAlternar: () => void };
+
+// Oculto onde o carrossel já não anima (celular/toque: classe no CSS; movimento reduzido: não renderiza).
+function BotaoDePausa({ pausado, onAlternar }: BotaoDePausaProps) {
+  const Icone = pausado ? PlayIcon : PauseIcon;
+  return (
+    <button
+      type="button"
+      aria-pressed={pausado}
+      aria-label={pausado ? "Retomar carrossel" : "Pausar carrossel"}
+      onClick={onAlternar}
+      className={`project-carousel-pausa border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex size-11 shrink-0 items-center justify-center rounded border transition-colors max-md:hidden ${FOCO}`}
+    >
+      <Icone aria-hidden="true" className="size-4" />
+    </button>
+  );
+}
 
 function rotuloDoFrame(project: ProjectItem, index: number): string {
   return [`frame ${String(index + 1).padStart(2, "0")}`, project.ano, project.categoria]
@@ -189,6 +208,8 @@ export function Projects({ eyebrow, title, description, projects }: ProjectsProp
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setSelected(project);
   };
+  const [pausado, setPausado] = useState(false);
+  const movimentoReduzido = usePrefereMovimentoReduzido();
   const loopedProjects = [...projects, ...projects];
 
   return (
@@ -198,16 +219,21 @@ export function Projects({ eyebrow, title, description, projects }: ProjectsProp
       className="border-line relative overflow-hidden border-t py-16 lg:py-24"
     >
       <div className="w-full px-5 sm:px-8 lg:px-10 2xl:px-14">
-        <Reveal margin="-80px" className="mb-8 lg:mb-10">
-          <p className="text-cyan mb-4 font-mono text-xs tracking-[0.34em] uppercase">{eyebrow}</p>
-          <h2 className="text-foreground text-[length:var(--text-h2)] leading-[0.96] font-black tracking-tight">
-            {title}
-          </h2>
-          <p className="text-gray-text mt-4 max-w-3xl text-base leading-relaxed">{description}</p>
+        <Reveal margin="-80px" className="mb-8 flex items-end justify-between gap-6 lg:mb-10">
+          <div className="min-w-0 flex-1">
+            <p className="text-cyan mb-4 font-mono text-xs tracking-[0.34em] uppercase">{eyebrow}</p>
+            <h2 className="text-foreground text-[length:var(--text-h2)] leading-[0.96] font-black tracking-tight">
+              {title}
+            </h2>
+            <p className="text-gray-text mt-4 max-w-3xl text-base leading-relaxed">{description}</p>
+          </div>
+          {!movimentoReduzido && (
+            <BotaoDePausa pausado={pausado} onAlternar={() => setPausado((p) => !p)} />
+          )}
         </Reveal>
       </div>
 
-      <div className="project-carousel relative overflow-hidden">
+      <div className="project-carousel relative overflow-hidden" data-paused={pausado}>
         <div
           role="group"
           aria-roledescription="carrossel"
