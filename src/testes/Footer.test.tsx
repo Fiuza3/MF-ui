@@ -32,12 +32,26 @@ describe("Footer", () => {
     }
   });
 
-  it("marca d'água se mede pela coluna, não pela viewport", () => {
+  it("marca d'água é SVG decorativo escalável pela largura da coluna", () => {
     const { container } = render(<Footer />);
-    const marca = container.querySelector("[aria-hidden=true].select-none");
+    const marca = container.querySelector("svg[aria-hidden=true]");
 
-    expect(marca?.className).toMatch(/cqi/);
-    expect(marca?.parentElement?.className.split(/\s+/)).toContain("@container");
+    expect(marca?.getAttribute("viewBox")).toBeTruthy();
+    expect(marca?.getAttribute("focusable")).toBe("false");
+    expect(marca?.getAttribute("class")).toMatch(/w-full/);
+  });
+
+  it("a marca d'água não é texto no DOM fora de um svg aria-hidden", () => {
+    const { container } = render(<Footer />);
+    const fora = [...container.querySelectorAll("*")].filter(
+      (el) =>
+        [...el.childNodes].some(
+          (n) => n.nodeType === Node.TEXT_NODE && n.textContent?.includes("<MF/>"),
+        ) && !el.closest("svg[aria-hidden=true]"),
+    );
+
+    expect(fora).toEqual([]);
+    expect(container.querySelector("svg[aria-hidden=true] text")?.textContent).toBe("<MF/>");
   });
 
   it("e-mail longo pode quebrar em vez de alargar a coluna", () => {
