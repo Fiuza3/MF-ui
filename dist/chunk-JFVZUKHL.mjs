@@ -9,13 +9,13 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import { jsx } from "react/jsx-runtime";
 var badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px] aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
   {
     variants: {
       variant: {
         default: "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
         secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
-        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive",
         outline: "text-foreground [a&]:hover:bg-foreground/10 [a&]:hover:text-foreground dark:border-input"
       }
     },
@@ -42,7 +42,7 @@ function Textarea({ className, ...props }) {
     {
       "data-slot": "textarea",
       className: cn(
-        "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
         className
       ),
       ...props
@@ -206,7 +206,7 @@ function SelectTrigger({
     {
       "data-slot": "select-trigger",
       className: cn(
-        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:ring-destructive/40 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring aria-invalid:not-focus-visible:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:not-focus-visible:ring-destructive/40 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
         alturas[size],
         className
       ),
@@ -335,7 +335,7 @@ function Checkbox({ className, ...props }) {
     {
       "data-slot": "checkbox",
       className: cn(
-        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
         className
       ),
       ...props,
@@ -778,12 +778,11 @@ var semAssinatura = () => () => {
 };
 var lerSuporte = () => typeof IntersectionObserver === "undefined" ? "nao" : "sim";
 var lerSuporteServidor = () => "servidor";
-function useInViewActivation(ref, enabled) {
+function useInViewActivation(alvo, enabled) {
   const suporte = React2.useSyncExternalStore(semAssinatura, lerSuporte, lerSuporteServidor);
   const [visto, setVisto] = React2.useState(false);
   const observavel = enabled && suporte === "sim";
   React2.useEffect(() => {
-    const alvo = ref.current;
     if (!observavel || !alvo) return;
     const observador = new IntersectionObserver(
       ([entrada]) => {
@@ -795,20 +794,24 @@ function useInViewActivation(ref, enabled) {
     );
     observador.observe(alvo);
     return () => observador.disconnect();
-  }, [ref, observavel]);
+  }, [alvo, observavel]);
   return {
     armed: observavel,
     active: enabled && (visto || suporte === "nao")
   };
 }
 var FORMAS = "path, circle, line, polyline, polygon, rect, ellipse";
-function useNormalizedPathLength(ref, enabled) {
+function useNormalizedPathLength(alvo, enabled) {
   React2.useLayoutEffect(() => {
-    if (!enabled) return;
-    const formas = ref.current?.querySelectorAll(FORMAS);
-    formas?.forEach((forma) => forma.setAttribute("pathLength", "100"));
-    return () => formas?.forEach((forma) => forma.removeAttribute("pathLength"));
-  }, [ref, enabled]);
+    if (!enabled || !alvo) return;
+    const formas = alvo.querySelectorAll(FORMAS);
+    formas.forEach((forma) => forma.setAttribute("pathLength", "100"));
+    return () => formas.forEach((forma) => forma.removeAttribute("pathLength"));
+  }, [alvo, enabled]);
+}
+function atribuirRef(ref, no) {
+  if (typeof ref === "function") ref(no);
+  else if (ref) ref.current = no;
 }
 function AnimatedIcon({
   icon: Icon2,
@@ -817,11 +820,19 @@ function AnimatedIcon({
   size = 24,
   label,
   className,
+  ref: refDoConsumidor,
   ...props
 }) {
-  const ref = React2.useRef(null);
-  const { armed, active } = useInViewActivation(ref, trigger === "inview");
-  useNormalizedPathLength(ref, animation === "draw");
+  const [no, setNo] = React2.useState(null);
+  const ref = React2.useCallback(
+    (alvo) => {
+      setNo(alvo);
+      atribuirRef(refDoConsumidor, alvo);
+    },
+    [refDoConsumidor]
+  );
+  const { armed, active } = useInViewActivation(no, trigger === "inview");
+  useNormalizedPathLength(no, animation === "draw");
   const acessivel = label ? { role: "img", "aria-label": label } : { "aria-hidden": true };
   return /* @__PURE__ */ jsx12(
     Icon2,
@@ -896,4 +907,4 @@ export {
   useToast,
   AnimatedIcon
 };
-//# sourceMappingURL=chunk-SKE4VRPK.mjs.map
+//# sourceMappingURL=chunk-JFVZUKHL.mjs.map

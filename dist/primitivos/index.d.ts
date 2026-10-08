@@ -196,12 +196,22 @@ declare function useToast(): ToastContextValue;
 type AnimatedIconAnimation = "draw" | "pulse" | "nudge" | "spin";
 type AnimatedIconTrigger = "hover" | "inview" | "always";
 type AnimatedIconProps = Omit<React.ComponentProps<"svg">, "children"> & {
+    /**
+     * Componente de ícone do Lucide. Por ser uma função, não atravessa a fronteira
+     * Server → Client Component (erro de serialização no Next): use o AnimatedIcon
+     * dentro de um client component ou crie um wrapper "use client".
+     */
     icon: LucideIcon;
     animation?: AnimatedIconAnimation;
+    /**
+     * `hover` reage ao próprio hover, ao `:hover` e ao `:focus-within` de qualquer ancestral
+     * `.group` (não só o mais próximo) e ao hover/foco de um `Button` do sistema.
+     * `inview` com `draw` acima da dobra desenha após a hidratação — prefira abaixo da dobra.
+     */
     trigger?: AnimatedIconTrigger;
     size?: number;
     label?: string;
 };
-declare function AnimatedIcon({ icon: Icon, animation, trigger, size, label, className, ...props }: AnimatedIconProps): react_jsx_runtime.JSX.Element;
+declare function AnimatedIcon({ icon: Icon, animation, trigger, size, label, className, ref: refDoConsumidor, ...props }: AnimatedIconProps): react_jsx_runtime.JSX.Element;
 
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AnimatedIcon, type AnimatedIconAnimation, type AnimatedIconProps, type AnimatedIconTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, type PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastRoot as Toast, ToastAction, ToastClose, ToastComponentProvider, type ToastData, ToastDescription, ToastProvider, ToastTitle, type ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast };

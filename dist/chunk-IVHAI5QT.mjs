@@ -11,6 +11,8 @@ var NOMES = {
   primariaTexto: "--primary-foreground",
   primariaHover: "--primary-hover",
   primariaSutil: "--cyan-dim",
+  marca: "--brand",
+  marcaTexto: "--brand-foreground",
   secundaria: "--secondary",
   secundariaTexto: "--secondary-foreground",
   neutra: "--muted",
@@ -75,4 +77,4 @@ export {
   duracoes,
   curvas
 };
-//# sourceMappingURL=chunk-DOQVRQ5O.mjs.map
+//# sourceMappingURL=chunk-IVHAI5QT.mjs.map

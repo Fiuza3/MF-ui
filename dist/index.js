@@ -181,6 +181,8 @@ var NOMES = {
   primariaTexto: "--primary-foreground",
   primariaHover: "--primary-hover",
   primariaSutil: "--cyan-dim",
+  marca: "--brand",
+  marcaTexto: "--brand-foreground",
   secundaria: "--secondary",
   secundariaTexto: "--secondary-foreground",
   neutra: "--muted",
@@ -853,12 +855,12 @@ function Spinner({ className, ...props }) {
 // src/primitivos/Button.tsx
 var import_jsx_runtime8 = require("react/jsx-runtime");
 var buttonVariants = (0, import_class_variance_authority.cva)(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px] aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive",
         outline: "border bg-background shadow-xs hover:bg-foreground/10 hover:text-foreground dark:bg-input/30 dark:border-input",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-foreground/10 hover:text-foreground",
@@ -999,13 +1001,13 @@ var import_react_slot2 = require("@radix-ui/react-slot");
 var import_class_variance_authority2 = require("class-variance-authority");
 var import_jsx_runtime10 = require("react/jsx-runtime");
 var badgeVariants = (0, import_class_variance_authority2.cva)(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px] aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
   {
     variants: {
       variant: {
         default: "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
         secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
-        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive",
         outline: "text-foreground [a&]:hover:bg-foreground/10 [a&]:hover:text-foreground dark:border-input"
       }
     },
@@ -1035,7 +1037,7 @@ function Input({ className, type, ...props }) {
       className: cn(
         "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:mr-3 file:inline-flex file:h-7 file:items-center file:rounded-sm file:border-0 file:bg-muted file:px-2 file:text-base file:font-medium md:file:text-sm disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
         "focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        "aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive",
         className
       ),
       ...props
@@ -1051,7 +1053,7 @@ function Textarea({ className, ...props }) {
     {
       "data-slot": "textarea",
       className: cn(
-        "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
         className
       ),
       ...props
@@ -1453,7 +1455,7 @@ function SelectTrigger({
     {
       "data-slot": "select-trigger",
       className: cn(
-        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:ring-destructive/40 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 focus-visible:border-ring focus-visible:ring-ring aria-invalid:not-focus-visible:ring-destructive/20 aria-invalid:border-destructive dark:bg-input/30 dark:aria-invalid:not-focus-visible:ring-destructive/40 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent whitespace-nowrap shadow-xs outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
         alturas[size],
         className
       ),
@@ -1582,7 +1584,7 @@ function Checkbox({ className, ...props }) {
     {
       "data-slot": "checkbox",
       className: cn(
-        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring aria-invalid:not-focus-visible:ring-destructive/20 dark:aria-invalid:not-focus-visible:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
         className
       ),
       ...props,
@@ -2283,12 +2285,11 @@ var semAssinatura = () => () => {
 };
 var lerSuporte = () => typeof IntersectionObserver === "undefined" ? "nao" : "sim";
 var lerSuporteServidor = () => "servidor";
-function useInViewActivation(ref, enabled) {
+function useInViewActivation(alvo, enabled) {
   const suporte = React4.useSyncExternalStore(semAssinatura, lerSuporte, lerSuporteServidor);
   const [visto, setVisto] = React4.useState(false);
   const observavel = enabled && suporte === "sim";
   React4.useEffect(() => {
-    const alvo = ref.current;
     if (!observavel || !alvo) return;
     const observador = new IntersectionObserver(
       ([entrada]) => {
@@ -2300,20 +2301,24 @@ function useInViewActivation(ref, enabled) {
     );
     observador.observe(alvo);
     return () => observador.disconnect();
-  }, [ref, observavel]);
+  }, [alvo, observavel]);
   return {
     armed: observavel,
     active: enabled && (visto || suporte === "nao")
   };
 }
 var FORMAS = "path, circle, line, polyline, polygon, rect, ellipse";
-function useNormalizedPathLength(ref, enabled) {
+function useNormalizedPathLength(alvo, enabled) {
   React4.useLayoutEffect(() => {
-    if (!enabled) return;
-    const formas = ref.current?.querySelectorAll(FORMAS);
-    formas?.forEach((forma) => forma.setAttribute("pathLength", "100"));
-    return () => formas?.forEach((forma) => forma.removeAttribute("pathLength"));
-  }, [ref, enabled]);
+    if (!enabled || !alvo) return;
+    const formas = alvo.querySelectorAll(FORMAS);
+    formas.forEach((forma) => forma.setAttribute("pathLength", "100"));
+    return () => formas.forEach((forma) => forma.removeAttribute("pathLength"));
+  }, [alvo, enabled]);
+}
+function atribuirRef(ref, no) {
+  if (typeof ref === "function") ref(no);
+  else if (ref) ref.current = no;
 }
 function AnimatedIcon({
   icon: Icon2,
@@ -2322,11 +2327,19 @@ function AnimatedIcon({
   size = 24,
   label,
   className,
+  ref: refDoConsumidor,
   ...props
 }) {
-  const ref = React4.useRef(null);
-  const { armed, active } = useInViewActivation(ref, trigger === "inview");
-  useNormalizedPathLength(ref, animation === "draw");
+  const [no, setNo] = React4.useState(null);
+  const ref = React4.useCallback(
+    (alvo) => {
+      setNo(alvo);
+      atribuirRef(refDoConsumidor, alvo);
+    },
+    [refDoConsumidor]
+  );
+  const { armed, active } = useInViewActivation(no, trigger === "inview");
+  useNormalizedPathLength(no, animation === "draw");
   const acessivel = label ? { role: "img", "aria-label": label } : { "aria-hidden": true };
   return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
     Icon2,
@@ -2375,7 +2388,7 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                       {
                         href: cta.href,
                         ...propsDeLink(cta.href),
-                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
+                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:border-cyan hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                         children: [
                           cta.label,
                           /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
@@ -2512,7 +2525,7 @@ function BotaoDePausa({ pausado, onAlternar }) {
     {
       type: "button",
       "aria-pressed": pausado,
-      "aria-label": pausado ? "Retomar carrossel" : "Pausar carrossel",
+      "aria-label": "Pausar carrossel",
       onClick: onAlternar,
       className: `project-carousel-pausa border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex size-11 shrink-0 items-center justify-center rounded border transition-colors max-md:hidden ${FOCO2}`,
       children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Icone, { "aria-hidden": "true", className: "size-4" })

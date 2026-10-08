@@ -79,7 +79,7 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                       {
                         href: cta.href,
                         ...propsDeLink(cta.href),
-                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
+                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:border-cyan hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                         children: [
                           cta.label,
                           /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
@@ -370,7 +370,7 @@ function BotaoDePausa({ pausado, onAlternar }) {
     {
       type: "button",
       "aria-pressed": pausado,
-      "aria-label": pausado ? "Retomar carrossel" : "Pausar carrossel",
+      "aria-label": "Pausar carrossel",
       onClick: onAlternar,
       className: `project-carousel-pausa border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex size-11 shrink-0 items-center justify-center rounded border transition-colors max-md:hidden ${FOCO}`,
       children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icone, { "aria-hidden": "true", className: "size-4" })

@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-HJRLSD6G.mjs";
+} from "./chunk-76S4CKHT.mjs";
 import {
   AppShell,
   CopyField,
@@ -20,7 +20,7 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-P5KGWRSC.mjs";
+} from "./chunk-UR2UXN57.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -76,7 +76,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-SKE4VRPK.mjs";
+} from "./chunk-JFVZUKHL.mjs";
 import {
   Dialog,
   DialogClose,
@@ -126,7 +126,7 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-T3JPMASJ.mjs";
+} from "./chunk-NNHV4ONZ.mjs";
 import {
   cn
 } from "./chunk-ZTAXVNYF.mjs";
@@ -138,7 +138,7 @@ import {
   pesos,
   tokensDeCor,
   tokensDeMotion
-} from "./chunk-DOQVRQ5O.mjs";
+} from "./chunk-IVHAI5QT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
