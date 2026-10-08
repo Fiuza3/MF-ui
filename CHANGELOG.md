@@ -4,7 +4,36 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [3.3.0] — 2026-10-08
+
+Tema claro na família ciano da marca, anel de foco opaco, piso tipográfico de 12px, pausa no carrossel do `Projects`, slot de ações na `Navbar` e o primitivo `AnimatedIcon`. Nenhuma assinatura mudou.
+
+### Atenção ao atualizar
+
+- **O tema claro trocou creme + laranja por gelo + ciano profundo.** `--primary`, `--accent`, `--cyan` e `--ring` passam a `#0a6e68` (5,7:1 sobre o fundo — seguros para texto), com `--primary-foreground` branco. O ciano brilhante da marca não serve como texto no claro (1,32:1), então ganhou token próprio de preenchimento: **`--brand` / `--brand-foreground`** (`#3df2e0` com `#0b0f14`, 13,7:1, iguais nos dois temas). CTA de identidade: `bg-brand text-brand-foreground`.
+- **Anel de foco sem alfa.** `focus-visible:ring-ring/50` dava 2,19:1 no claro (WCAG 1.4.11 pede 3:1); todos os componentes usam `ring-ring` opaco. Quem tinha `ring-ring/50` no próprio app deve trocar também.
+- **Marca d'água do `Footer` virou SVG `aria-hidden`.** Visual igual, mas o texto decorativo de 1,21:1 sai do cálculo de contraste do axe/Lighthouse. O viewBox foi medido com a Geist Mono Black real (antes cortava ~9 unidades do topo dos glifos).
+
+### Adicionado
+
+- `AnimatedIcon` (primitivo): ícone Lucide animado só com CSS — `draw`, `pulse`, `nudge`, `spin` × gatilhos `hover` (próprio ou `.group`, incluindo foco), `inview` (IntersectionObserver nativo) e `always`. Nunca fica escondido sem JS, antes da hidratação ou sem IntersectionObserver; `prefers-reduced-motion` mostra o estado final.
+- `Navbar`: prop `acoes` (ex.: botão de tema), renderizada no desktop antes do CTA e no fim do painel mobile.
+- `Projects`: botão "Pausar carrossel"/"Retomar carrossel" (WCAG 2.2.2), persiste com hover; some com movimento reduzido e no toque, onde o carrossel já é trilho com scroll.
+- Testes que travam regressão: anel com alfa, fonte abaixo de 12px (`classes-tailwind.test.ts`), pares `--brand`, `--accent` e foco/borda sobre `--muted` (`contraste.test.ts`).
+
+### Corrigido
+
+- `Reveal`: conteúdo ainda invisível revela ao receber foco por teclado, em vez de receber foco com `opacity: 0`.
+- `text-[10px]`/`text-[11px]` em `Contact`, `Hero`, `Process`, `Projects` e `Services` → `text-xs`, com tracking de caixa-alta limitado a 0,2em.
+
+## [3.2.0] — 2026-09-26
+
+### Adicionado
+
+- Piso de toque de 44px nos controles sob `pointer: coarse` (decide o dedo, não a largura da tela), via `min-height` para não esticar quem já é maior.
+- `AppShell`: `larguraSidebar` configurável (trilho de ícones); a gaveta do celular não acompanha de propósito.
+
+## [3.1.0] — 2026-09-26
 
 Auditoria componente a componente: todo bloco deve funcionar só com `tailwindcss` + `globals.css` + `utilitarios.css`, sem CSS extra no consumidor. Sugestão de versão: **3.1.0**. Não há mudança de assinatura, mas há mudança visual e de comportamento (ver "Atenção ao atualizar").
 
