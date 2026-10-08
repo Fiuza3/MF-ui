@@ -58,6 +58,10 @@ const PARES: Array<[string, string, number, string]> = [
   ["--ring", "--card", UI_AA, "anel de foco sobre card"],
   ["--input", "--background", UI_AA, "borda de campo sobre o fundo"],
   ["--input", "--card", UI_AA, "borda de campo sobre card"],
+  ["--brand-foreground", "--brand", TEXTO_AA, "texto dentro do CTA de marca (ciano)"],
+  ["--accent-foreground", "--accent", TEXTO_AA, "texto sobre acento"],
+  ["--ring", "--muted", UI_AA, "anel de foco sobre superfície muted"],
+  ["--input", "--muted", UI_AA, "borda de campo sobre superfície muted"],
 ];
 
 describe.each<Tema>(["escuro", "claro"])("contraste — tema %s", (tema) => {
