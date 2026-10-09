@@ -16,11 +16,7 @@ const CANVAS = {
 };
 
 async function writeAvatar(ctx, side) {
-  const png = await rasterize(
-    ctx.sharp,
-    fullBleedSvg(ctx.brand, "symbol-block"),
-    squareTarget(side),
-  );
+  const png = await rasterize(ctx.sharp, fullBleedSvg(ctx.brand, "symbol"), squareTarget(side));
   await writeFileDeep(path.join(ctx.out, "png", "social", `avatar-${side}.png`), png);
 }
 

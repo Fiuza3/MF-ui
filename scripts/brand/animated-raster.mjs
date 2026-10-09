@@ -1,8 +1,8 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
-const VARIANTS = ["horizontal", "symbol-block", "symbol-tag", "symbol-cursor"];
-const ANIMATIONS = ["assemble", "type", "draw", "pulse"];
+const VARIANTS = ["horizontal", "symbol"];
+const ANIMATIONS = ["assemble", "type", "draw", "pulse", "bounce"];
 const TONE = "cyan";
 const GIF_BACKGROUND = "#0B0F14";
 const WEBP_FPS = 30;

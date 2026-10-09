@@ -30,8 +30,8 @@ export function maskableSvg(brand, variant) {
 }
 
 // Só as formas, sem bloco: o Safari pinta a máscara com a cor do atributo `color`
-// do <link>, então o SVG precisa ser monocromático e sem fundo. Usa o próprio
-// símbolo (não o monograma) para a aba fixada bater com o favicon escolhido.
+// do <link>, então o SVG precisa ser monocromático e sem fundo. Usa o símbolo
+// (não o monograma) para a aba fixada bater com o favicon.
 export function pinnedTabSvg(brand, variant) {
   const decorate = (layout) => {
     const bounds = brand.boundsOf(layout.parts);

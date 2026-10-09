@@ -11,7 +11,7 @@ describe("frameTimes", () => {
     expect(times.at(-1)).toBeLessThan(2200);
   });
 
-  it("pulse cobre exatamente um ciclo sem repetir o quadro inicial", () => {
+  it("pulse e bounce (loop) cobrem exatamente um ciclo sem repetir o quadro inicial", () => {
     const { times, total } = frameTimes({ trigger: "loop", length: 1000 }, 20);
     expect(total).toBe(1000);
     expect(times).toHaveLength(20);
@@ -48,7 +48,7 @@ describe("targetSize", () => {
       width: 640,
       height: 160,
     });
-    expect(targetSize("symbol-block", { width: 1, height: 1 })).toEqual({
+    expect(targetSize("symbol", { width: 1, height: 1 })).toEqual({
       width: 512,
       height: 512,
     });

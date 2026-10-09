@@ -5,7 +5,7 @@ import { encodeIco } from "./ico.mjs";
 import { rasterize, squareTarget } from "./raster.mjs";
 import { staticSvg } from "./svg-files.mjs";
 
-const FAVICON_VARIANTS = ["symbol-block", "symbol-tag", "symbol-cursor"];
+const FAVICON_SYMBOL = "symbol";
 const ICO_SIZES = [16, 32, 48];
 const THEME = "#0B0F14";
 
@@ -57,8 +57,9 @@ async function writeAppIcons(ctx, dir, variant) {
   );
 }
 
-async function writeFaviconSet(ctx, variant) {
-  const dir = path.join(ctx.out, "favicon", variant);
+async function writeFaviconSet(ctx) {
+  const variant = FAVICON_SYMBOL;
+  const dir = path.join(ctx.out, "favicon");
   await Promise.all([
     writeIco(ctx, dir, variant),
     writeAppIcons(ctx, dir, variant),
@@ -69,6 +70,4 @@ async function writeFaviconSet(ctx, variant) {
   ]);
 }
 
-export async function writeFavicons(ctx) {
-  await Promise.all(FAVICON_VARIANTS.map((variant) => writeFaviconSet(ctx, variant)));
-}
+export const writeFavicons = writeFaviconSet;

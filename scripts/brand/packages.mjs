@@ -3,21 +3,15 @@ import path from "node:path";
 import { walk, writeFileDeep } from "./files.mjs";
 import { encodeZip } from "./zip.mjs";
 
-const SYMBOLS = ["symbol-block", "symbol-tag", "symbol-cursor"];
-
 // Pastas não baixam em site estático (o Storybook publicado não lista diretório):
 // cada conjunto vira um .zip com link direto na página da marca.
 function packagesOf(out) {
-  const favicons = SYMBOLS.map((symbol) => ({
-    file: `mf-favicon-${symbol}.zip`,
-    root: path.join(out, "favicon", symbol),
-  }));
   return [
     { file: "mf-marca-completa.zip", root: out },
     { file: "mf-marca-svg.zip", root: path.join(out, "svg") },
     { file: "mf-marca-png.zip", root: path.join(out, "png") },
     { file: "mf-marca-animada.zip", root: path.join(out, "animated") },
-    ...favicons,
+    { file: "mf-favicon.zip", root: path.join(out, "favicon") },
   ];
 }
 
