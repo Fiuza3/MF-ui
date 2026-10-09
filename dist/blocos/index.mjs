@@ -7,9 +7,10 @@ import {
   Services,
   Stack,
   Testimonials
-} from "../chunk-XZIMKAVG.mjs";
-import "../chunk-65233P6I.mjs";
-import "../chunk-ZTAXVNYF.mjs";
+} from "../chunk-6OV2HO33.mjs";
+import "../chunk-RXXQMEPX.mjs";
+import "../chunk-D4CBAES4.mjs";
+import "../chunk-TE62FXIV.mjs";
 export {
   About,
   Contact,

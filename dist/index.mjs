@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-XZIMKAVG.mjs";
+} from "./chunk-6OV2HO33.mjs";
 import {
   AppShell,
   CopyField,
@@ -20,13 +20,21 @@ import {
   FormField,
   PageHeader,
   StatCard
-} from "./chunk-UR2UXN57.mjs";
+} from "./chunk-IHQZJJTE.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-IVHAI5QT.mjs";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AnimatedIcon,
   Badge,
   Checkbox,
   DropdownMenu,
@@ -76,7 +84,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-JFVZUKHL.mjs";
+} from "./chunk-YTSJF7V4.mjs";
 import {
   Dialog,
   DialogClose,
@@ -88,7 +96,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger
-} from "./chunk-65233P6I.mjs";
+} from "./chunk-RXXQMEPX.mjs";
 import {
   Button,
   Card,
@@ -126,19 +134,14 @@ import {
   TableHeader,
   TableRow,
   buttonVariants
-} from "./chunk-NNHV4ONZ.mjs";
+} from "./chunk-NMIWSCXQ.mjs";
+import "./chunk-D4CBAES4.mjs";
+import {
+  AnimatedIcon
+} from "./chunk-ECVJPYOC.mjs";
 import {
   cn
-} from "./chunk-ZTAXVNYF.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-IVHAI5QT.mjs";
+} from "./chunk-TE62FXIV.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
