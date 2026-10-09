@@ -13,6 +13,9 @@ export type BrandTreeOptions = {
   tone: BrandTone;
   title?: string;
   bracketOpacity?: number;
+  // Cor livre (ex.: "currentColor", "var(--cyan)") no lugar do tom: mantém a
+  // opacidade dos colchetes e o bloco do tom. É o que o Logo legado recebe em `cor`.
+  color?: string;
   // Prefixo de ids (máscara): necessário quando várias marcas vazadas dividem a página.
   idPrefix?: string;
   // Partes extras e classes que as animações precisam; o estático ignora.
@@ -77,6 +80,12 @@ function bodyNodes(layout: BrandLayout, colors: ToneColors, options: BrandTreeOp
   return layout.tile ? [tileRect(layout, colors.tile), content] : [content];
 }
 
+function colorsFor(options: BrandTreeOptions): ToneColors {
+  const tone = TONES[options.tone];
+  if (!options.color) return tone;
+  return { ...tone, core: options.color, bracket: options.color, cursor: options.color };
+}
+
 export function buildBrandTree(options: BrandTreeOptions): SvgNode {
   const base = layoutBrand(options.variant);
   const layout = options.decorate ? options.decorate(base) : base;
@@ -87,6 +96,6 @@ export function buildBrandTree(options: BrandTreeOptions): SvgNode {
   return node(
     "svg",
     { xmlns: "http://www.w3.org/2000/svg", viewBox: `${x} ${y} ${width} ${height}`, role: "img", "aria-label": title, class: rootClass },
-    [node("title", {}, [], title), ...style, ...bodyNodes(layout, TONES[options.tone], options)],
+    [node("title", {}, [], title), ...style, ...bodyNodes(layout, colorsFor(options), options)],
   );
 }

@@ -179,3 +179,12 @@ describe("easing", () => {
     expect(applyEasing(EASING.stepEnd, 1)).toBe(1);
   });
 });
+
+describe("cor livre", () => {
+  it("pinta com a cor dada e preserva o esmaecido dos colchetes", () => {
+    const svg = serializeSvg(buildBrandTree({ variant: "horizontal", tone: "cyan", color: "currentColor" }));
+    expect(svg).not.toContain("#3DF2E0");
+    expect(svg.match(/fill="currentColor"/g)).toHaveLength(5);
+    expect(svg.match(/fill-opacity="0.58"/g)).toHaveLength(3);
+  });
+});
