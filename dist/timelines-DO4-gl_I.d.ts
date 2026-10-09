@@ -12,7 +12,7 @@ type Glyph = {
 };
 declare const GLYPHS: Readonly<Record<GlyphChar, Glyph>>;
 
-declare const BRAND_VARIANTS: readonly ["horizontal", "monogram", "symbol-block", "symbol-tag", "symbol-cursor"];
+declare const BRAND_VARIANTS: readonly ["horizontal", "monogram", "symbol"];
 type BrandVariant = (typeof BRAND_VARIANTS)[number];
 type PartId = "lt" | "m" | "f" | "slash" | "gt" | "cursor";
 type GlyphPart = {
@@ -100,7 +100,7 @@ declare const EASING: {
 declare function easingToCss(easing: Easing): string;
 declare function applyEasing(easing: Easing, progress: number): number;
 
-declare const BRAND_ANIMATIONS: readonly ["assemble", "type", "draw", "pulse", "spread"];
+declare const BRAND_ANIMATIONS: readonly ["assemble", "type", "draw", "pulse", "spread", "bounce"];
 type BrandAnimation = (typeof BRAND_ANIMATIONS)[number];
 type Frame = {
     opacity: number;

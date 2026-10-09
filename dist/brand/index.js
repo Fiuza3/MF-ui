@@ -76,26 +76,18 @@ var GLYPHS = {
 };
 
 // src/brand/layout.ts
-var BRAND_VARIANTS = [
-  "horizontal",
-  "monogram",
-  "symbol-block",
-  "symbol-tag",
-  "symbol-cursor"
-];
+var BRAND_VARIANTS = ["horizontal", "monogram", "symbol"];
 var PART_ID = { "<": "lt", M: "m", F: "f", "/": "slash", ">": "gt" };
 var roleOf = (char) => char === "M" || char === "F" ? "core" : "bracket";
 var KERNING = {
   "<M": -40,
   MF: -15,
   "F/": -45,
-  "/>": -105,
-  "</": -120,
-  "M>": -40
+  "/>": -105
 };
 var TILE_SIZE = 1e3;
 var TILE_RADIUS = 224;
-var CONTENT_WIDTH = { "symbol-block": 720, "symbol-tag": 660, "symbol-cursor": 700 };
+var SYMBOL_CONTENT_WIDTH = 740;
 function rowItems(chars) {
   return chars.map((char, index) => {
     const next = chars[index + 1];
@@ -143,49 +135,20 @@ function centerInTile(parts, contentWidth) {
     y: TILE_SIZE / 2 - (bounds.y + bounds.height / 2) * scale
   };
 }
-function symbolLayout(variant, parts) {
+function symbolLayout() {
+  const parts = placeRow(rowItems(["M", "F"]));
   return {
-    variant,
+    variant: "symbol",
     viewBox: { x: 0, y: 0, width: TILE_SIZE, height: TILE_SIZE },
     tile: { size: TILE_SIZE, radius: TILE_RADIUS },
-    content: centerInTile(parts, CONTENT_WIDTH[variant]),
+    content: centerInTile(parts, SYMBOL_CONTENT_WIDTH),
     parts
   };
-}
-function blockSymbol() {
-  const letters = placeRow(rowItems(["M", "F"]));
-  const f = letters[1];
-  const cursor = {
-    kind: "rect",
-    id: "cursor",
-    role: "cursor",
-    x: f.x + 600,
-    y: -96,
-    width: 300,
-    height: 96
-  };
-  return symbolLayout("symbol-block", [...letters, cursor]);
-}
-function cursorSymbol() {
-  const glyphs = placeRow(rowItems(["<", "M", ">"]));
-  const gt = glyphs[2];
-  const cursor = {
-    kind: "rect",
-    id: "cursor",
-    role: "cursor",
-    x: gt.x + 600,
-    y: -564,
-    width: 230,
-    height: 545
-  };
-  return symbolLayout("symbol-cursor", [...glyphs, cursor]);
 }
 var LAYOUTS = {
   horizontal: () => wordLayout("horizontal", ["<", "M", "F", "/", ">"]),
   monogram: () => wordLayout("monogram", ["M", "F"]),
-  "symbol-block": blockSymbol,
-  "symbol-tag": () => symbolLayout("symbol-tag", placeRow(rowItems(["<", "/", ">"]))),
-  "symbol-cursor": cursorSymbol
+  symbol: symbolLayout
 };
 function layoutBrand(variant) {
   return LAYOUTS[variant]();
@@ -388,7 +351,7 @@ function applyEasing(easing, progress) {
 }
 
 // src/brand/timelines.ts
-var BRAND_ANIMATIONS = ["assemble", "type", "draw", "pulse", "spread"];
+var BRAND_ANIMATIONS = ["assemble", "type", "draw", "pulse", "spread", "bounce"];
 var REST = { opacity: 1, x: 0, y: 0, scale: 1, draw: 1, fill: 1 };
 var resolve = (keyframes2) => keyframes2.map((keyframe) => ({ ...REST, ...keyframe }));
 var track = (spec) => ({ ...spec, keyframes: resolve(spec.keyframes) });
@@ -527,12 +490,35 @@ function spread(layout) {
   });
   return { animation: "spread", trigger: "hover", length: 320, usesStroke: false, tracks };
 }
+var BOUNCE_CYCLE = 3200;
+var BOUNCE_STAGGER = 90;
+function bounceTrack(part, index) {
+  return track({
+    part: part.id,
+    delay: index * BOUNCE_STAGGER,
+    duration: BOUNCE_CYCLE,
+    easing: EASING.inOut,
+    keyframes: [
+      { at: 0 },
+      { at: 0.06, y: -130, scale: 1.04 },
+      { at: 0.12, y: 0, scale: 0.97 },
+      { at: 0.16, y: -36 },
+      { at: 0.2, y: 0 },
+      { at: 1 }
+    ]
+  });
+}
+function bounce(layout) {
+  const tracks = layout.parts.map(bounceTrack);
+  return { animation: "bounce", trigger: "loop", length: BOUNCE_CYCLE, usesStroke: false, tracks };
+}
 var BUILDERS = {
   assemble,
   type,
   draw,
   pulse,
-  spread
+  spread,
+  bounce
 };
 function timelineFor(animation, layout) {
   return BUILDERS[animation](layout);

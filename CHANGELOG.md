@@ -4,6 +4,22 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [3.4.0-beta.0] — 2026-10-09
+
+A marca `<MF/>` vira contorno vetorial, com variantes, tons, animações e o pacote completo de arquivos. Versão de teste no dist-tag `next`: `latest` continua na 3.3.x.
+
+### Adicionado
+
+- Subpath `@fiuza3/mf-ui/brand`: núcleo puro da marca, sem React (pensado para o consumidor Vue). Traz os contornos do Geist Mono 700, 3 variantes (`horizontal`, `monogram`, `symbol`), 5 tons (`cyan`, `light`, `ink`, `solid-black`, `solid-white`) e 6 animações descritas como dados (`assemble`, `type`, `draw`, `pulse`, `spread`, `bounce`). Uma árvore SVG única alimenta o componente, os arquivos e os quadros dos animados.
+- `BrandMark` e `BrandMarkAnimated`: o CSS da animação vai embutido no SVG, então nada depende de hidratação. Com `prefers-reduced-motion`, a marca aparece completa e parada.
+- `BrandMarkLive`: a logo brinca em repouso (`bounce`) e se redesenha no hover (`draw`).
+- `@fiuza3/mf-ui/brand/*`: SVG estáticos e animados, favicon completo do símbolo `MF` (ico, apple-touch, maskable, pinned tab, webmanifest, head.html) e README com as regras de uso. PNG, WebP/GIF e zips ficam no repositório (`pnpm brand`), fora do pacote.
+
+### Alterado
+
+- `Logo` e `LogoAnimado` mantêm a mesma API, mas desenham com os vetores da marca, sem depender da fonte. O `LogoAnimado` entra com a animação de montagem.
+- `exports`: a condição `types` passa a vir antes de `import`/`require`. Antes ela nunca era lida.
+
 ## [3.3.2] — 2026-10-09
 
 Alvos de toque de 42 px (e menores) chegam ao piso do sistema. Nenhuma assinatura mudou.

@@ -27,17 +27,9 @@ import {
   BRAND_VARIANTS,
   buildAnimatedBrandTree,
   buildBrandTree,
-  layoutBrand
-} from "./chunk-U4R7PXQ7.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-IVHAI5QT.mjs";
+  layoutBrand,
+  prepareAnimation
+} from "./chunk-MKVEKN7O.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -147,6 +139,15 @@ import {
 import {
   cn
 } from "./chunk-ZTAXVNYF.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-IVHAI5QT.mjs";
 
 // src/componentes/BrandMark.tsx
 import { useId } from "react";
@@ -319,8 +320,48 @@ function LogoAnimado({
   return svg;
 }
 
+// src/componentes/BrandMarkLive.tsx
+import { useEffect, useMemo, useRef, useState } from "react";
+import { jsx as jsx4 } from "react/jsx-runtime";
+function BrandMarkLive({ variant = "horizontal", tone = "cyan", ...rest }) {
+  const [mode, setMode] = useState("bounce");
+  const [take, setTake] = useState(0);
+  const hovered = useRef(false);
+  const drawing = useRef(false);
+  const drawLength = useMemo(() => prepareAnimation(variant, "draw").timeline.length, [variant]);
+  useEffect(() => {
+    if (mode !== "draw") return;
+    drawing.current = true;
+    const timer = setTimeout(() => {
+      drawing.current = false;
+      if (!hovered.current) setMode("bounce");
+    }, drawLength);
+    return () => clearTimeout(timer);
+  }, [mode, take, drawLength]);
+  const enter = () => {
+    hovered.current = true;
+    if (drawing.current) return;
+    setMode("draw");
+    setTake((count) => count + 1);
+  };
+  const leave = () => {
+    hovered.current = false;
+    if (!drawing.current) setMode("bounce");
+  };
+  return /* @__PURE__ */ jsx4("span", { className: "inline-flex", onPointerEnter: enter, onPointerLeave: leave, children: /* @__PURE__ */ jsx4(
+    BrandMarkAnimated,
+    {
+      ...rest,
+      variant,
+      tone,
+      animation: mode,
+      replayKey: `${mode}-${take}`
+    }
+  ) });
+}
+
 // src/componentes/Navbar.tsx
-import { useEffect, useId as useId2, useRef, useState } from "react";
+import { useEffect as useEffect2, useId as useId2, useRef as useRef2, useState as useState2 } from "react";
 
 // src/lib/comportamento-de-scroll.ts
 function comportamentoDeScroll() {
@@ -328,7 +369,7 @@ function comportamentoDeScroll() {
 }
 
 // src/componentes/Navbar.tsx
-import { jsx as jsx4, jsxs } from "react/jsx-runtime";
+import { jsx as jsx5, jsxs } from "react/jsx-runtime";
 var FOCO = "focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none";
 function propsDoLinkDeMenu(link) {
   return link.externo ? { target: "_blank", rel: "noopener noreferrer" } : {};
@@ -341,10 +382,10 @@ function Navbar({
   logoLabel = "Ir para o topo",
   onLogoClick
 }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const headerRef = useRef(null);
-  const hamburgerRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState2(false);
+  const [menuOpen, setMenuOpen] = useState2(false);
+  const headerRef = useRef2(null);
+  const hamburgerRef = useRef2(null);
   const menuId = useId2();
   useScrollado(setIsScrolled);
   useFecharMenu({ aberto: menuOpen, setAberto: setMenuOpen, headerRef, hamburgerRef });
@@ -355,7 +396,7 @@ function Navbar({
       className: `fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${isScrolled || menuOpen ? "border-line bg-background/90 border-b backdrop-blur-md" : "bg-transparent"}`,
       children: [
         /* @__PURE__ */ jsxs("div", { className: "flex w-full items-center justify-between px-5 py-4 sm:px-8 lg:px-10", children: [
-          /* @__PURE__ */ jsx4(
+          /* @__PURE__ */ jsx5(
             LogoAnimado,
             {
               compacto: isScrolled,
@@ -363,8 +404,8 @@ function Navbar({
               label: logoLabel
             }
           ),
-          /* @__PURE__ */ jsx4(NavDesktop, { links, ctaHref, ctaLabel, acoes }),
-          /* @__PURE__ */ jsx4(
+          /* @__PURE__ */ jsx5(NavDesktop, { links, ctaHref, ctaLabel, acoes }),
+          /* @__PURE__ */ jsx5(
             Hamburguer,
             {
               ref: hamburgerRef,
@@ -374,7 +415,7 @@ function Navbar({
             }
           )
         ] }),
-        menuOpen && /* @__PURE__ */ jsx4(
+        menuOpen && /* @__PURE__ */ jsx5(
           NavMobile,
           {
             id: menuId,
@@ -390,14 +431,14 @@ function Navbar({
   );
 }
 function useScrollado(setIsScrolled) {
-  useEffect(() => {
+  useEffect2(() => {
     const handler = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, [setIsScrolled]);
 }
 function useFecharMenu({ aberto, setAberto, headerRef, hamburgerRef }) {
-  useEffect(() => {
+  useEffect2(() => {
     if (!aberto) return;
     const fechar = () => setAberto(false);
     const onKey = (e) => {
@@ -418,7 +459,7 @@ function useFecharMenu({ aberto, setAberto, headerRef, hamburgerRef }) {
 }
 function NavDesktop({ links, ctaHref, ctaLabel, acoes }) {
   return /* @__PURE__ */ jsxs("nav", { "aria-label": "Navega\xE7\xE3o principal", className: "hidden items-center gap-8 md:flex", children: [
-    links.map((link) => /* @__PURE__ */ jsx4(
+    links.map((link) => /* @__PURE__ */ jsx5(
       "a",
       {
         href: link.href,
@@ -428,8 +469,8 @@ function NavDesktop({ links, ctaHref, ctaLabel, acoes }) {
       },
       link.href
     )),
-    acoes && /* @__PURE__ */ jsx4("div", { className: "flex items-center gap-2", children: acoes }),
-    ctaHref && /* @__PURE__ */ jsx4(
+    acoes && /* @__PURE__ */ jsx5("div", { className: "flex items-center gap-2", children: acoes }),
+    ctaHref && /* @__PURE__ */ jsx5(
       "a",
       {
         href: ctaHref,
@@ -448,8 +489,8 @@ function NavMobile({
   acoes,
   fechar
 }) {
-  return /* @__PURE__ */ jsx4("div", { className: "mf-entrada mf-entrada-down border-line bg-background absolute inset-x-0 top-full border-b md:hidden", children: /* @__PURE__ */ jsxs("nav", { id, "aria-label": "Menu mobile", className: "flex flex-col gap-1 px-6 py-6", children: [
-    links.map((link) => /* @__PURE__ */ jsx4(
+  return /* @__PURE__ */ jsx5("div", { className: "mf-entrada mf-entrada-down border-line bg-background absolute inset-x-0 top-full border-b md:hidden", children: /* @__PURE__ */ jsxs("nav", { id, "aria-label": "Menu mobile", className: "flex flex-col gap-1 px-6 py-6", children: [
+    links.map((link) => /* @__PURE__ */ jsx5(
       "a",
       {
         href: link.href,
@@ -460,7 +501,7 @@ function NavMobile({
       },
       link.href
     )),
-    ctaHref && /* @__PURE__ */ jsx4(
+    ctaHref && /* @__PURE__ */ jsx5(
       "a",
       {
         href: ctaHref,
@@ -470,7 +511,7 @@ function NavMobile({
         children: ctaLabel
       }
     ),
-    acoes && /* @__PURE__ */ jsx4("div", { className: "mt-4 flex items-center gap-2", children: acoes })
+    acoes && /* @__PURE__ */ jsx5("div", { className: "mt-4 flex items-center gap-2", children: acoes })
   ] }) });
 }
 function Hamburguer({ ref, aberto, controla, alternar }) {
@@ -486,16 +527,16 @@ function Hamburguer({ ref, aberto, controla, alternar }) {
       onClick: alternar,
       className: `flex size-11 flex-col items-center justify-center gap-1.5 rounded md:hidden ${FOCO}`,
       children: [
-        /* @__PURE__ */ jsx4("span", { className: `${barra} ${aberto ? "translate-y-[7px] rotate-45" : ""}` }),
-        /* @__PURE__ */ jsx4("span", { className: `${barra} ${aberto ? "opacity-0" : ""}` }),
-        /* @__PURE__ */ jsx4("span", { className: `${barra} ${aberto ? "-translate-y-[7px] -rotate-45" : ""}` })
+        /* @__PURE__ */ jsx5("span", { className: `${barra} ${aberto ? "translate-y-[7px] rotate-45" : ""}` }),
+        /* @__PURE__ */ jsx5("span", { className: `${barra} ${aberto ? "opacity-0" : ""}` }),
+        /* @__PURE__ */ jsx5("span", { className: `${barra} ${aberto ? "-translate-y-[7px] -rotate-45" : ""}` })
       ]
     }
   );
 }
 
 // src/componentes/Footer.tsx
-import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
 var ROTULOS_PADRAO = {
   resumo: "runtime summary",
   local: "location",
@@ -520,17 +561,17 @@ function Footer({
       className: "relative overflow-hidden border-t border-line py-16 lg:py-24",
       "aria-label": "Rodap\xE9 do site",
       children: [
-        /* @__PURE__ */ jsx5("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
-        /* @__PURE__ */ jsx5("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs2("div", { className: "grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end", children: [
+        /* @__PURE__ */ jsx6("div", { className: "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/60 to-transparent" }),
+        /* @__PURE__ */ jsx6("div", { className: "w-full px-5 sm:px-8 lg:px-10 2xl:px-14", children: /* @__PURE__ */ jsxs2("div", { className: "grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end", children: [
           /* @__PURE__ */ jsxs2("div", { className: "min-w-0", children: [
-            /* @__PURE__ */ jsx5("div", { className: "mb-8", children: /* @__PURE__ */ jsx5(
+            /* @__PURE__ */ jsx6("div", { className: "mb-8", children: /* @__PURE__ */ jsx6(
               LogoAnimado,
               {
                 label: "Voltar ao topo",
                 onClick: onLogoClick ?? (() => window.scrollTo({ top: 0, behavior: comportamentoDeScroll() }))
               }
             ) }),
-            /* @__PURE__ */ jsx5(
+            /* @__PURE__ */ jsx6(
               "svg",
               {
                 "aria-hidden": "true",
@@ -538,7 +579,7 @@ function Footer({
                 overflow: "visible",
                 viewBox: "0 0 280 90",
                 className: "w-full max-w-[67.2rem] select-none",
-                children: /* @__PURE__ */ jsx5(
+                children: /* @__PURE__ */ jsx6(
                   "text",
                   {
                     x: "0",
@@ -554,19 +595,19 @@ function Footer({
           ] }),
           /* @__PURE__ */ jsxs2("div", { className: "grid min-w-0 gap-8 font-mono", children: [
             (email || localizacao || cnpj) && /* @__PURE__ */ jsxs2("div", { className: "rounded border border-line bg-surface p-5", children: [
-              /* @__PURE__ */ jsx5("p", { className: "text-xs uppercase tracking-[0.2em] text-gray-text", children: r.resumo }),
+              /* @__PURE__ */ jsx6("p", { className: "text-xs uppercase tracking-[0.2em] text-gray-text", children: r.resumo }),
               /* @__PURE__ */ jsxs2("div", { className: "mt-5 grid gap-3 text-sm", children: [
                 localizacao && /* @__PURE__ */ jsxs2("p", { className: "flex items-baseline justify-between gap-4 border-b border-line pb-2", children: [
-                  /* @__PURE__ */ jsx5("span", { className: "text-gray-text shrink-0", children: r.local }),
-                  /* @__PURE__ */ jsx5("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: localizacao })
+                  /* @__PURE__ */ jsx6("span", { className: "text-gray-text shrink-0", children: r.local }),
+                  /* @__PURE__ */ jsx6("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: localizacao })
                 ] }),
                 cnpj && /* @__PURE__ */ jsxs2("p", { className: "flex items-baseline justify-between gap-4 border-b border-line pb-2", children: [
-                  /* @__PURE__ */ jsx5("span", { className: "text-gray-text shrink-0", children: r.cnpj }),
-                  /* @__PURE__ */ jsx5("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: cnpj })
+                  /* @__PURE__ */ jsx6("span", { className: "text-gray-text shrink-0", children: r.cnpj }),
+                  /* @__PURE__ */ jsx6("span", { className: "text-foreground min-w-0 text-right [overflow-wrap:anywhere]", children: cnpj })
                 ] }),
                 email && /* @__PURE__ */ jsxs2("p", { className: "flex items-baseline justify-between gap-4", children: [
-                  /* @__PURE__ */ jsx5("span", { className: "text-gray-text shrink-0", children: r.contato }),
-                  /* @__PURE__ */ jsx5(
+                  /* @__PURE__ */ jsx6("span", { className: "text-gray-text shrink-0", children: r.contato }),
+                  /* @__PURE__ */ jsx6(
                     "a",
                     {
                       href: `mailto:${email}`,
@@ -577,7 +618,7 @@ function Footer({
                 ] })
               ] })
             ] }),
-            links.length > 0 && /* @__PURE__ */ jsx5("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-x-3 gap-y-1.5", children: links.map((link) => /* @__PURE__ */ jsx5(
+            links.length > 0 && /* @__PURE__ */ jsx6("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-x-3 gap-y-1.5", children: links.map((link) => /* @__PURE__ */ jsx6(
               "a",
               {
                 href: link.href,
@@ -594,7 +635,7 @@ function Footer({
                 nomeEmpresa
               ] }),
               /* @__PURE__ */ jsxs2("p", { children: [
-                /* @__PURE__ */ jsx5("span", { className: "text-cyan", children: "$" }),
+                /* @__PURE__ */ jsx6("span", { className: "text-cyan", children: "$" }),
                 " ",
                 r.saida
               ] })
@@ -619,7 +660,7 @@ function lerToken(el, token, fallback) {
 }
 
 // src/componentes/NodeNetwork.tsx
-import { jsx as jsx6 } from "react/jsx-runtime";
+import { jsx as jsx7 } from "react/jsx-runtime";
 function lerCor(el, override) {
   return override ?? lerToken(el, tokensDeCor.primaria);
 }
@@ -724,7 +765,7 @@ function NodeNetwork({
       if (animId) cancelAnimationFrame(animId);
     };
   }, [count, maxDistance, speed, color]);
-  return /* @__PURE__ */ jsx6(
+  return /* @__PURE__ */ jsx7(
     "canvas",
     {
       ref: canvasRef,
@@ -754,6 +795,7 @@ export {
   Badge,
   BrandMark,
   BrandMarkAnimated,
+  BrandMarkLive,
   Button,
   Card,
   CardAction,

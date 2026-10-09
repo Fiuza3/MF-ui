@@ -22,7 +22,7 @@ import {
   sampleTrack,
   serializeSvg,
   timelineFor
-} from "../chunk-U4R7PXQ7.mjs";
+} from "../chunk-MKVEKN7O.mjs";
 export {
   BRAND_ANIMATIONS,
   BRAND_COLORS,

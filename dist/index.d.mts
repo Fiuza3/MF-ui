@@ -2,8 +2,8 @@ export { Cores, NomeDeCor, NomeDeCurva, NomeDeDuracao, cores, curvas, duracoes, 
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { i as BrandVariant, h as BrandTone, e as BrandAnimation } from './timelines-BU1hecP4.mjs';
-export { B as BRAND_ANIMATIONS, b as BRAND_TONES, c as BRAND_VARIANTS } from './timelines-BU1hecP4.mjs';
+import { i as BrandVariant, h as BrandTone, e as BrandAnimation } from './timelines-DO4-gl_I.mjs';
+export { B as BRAND_ANIMATIONS, b as BRAND_TONES, c as BRAND_VARIANTS } from './timelines-DO4-gl_I.mjs';
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AnimatedIcon, AnimatedIconAnimation, AnimatedIconProps, AnimatedIconTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toast, ToastAction, ToastClose, ToastComponentProvider, ToastData, ToastDescription, ToastProvider, ToastTitle, ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast } from './primitivos/index.mjs';
 import { ClassValue } from 'clsx';
 export { About, AboutProps, Contact, ContactProps, Depoimento, Hero, HeroProps, HeroStat, Process, ProcessProps, ProcessStep, ProjectItem, Projects, ProjectsProps, ServiceItem, Services, ServicesProps, Stack, StackGrupo, StackProps, Testimonials, TestimonialsProps } from './blocos/index.mjs';
@@ -72,6 +72,12 @@ type BrandMarkAnimatedProps = Pick<BrandMarkProps, "height" | "color" | "title" 
     replayKey?: string | number;
 };
 declare function BrandMarkAnimated({ animation, variant, tone, height, color, title, bracketOpacity, decorative, replayKey, className, }: BrandMarkAnimatedProps): react_jsx_runtime.JSX.Element;
+
+type BrandMarkLiveProps = Pick<BrandMarkProps, "height" | "color" | "title" | "decorative" | "className"> & {
+    variant?: BrandVariant;
+    tone?: BrandTone;
+};
+declare function BrandMarkLive({ variant, tone, ...rest }: BrandMarkLiveProps): react_jsx_runtime.JSX.Element;
 
 type NavLink = {
     href: string;
@@ -168,4 +174,4 @@ declare function cn(...inputs: ClassValue[]): string;
  */
 declare function lerToken(el: Element, token: string, fallback?: string): string;
 
-export { BrandAnimation, BrandMark, BrandMarkAnimated, type BrandMarkAnimatedProps, type BrandMarkProps, BrandTone, BrandVariant, Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, NodeNetwork, type NodeNetworkProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn, lerToken };
+export { BrandAnimation, BrandMark, BrandMarkAnimated, type BrandMarkAnimatedProps, BrandMarkLive, type BrandMarkLiveProps, type BrandMarkProps, BrandTone, BrandVariant, Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, NodeNetwork, type NodeNetworkProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn, lerToken };
