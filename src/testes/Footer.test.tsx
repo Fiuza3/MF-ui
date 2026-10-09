@@ -79,4 +79,11 @@ describe("Footer", () => {
     expect(screen.getByText("fim")).toBeInTheDocument();
     expect(screen.queryByText("runtime summary")).toBeNull();
   });
+
+  // Piso de alvo de toque do sistema (WCAG 2.5.5): 44px. py-2 + text-xs dava ~34.
+  it("os links do rodapé têm alvo de toque de pelo menos 44px de altura", () => {
+    render(<Footer links={[{ href: "#a", label: "privacidade" }]} />);
+
+    expect(screen.getByRole("link", { name: "privacidade" })).toHaveClass("min-h-11");
+  });
 });

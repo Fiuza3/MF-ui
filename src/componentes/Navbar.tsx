@@ -169,7 +169,7 @@ function NavMobile({
             href={link.href}
             {...propsDoLinkDeMenu(link)}
             onClick={fechar}
-            className={`text-gray-text hover:text-foreground rounded py-2 font-mono text-sm transition-colors ${FOCO}`}
+            className={`text-gray-text hover:text-foreground flex min-h-11 items-center rounded py-2 font-mono text-sm transition-colors ${FOCO}`}
           >
             {link.label}
           </a>
@@ -179,7 +179,7 @@ function NavMobile({
             href={ctaHref}
             {...propsDeLink(ctaHref)}
             onClick={fechar}
-            className={`border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`}
+            className={`border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 flex min-h-11 items-center justify-center rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`}
           >
             {ctaLabel}
           </a>

@@ -103,4 +103,16 @@ describe("Navbar", () => {
     render(<Navbar links={links} />);
     expect(screen.getByRole("button", { name: /^Ir para o topo/ })).toBeTruthy();
   });
+
+  // Piso de alvo de toque do sistema (WCAG 2.5.5): 44px. py-2 + text-sm dava 36.
+  it("os links e o CTA do menu mobile têm alvo de toque de pelo menos 44px de altura", async () => {
+    const user = userEvent.setup();
+    render(<Navbar links={links} ctaHref="#contato" ctaLabel="Fale comigo" />);
+
+    await user.click(screen.getByRole("button", { name: /abrir menu/i }));
+    const menu = screen.getByRole("navigation", { name: /menu mobile/i });
+
+    expect(within(menu).getByRole("link", { name: "servicos" })).toHaveClass("min-h-11");
+    expect(within(menu).getByRole("link", { name: "Fale comigo" })).toHaveClass("min-h-11");
+  });
 });
