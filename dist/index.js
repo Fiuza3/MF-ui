@@ -490,7 +490,7 @@ function NavMobile({
         href: link.href,
         ...propsDoLinkDeMenu(link),
         onClick: fechar,
-        className: `text-gray-text hover:text-foreground rounded py-2 font-mono text-sm transition-colors ${FOCO}`,
+        className: `text-gray-text hover:text-foreground flex min-h-11 items-center rounded py-2 font-mono text-sm transition-colors ${FOCO}`,
         children: link.label
       },
       link.href
@@ -501,7 +501,7 @@ function NavMobile({
         href: ctaHref,
         ...propsDeLink(ctaHref),
         onClick: fechar,
-        className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
+        className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 flex min-h-11 items-center justify-center rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
         children: ctaLabel
       }
     ),
@@ -612,11 +612,11 @@ function Footer({
                 ] })
               ] })
             ] }),
-            links.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-3", children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            links.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-x-3 gap-y-1.5", children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
               "a",
               {
                 href: link.href,
-                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
+                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring inline-flex min-h-11 items-center rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
                 children: link.label
               },
               link.href
