@@ -185,7 +185,7 @@ function RodapeDoFrame({ project, onOpen }: Omit<FrameProps, "index">) {
           <a
             href={project.href}
             {...propsDeLink(project.href)}
-            className={`border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex items-center gap-1.5 rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO}`}
+            className={`border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex items-center gap-1.5 rounded border px-4 min-h-11 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO}`}
           >
             ver projeto <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
           </a>
@@ -193,7 +193,7 @@ function RodapeDoFrame({ project, onOpen }: Omit<FrameProps, "index">) {
         <button
           type="button"
           onClick={() => onOpen(project)}
-          className={`border-cyan text-cyan hover:bg-cyan hover:text-background rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO}`}
+          className={`border-cyan text-cyan hover:bg-cyan hover:text-background inline-flex min-h-11 items-center justify-center rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO}`}
         >
           abrir case
         </button>

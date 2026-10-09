@@ -191,4 +191,13 @@ describe("Projects", () => {
       expect(screen.queryByRole("button", { name: /carrossel/i })).toBeNull();
     });
   });
+
+  // Piso de alvo de toque do sistema (WCAG 2.5.5): 44x44. py-3 + text-xs dava 42.
+  it("os controles do card têm alvo de toque de pelo menos 44px de altura", () => {
+    renderizar([{ title: "Site", href: "https://exemplo.com" }]);
+    const card = screen.getByTestId("project-item");
+
+    expect(within(card).getByRole("button", { name: "abrir case" })).toHaveClass("min-h-11");
+    expect(within(card).getByRole("link", { name: /ver projeto/i })).toHaveClass("min-h-11");
+  });
 });

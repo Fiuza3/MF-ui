@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-BQZHE4L3.mjs";
+} from "./chunk-XZIMKAVG.mjs";
 import {
   AppShell,
   CopyField,
@@ -21,15 +21,6 @@ import {
   PageHeader,
   StatCard
 } from "./chunk-UR2UXN57.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-IVHAI5QT.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -139,6 +130,15 @@ import {
 import {
   cn
 } from "./chunk-ZTAXVNYF.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-IVHAI5QT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -386,7 +386,7 @@ function NavMobile({
         href: link.href,
         ...propsDoLinkDeMenu(link),
         onClick: fechar,
-        className: `text-gray-text hover:text-foreground rounded py-2 font-mono text-sm transition-colors ${FOCO}`,
+        className: `text-gray-text hover:text-foreground flex min-h-11 items-center rounded py-2 font-mono text-sm transition-colors ${FOCO}`,
         children: link.label
       },
       link.href
@@ -397,7 +397,7 @@ function NavMobile({
         href: ctaHref,
         ...propsDeLink(ctaHref),
         onClick: fechar,
-        className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
+        className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 flex min-h-11 items-center justify-center rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
         children: ctaLabel
       }
     ),
@@ -508,11 +508,11 @@ function Footer({
                 ] })
               ] })
             ] }),
-            links.length > 0 && /* @__PURE__ */ jsx4("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-3", children: links.map((link) => /* @__PURE__ */ jsx4(
+            links.length > 0 && /* @__PURE__ */ jsx4("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-x-3 gap-y-1.5", children: links.map((link) => /* @__PURE__ */ jsx4(
               "a",
               {
                 href: link.href,
-                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
+                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring inline-flex min-h-11 items-center rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
                 children: link.label
               },
               link.href

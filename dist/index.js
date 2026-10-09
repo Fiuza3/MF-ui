@@ -490,7 +490,7 @@ function NavMobile({
         href: link.href,
         ...propsDoLinkDeMenu(link),
         onClick: fechar,
-        className: `text-gray-text hover:text-foreground rounded py-2 font-mono text-sm transition-colors ${FOCO}`,
+        className: `text-gray-text hover:text-foreground flex min-h-11 items-center rounded py-2 font-mono text-sm transition-colors ${FOCO}`,
         children: link.label
       },
       link.href
@@ -501,7 +501,7 @@ function NavMobile({
         href: ctaHref,
         ...propsDeLink(ctaHref),
         onClick: fechar,
-        className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
+        className: `border-cyan text-cyan hover:bg-cyan hover:text-background mt-4 flex min-h-11 items-center justify-center rounded border px-4 py-2 text-center font-mono text-sm transition-all ${FOCO}`,
         children: ctaLabel
       }
     ),
@@ -612,11 +612,11 @@ function Footer({
                 ] })
               ] })
             ] }),
-            links.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-3", children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            links.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("nav", { "aria-label": "Links do rodap\xE9", className: "flex flex-wrap gap-x-3 gap-y-1.5", children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
               "a",
               {
                 href: link.href,
-                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
+                className: "border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring inline-flex min-h-11 items-center rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
                 children: link.label
               },
               link.href
@@ -2388,7 +2388,7 @@ function Hero({ eyebrow, title, description, cta, stats, slot, slotLabel = "" })
                       {
                         href: cta.href,
                         ...propsDeLink(cta.href),
-                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:border-cyan hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
+                        className: "group inline-flex w-fit shrink-0 items-center gap-3 whitespace-nowrap rounded border border-brand bg-brand px-5 min-h-11 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brand-foreground transition-all duration-300 hover:border-cyan hover:bg-transparent hover:text-cyan focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
                         children: [
                           cta.label,
                           /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
@@ -2623,7 +2623,7 @@ function RodapeDoFrame({ project, onOpen }) {
         {
           href: project.href,
           ...propsDeLink(project.href),
-          className: `border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex items-center gap-1.5 rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO2}`,
+          className: `border-line text-gray-text hover:border-cyan hover:text-cyan inline-flex items-center gap-1.5 rounded border px-4 min-h-11 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO2}`,
           children: [
             "ver projeto ",
             /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(import_lucide_react9.ArrowUpRightIcon, { className: "size-3.5", "aria-hidden": "true" })
@@ -2635,7 +2635,7 @@ function RodapeDoFrame({ project, onOpen }) {
         {
           type: "button",
           onClick: () => onOpen(project),
-          className: `border-cyan text-cyan hover:bg-cyan hover:text-background rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO2}`,
+          className: `border-cyan text-cyan hover:bg-cyan hover:text-background inline-flex min-h-11 items-center justify-center rounded border px-4 py-3 font-mono text-xs font-bold tracking-[0.18em] uppercase transition-colors ${FOCO2}`,
           children: "abrir case"
         }
       )

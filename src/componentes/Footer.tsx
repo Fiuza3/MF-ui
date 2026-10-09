@@ -127,12 +127,12 @@ export function Footer({
             )}
 
             {links.length > 0 && (
-              <nav aria-label="Links do rodapé" className="flex flex-wrap gap-3">
+              <nav aria-label="Links do rodapé" className="flex flex-wrap gap-x-3 gap-y-1.5">
                 {links.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
+                    className="border-line text-gray-text hover:border-cyan/60 hover:text-foreground focus-visible:ring-ring inline-flex min-h-11 items-center rounded border px-3 py-2 text-xs transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
                   >
                     {link.label}
                   </a>
