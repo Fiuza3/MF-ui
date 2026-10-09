@@ -73,4 +73,19 @@ describe("Hero", () => {
     );
     expect(escondidos).toHaveLength(0);
   });
+
+  // Piso de alvo de toque do sistema (WCAG 2.5.5): 44x44. py-3 + text-xs dava 42.
+  it("o CTA tem alvo de toque de pelo menos 44px de altura", () => {
+    render(
+      <Hero
+        eyebrow="e"
+        title="t"
+        description="d"
+        cta={{ label: "iniciar projeto", href: "https://wa.me/000" }}
+        stats={[{ value: "8+", label: "anos" }]}
+      />,
+    );
+
+    expect(screen.getByRole("link", { name: /iniciar projeto/i })).toHaveClass("min-h-11");
+  });
 });
