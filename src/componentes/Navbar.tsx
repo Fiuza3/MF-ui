@@ -209,7 +209,7 @@ function Hamburguer({ ref, aberto, controla, alternar }: HamburguerProps) {
       aria-expanded={aberto}
       aria-controls={controla}
       onClick={alternar}
-      className={`flex flex-col gap-1.5 rounded p-2 md:hidden ${FOCO}`}
+      className={`flex size-11 flex-col items-center justify-center gap-1.5 rounded md:hidden ${FOCO}`}
     >
       <span className={`${barra} ${aberto ? "translate-y-[7px] rotate-45" : ""}`} />
       <span className={`${barra} ${aberto ? "opacity-0" : ""}`} />
