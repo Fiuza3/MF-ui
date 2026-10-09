@@ -66,7 +66,25 @@ describe("Testimonials", () => {
 
     act(() => vi.advanceTimersByTime(12_000));
     expect(screen.getByText("Primeiro.")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Retomar apresentação" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Pausar apresentação" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+  });
+
+  // Rótulo que troca junto com aria-pressed faz o leitor de tela dizer "Retomar, pressionado".
+  it("botão de pausa mantém o rótulo fixo e só alterna aria-pressed", async () => {
+    definirMovimentoReduzido(false);
+    const user = userEvent.setup();
+    render(<Testimonials {...tres} />);
+    const botao = screen.getByRole("button", { name: "Pausar apresentação" });
+    expect(botao).toHaveAttribute("aria-pressed", "false");
+
+    await user.click(botao);
+
+    expect(botao).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Pausar apresentação" })).toBe(botao);
+    expect(screen.queryByRole("button", { name: /retomar/i })).toBeNull();
   });
 
   it("pausa quando o foco de teclado entra no carrossel", () => {

@@ -48,7 +48,7 @@
   }
 }
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee var(--mf-duration-marquee) linear infinite;
 }
 .animate-marquee:hover {
   animation-play-state: paused;

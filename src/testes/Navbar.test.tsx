@@ -27,6 +27,13 @@ describe("Navbar", () => {
     expect(escondidos).toHaveLength(0);
   });
 
+  // Piso de alvo do sistema (WCAG 2.5.8 + regra interna): 44x44.
+  it("o botão do menu tem alvo de toque de 44x44", () => {
+    render(<Navbar links={links} />);
+
+    expect(screen.getByRole("button", { name: /abrir menu/i })).toHaveClass("size-11");
+  });
+
   it("o botão aponta para o menu que controla", async () => {
     const user = userEvent.setup();
     render(<Navbar links={links} />);
