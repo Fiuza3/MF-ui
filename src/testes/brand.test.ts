@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
   BRAND_ANIMATIONS,
-  BRAND_TONES,
   BRAND_VARIANTS,
   EASING,
   applyEasing,
@@ -15,10 +14,12 @@ import {
   sampleTrack,
   serializeSvg,
   timelineFor,
+  type BrandTone,
+  type BrandVariant,
   type SvgNode,
 } from "../brand";
 
-const svgOf = (variant: (typeof BRAND_VARIANTS)[number], tone: (typeof BRAND_TONES)[number]) =>
+const svgOf = (variant: BrandVariant, tone: BrandTone) =>
   serializeSvg(buildBrandTree({ variant, tone }));
 
 const findPart = (tree: SvgNode, id: string): SvgNode | undefined => {
