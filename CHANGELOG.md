@@ -6,12 +6,14 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 
 ## [3.3.2] — 2026-10-09
 
-Alvos de toque de 42 px chegam ao piso do sistema. Nenhuma assinatura mudou.
+Alvos de toque de 42 px (e menores) chegam ao piso do sistema. Nenhuma assinatura mudou.
 
 ### Corrigido
 
 - `Hero`: o CTA de marca ("iniciar projeto") media 42 px de altura; agora tem 44, o piso de alvo de toque do sistema (WCAG 2.5.5).
 - `Projects`: os botões "abrir case" e "ver projeto" mediam 42 px de altura; agora têm 44 (mesmo piso). Padding horizontal e visual não mudaram.
+- `Footer`: os links do rodapé mediam ~34 px de altura; agora têm 44. O espaçamento vertical entre linhas de links passou de `gap-3` para `gap-y-1.5` (o horizontal continua `gap-3`) para o ritmo não dobrar.
+- `Navbar`: os links e o CTA do menu mobile mediam 36 px de altura; agora têm 44.
 
 ## [3.3.1] — 2026-10-09
 
