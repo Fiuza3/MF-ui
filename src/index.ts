@@ -10,6 +10,12 @@ export { Logo, RATIO_AVANCO_LOGO, RATIO_ALTURA_LOGO, RATIO_PADDING_LOGO } from "
 export type { LogoProps } from "./componentes/Logo";
 export { LogoAnimado } from "./componentes/LogoAnimado";
 export type { LogoAnimadoProps } from "./componentes/LogoAnimado";
+export { BrandMark } from "./componentes/BrandMark";
+export type { BrandMarkProps } from "./componentes/BrandMark";
+export { BrandMarkAnimated } from "./componentes/BrandMarkAnimated";
+export type { BrandMarkAnimatedProps } from "./componentes/BrandMarkAnimated";
+export { BRAND_ANIMATIONS, BRAND_TONES, BRAND_VARIANTS } from "./brand";
+export type { BrandAnimation, BrandTone, BrandVariant } from "./brand";
 export { Navbar } from "./componentes/Navbar";
 export type { NavbarProps, NavLink } from "./componentes/Navbar";
 export { Footer } from "./componentes/Footer";

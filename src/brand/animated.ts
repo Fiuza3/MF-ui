@@ -10,6 +10,7 @@ export type AnimatedBrandOptions = {
   animation: BrandAnimation;
   title?: string;
   bracketOpacity?: number;
+  color?: string;
   idPrefix?: string;
 };
 
