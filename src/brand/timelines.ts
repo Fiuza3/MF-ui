@@ -4,7 +4,7 @@ import type { BrandLayout, BrandPart, GlyphPart, PartId, RectPart } from "./layo
 // Animações como dados: o CSS dos componentes e os quadros dos PNG/WebP
 // animados saem desta mesma definição. Duas fontes de verdade divergiriam no
 // primeiro ajuste de tempo.
-export const BRAND_ANIMATIONS = ["assemble", "type", "draw", "pulse", "spread"] as const;
+export const BRAND_ANIMATIONS = ["assemble", "type", "draw", "pulse", "spread", "bounce"] as const;
 
 export type BrandAnimation = (typeof BRAND_ANIMATIONS)[number];
 
@@ -201,12 +201,40 @@ function spread(layout: BrandLayout): Timeline {
   return { animation: "spread", trigger: "hover", length: 320, usesStroke: false, tracks };
 }
 
+const BOUNCE_CYCLE = 3200;
+const BOUNCE_STAGGER = 90;
+
+// Repouso vivo da logo: uma onda de pulos que atravessa os glifos e para,
+// em vez de pular sem trégua — movimento constante cansa e vira ruído.
+function bounceTrack(part: BrandPart, index: number): Track {
+  return track({
+    part: part.id,
+    delay: index * BOUNCE_STAGGER,
+    duration: BOUNCE_CYCLE,
+    easing: EASING.inOut,
+    keyframes: [
+      { at: 0 },
+      { at: 0.06, y: -130, scale: 1.04 },
+      { at: 0.12, y: 0, scale: 0.97 },
+      { at: 0.16, y: -36 },
+      { at: 0.2, y: 0 },
+      { at: 1 },
+    ],
+  });
+}
+
+function bounce(layout: BrandLayout): Timeline {
+  const tracks = layout.parts.map(bounceTrack);
+  return { animation: "bounce", trigger: "loop", length: BOUNCE_CYCLE, usesStroke: false, tracks };
+}
+
 const BUILDERS: Record<BrandAnimation, (layout: BrandLayout) => Timeline> = {
   assemble,
   type,
   draw,
   pulse,
   spread,
+  bounce,
 };
 
 export function timelineFor(animation: BrandAnimation, layout: BrandLayout): Timeline {
