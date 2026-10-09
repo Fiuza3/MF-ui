@@ -14,6 +14,8 @@ export { BrandMark } from "./componentes/BrandMark";
 export type { BrandMarkProps } from "./componentes/BrandMark";
 export { BrandMarkAnimated } from "./componentes/BrandMarkAnimated";
 export type { BrandMarkAnimatedProps } from "./componentes/BrandMarkAnimated";
+export { BrandMarkLive } from "./componentes/BrandMarkLive";
+export type { BrandMarkLiveProps } from "./componentes/BrandMarkLive";
 export { BRAND_ANIMATIONS, BRAND_TONES, BRAND_VARIANTS } from "./brand";
 export type { BrandAnimation, BrandTone, BrandVariant } from "./brand";
 export { Navbar } from "./componentes/Navbar";
