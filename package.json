@@ -22,29 +22,29 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
       "import": "./dist/tokens/index.mjs",
-      "require": "./dist/tokens/index.js",
-      "types": "./dist/tokens/index.d.ts"
+      "require": "./dist/tokens/index.js"
     },
     "./primitivos": {
+      "types": "./dist/primitivos/index.d.ts",
       "import": "./dist/primitivos/index.mjs",
-      "require": "./dist/primitivos/index.js",
-      "types": "./dist/primitivos/index.d.ts"
+      "require": "./dist/primitivos/index.js"
     },
     "./blocos": {
+      "types": "./dist/blocos/index.d.ts",
       "import": "./dist/blocos/index.mjs",
-      "require": "./dist/blocos/index.js",
-      "types": "./dist/blocos/index.d.ts"
+      "require": "./dist/blocos/index.js"
     },
     "./blocos-app": {
+      "types": "./dist/blocos-app/index.d.ts",
       "import": "./dist/blocos-app/index.mjs",
-      "require": "./dist/blocos-app/index.js",
-      "types": "./dist/blocos-app/index.d.ts"
+      "require": "./dist/blocos-app/index.js"
     },
     "./brand": {
       "types": "./dist/brand/index.d.ts",
