@@ -519,7 +519,7 @@ function Hamburguer({ ref, aberto, controla, alternar }) {
       "aria-expanded": aberto,
       "aria-controls": controla,
       onClick: alternar,
-      className: `flex flex-col gap-1.5 rounded p-2 md:hidden ${FOCO}`,
+      className: `flex size-11 flex-col items-center justify-center gap-1.5 rounded md:hidden ${FOCO}`,
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: `${barra} ${aberto ? "translate-y-[7px] rotate-45" : ""}` }),
         /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: `${barra} ${aberto ? "opacity-0" : ""}` }),
@@ -3034,7 +3034,8 @@ function Controles({
       {
         type: "button",
         onClick: alternarPausa,
-        "aria-label": pausadoPeloUsuario ? "Retomar apresenta\xE7\xE3o" : "Pausar apresenta\xE7\xE3o",
+        "aria-pressed": pausadoPeloUsuario,
+        "aria-label": "Pausar apresenta\xE7\xE3o",
         className: BOTAO,
         children: pausadoPeloUsuario ? /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_lucide_react10.PlayIcon, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_lucide_react10.PauseIcon, { "aria-hidden": "true" })
       }

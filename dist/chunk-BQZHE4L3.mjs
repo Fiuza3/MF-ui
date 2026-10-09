@@ -741,7 +741,8 @@ function Controles({
       {
         type: "button",
         onClick: alternarPausa,
-        "aria-label": pausadoPeloUsuario ? "Retomar apresenta\xE7\xE3o" : "Pausar apresenta\xE7\xE3o",
+        "aria-pressed": pausadoPeloUsuario,
+        "aria-label": "Pausar apresenta\xE7\xE3o",
         className: BOTAO,
         children: pausadoPeloUsuario ? /* @__PURE__ */ jsx7(PlayIcon2, { "aria-hidden": "true" }) : /* @__PURE__ */ jsx7(PauseIcon2, { "aria-hidden": "true" })
       }
@@ -880,4 +881,4 @@ export {
   About,
   Contact
 };
-//# sourceMappingURL=chunk-76S4CKHT.mjs.map
+//# sourceMappingURL=chunk-BQZHE4L3.mjs.map

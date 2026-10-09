@@ -879,7 +879,8 @@ function Controles({
       {
         type: "button",
         onClick: alternarPausa,
-        "aria-label": pausadoPeloUsuario ? "Retomar apresenta\xE7\xE3o" : "Pausar apresenta\xE7\xE3o",
+        "aria-pressed": pausadoPeloUsuario,
+        "aria-label": "Pausar apresenta\xE7\xE3o",
         className: BOTAO,
         children: pausadoPeloUsuario ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_lucide_react3.PlayIcon, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_lucide_react3.PauseIcon, { "aria-hidden": "true" })
       }

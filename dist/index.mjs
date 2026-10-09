@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-76S4CKHT.mjs";
+} from "./chunk-BQZHE4L3.mjs";
 import {
   AppShell,
   CopyField,
@@ -21,6 +21,15 @@ import {
   PageHeader,
   StatCard
 } from "./chunk-UR2UXN57.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-IVHAI5QT.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -130,15 +139,6 @@ import {
 import {
   cn
 } from "./chunk-ZTAXVNYF.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-IVHAI5QT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -415,7 +415,7 @@ function Hamburguer({ ref, aberto, controla, alternar }) {
       "aria-expanded": aberto,
       "aria-controls": controla,
       onClick: alternar,
-      className: `flex flex-col gap-1.5 rounded p-2 md:hidden ${FOCO}`,
+      className: `flex size-11 flex-col items-center justify-center gap-1.5 rounded md:hidden ${FOCO}`,
       children: [
         /* @__PURE__ */ jsx3("span", { className: `${barra} ${aberto ? "translate-y-[7px] rotate-45" : ""}` }),
         /* @__PURE__ */ jsx3("span", { className: `${barra} ${aberto ? "opacity-0" : ""}` }),
