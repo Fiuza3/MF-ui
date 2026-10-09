@@ -178,7 +178,8 @@ function Controles({
       <button
         type="button"
         onClick={alternarPausa}
-        aria-label={pausadoPeloUsuario ? "Retomar apresentação" : "Pausar apresentação"}
+        aria-pressed={pausadoPeloUsuario}
+        aria-label="Pausar apresentação"
         className={BOTAO}
       >
         {pausadoPeloUsuario ? <PlayIcon aria-hidden="true" /> : <PauseIcon aria-hidden="true" />}
