@@ -6,22 +6,29 @@ Tudo aqui é gerado a partir do núcleo `src/brand/` (contornos de glifo, sem fo
 
 | Pasta | Conteúdo | Vai para o npm |
 | --- | --- | --- |
-| `svg/{variante}-{tom}.svg` | 25 SVGs estáticos (5 variantes × 5 tons) | sim |
-| `svg/animated/{variante}-{animacao}.svg` | 25 SVGs animados em CSS, tom ciano | sim (via `svg/`) |
-| `favicon/{symbol-block,symbol-tag,symbol-cursor}/` | Pacote completo de favicon por candidato | sim |
-| `png/{variante}/{tom}/mf-{variante}-{tom}-{N}.png` | Rasters. Horizontal e monograma: altura 32–1024. Símbolos: lado 16–1024 | não (só repositório) |
+| `svg/{variante}-{tom}.svg` | 15 SVGs estáticos (3 variantes × 5 tons) | sim |
+| `svg/animated/{variante}-{animacao}.svg` | 18 SVGs animados em CSS (3 variantes × 6 animações), tom ciano | sim (via `svg/`) |
+| `favicon/` | Pacote completo de favicon (símbolo MF no bloco) | sim |
+| `png/{variante}/{tom}/mf-{variante}-{tom}-{N}.png` | Rasters. Horizontal e monograma: altura 32–1024. Símbolo: lado 16–1024 | não (só repositório) |
 | `png/social/` | Avatar 400 e 1080, banner 1500×500, card OG 1200×630 | não |
-| `animated/` | PNG/WebP/GIF animados | não |
+| `animated/` | WebP/GIF animados: horizontal e símbolo × assemble, type, draw, pulse, bounce | não |
 
 PNG e animados pesam no install de todo consumidor, por isso ficam só no repositório.
 
-**Animados:** a animação `spread` é de hover e só roda com o SVG inline no HTML. Dentro de `<img>` ou como `background-image` ela fica parada no estado de repouso.
+## Animações
+
+`assemble` (montagem), `type` (digitação), `draw` (traço), `pulse` (pulso, loop), `spread` (abertura, hover) e `bounce` (brincando, loop).
+
+- `draw` é a animação assinatura, aprovada: abertura de site, vídeo e fecho de apresentação.
+- `bounce` é o repouso vivo da logo na navegação (componente `BrandMarkLive`: brinca em repouso, se redesenha no hover).
+- `spread` é de hover e só roda com o SVG inline no HTML. Dentro de `<img>` ou como `background-image` ela fica parada no estado de repouso, e por isso não tem WebP/GIF.
+- `pulse` e `bounce` são loops de exatamente um ciclo nos WebP/GIF.
 
 ## Variantes
 
 - `horizontal` — `<MF/>` completo. Uso principal: header, rodapé, documentos.
 - `monogram` — `MF` sem colchetes, para espaços estreitos.
-- `symbol-block` — `MF_` em bloco arredondado. `symbol-tag` — `</>`. `symbol-cursor` — `<M>` com cursor. Os três são candidatos a favicon/avatar; só um será adotado.
+- `symbol` — `MF` em bloco escuro arredondado, sem cursor. Favicon, ícone de app e avatar das redes. Escolhido por manter as iniciais legíveis em 16 px.
 
 ## Cores
 
@@ -42,9 +49,9 @@ PNG e animados pesam no install de todo consumidor, por isso ficam só no reposi
 
 ## Favicon
 
-Cada pasta em `favicon/` tem: `favicon.ico` (16/32/48), `icon.svg`, `apple-touch-icon.png` (180, quadrado cheio sem transparência — o iOS arredonda sozinho), `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (cheio, conteúdo a 60% do lado, dentro da zona segura de 80%), `safari-pinned-tab.svg`, `site.webmanifest` e `head.html` (cole no `<head>`).
+`favicon/` (também em `zip/mf-favicon.zip`) tem: `favicon.ico` (16/32/48), `icon.svg`, `apple-touch-icon.png` (180, quadrado cheio sem transparência — o iOS arredonda sozinho), `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (cheio, conteúdo a 60% do lado, dentro da zona segura de 80%), `safari-pinned-tab.svg`, `site.webmanifest` e `head.html` (cole no `<head>`).
 
-`safari-pinned-tab.svg` é preto puro, só as formas do próprio símbolo, sem bloco: o Safari usa o arquivo como máscara e pinta com a cor do atributo `color` do `<link rel="mask-icon">`. Fundo ou duas cores quebrariam a máscara.
+`safari-pinned-tab.svg` é preto puro, só as formas do símbolo, sem bloco: o Safari usa o arquivo como máscara e pinta com a cor do atributo `color` do `<link rel="mask-icon">`. Fundo ou duas cores quebrariam a máscara.
 
 ## Uso correto
 
