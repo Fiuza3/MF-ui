@@ -1,6 +1,6 @@
 import { GLYPHS } from "./glyphs";
 import { layoutBrand, type BrandLayout, type BrandPart, type BrandVariant } from "./layout";
-import { TONES, type BrandTone, type ToneColors } from "./palette";
+import { BRAND_COLORS, TONES, type BrandTone, type ToneColors } from "./palette";
 
 // Uma árvore neutra que o React (componente), o serializador (arquivos .svg) e
 // o rasterizador (PNG, quadros animados) percorrem: os três desenham a mesma coisa.
@@ -65,9 +65,10 @@ function tileRect(layout: BrandLayout, fill: string, extra: SvgAttrs = {}): SvgN
 // Uma cor só: o bloco recebe as letras como furo (máscara), sem segunda cor.
 function knockoutTile(layout: BrandLayout, colors: ToneColors, prefix: string): SvgNode[] {
   const maskId = `${prefix}knockout`;
-  const holes = layout.parts.map((part) => partShape(part, "#000", 1));
+  // Máscara por luminância: branco mostra o bloco, preto abre o furo da letra.
+  const holes = layout.parts.map((part) => partShape(part, BRAND_COLORS.black, 1));
   const mask = node("mask", { id: maskId }, [
-    tileRect(layout, "#fff"),
+    tileRect(layout, BRAND_COLORS.white),
     node("g", { transform: contentTransform(layout) }, holes),
   ]);
   return [node("defs", {}, [mask]), tileRect(layout, colors.tile, { mask: `url(#${maskId})` })];
