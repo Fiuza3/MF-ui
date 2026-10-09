@@ -2,6 +2,8 @@ export { Cores, NomeDeCor, NomeDeCurva, NomeDeDuracao, cores, curvas, duracoes, 
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React from 'react';
 import { ReactNode } from 'react';
+import { i as BrandVariant, h as BrandTone, e as BrandAnimation } from './timelines-BU1hecP4.js';
+export { B as BRAND_ANIMATIONS, b as BRAND_TONES, c as BRAND_VARIANTS } from './timelines-BU1hecP4.js';
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, AnimatedIcon, AnimatedIconAnimation, AnimatedIconProps, AnimatedIconTrigger, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Input, Label, Pagination, PaginationContent, PaginationControl, PaginationControlProps, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Skeleton, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toast, ToastAction, ToastClose, ToastComponentProvider, ToastData, ToastDescription, ToastProvider, ToastTitle, ToastVariant, ToastViewport, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, toastVariants, useToast } from './primitivos/index.js';
 import { ClassValue } from 'clsx';
 export { About, AboutProps, Contact, ContactProps, Depoimento, Hero, HeroProps, HeroStat, Process, ProcessProps, ProcessStep, ProjectItem, Projects, ProjectsProps, ServiceItem, Services, ServicesProps, Stack, StackGrupo, StackProps, Testimonials, TestimonialsProps } from './blocos/index.js';
@@ -28,8 +30,11 @@ type LogoProps = {
     compacto?: boolean;
     className?: string;
 };
+/** @deprecated Eram da versão com fonte; o desenho vetorial não usa mais. Use BrandMark. */
 declare const RATIO_AVANCO_LOGO: number;
+/** @deprecated Eram da versão com fonte; o desenho vetorial não usa mais. Use BrandMark. */
 declare const RATIO_ALTURA_LOGO: number;
+/** @deprecated Eram da versão com fonte; o desenho vetorial não usa mais. Use BrandMark. */
 declare const RATIO_PADDING_LOGO: number;
 declare function Logo({ tamanho, cor, opacidadeColchetes, compacto, className, }: LogoProps): react_jsx_runtime.JSX.Element;
 
@@ -43,6 +48,30 @@ type LogoAnimadoProps = {
     className?: string;
 };
 declare function LogoAnimado({ tamanho, cor, opacidadeColchetes, compacto, onClick, label, className, }: LogoAnimadoProps): react_jsx_runtime.JSX.Element;
+
+type BrandMarkProps = {
+    variant?: BrandVariant;
+    tone?: BrandTone;
+    /** Altura em px (number) ou qualquer comprimento CSS; a largura segue o viewBox. */
+    height?: number | string;
+    /** Cor livre (ex.: "currentColor") no lugar do tom. */
+    color?: string;
+    title?: string;
+    bracketOpacity?: number;
+    /** Marca puramente visual: escondida do leitor de tela, sem role nem title. */
+    decorative?: boolean;
+    className?: string;
+};
+declare function BrandMark({ variant, tone, height, color, title, bracketOpacity, decorative, className, }: BrandMarkProps): React.ReactElement<unknown, string | React.JSXElementConstructor<any>>;
+
+type BrandMarkAnimatedProps = Pick<BrandMarkProps, "height" | "color" | "title" | "decorative" | "className" | "bracketOpacity"> & {
+    animation?: BrandAnimation;
+    variant?: BrandVariant;
+    tone?: BrandTone;
+    /** Mudar este valor remonta o svg e reinicia a animação CSS. */
+    replayKey?: string | number;
+};
+declare function BrandMarkAnimated({ animation, variant, tone, height, color, title, bracketOpacity, decorative, replayKey, className, }: BrandMarkAnimatedProps): react_jsx_runtime.JSX.Element;
 
 type NavLink = {
     href: string;
@@ -139,4 +168,4 @@ declare function cn(...inputs: ClassValue[]): string;
  */
 declare function lerToken(el: Element, token: string, fallback?: string): string;
 
-export { Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, NodeNetwork, type NodeNetworkProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn, lerToken };
+export { BrandAnimation, BrandMark, BrandMarkAnimated, type BrandMarkAnimatedProps, type BrandMarkProps, BrandTone, BrandVariant, Footer, type FooterLink, type FooterProps, Logo, LogoAnimado, type LogoAnimadoProps, type LogoProps, type NavLink, Navbar, type NavbarProps, NodeNetwork, type NodeNetworkProps, RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO, Reveal, type RevealProps, cn, lerToken };
