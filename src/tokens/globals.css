@@ -121,6 +121,9 @@
   --mf-duration-pulse: 1.6s;
   --mf-duration-nudge: 0.8s;
   --mf-duration-spin: 0.9s;
+  --mf-duration-scan: 8s;
+  --mf-duration-marquee: 30s;
+  --mf-duration-carousel: 96s;
 
   --mf-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --mf-ease-power: cubic-bezier(0.22, 1, 0.36, 1);

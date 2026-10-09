@@ -64,7 +64,7 @@
     transparent
   );
   opacity: 0.22;
-  animation: hero-scan 8s linear infinite;
+  animation: hero-scan var(--mf-duration-scan) linear infinite;
 }
 
 @keyframes hero-scan {
@@ -97,7 +97,7 @@
 }
 
 .project-carousel-track {
-  animation: project-carousel-loop 96s linear infinite;
+  animation: project-carousel-loop var(--mf-duration-carousel) linear infinite;
 }
 
 .project-carousel:hover .project-carousel-track,
