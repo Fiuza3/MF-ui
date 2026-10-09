@@ -45,7 +45,7 @@ describe("geometria da marca", () => {
     expect(layout.tile).toBeNull();
   });
 
-  it.each(["symbol-block", "symbol-tag", "symbol-cursor"] as const)(
+  it.each(["symbol"] as const)(
     "%s cabe no bloco com margem para o recorte do ícone",
     (variant) => {
       const layout = layoutBrand(variant);
@@ -55,8 +55,9 @@ describe("geometria da marca", () => {
       const top = layout.content.y + bounds.y * layout.content.scale;
       const bottom = top + bounds.height * layout.content.scale;
       expect(layout.viewBox).toEqual({ x: 0, y: 0, width: 1000, height: 1000 });
-      expect(left).toBeGreaterThanOrEqual(130);
-      expect(right).toBeLessThanOrEqual(870);
+      // Margem mínima de 12,5% do lado: o recorte arredondado do iOS/Android não alcança as letras.
+      expect(left).toBeGreaterThanOrEqual(125);
+      expect(right).toBeLessThanOrEqual(875);
       expect(top).toBeGreaterThan(0);
       expect(bottom).toBeLessThan(1000);
     },
@@ -83,7 +84,7 @@ describe("SVG da marca", () => {
   });
 
   it("uma cor só vaza as letras do bloco em vez de pintar com segunda cor", () => {
-    const svg = svgOf("symbol-block", "solid-black");
+    const svg = svgOf("symbol", "solid-black");
     expect(svg).toContain("<mask");
     expect(svg).not.toMatch(/fill="#(?!000000|fff|000)/i);
   });
@@ -127,16 +128,31 @@ describe("linhas do tempo", () => {
     );
   });
 
-  it("digitação some com o cursor provisório na horizontal e mantém o do bloco", () => {
+  it("digitação termina sem cursor: o símbolo escolhido é só MF, sem sublinhado", () => {
     const horizontal = prepareAnimation("horizontal", "type");
-    const block = prepareAnimation("symbol-block", "type");
+    const block = prepareAnimation("symbol", "type");
     const cursorEnd = (prepared: typeof horizontal) => {
       const cursor = prepared.timeline.tracks.find((track) => track.part === "cursor");
       if (!cursor) throw new Error("trilha do cursor ausente");
       return sampleTrack(cursor, prepared.timeline.length, "mount");
     };
     expect(cursorEnd(horizontal)).toMatchObject({ opacity: 0, x: 0 });
-    expect(cursorEnd(block)).toMatchObject({ opacity: 1, x: 0 });
+    expect(cursorEnd(block)).toMatchObject({ opacity: 0, x: 0 });
+  });
+
+  it("o símbolo é só o MF, sem cursor", () => {
+    expect(layoutBrand("symbol").parts.map((part) => part.id)).toEqual(["m", "f"]);
+  });
+
+  it("brincando: a onda de pulos sai do lugar, volta e repete em loop", () => {
+    const { timeline } = prepareAnimation("horizontal", "bounce");
+    expect(timeline.trigger).toBe("loop");
+    const [lt, m] = timeline.tracks;
+    expect(m.delay).toBeGreaterThan(lt.delay);
+    const peak = lt.delay + timeline.length * 0.06;
+    expect(sampleTrack(lt, peak, "loop").y).toBeLessThan(-100);
+    expect(sampleTrack(lt, lt.delay + timeline.length * 0.5, "loop").y).toBe(0);
+    expect(sampleTrack(lt, peak, "loop")).toEqual(sampleTrack(lt, peak + timeline.length, "loop"));
   });
 
   it("abertura no hover só afasta os colchetes", () => {
@@ -147,10 +163,10 @@ describe("linhas do tempo", () => {
 
 describe("CSS das animações", () => {
   it("só anima com movimento liberado e nomeia keyframes por variante", () => {
-    const { timeline } = prepareAnimation("symbol-tag", "assemble");
-    const css = brandAnimationCss(timeline, "symbol-tag");
+    const { timeline } = prepareAnimation("symbol", "assemble");
+    const css = brandAnimationCss(timeline, "symbol");
     expect(css).toContain("@media (prefers-reduced-motion:no-preference)");
-    expect(css).toContain("@keyframes mf-brand-symbol-tag-assemble-lt");
+    expect(css).toContain("@keyframes mf-brand-symbol-assemble-m");
     expect(css.indexOf(".mf-brand-transient{opacity:0}")).toBeLessThan(css.indexOf("@media"));
   });
 

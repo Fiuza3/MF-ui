@@ -1,12 +1,6 @@
 import { GLYPHS, type GlyphChar } from "./glyphs";
 
-export const BRAND_VARIANTS = [
-  "horizontal",
-  "monogram",
-  "symbol-block",
-  "symbol-tag",
-  "symbol-cursor",
-] as const;
+export const BRAND_VARIANTS = ["horizontal", "monogram", "symbol"] as const;
 
 export type BrandVariant = (typeof BRAND_VARIANTS)[number];
 
@@ -61,18 +55,14 @@ const KERNING: Partial<Record<`${GlyphChar}${GlyphChar}`, number>> = {
   MF: -15,
   "F/": -45,
   "/>": -105,
-  "</": -120,
-  "M>": -40,
 };
 
 const TILE_SIZE = 1000;
 const TILE_RADIUS = 224;
-// Largura útil do conteúdo por símbolo: o máximo que cabe sem encostar no
-// recorte arredondado do iOS/Android. Medido em prévia de 16px: com 640 o
-// "MF_" do bloco ficava ilegível na aba do navegador.
-const CONTENT_WIDTH = { "symbol-block": 720, "symbol-tag": 660, "symbol-cursor": 700 } as const;
-
-type SymbolVariant = keyof typeof CONTENT_WIDTH;
+// Largura útil do MF dentro do bloco: o máximo que cabe sem encostar no
+// recorte arredondado do iOS/Android. Medido em prévia de 16px: com 640 as
+// letras ficavam ilegíveis na aba do navegador.
+const SYMBOL_CONTENT_WIDTH = 740;
 
 function rowItems(chars: GlyphChar[]): RowItem[] {
   return chars.map((char, index) => {
@@ -127,53 +117,23 @@ function centerInTile(parts: BrandPart[], contentWidth: number): BrandLayout["co
   };
 }
 
-function symbolLayout(variant: SymbolVariant, parts: BrandPart[]): BrandLayout {
+// Escolhido pelo Marcus em 2026-10-09 entre "MF_", "</>" e "<M>▮": só o MF, sem
+// o sublinhado — as iniciais são o que se lê numa aba de 16px.
+function symbolLayout(): BrandLayout {
+  const parts = placeRow(rowItems(["M", "F"]));
   return {
-    variant,
+    variant: "symbol",
     viewBox: { x: 0, y: 0, width: TILE_SIZE, height: TILE_SIZE },
     tile: { size: TILE_SIZE, radius: TILE_RADIUS },
-    content: centerInTile(parts, CONTENT_WIDTH[variant]),
+    content: centerInTile(parts, SYMBOL_CONTENT_WIDTH),
     parts,
   };
-}
-
-// "MF_": o sublinhado é o cursor do terminal — o mesmo que pisca na animação de digitação.
-function blockSymbol(): BrandLayout {
-  const letters = placeRow(rowItems(["M", "F"]));
-  const f = letters[1];
-  const cursor: RectPart = {
-    kind: "rect",
-    id: "cursor",
-    role: "cursor",
-    x: f.x + 600,
-    y: -96,
-    width: 300,
-    height: 96,
-  };
-  return symbolLayout("symbol-block", [...letters, cursor]);
-}
-
-function cursorSymbol(): BrandLayout {
-  const glyphs = placeRow(rowItems(["<", "M", ">"]));
-  const gt = glyphs[2];
-  const cursor: RectPart = {
-    kind: "rect",
-    id: "cursor",
-    role: "cursor",
-    x: gt.x + 600,
-    y: -564,
-    width: 230,
-    height: 545,
-  };
-  return symbolLayout("symbol-cursor", [...glyphs, cursor]);
 }
 
 const LAYOUTS: Record<BrandVariant, () => BrandLayout> = {
   horizontal: () => wordLayout("horizontal", ["<", "M", "F", "/", ">"]),
   monogram: () => wordLayout("monogram", ["M", "F"]),
-  "symbol-block": blockSymbol,
-  "symbol-tag": () => symbolLayout("symbol-tag", placeRow(rowItems(["<", "/", ">"]))),
-  "symbol-cursor": cursorSymbol,
+  symbol: symbolLayout,
 };
 
 export function layoutBrand(variant: BrandVariant): BrandLayout {

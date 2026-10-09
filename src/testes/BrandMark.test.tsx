@@ -48,8 +48,8 @@ describe("BrandMark", () => {
   it("duas marcas solid-black na mesma página têm ids de máscara diferentes", () => {
     const { container } = render(
       <>
-        <BrandMark variant="symbol-block" tone="solid-black" />
-        <BrandMark variant="symbol-block" tone="solid-black" />
+        <BrandMark variant="symbol" tone="solid-black" />
+        <BrandMark variant="symbol" tone="solid-black" />
       </>,
     );
     const ids = Array.from(container.querySelectorAll("mask")).map((mask) => mask.id);
