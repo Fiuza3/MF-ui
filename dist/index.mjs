@@ -11,7 +11,7 @@ import {
   Stack,
   Testimonials,
   propsDeLink
-} from "./chunk-BQZHE4L3.mjs";
+} from "./chunk-XZIMKAVG.mjs";
 import {
   AppShell,
   CopyField,
@@ -21,15 +21,6 @@ import {
   PageHeader,
   StatCard
 } from "./chunk-UR2UXN57.mjs";
-import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-IVHAI5QT.mjs";
 import {
   Accordion,
   AccordionContent,
@@ -139,6 +130,15 @@ import {
 import {
   cn
 } from "./chunk-ZTAXVNYF.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-IVHAI5QT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
