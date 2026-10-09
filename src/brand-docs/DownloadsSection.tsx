@@ -22,9 +22,7 @@ const PACKAGE_LINKS: readonly FileLink[] = [
 ];
 
 const FAVICON_LINKS: readonly FileLink[] = [
-  { href: "/brand/zip/mf-favicon-symbol-block.zip", label: "Favicon: Bloco (MF_)" },
-  { href: "/brand/zip/mf-favicon-symbol-tag.zip", label: "Favicon: Tag (</>)" },
-  { href: "/brand/zip/mf-favicon-symbol-cursor.zip", label: "Favicon: Cursor (<M>▮)" },
+  { href: "/brand/zip/mf-favicon.zip", label: "Pacote de favicon (.zip)" },
 ];
 
 const SOCIAL_LINKS: readonly FileLink[] = [
@@ -61,7 +59,7 @@ export function DownloadsSection() {
     >
       <div className="flex flex-col gap-12">
         <LinkGroup title="Pacotes" links={PACKAGE_LINKS} />
-        <LinkGroup title="Pacote de favicon de cada símbolo" links={FAVICON_LINKS} />
+        <LinkGroup title="Favicon" links={FAVICON_LINKS} />
         <LinkGroup title="Redes sociais e documentação" links={SOCIAL_LINKS} />
         <LinkGroup title="SVG por variante e tom" links={SVG_LINKS} />
       </div>

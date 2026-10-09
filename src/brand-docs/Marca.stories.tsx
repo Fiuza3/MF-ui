@@ -5,14 +5,14 @@ import { ConstructionSection } from "./ConstructionSection";
 import { DownloadsSection } from "./DownloadsSection";
 import { OpeningSection } from "./OpeningSection";
 import { INK } from "./shared";
-import { SymbolChoiceSection } from "./SymbolChoiceSection";
+import { SymbolSection } from "./SymbolSection";
 import { VariantsSection } from "./VariantsSection";
 
 function BrandManual() {
   return (
     <div className="min-h-screen font-sans text-foreground" style={{ backgroundColor: INK }}>
       <OpeningSection />
-      <SymbolChoiceSection />
+      <SymbolSection />
       <VariantsSection />
       <AnimationsSection />
       <ConstructionSection />

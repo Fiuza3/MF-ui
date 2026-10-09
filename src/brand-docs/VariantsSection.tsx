@@ -58,9 +58,7 @@ function heightFor(variant: BrandVariant): number {
 const VARIANT_NAMES: Record<BrandVariant, string> = {
   horizontal: "Horizontal",
   monogram: "Monograma",
-  "symbol-block": "Símbolo bloco",
-  "symbol-tag": "Símbolo tag",
-  "symbol-cursor": "Símbolo cursor",
+  symbol: "Símbolo",
 };
 
 function ToneRow({ doc }: { doc: ToneDoc }) {
@@ -76,7 +74,7 @@ function ToneRow({ doc }: { doc: ToneDoc }) {
           {doc.name}
         </h3>
         <p className={`mt-1 max-w-xl text-sm ${caption}`}>{doc.use}</p>
-        <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
+        <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-3">
           {BRAND_VARIANTS.map((variant) => (
             <li key={variant} className="flex flex-col items-start gap-3">
               <div className="flex h-16 items-center">
@@ -101,7 +99,7 @@ export function VariantsSection() {
     <Section
       id="variantes"
       title="Variantes e tons"
-      lead="Cinco formas, cinco tons. Cada tom aparece sobre o fundo para o qual foi feito."
+      lead="Três formas, cinco tons. Cada tom aparece sobre o fundo para o qual foi feito."
     >
       <div className="flex flex-col gap-6">
         {TONE_DOCS.map((doc) => (

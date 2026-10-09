@@ -54,7 +54,7 @@ function MinimumSizes() {
           <span className={`text-xs ${MUTED}`}>Horizontal: 80 px de largura</span>
         </div>
         <div className="flex flex-col gap-2">
-          <BrandMark variant="symbol-block" tone="cyan" height={16} decorative />
+          <BrandMark variant="symbol" tone="cyan" height={16} decorative />
           <span className={`text-xs ${MUTED}`}>Símbolo: 16 px</span>
         </div>
       </div>
