@@ -10,7 +10,7 @@ Correções de acessibilidade e a trava de durações estendida. Nenhuma assinat
 
 ### Corrigido
 
-- `Testimonials`: o botão de pausa mantinha `aria-pressed` e ainda trocava o rótulo entre "Pausar" e "Retomar", então o leitor de tela anunciava o estado invertido ("Retomar, pressionado"). Agora o rótulo é fixo ("Pausar apresentação") e só o ícone alterna, igual ao `Projects`.
+- `Testimonials`: o botão de pausa trocava o rótulo entre "Pausar" e "Retomar apresentação"; agora segue o padrão do `Projects` — rótulo fixo ("Pausar apresentação") com `aria-pressed`, e só o ícone alterna. Os dois carrosséis do sistema passam a ser anunciados do mesmo jeito.
 - `Navbar`: o botão "Abrir menu" media 40×44 px; agora tem 44×44 (WCAG 2.5.8).
 
 ### Alterado
