@@ -4,6 +4,19 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [3.3.1] — 2026-10-09
+
+Correções de acessibilidade e a trava de durações estendida. Nenhuma assinatura mudou.
+
+### Corrigido
+
+- `Testimonials`: o botão de pausa mantinha `aria-pressed` e ainda trocava o rótulo entre "Pausar" e "Retomar", então o leitor de tela anunciava o estado invertido ("Retomar, pressionado"). Agora o rótulo é fixo ("Pausar apresentação") e só o ícone alterna, igual ao `Projects`.
+- `Navbar`: o botão "Abrir menu" media 40×44 px; agora tem 44×44 (WCAG 2.5.8).
+
+### Alterado
+
+- Durações dos loops (`hero-scan` 8s, `marquee` 30s, carrossel do `Projects` 96s) viraram os tokens `--mf-duration-scan`, `--mf-duration-marquee` e `--mf-duration-carousel` em `globals.css`. Os valores são os mesmos. A trava `tokens-fonte-unica` passa a barrar duração em segundos literal em qualquer CSS, não só no `animated-icon.css`.
+
 ## [3.3.0] — 2026-10-08
 
 Tema claro na família ciano da marca, anel de foco opaco, piso tipográfico de 12px, pausa no carrossel do `Projects`, slot de ações na `Navbar` e o primitivo `AnimatedIcon`. Nenhuma assinatura mudou.
