@@ -28,7 +28,12 @@ export type BrandTreeOptions = {
 
 export const BRAND_TITLE = "MF Desenvolvimento";
 
-const node = (tag: string, attrs: SvgAttrs, children: SvgNode[] = [], text?: string): SvgNode => ({ tag, attrs, children, text });
+const node = (tag: string, attrs: SvgAttrs, children: SvgNode[] = [], text?: string): SvgNode => ({
+  tag,
+  attrs,
+  children,
+  text,
+});
 
 function colorOf(part: BrandPart, colors: ToneColors): string {
   if (part.role === "core") return colors.core;
@@ -38,7 +43,8 @@ function colorOf(part: BrandPart, colors: ToneColors): string {
 
 export function partShape(part: BrandPart, fill: string, opacity: number): SvgNode {
   const paint = { fill, ...(opacity < 1 ? { "fill-opacity": opacity } : {}) };
-  if (part.kind === "rect") return node("rect", { x: part.x, y: part.y, width: part.width, height: part.height, ...paint });
+  if (part.kind === "rect")
+    return node("rect", { x: part.x, y: part.y, width: part.width, height: part.height, ...paint });
   return node("path", { d: GLYPHS[part.char].d, transform: `translate(${part.x} 0)`, ...paint });
 }
 
@@ -47,7 +53,11 @@ function partNode(part: BrandPart, colors: ToneColors, options: BrandTreeOptions
   const shape = partShape(part, colorOf(part, colors), opacity);
   const children = options.partChildren ? options.partChildren(part, shape) : [shape];
   const transient = part.kind === "rect" && part.transient ? " mf-brand-transient" : "";
-  const attrs = { class: `mf-brand-part mf-brand-part--${part.id}${transient}`, "data-part": part.id, ...options.partAttrs?.(part) };
+  const attrs = {
+    class: `mf-brand-part mf-brand-part--${part.id}${transient}`,
+    "data-part": part.id,
+    ...options.partAttrs?.(part),
+  };
   return node("g", attrs, children);
 }
 
@@ -59,7 +69,15 @@ function contentTransform(layout: BrandLayout): string {
 function tileRect(layout: BrandLayout, fill: string, extra: SvgAttrs = {}): SvgNode {
   const tile = layout.tile;
   const size = tile?.size ?? 0;
-  return node("rect", { x: 0, y: 0, width: size, height: size, rx: tile?.radius ?? 0, fill, ...extra });
+  return node("rect", {
+    x: 0,
+    y: 0,
+    width: size,
+    height: size,
+    rx: tile?.radius ?? 0,
+    fill,
+    ...extra,
+  });
 }
 
 // Uma cor só: o bloco recebe as letras como furo (máscara), sem segunda cor.
@@ -75,9 +93,14 @@ function knockoutTile(layout: BrandLayout, colors: ToneColors, prefix: string): 
 }
 
 function bodyNodes(layout: BrandLayout, colors: ToneColors, options: BrandTreeOptions): SvgNode[] {
-  if (layout.tile && colors.knockout) return knockoutTile(layout, colors, options.idPrefix ?? "mf-brand-");
+  if (layout.tile && colors.knockout)
+    return knockoutTile(layout, colors, options.idPrefix ?? "mf-brand-");
   const parts = layout.parts.map((part) => partNode(part, colors, options));
-  const content = node("g", { class: "mf-brand-content", transform: contentTransform(layout) }, parts);
+  const content = node(
+    "g",
+    { class: "mf-brand-content", transform: contentTransform(layout) },
+    parts,
+  );
   return layout.tile ? [tileRect(layout, colors.tile), content] : [content];
 }
 
@@ -96,7 +119,13 @@ export function buildBrandTree(options: BrandTreeOptions): SvgNode {
   const rootClass = ["mf-brand", options.rootClass].filter(Boolean).join(" ");
   return node(
     "svg",
-    { xmlns: "http://www.w3.org/2000/svg", viewBox: `${x} ${y} ${width} ${height}`, role: "img", "aria-label": title, class: rootClass },
+    {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: `${x} ${y} ${width} ${height}`,
+      role: "img",
+      "aria-label": title,
+      class: rootClass,
+    },
     [node("title", {}, [], title), ...style, ...bodyNodes(layout, colorsFor(options), options)],
   );
 }

@@ -10,7 +10,12 @@ export type BrandRootOptions = {
 
 // A largura sai do viewBox (width:auto); só a altura é decidida por quem usa.
 // Número vira atributo (funciona sem CSS); string CSS ("2rem") só vale via style.
-export function rootOverrides({ tree, height, decorative, className }: BrandRootOptions): RootOverrides {
+export function rootOverrides({
+  tree,
+  height,
+  decorative,
+  className,
+}: BrandRootOptions): RootOverrides {
   // overflow visível: o viewBox abraça os contornos sem folga, e o Pulso e a
   // Abertura afastam os colchetes para fora dele — sem isto eles seriam cortados.
   const base = { width: "auto", overflow: "visible" } as const;

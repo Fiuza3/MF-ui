@@ -45,19 +45,22 @@ describe("geometria da marca", () => {
     expect(layout.tile).toBeNull();
   });
 
-  it.each(["symbol-block", "symbol-tag", "symbol-cursor"] as const)("%s cabe no bloco com margem para o recorte do ícone", (variant) => {
-    const layout = layoutBrand(variant);
-    const bounds = boundsOf(layout.parts);
-    const left = layout.content.x + bounds.x * layout.content.scale;
-    const right = left + bounds.width * layout.content.scale;
-    const top = layout.content.y + bounds.y * layout.content.scale;
-    const bottom = top + bounds.height * layout.content.scale;
-    expect(layout.viewBox).toEqual({ x: 0, y: 0, width: 1000, height: 1000 });
-    expect(left).toBeGreaterThanOrEqual(130);
-    expect(right).toBeLessThanOrEqual(870);
-    expect(top).toBeGreaterThan(0);
-    expect(bottom).toBeLessThan(1000);
-  });
+  it.each(["symbol-block", "symbol-tag", "symbol-cursor"] as const)(
+    "%s cabe no bloco com margem para o recorte do ícone",
+    (variant) => {
+      const layout = layoutBrand(variant);
+      const bounds = boundsOf(layout.parts);
+      const left = layout.content.x + bounds.x * layout.content.scale;
+      const right = left + bounds.width * layout.content.scale;
+      const top = layout.content.y + bounds.y * layout.content.scale;
+      const bottom = top + bounds.height * layout.content.scale;
+      expect(layout.viewBox).toEqual({ x: 0, y: 0, width: 1000, height: 1000 });
+      expect(left).toBeGreaterThanOrEqual(130);
+      expect(right).toBeLessThanOrEqual(870);
+      expect(top).toBeGreaterThan(0);
+      expect(bottom).toBeLessThan(1000);
+    },
+  );
 });
 
 describe("SVG da marca", () => {
@@ -86,7 +89,9 @@ describe("SVG da marca", () => {
   });
 
   it("escapa o título fornecido", () => {
-    const svg = serializeSvg(buildBrandTree({ variant: "monogram", tone: "cyan", title: "A & <B>" }));
+    const svg = serializeSvg(
+      buildBrandTree({ variant: "monogram", tone: "cyan", title: "A & <B>" }),
+    );
     expect(svg).toContain("<title>A &amp; &lt;B&gt;</title>");
   });
 });
@@ -105,7 +110,10 @@ describe("linhas do tempo", () => {
     const lt = timeline.tracks.find((track) => track.part === "lt");
     if (!lt) throw new Error("trilha do < ausente");
     expect(sampleTrack(lt, 0, timeline.trigger)).toMatchObject({ opacity: 0, x: -220 });
-    expect(sampleTrack(lt, lt.delay + lt.duration, timeline.trigger)).toMatchObject({ opacity: 1, x: 0 });
+    expect(sampleTrack(lt, lt.delay + lt.duration, timeline.trigger)).toMatchObject({
+      opacity: 1,
+      x: 0,
+    });
     const middle = sampleTrack(lt, lt.delay + lt.duration / 2, timeline.trigger);
     expect(middle.x).toBeGreaterThan(-220);
     expect(middle.x).toBeLessThan(0);
@@ -114,7 +122,9 @@ describe("linhas do tempo", () => {
   it("pulso é contínuo: um ciclo depois volta ao mesmo quadro", () => {
     const { timeline } = prepareAnimation("horizontal", "pulse");
     const track = timeline.tracks[0];
-    expect(sampleTrack(track, 700, "loop")).toEqual(sampleTrack(track, 700 + track.duration, "loop"));
+    expect(sampleTrack(track, 700, "loop")).toEqual(
+      sampleTrack(track, 700 + track.duration, "loop"),
+    );
   });
 
   it("digitação some com o cursor provisório na horizontal e mantém o do bloco", () => {
@@ -148,11 +158,15 @@ describe("CSS das animações", () => {
     const { timeline } = prepareAnimation("horizontal", "spread");
     const css = brandAnimationCss(timeline, "horizontal");
     expect(css).toContain(".mf-brand--horizontal.mf-brand--spread:hover .mf-brand-part--lt");
-    expect(css).toContain(":focus-visible>.mf-brand--horizontal.mf-brand--spread .mf-brand-part--lt");
+    expect(css).toContain(
+      ":focus-visible>.mf-brand--horizontal.mf-brand--spread .mf-brand-part--lt",
+    );
   });
 
   it("o traço desenha contorno e preenchimento em camadas próprias", () => {
-    const svg = serializeSvg(buildAnimatedBrandTree({ variant: "horizontal", tone: "cyan", animation: "draw" }));
+    const svg = serializeSvg(
+      buildAnimatedBrandTree({ variant: "horizontal", tone: "cyan", animation: "draw" }),
+    );
     expect(svg).toContain('class="mf-brand-stroke"');
     expect(svg).toContain('class="mf-brand-fill"');
     expect(svg).toContain("mf-brand-horizontal-draw-m-stroke");
@@ -172,7 +186,9 @@ describe("easing", () => {
     const samples = [0, 0.1, 0.3, 0.5, 0.8, 1].map((t) => applyEasing(EASING.expoOut, t));
     expect(samples[0]).toBeCloseTo(0);
     expect(samples[5]).toBeCloseTo(1);
-    samples.slice(1).forEach((value, index) => expect(value).toBeGreaterThanOrEqual(samples[index]));
+    samples
+      .slice(1)
+      .forEach((value, index) => expect(value).toBeGreaterThanOrEqual(samples[index]));
   });
 
   it("step-end só salta no fim do segmento", () => {
@@ -183,7 +199,9 @@ describe("easing", () => {
 
 describe("cor livre", () => {
   it("pinta com a cor dada e preserva o esmaecido dos colchetes", () => {
-    const svg = serializeSvg(buildBrandTree({ variant: "horizontal", tone: "cyan", color: "currentColor" }));
+    const svg = serializeSvg(
+      buildBrandTree({ variant: "horizontal", tone: "cyan", color: "currentColor" }),
+    );
     expect(svg).not.toContain("#3DF2E0");
     expect(svg.match(/fill="currentColor"/g)).toHaveLength(5);
     expect(svg.match(/fill-opacity="0.58"/g)).toHaveLength(3);

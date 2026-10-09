@@ -83,14 +83,20 @@ async function renderFrames({ brand, sharp, options, times, timeline, size, back
   const frames = [];
   for (const time of times) {
     const at = Math.min(time, timeline.length);
-    if (!cache.has(at)) cache.set(at, await renderRaw({ sharp, svg: svgAt(brand, options, at, size), background }));
+    if (!cache.has(at))
+      cache.set(at, await renderRaw({ sharp, svg: svgAt(brand, options, at, size), background }));
     frames.push(cache.get(at));
   }
   return frames;
 }
 // Os quadros RGBA empilhados numa imagem alta + pageHeight: o sharp trata cada fatia como um quadro.
 function animationOf({ sharp, frames, size }) {
-  const raw = { width: size.width, height: size.height * frames.length, channels: 4, pageHeight: size.height };
+  const raw = {
+    width: size.width,
+    height: size.height * frames.length,
+    channels: 4,
+    pageHeight: size.height,
+  };
   return sharp(Buffer.concat(frames.map((frame) => frame.data)), { raw });
 }
 
@@ -127,6 +133,7 @@ async function writeOne({ brand, sharp, outDir, variant, animation }) {
 export async function writeAnimatedRasters({ brand, sharp, outDir }) {
   await mkdir(outDir, { recursive: true });
   for (const variant of VARIANTS) {
-    for (const animation of ANIMATIONS) await writeOne({ brand, sharp, outDir, variant, animation });
+    for (const animation of ANIMATIONS)
+      await writeOne({ brand, sharp, outDir, variant, animation });
   }
 }

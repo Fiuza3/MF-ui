@@ -29,7 +29,9 @@ describe("encodeZip", () => {
   it("fecha com o registro de fim do diretório central apontando todas as entradas", () => {
     const zip = encodeZip(entries);
     expect(zip.readUInt32LE(zip.length - 22)).toBe(0x06054b50);
-    expect(centralRecords(zip).map((record) => record.name)).toEqual(entries.map((entry) => entry.name));
+    expect(centralRecords(zip).map((record) => record.name)).toEqual(
+      entries.map((entry) => entry.name),
+    );
   });
 
   it("cada entrada descompacta no conteúdo original e confere o CRC", () => {

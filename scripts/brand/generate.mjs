@@ -18,7 +18,11 @@ const ANIMATED_RASTER = path.join(ROOT, "scripts/brand/animated-raster.mjs");
 async function writeAnimatedRasters(ctx) {
   if (!existsSync(ANIMATED_RASTER)) return;
   const module = await import(pathToFileURL(ANIMATED_RASTER).href);
-  await module.writeAnimatedRasters({ brand: ctx.brand, sharp: ctx.sharp, outDir: path.join(OUT, "animated") });
+  await module.writeAnimatedRasters({
+    brand: ctx.brand,
+    sharp: ctx.sharp,
+    outDir: path.join(OUT, "animated"),
+  });
 }
 
 // O README é escrito à mão e vive dentro de brand/: sobrevive à limpeza.
@@ -29,13 +33,17 @@ async function resetKeepingReadme() {
 }
 
 function formatBytes(bytes) {
-  return bytes > 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : `${(bytes / 1024).toFixed(1)} KB`;
+  return bytes > 1024 * 1024
+    ? `${(bytes / 1024 / 1024).toFixed(1)} MB`
+    : `${(bytes / 1024).toFixed(1)} KB`;
 }
 
 async function printSummary() {
   const { groups, total } = await summarize(OUT);
-  const line = (name, group) => `${name.padEnd(28)} ${String(group.count).padStart(4)} arquivos  ${formatBytes(group.bytes)}\n`;
-  for (const [name, group] of [...groups].sort(([a], [b]) => a.localeCompare(b))) process.stdout.write(line(name, group));
+  const line = (name, group) =>
+    `${name.padEnd(28)} ${String(group.count).padStart(4)} arquivos  ${formatBytes(group.bytes)}\n`;
+  for (const [name, group] of [...groups].sort(([a], [b]) => a.localeCompare(b)))
+    process.stdout.write(line(name, group));
   process.stdout.write(line("TOTAL", total));
 }
 

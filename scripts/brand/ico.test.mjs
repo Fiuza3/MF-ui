@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { encodeIco } from "./ico.mjs";
 
-const fakePng = (size, fill) => Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47]), Buffer.alloc(size, fill)]);
+const fakePng = (size, fill) =>
+  Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47]), Buffer.alloc(size, fill)]);
 
 describe("encodeIco", () => {
   const images = [

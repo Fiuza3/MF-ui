@@ -26,13 +26,42 @@ export const BRAND_COLORS = {
   black: "#000000",
 } as const;
 
-const { cyan: CYAN, ink: INK, teal: TEAL, ice: ICE, paper: PAPER, white: WHITE, black: BLACK } = BRAND_COLORS;
+const {
+  cyan: CYAN,
+  ink: INK,
+  teal: TEAL,
+  ice: ICE,
+  paper: PAPER,
+  white: WHITE,
+  black: BLACK,
+} = BRAND_COLORS;
 
 export const TONES: Readonly<Record<BrandTone, ToneColors>> = {
-  cyan: { core: CYAN, bracket: CYAN, bracketOpacity: 0.58, cursor: CYAN, tile: INK, knockout: false },
+  cyan: {
+    core: CYAN,
+    bracket: CYAN,
+    bracketOpacity: 0.58,
+    cursor: CYAN,
+    tile: INK,
+    knockout: false,
+  },
   light: { core: ICE, bracket: CYAN, bracketOpacity: 1, cursor: CYAN, tile: INK, knockout: false },
   // Sobre fundo claro o ciano some (1.3:1); o teal mantém o DNA com 5.6:1.
   ink: { core: INK, bracket: TEAL, bracketOpacity: 1, cursor: TEAL, tile: PAPER, knockout: false },
-  "solid-black": { core: BLACK, bracket: BLACK, bracketOpacity: 1, cursor: BLACK, tile: BLACK, knockout: true },
-  "solid-white": { core: WHITE, bracket: WHITE, bracketOpacity: 1, cursor: WHITE, tile: WHITE, knockout: true },
+  "solid-black": {
+    core: BLACK,
+    bracket: BLACK,
+    bracketOpacity: 1,
+    cursor: BLACK,
+    tile: BLACK,
+    knockout: true,
+  },
+  "solid-white": {
+    core: WHITE,
+    bracket: WHITE,
+    bracketOpacity: 1,
+    cursor: WHITE,
+    tile: WHITE,
+    knockout: true,
+  },
 };

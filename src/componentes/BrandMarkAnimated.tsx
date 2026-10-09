@@ -1,10 +1,18 @@
 import { Fragment } from "react";
-import { buildAnimatedBrandTree, type BrandAnimation, type BrandTone, type BrandVariant } from "../brand";
+import {
+  buildAnimatedBrandTree,
+  type BrandAnimation,
+  type BrandTone,
+  type BrandVariant,
+} from "../brand";
 import { useBrandIdPrefix, type BrandMarkProps } from "./BrandMark";
 import { renderBrandRoot } from "./brand-node";
 import { rootOverrides } from "./brand-root";
 
-export type BrandMarkAnimatedProps = Pick<BrandMarkProps, "height" | "color" | "title" | "decorative" | "className" | "bracketOpacity"> & {
+export type BrandMarkAnimatedProps = Pick<
+  BrandMarkProps,
+  "height" | "color" | "title" | "decorative" | "className" | "bracketOpacity"
+> & {
   animation?: BrandAnimation;
   variant?: BrandVariant;
   tone?: BrandTone;
@@ -27,7 +35,15 @@ export function BrandMarkAnimated({
   className,
 }: BrandMarkAnimatedProps) {
   const idPrefix = useBrandIdPrefix();
-  const tree = buildAnimatedBrandTree({ variant, tone, animation, color, title, bracketOpacity, idPrefix });
+  const tree = buildAnimatedBrandTree({
+    variant,
+    tone,
+    animation,
+    color,
+    title,
+    bracketOpacity,
+    idPrefix,
+  });
   const svg = renderBrandRoot(tree, rootOverrides({ tree, height, decorative, className }));
   return <Fragment key={replayKey}>{svg}</Fragment>;
 }

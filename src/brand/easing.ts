@@ -3,7 +3,10 @@ export type Easing =
   | { kind: "linear" }
   | { kind: "step-end" };
 
-const cubic = (x1: number, y1: number, x2: number, y2: number): Easing => ({ kind: "cubic", points: [x1, y1, x2, y2] });
+const cubic = (x1: number, y1: number, x2: number, y2: number): Easing => ({
+  kind: "cubic",
+  points: [x1, y1, x2, y2],
+});
 
 export const EASING = {
   // expo-out da marca: o mesmo [0.16, 1, 0.3, 1] dos componentes do MF-UI.
@@ -19,7 +22,8 @@ export function easingToCss(easing: Easing): string {
   return easing.kind;
 }
 
-const bezier = (t: number, p1: number, p2: number) => 3 * (1 - t) ** 2 * t * p1 + 3 * (1 - t) * t ** 2 * p2 + t ** 3;
+const bezier = (t: number, p1: number, p2: number) =>
+  3 * (1 - t) ** 2 * t * p1 + 3 * (1 - t) * t ** 2 * p2 + t ** 3;
 
 // Bissecção no eixo x: 30 passos dão erro < 1e-9, sobra para quadro de GIF.
 function solveT(x: number, x1: number, x2: number): number {

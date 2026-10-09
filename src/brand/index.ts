@@ -1,7 +1,15 @@
 export { GLYPHS } from "./glyphs";
 export type { Glyph, GlyphBox, GlyphChar } from "./glyphs";
 export { BRAND_VARIANTS, boundsOf, layoutBrand, partBox } from "./layout";
-export type { BrandLayout, BrandPart, BrandVariant, Box, GlyphPart, PartId, RectPart } from "./layout";
+export type {
+  BrandLayout,
+  BrandPart,
+  BrandVariant,
+  Box,
+  GlyphPart,
+  PartId,
+  RectPart,
+} from "./layout";
 export { BRAND_COLORS, BRAND_TONES, TONES } from "./palette";
 export type { BrandTone, ToneColors } from "./palette";
 export { BRAND_TITLE, buildBrandTree, partShape } from "./tree";

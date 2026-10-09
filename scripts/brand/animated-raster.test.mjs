@@ -44,7 +44,13 @@ describe("mergeIdenticalFrames", () => {
 
 describe("targetSize", () => {
   it("horizontal tem 640 de largura e altura proporcional; símbolo é 512x512", () => {
-    expect(targetSize("horizontal", { width: 1000, height: 250 })).toEqual({ width: 640, height: 160 });
-    expect(targetSize("symbol-block", { width: 1, height: 1 })).toEqual({ width: 512, height: 512 });
+    expect(targetSize("horizontal", { width: 1000, height: 250 })).toEqual({
+      width: 640,
+      height: 160,
+    });
+    expect(targetSize("symbol-block", { width: 1, height: 1 })).toEqual({
+      width: 512,
+      height: 512,
+    });
   });
 });

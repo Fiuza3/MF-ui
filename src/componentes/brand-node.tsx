@@ -27,7 +27,9 @@ function reactAttrs(attrs: SvgNode["attrs"]): ElementProps {
 
 function childrenOf(node: SvgNode, skipTitle: boolean): ReactNode[] {
   if (node.text !== undefined) return [node.text];
-  const visible = skipTitle ? node.children.filter((child) => child.tag !== "title") : node.children;
+  const visible = skipTitle
+    ? node.children.filter((child) => child.tag !== "title")
+    : node.children;
   return visible.map((child, index) => toElement(child, index));
 }
 

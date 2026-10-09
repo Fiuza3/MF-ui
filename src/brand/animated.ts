@@ -1,7 +1,22 @@
 import { brandAnimationCss } from "./css";
-import { layoutBrand, partBox, type BrandLayout, type BrandPart, type BrandVariant, type GlyphPart, type RectPart } from "./layout";
+import {
+  layoutBrand,
+  partBox,
+  type BrandLayout,
+  type BrandPart,
+  type BrandVariant,
+  type GlyphPart,
+  type RectPart,
+} from "./layout";
 import type { BrandTone } from "./palette";
-import { REST, sampleTrack, timelineFor, type BrandAnimation, type Frame, type Timeline } from "./timelines";
+import {
+  REST,
+  sampleTrack,
+  timelineFor,
+  type BrandAnimation,
+  type Frame,
+  type Timeline,
+} from "./timelines";
 import { buildBrandTree, type SvgAttrs, type SvgNode } from "./tree";
 
 export type AnimatedBrandOptions = {
@@ -22,30 +37,58 @@ function withTypingCursor(layout: BrandLayout): BrandLayout {
   if (layout.parts.some((part) => part.kind === "rect")) return layout;
   const glyphs = layout.parts.filter((part): part is GlyphPart => part.kind === "glyph");
   const last = glyphs[glyphs.length - 1];
-  const cursor: RectPart = { kind: "rect", id: "cursor", role: "cursor", x: last.x + 600, y: -96, width: 300, height: 96, transient: true };
+  const cursor: RectPart = {
+    kind: "rect",
+    id: "cursor",
+    role: "cursor",
+    x: last.x + 600,
+    y: -96,
+    width: 300,
+    height: 96,
+    transient: true,
+  };
   return { ...layout, parts: [...layout.parts, cursor] };
 }
 
-export function prepareAnimation(variant: BrandVariant, animation: BrandAnimation): PreparedAnimation {
+export function prepareAnimation(
+  variant: BrandVariant,
+  animation: BrandAnimation,
+): PreparedAnimation {
   const base = layoutBrand(variant);
   const layout = animation === "type" ? withTypingCursor(base) : base;
   return { layout, timeline: timelineFor(animation, layout) };
 }
 
-const withClass = (shape: SvgNode, className: string): SvgNode => ({ ...shape, attrs: { ...shape.attrs, class: className } });
+const withClass = (shape: SvgNode, className: string): SvgNode => ({
+  ...shape,
+  attrs: { ...shape.attrs, class: className },
+});
 
 function strokeOf(shape: SvgNode): SvgNode {
   const { d, transform, fill } = shape.attrs;
   return {
     tag: "path",
-    attrs: { d, transform, fill: "none", stroke: fill, "stroke-width": 10, "stroke-linejoin": "round", pathLength: 1, "stroke-dasharray": 1, "stroke-dashoffset": 0, class: "mf-brand-stroke" },
+    attrs: {
+      d,
+      transform,
+      fill: "none",
+      stroke: fill,
+      "stroke-width": 10,
+      "stroke-linejoin": "round",
+      pathLength: 1,
+      "stroke-dasharray": 1,
+      "stroke-dashoffset": 0,
+      class: "mf-brand-stroke",
+    },
     children: [],
   };
 }
 
 function strokeChildren(timeline: Timeline) {
   return (part: BrandPart, shape: SvgNode): SvgNode[] =>
-    timeline.usesStroke && part.kind === "glyph" ? [withClass(shape, "mf-brand-fill"), strokeOf(shape)] : [shape];
+    timeline.usesStroke && part.kind === "glyph"
+      ? [withClass(shape, "mf-brand-fill"), strokeOf(shape)]
+      : [shape];
 }
 
 export function buildAnimatedBrandTree(options: AnimatedBrandOptions): SvgNode {
@@ -81,7 +124,13 @@ function frameChildren(timeline: Timeline, timeMs: number) {
     const frame = frameOf(part, timeline, timeMs);
     const fill = { ...shape, attrs: { ...shape.attrs, opacity: Number(frame.fill.toFixed(4)) } };
     const stroke = strokeOf(shape);
-    return [fill, { ...stroke, attrs: { ...stroke.attrs, "stroke-dashoffset": Number((1 - frame.draw).toFixed(4)) } }];
+    return [
+      fill,
+      {
+        ...stroke,
+        attrs: { ...stroke.attrs, "stroke-dashoffset": Number((1 - frame.draw).toFixed(4)) },
+      },
+    ];
   };
 }
 

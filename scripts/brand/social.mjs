@@ -16,18 +16,30 @@ const CANVAS = {
 };
 
 async function writeAvatar(ctx, side) {
-  const png = await rasterize(ctx.sharp, fullBleedSvg(ctx.brand, "symbol-block"), squareTarget(side));
+  const png = await rasterize(
+    ctx.sharp,
+    fullBleedSvg(ctx.brand, "symbol-block"),
+    squareTarget(side),
+  );
   await writeFileDeep(path.join(ctx.out, "png", "social", `avatar-${side}.png`), png);
 }
 
 async function writeCanvas(ctx, name) {
   const { width, height, share } = CANVAS[name];
-  const logo = await rasterize(ctx.sharp, staticSvg(ctx, "horizontal", "cyan"), { width: Math.round(width * share) });
+  const logo = await rasterize(ctx.sharp, staticSvg(ctx, "horizontal", "cyan"), {
+    width: Math.round(width * share),
+  });
   const canvas = ctx.sharp({ create: { width, height, channels: 4, background: BACKGROUND } });
-  const png = await canvas.composite([{ input: logo, gravity: "center" }]).png({ compressionLevel: 9 }).toBuffer();
+  const png = await canvas
+    .composite([{ input: logo, gravity: "center" }])
+    .png({ compressionLevel: 9 })
+    .toBuffer();
   await writeFileDeep(path.join(ctx.out, "png", "social", `${name}.png`), png);
 }
 
 export async function writeSocial(ctx) {
-  await Promise.all([...AVATARS.map((side) => writeAvatar(ctx, side)), ...Object.keys(CANVAS).map((name) => writeCanvas(ctx, name))]);
+  await Promise.all([
+    ...AVATARS.map((side) => writeAvatar(ctx, side)),
+    ...Object.keys(CANVAS).map((name) => writeCanvas(ctx, name)),
+  ]);
 }

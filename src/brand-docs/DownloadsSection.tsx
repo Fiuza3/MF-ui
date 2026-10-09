@@ -7,7 +7,10 @@ const LINK_CLASS =
   "inline-flex min-h-10 items-center rounded-md border border-line px-3 text-sm text-foreground transition-colors hover:border-cyan/60 hover:text-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan";
 
 const SVG_LINKS: readonly FileLink[] = BRAND_VARIANTS.flatMap((variant) =>
-  BRAND_TONES.map((tone) => ({ href: `/brand/svg/${variant}-${tone}.svg`, label: `${variant}-${tone}.svg` })),
+  BRAND_TONES.map((tone) => ({
+    href: `/brand/svg/${variant}-${tone}.svg`,
+    label: `${variant}-${tone}.svg`,
+  })),
 );
 
 // Site estático não lista pasta: cada conjunto sai como .zip gerado por scripts/brand/packages.mjs.
@@ -51,7 +54,11 @@ function LinkGroup({ title, links }: { title: string; links: readonly FileLink[]
 
 export function DownloadsSection() {
   return (
-    <Section id="downloads" title="Downloads" lead="Todos os arquivos da marca, prontos para baixar.">
+    <Section
+      id="downloads"
+      title="Downloads"
+      lead="Todos os arquivos da marca, prontos para baixar."
+    >
       <div className="flex flex-col gap-12">
         <LinkGroup title="Pacotes" links={PACKAGE_LINKS} />
         <LinkGroup title="Pacote de favicon de cada símbolo" links={FAVICON_LINKS} />

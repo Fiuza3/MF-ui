@@ -28,7 +28,10 @@ type SectionProps = { id: string; title: string; lead: string; children: ReactNo
 export function Section({ id, title, lead, children }: SectionProps) {
   return (
     <section aria-labelledby={id} className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-      <h2 id={id} className="max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+      <h2
+        id={id}
+        className="max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+      >
         {title}
       </h2>
       <p className={`mt-4 max-w-2xl text-base leading-relaxed ${MUTED}`}>{lead}</p>

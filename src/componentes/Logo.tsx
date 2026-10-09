@@ -24,7 +24,13 @@ export const alturaDoLogo = (tamanho: number): number => (tamanho * VIEWBOX_HEIG
 
 export const opacidadePadraoDosColchetes = (compacto: boolean): number => (compacto ? 0.28 : 0.58);
 
-export function Logo({ tamanho = 24, cor = "var(--cyan)", opacidadeColchetes, compacto = false, className }: LogoProps) {
+export function Logo({
+  tamanho = 24,
+  cor = "var(--cyan)",
+  opacidadeColchetes,
+  compacto = false,
+  className,
+}: LogoProps) {
   return (
     <BrandMark
       variant="horizontal"

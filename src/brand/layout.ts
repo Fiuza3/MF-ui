@@ -1,13 +1,25 @@
 import { GLYPHS, type GlyphChar } from "./glyphs";
 
-export const BRAND_VARIANTS = ["horizontal", "monogram", "symbol-block", "symbol-tag", "symbol-cursor"] as const;
+export const BRAND_VARIANTS = [
+  "horizontal",
+  "monogram",
+  "symbol-block",
+  "symbol-tag",
+  "symbol-cursor",
+] as const;
 
 export type BrandVariant = (typeof BRAND_VARIANTS)[number];
 
 // Ids estáveis: as linhas do tempo das animações miram estas peças.
 export type PartId = "lt" | "m" | "f" | "slash" | "gt" | "cursor";
 
-export type GlyphPart = { kind: "glyph"; id: PartId; role: "core" | "bracket"; char: GlyphChar; x: number };
+export type GlyphPart = {
+  kind: "glyph";
+  id: PartId;
+  role: "core" | "bracket";
+  char: GlyphChar;
+  x: number;
+};
 
 export type RectPart = {
   kind: "rect";
@@ -38,7 +50,8 @@ type RowItem = { char: GlyphChar; id: PartId; role: "core" | "bracket"; kernAfte
 
 const PART_ID: Record<GlyphChar, PartId> = { "<": "lt", M: "m", F: "f", "/": "slash", ">": "gt" };
 
-const roleOf = (char: GlyphChar): "core" | "bracket" => (char === "M" || char === "F" ? "core" : "bracket");
+const roleOf = (char: GlyphChar): "core" | "bracket" =>
+  char === "M" || char === "F" ? "core" : "bracket";
 
 // Espaçamento ajustado à mão sobre o avanço monoespaçado (600): o mono puro
 // deixava o "<" solto do MF e o "/>" lido como dois sinais. Medido em
@@ -95,7 +108,13 @@ export function boundsOf(parts: BrandPart[]): Box {
 
 function wordLayout(variant: "horizontal" | "monogram", chars: GlyphChar[]): BrandLayout {
   const parts = placeRow(rowItems(chars));
-  return { variant, viewBox: boundsOf(parts), tile: null, content: { x: 0, y: 0, scale: 1 }, parts };
+  return {
+    variant,
+    viewBox: boundsOf(parts),
+    tile: null,
+    content: { x: 0, y: 0, scale: 1 },
+    parts,
+  };
 }
 
 function centerInTile(parts: BrandPart[], contentWidth: number): BrandLayout["content"] {
@@ -122,14 +141,30 @@ function symbolLayout(variant: SymbolVariant, parts: BrandPart[]): BrandLayout {
 function blockSymbol(): BrandLayout {
   const letters = placeRow(rowItems(["M", "F"]));
   const f = letters[1];
-  const cursor: RectPart = { kind: "rect", id: "cursor", role: "cursor", x: f.x + 600, y: -96, width: 300, height: 96 };
+  const cursor: RectPart = {
+    kind: "rect",
+    id: "cursor",
+    role: "cursor",
+    x: f.x + 600,
+    y: -96,
+    width: 300,
+    height: 96,
+  };
   return symbolLayout("symbol-block", [...letters, cursor]);
 }
 
 function cursorSymbol(): BrandLayout {
   const glyphs = placeRow(rowItems(["<", "M", ">"]));
   const gt = glyphs[2];
-  const cursor: RectPart = { kind: "rect", id: "cursor", role: "cursor", x: gt.x + 600, y: -564, width: 230, height: 545 };
+  const cursor: RectPart = {
+    kind: "rect",
+    id: "cursor",
+    role: "cursor",
+    x: gt.x + 600,
+    y: -564,
+    width: 230,
+    height: 545,
+  };
   return symbolLayout("symbol-cursor", [...glyphs, cursor]);
 }
 

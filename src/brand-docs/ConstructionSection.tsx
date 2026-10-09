@@ -37,7 +37,8 @@ function ProtectionArea() {
         </div>
       </div>
       <figcaption className={`mt-3 max-w-md text-sm ${MUTED}`}>
-        Deixe livre, em volta da marca, o espaço de uma letra M. Nada de texto, borda ou imagem dentro da linha tracejada.
+        Deixe livre, em volta da marca, o espaço de uma letra M. Nada de texto, borda ou imagem
+        dentro da linha tracejada.
       </figcaption>
     </figure>
   );
@@ -64,9 +65,17 @@ function MinimumSizes() {
 type Mistake = { label: string; style: CSSProperties; color?: string };
 
 const MISTAKES: readonly Mistake[] = [
-  { label: "Distorcer ou esticar", style: { transform: "scale(1.5, 0.65)", transformOrigin: "left center" } },
+  {
+    label: "Distorcer ou esticar",
+    style: { transform: "scale(1.5, 0.65)", transformOrigin: "left center" },
+  },
   { label: "Recolorir fora dos tons", style: {}, color: "var(--warning)" },
-  { label: "Aplicar sombra ou brilho", style: { filter: "drop-shadow(3px 4px 3px var(--background)) drop-shadow(0 0 8px var(--warning))" } },
+  {
+    label: "Aplicar sombra ou brilho",
+    style: {
+      filter: "drop-shadow(3px 4px 3px var(--background)) drop-shadow(0 0 8px var(--warning))",
+    },
+  },
 ];
 
 function Mistakes() {
@@ -75,10 +84,19 @@ function Mistakes() {
       <h3 className="text-lg font-semibold text-foreground">Não faça</h3>
       <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
         {MISTAKES.map((mistake) => (
-          <li key={mistake.label} className="flex flex-col gap-3 rounded-lg border border-destructive/40 bg-card p-4">
+          <li
+            key={mistake.label}
+            className="flex flex-col gap-3 rounded-lg border border-destructive/40 bg-card p-4"
+          >
             <div className="flex h-16 items-center overflow-hidden">
               <div style={mistake.style}>
-                <BrandMark variant="horizontal" tone="cyan" height={24} color={mistake.color} decorative />
+                <BrandMark
+                  variant="horizontal"
+                  tone="cyan"
+                  height={24}
+                  color={mistake.color}
+                  decorative
+                />
               </div>
             </div>
             <span className="text-sm text-destructive">Não: {mistake.label.toLowerCase()}</span>
@@ -91,7 +109,11 @@ function Mistakes() {
 
 export function ConstructionSection() {
   return (
-    <Section id="construcao" title="Construção e uso" lead="Três regras que mantêm a marca reconhecível em qualquer lugar.">
+    <Section
+      id="construcao"
+      title="Construção e uso"
+      lead="Três regras que mantêm a marca reconhecível em qualquer lugar."
+    >
       <div className="flex flex-col gap-16">
         <ProtectionArea />
         <MinimumSizes />

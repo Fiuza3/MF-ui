@@ -13,7 +13,11 @@ export async function writeFileDeep(file, data) {
 
 export async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
-  const nested = await Promise.all(entries.map((entry) => (entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)])));
+  const nested = await Promise.all(
+    entries.map((entry) =>
+      entry.isDirectory() ? walk(path.join(dir, entry.name)) : [path.join(dir, entry.name)],
+    ),
+  );
   return nested.flat();
 }
 
@@ -24,9 +28,15 @@ export async function summarize(root) {
   const groups = new Map();
   files.forEach((file, index) => {
     const parts = path.relative(root, file).split(path.sep);
-    const key = parts.length === 1 ? "(raiz)" : parts.slice(0, parts[0] === "png" && parts.length > 2 ? 2 : 1).join("/");
+    const key =
+      parts.length === 1
+        ? "(raiz)"
+        : parts.slice(0, parts[0] === "png" && parts.length > 2 ? 2 : 1).join("/");
     const group = groups.get(key) ?? { count: 0, bytes: 0 };
     groups.set(key, { count: group.count + 1, bytes: group.bytes + sizes[index] });
   });
-  return { groups, total: { count: files.length, bytes: sizes.reduce((sum, size) => sum + size, 0) } };
+  return {
+    groups,
+    total: { count: files.length, bytes: sizes.reduce((sum, size) => sum + size, 0) },
+  };
 }

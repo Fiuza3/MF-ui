@@ -14,7 +14,10 @@ function contentWidth(brand, layout) {
 function shrinkContent(brand, layout, targetWidth) {
   const factor = targetWidth / contentWidth(brand, layout);
   const { x, y, scale } = layout.content;
-  return { ...layout, content: { x: 500 + (x - 500) * factor, y: 500 + (y - 500) * factor, scale: scale * factor } };
+  return {
+    ...layout,
+    content: { x: 500 + (x - 500) * factor, y: 500 + (y - 500) * factor, scale: scale * factor },
+  };
 }
 
 export function fullBleedSvg(brand, variant) {
@@ -33,7 +36,12 @@ export function pinnedTabSvg(brand, variant) {
   const decorate = (layout) => {
     const bounds = brand.boundsOf(layout.parts);
     const side = Math.max(bounds.width, bounds.height);
-    const viewBox = { x: bounds.x - (side - bounds.width) / 2, y: bounds.y - (side - bounds.height) / 2, width: side, height: side };
+    const viewBox = {
+      x: bounds.x - (side - bounds.width) / 2,
+      y: bounds.y - (side - bounds.height) / 2,
+      width: side,
+      height: side,
+    };
     return { ...layout, tile: null, viewBox, content: { x: 0, y: 0, scale: 1 } };
   };
   return brand.serializeSvg(brand.buildBrandTree({ variant, tone: "solid-black", decorate }));

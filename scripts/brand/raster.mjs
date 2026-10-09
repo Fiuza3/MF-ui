@@ -20,7 +20,10 @@ export function rasterize(sharp, svg, target) {
   const intrinsic = intrinsicSize(svg);
   const ratio = target.height ? target.height / intrinsic.height : target.width / intrinsic.width;
   const density = Math.max(1, Math.round(BASE_DENSITY * ratio * SUPERSAMPLE));
-  return sharp(Buffer.from(svg), { density }).resize(target).png({ compressionLevel: 9 }).toBuffer();
+  return sharp(Buffer.from(svg), { density })
+    .resize(target)
+    .png({ compressionLevel: 9 })
+    .toBuffer();
 }
 
 export const squareTarget = (side) => ({ width: side, height: side });

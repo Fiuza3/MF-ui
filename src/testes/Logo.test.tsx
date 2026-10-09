@@ -12,7 +12,10 @@ describe("Logo", () => {
   it("aceita tamanho customizado mantendo a escala do legado (1000 unidades/em)", () => {
     const { container } = render(<Logo tamanho={48} />);
     const svg = container.querySelector("svg");
-    expect(svg).toHaveAttribute("height", String((48 * layoutBrand("horizontal").viewBox.height) / 1000));
+    expect(svg).toHaveAttribute(
+      "height",
+      String((48 * layoutBrand("horizontal").viewBox.height) / 1000),
+    );
   });
 
   it("aceita cor customizada", () => {

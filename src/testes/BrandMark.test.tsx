@@ -55,7 +55,8 @@ describe("BrandMark", () => {
     const ids = Array.from(container.querySelectorAll("mask")).map((mask) => mask.id);
     expect(ids).toHaveLength(2);
     expect(ids[0]).not.toBe(ids[1]);
-    for (const id of ids) expect(container.querySelector(`rect[mask="url(#${id})"]`)).not.toBeNull();
+    for (const id of ids)
+      expect(container.querySelector(`rect[mask="url(#${id})"]`)).not.toBeNull();
   });
 });
 

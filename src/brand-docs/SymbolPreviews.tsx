@@ -16,12 +16,16 @@ function BrowserTab({ theme, variant }: { theme: TabTheme; variant: BrandVariant
   return (
     <figure className="m-0">
       <div className={`flex items-end rounded-t-lg px-2 pt-2 ${theme.bar}`}>
-        <div className={`flex min-w-0 max-w-[260px] items-center gap-2 rounded-t-lg px-3 py-2 ${theme.tab}`}>
+        <div
+          className={`flex min-w-0 max-w-[260px] items-center gap-2 rounded-t-lg px-3 py-2 ${theme.tab}`}
+        >
           <BrandMark variant={variant} tone="cyan" height={16} decorative />
           <span className="truncate text-xs">MF Desenvolvimento — Sites e sistemas</span>
         </div>
       </div>
-      <figcaption className="mt-2 text-xs text-gray-text">{theme.label}, favicon em 16 px reais</figcaption>
+      <figcaption className="mt-2 text-xs text-gray-text">
+        {theme.label}, favicon em 16 px reais
+      </figcaption>
     </figure>
   );
 }
@@ -36,12 +40,25 @@ export function BrowserTabs({ variant }: { variant: BrandVariant }) {
   );
 }
 
-function IconFrame({ size, shape, variant }: { size: number; shape: string; variant: BrandVariant }) {
+function IconFrame({
+  size,
+  shape,
+  variant,
+}: {
+  size: number;
+  shape: string;
+  variant: BrandVariant;
+}) {
   const inner = shape === "rounded-full" ? size * 0.8 : size;
   return (
     <div
       className={`flex shrink-0 items-center justify-center overflow-hidden ${shape}`}
-      style={{ width: size, height: size, backgroundColor: INK, boxShadow: "0 0 0 1px color-mix(in srgb, var(--foreground) 12%, transparent)" }}
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: INK,
+        boxShadow: "0 0 0 1px color-mix(in srgb, var(--foreground) 12%, transparent)",
+      }}
     >
       <BrandMark variant={variant} tone="cyan" height={inner} decorative />
     </div>

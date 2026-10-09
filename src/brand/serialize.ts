@@ -1,6 +1,7 @@
 import type { SvgNode } from "./tree";
 
-const escapeText = (value: string) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const escapeText = (value: string) =>
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 const escapeAttr = (value: string | number) => escapeText(String(value)).replace(/"/g, "&quot;");
 

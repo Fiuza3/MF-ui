@@ -1,7 +1,13 @@
 import { Section } from "./shared";
 import { AppIcons, BrowserTabs, SizeLadder, type Candidate } from "./SymbolPreviews";
 
-type CandidateDoc = { variant: Candidate; name: string; glyphs: string; pros: string; cons: string };
+type CandidateDoc = {
+  variant: Candidate;
+  name: string;
+  glyphs: string;
+  pros: string;
+  cons: string;
+};
 
 const CANDIDATES: readonly CandidateDoc[] = [
   {
@@ -15,7 +21,7 @@ const CANDIDATES: readonly CandidateDoc[] = [
     variant: "symbol-tag",
     name: "Tag",
     glyphs: "</>",
-    pros: "Formas grandes e simples: é o mais legível em 16 px e diz \"código\" sem explicação.",
+    pros: 'Formas grandes e simples: é o mais legível em 16 px e diz "código" sem explicação.',
     cons: "Não tem o MF. Qualquer desenvolvedor poderia usar o mesmo sinal, então é o menos original.",
   },
   {
@@ -32,7 +38,8 @@ function CandidateCard({ doc }: { doc: CandidateDoc }) {
     <article className="flex flex-col gap-8 rounded-xl border border-line bg-card p-6">
       <header>
         <h3 className="text-xl font-semibold text-foreground">
-          {doc.name} <span className="ml-2 font-mono text-base font-normal text-cyan">{doc.glyphs}</span>
+          {doc.name}{" "}
+          <span className="ml-2 font-mono text-base font-normal text-cyan">{doc.glyphs}</span>
         </h3>
       </header>
       <BrowserTabs variant={doc.variant} />
@@ -65,7 +72,8 @@ export function SymbolChoiceSection() {
         ))}
       </div>
       <p className="mt-8 max-w-2xl text-base text-foreground">
-        Responda com o nome: Bloco, Tag ou Cursor. O escolhido vira o favicon, o ícone do app e o avatar das redes.
+        Responda com o nome: Bloco, Tag ou Cursor. O escolhido vira o favicon, o ícone do app e o
+        avatar das redes.
       </p>
     </Section>
   );

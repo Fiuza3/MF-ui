@@ -32,7 +32,12 @@ const HEAD_HTML = `<link rel="icon" href="/favicon.ico" sizes="any">
 
 async function writeIco(ctx, dir, variant) {
   const svg = staticSvg(ctx, variant, "cyan");
-  const images = await Promise.all(ICO_SIZES.map(async (size) => ({ size, png: await rasterize(ctx.sharp, svg, squareTarget(size)) })));
+  const images = await Promise.all(
+    ICO_SIZES.map(async (size) => ({
+      size,
+      png: await rasterize(ctx.sharp, svg, squareTarget(size)),
+    })),
+  );
   await writeFileDeep(path.join(dir, "favicon.ico"), encodeIco(images));
 }
 
@@ -45,7 +50,11 @@ async function writeAppIcons(ctx, dir, variant) {
     ["icon-512.png", rounded, 512],
     ["icon-maskable-512.png", maskableSvg(brand, variant), 512],
   ];
-  await Promise.all(icons.map(async ([name, svg, size]) => writeFileDeep(path.join(dir, name), await rasterize(sharp, svg, squareTarget(size)))));
+  await Promise.all(
+    icons.map(async ([name, svg, size]) =>
+      writeFileDeep(path.join(dir, name), await rasterize(sharp, svg, squareTarget(size))),
+    ),
+  );
 }
 
 async function writeFaviconSet(ctx, variant) {
