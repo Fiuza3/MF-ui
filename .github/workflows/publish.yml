@@ -53,7 +53,12 @@ jobs:
             exit 1
           fi
 
+      # Versão com "-" (ex.: 3.4.0-beta.0) sai no dist-tag next: sem isso o registry
+      # a marcaria como latest e todo `pnpm add` sem versão instalaria o beta.
       - name: Publicar
-        run: pnpm publish --no-git-checks
+        run: |
+          versao="$(node -p "require('./package.json').version")"
+          case "$versao" in *-*) tag=next ;; *) tag=latest ;; esac
+          pnpm publish --no-git-checks --tag "$tag"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

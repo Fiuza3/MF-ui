@@ -17,13 +17,16 @@ describe("LogoAnimado", () => {
     ).toBeInTheDocument();
   });
 
-  it("nao esconde o texto do logo no primeiro paint", () => {
+  it("nao esconde o logo no primeiro paint", () => {
     const { container } = render(<LogoAnimado />);
-    const texto = container.querySelector("text");
+    const pecas = container.querySelectorAll("path");
 
-    expect(texto).not.toBeNull();
-    expect(texto?.getAttribute("opacity")).not.toBe("0");
-    expect(/opacity:\s*0\s*(;|$)/.test(texto?.getAttribute("style") ?? "")).toBe(false);
+    expect(pecas.length).toBeGreaterThan(0);
+    expect(container.querySelector("text")).toBeNull();
+    for (const peca of pecas) {
+      expect(peca.getAttribute("opacity")).not.toBe("0");
+      expect(/opacity:s*0s*(;|$)/.test(peca.getAttribute("style") ?? "")).toBe(false);
+    }
   });
 
   it("com o rótulo padrão não repete a marca no nome acessível", () => {

@@ -1,4 +1,5 @@
-import { familias } from "../tokens/tipografia";
+import { layoutBrand } from "../brand";
+import { BrandMark } from "./BrandMark";
 
 export type LogoProps = {
   tamanho?: number;
@@ -8,9 +9,20 @@ export type LogoProps = {
   className?: string;
 };
 
+/** @deprecated Eram da versão com fonte; o desenho vetorial não usa mais. Use BrandMark. */
 export const RATIO_AVANCO_LOGO = 13.2 / 22;
+/** @deprecated Eram da versão com fonte; o desenho vetorial não usa mais. Use BrandMark. */
 export const RATIO_ALTURA_LOGO = 30 / 22;
+/** @deprecated Eram da versão com fonte; o desenho vetorial não usa mais. Use BrandMark. */
 export const RATIO_PADDING_LOGO = 1 / 22;
+
+const VIEWBOX_HEIGHT = layoutBrand("horizontal").viewBox.height;
+
+// `tamanho` era o corpo da fonte (1000 unidades/em): a altura do glifo continua
+// proporcional a ele, então quem já usava Logo não vê a marca crescer ou encolher.
+export const alturaDoLogo = (tamanho: number): number => (tamanho * VIEWBOX_HEIGHT) / 1000;
+
+export const opacidadePadraoDosColchetes = (compacto: boolean): number => (compacto ? 0.28 : 0.58);
 
 export function Logo({
   tamanho = 24,
@@ -19,37 +31,14 @@ export function Logo({
   compacto = false,
   className,
 }: LogoProps) {
-  const cw = tamanho * RATIO_AVANCO_LOGO;
-  const altura = tamanho * RATIO_ALTURA_LOGO;
-  const padX = tamanho * RATIO_PADDING_LOGO;
-  // Um único <text> "<MF/>": a fonte cuida do espaçamento natural entre os
-  // glifos (como no logo original). Os colchetes ganham opacidade via <tspan>.
-  const larguraTotal = padX + cw * 5;
-  const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
-
   return (
-    <svg
-      role="img"
-      aria-label="MF Desenvolvimento"
-      viewBox={`0 0 ${larguraTotal} ${altura}`}
-      height={altura}
-      style={{ width: "auto", overflow: "visible" }}
-      xmlns="http://www.w3.org/2000/svg"
+    <BrandMark
+      variant="horizontal"
+      tone="cyan"
+      color={cor}
+      height={alturaDoLogo(tamanho)}
+      bracketOpacity={opacidadeColchetes ?? opacidadePadraoDosColchetes(compacto)}
       className={className}
-    >
-      <text
-        x={padX}
-        y={altura / 2}
-        dominantBaseline="central"
-        fontFamily={familias.logo}
-        fontWeight={700}
-        fontSize={tamanho}
-        fill={cor}
-      >
-        <tspan fillOpacity={opColchetes}>{"<"}</tspan>
-        <tspan>MF</tspan>
-        <tspan fillOpacity={opColchetes}>{"/>"}</tspan>
-      </text>
-    </svg>
+    />
   );
 }

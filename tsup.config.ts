@@ -5,6 +5,7 @@ import { preserveDirectivesPlugin } from "esbuild-plugin-preserve-directives";
 export default defineConfig({
   entry: [
     "src/index.ts",
+    "src/brand/index.ts",
     "src/tokens/index.ts",
     "src/primitivos/index.ts",
     "src/blocos/index.ts",

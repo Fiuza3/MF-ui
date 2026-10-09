@@ -1,6 +1,6 @@
 {
   "name": "@fiuza3/mf-ui",
-  "version": "3.3.2",
+  "version": "3.4.0-beta.0",
   "description": "Design system compartilhado da MF Desenvolvimento",
   "author": "Marcus Fiuza <devfiuza@gmail.com>",
   "license": "MIT",
@@ -22,39 +22,49 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
       "import": "./dist/tokens/index.mjs",
-      "require": "./dist/tokens/index.js",
-      "types": "./dist/tokens/index.d.ts"
+      "require": "./dist/tokens/index.js"
     },
     "./primitivos": {
+      "types": "./dist/primitivos/index.d.ts",
       "import": "./dist/primitivos/index.mjs",
-      "require": "./dist/primitivos/index.js",
-      "types": "./dist/primitivos/index.d.ts"
+      "require": "./dist/primitivos/index.js"
     },
     "./blocos": {
+      "types": "./dist/blocos/index.d.ts",
       "import": "./dist/blocos/index.mjs",
-      "require": "./dist/blocos/index.js",
-      "types": "./dist/blocos/index.d.ts"
+      "require": "./dist/blocos/index.js"
     },
     "./blocos-app": {
+      "types": "./dist/blocos-app/index.d.ts",
       "import": "./dist/blocos-app/index.mjs",
-      "require": "./dist/blocos-app/index.js",
-      "types": "./dist/blocos-app/index.d.ts"
+      "require": "./dist/blocos-app/index.js"
+    },
+    "./brand": {
+      "types": "./dist/brand/index.d.ts",
+      "import": "./dist/brand/index.mjs",
+      "require": "./dist/brand/index.js"
     },
     "./globals.css": "./src/tokens/globals.css",
-    "./utilitarios.css": "./src/tokens/utilitarios.css"
+    "./utilitarios.css": "./src/tokens/utilitarios.css",
+    "./brand/*": "./brand/*"
   },
   "files": [
     "dist",
+    "brand/svg",
+    "brand/favicon",
+    "brand/README.md",
     "src",
     "!src/testes",
     "!src/blocos-app/__tests__",
-    "!src/**/*.stories.tsx"
+    "!src/**/*.stories.tsx",
+    "!src/brand-docs"
   ],
   "scripts": {
     "build": "tsup",
@@ -67,9 +77,10 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepublishOnly": "pnpm typecheck && pnpm test && pnpm build",
+    "prepublishOnly": "pnpm typecheck && pnpm test && pnpm brand && pnpm build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "brand": "node scripts/brand/generate.mjs"
   },
   "peerDependencies": {
     "@radix-ui/react-accordion": ">=1.2",
@@ -127,6 +138,7 @@
     "react-dom": "^19",
     "react-hook-form": "^7.88.0",
     "recharts": "^3.10.1",
+    "sharp": "^0.35.5",
     "storybook": "10.6.0",
     "tailwindcss": "^4.3.3",
     "tsup": "^8.0.0",

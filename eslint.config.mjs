@@ -56,6 +56,17 @@ export default tseslint.config(
     },
   },
 
+  // Scripts de build (gerador da marca): rodam no Node, nunca vão para o bundle.
+  {
+    files: ["scripts/**/*.{js,mjs,cjs}"],
+    languageOptions: { globals: { ...globals.node } },
+  },
+  // .cjs é CommonJS por definição: require é a forma de importar ali.
+  {
+    files: ["scripts/**/*.cjs"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
+  },
+
   {
     files: ["src/testes/**/*.{ts,tsx}"],
     rules: {

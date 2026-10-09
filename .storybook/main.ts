@@ -5,6 +5,8 @@ const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)"],
   addons: ["@storybook/addon-docs"],
   framework: "@storybook/react-vite",
+  // Arquivos da marca (SVG, PNG, favicons) servidos em /brand para os links de download do manual.
+  staticDirs: [{ from: "../brand", to: "/brand" }],
   core: { disableTelemetry: true },
   async viteFinal(viteConfig) {
     viteConfig.plugins = [...(viteConfig.plugins ?? []), tailwindcss()];
