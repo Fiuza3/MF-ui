@@ -1,11 +1,8 @@
 'use client'
 
-// src/lib/cn.ts
-import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-function cn(...inputs) {
-  return twMerge(clsx(inputs));
-}
+import {
+  cn
+} from "./chunk-TE62FXIV.mjs";
 
 // src/primitivos/OverlayClose.tsx
 import * as DialogPrimitive from "@radix-ui/react-dialog";
@@ -29,7 +26,6 @@ function OverlayClose({ className }) {
 }
 
 export {
-  cn,
   OverlayClose
 };
-//# sourceMappingURL=chunk-ZTAXVNYF.mjs.map
+//# sourceMappingURL=chunk-D4CBAES4.mjs.map

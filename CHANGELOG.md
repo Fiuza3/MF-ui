@@ -4,6 +4,18 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [3.3.3] — 2026-10-09
+
+O `AnimatedIcon` deixa de pesar em rotas que não o usam. Nenhuma assinatura mudou.
+
+### Corrigido
+
+- `AnimatedIcon`: o build ESM o agrupava no mesmo chunk de `Badge`, `Textarea`, `Separator`, `Accordion`, `Tooltip`, `Select` e `Checkbox`. O bundler do consumidor faz tree-shaking por export, mas carrega o módulo inteiro assim que qualquer um desses primitivos é usado; no site, o código do `AnimatedIcon` (1,1 KB gzip, medido no chunk isolado) passou a ir para todas as rotas, inclusive as sem nenhum ícone animado. O componente agora é entrada própria do tsup e sai num chunk isolado (`use client` preservado). Os exports de `src/index.ts` e `src/primitivos/index.ts` não mudaram.
+
+### Adicionado
+
+- Teste `chunks-dist`: falha se algum chunk do `dist/` juntar o código do `AnimatedIcon` com outro componente.
+
 ## [3.3.2] — 2026-10-09
 
 Alvos de toque de 42 px (e menores) chegam ao piso do sistema. Nenhuma assinatura mudou.
