@@ -29,4 +29,13 @@ describe("chunks do dist", () => {
       expect(modulosDe(chunk.fonte), chunk.nome).toEqual(["src/primitivos/AnimatedIcon.tsx"]);
     }
   });
+
+  it("o CssAnimatedIcon fica num chunk sem diretiva de cliente", () => {
+    const comCss = chunksDeCodigo().filter((c) => modulosDe(c.fonte).includes("src/primitivos/CssAnimatedIcon.tsx"));
+
+    expect(comCss.length).toBeGreaterThan(0);
+    for (const chunk of comCss) {
+      expect(chunk.fonte.trimStart(), chunk.nome).not.toMatch(/^["']use client["']/);
+    }
+  });
 });
