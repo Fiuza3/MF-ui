@@ -28,3 +28,5 @@ export * from "./DropdownMenu";
 export * from "./Toast";
 export { AnimatedIcon } from "./AnimatedIcon";
 export type { AnimatedIconProps, AnimatedIconAnimation, AnimatedIconTrigger } from "./AnimatedIcon";
+export { CssAnimatedIcon } from "./CssAnimatedIcon";
+export type { CssAnimatedIconProps, CssAnimatedIconAnimation, CssAnimatedIconTrigger } from "./CssAnimatedIcon";
