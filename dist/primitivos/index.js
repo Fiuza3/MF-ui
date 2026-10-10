@@ -47,6 +47,7 @@ __export(primitivos_exports, {
   CardHeader: () => CardHeader,
   CardTitle: () => CardTitle,
   Checkbox: () => Checkbox,
+  CssAnimatedIcon: () => CssAnimatedIcon,
   Dialog: () => Dialog,
   DialogClose: () => DialogClose,
   DialogContent: () => DialogContent,
@@ -1667,6 +1668,32 @@ function AnimatedIcon({
     }
   );
 }
+
+// src/primitivos/CssAnimatedIcon.tsx
+var import_jsx_runtime24 = require("react/jsx-runtime");
+function CssAnimatedIcon({
+  icon: Icon2,
+  animation,
+  trigger = "hover",
+  size = 24,
+  label,
+  className,
+  ...props
+}) {
+  const acessivel = label ? { role: "img", "aria-label": label } : { "aria-hidden": true };
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
+    Icon2,
+    {
+      size,
+      "data-slot": "animated-icon",
+      "data-anim": animation,
+      "data-trigger": trigger,
+      className: cn("mf-anim-icon", className),
+      ...acessivel,
+      ...props
+    }
+  );
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Accordion,
@@ -1684,6 +1711,7 @@ function AnimatedIcon({
   CardHeader,
   CardTitle,
   Checkbox,
+  CssAnimatedIcon,
   Dialog,
   DialogClose,
   DialogContent,
