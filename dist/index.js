@@ -2083,6 +2083,7 @@ function TooltipContent({
 }
 
 // src/primitivos/Select.tsx
+var React3 = __toESM(require("react"));
 var SelectPrimitive = __toESM(require("@radix-ui/react-select"));
 var import_lucide_react4 = require("lucide-react");
 var import_jsx_runtime22 = require("react/jsx-runtime");
@@ -2118,7 +2119,7 @@ function SelectTrigger({
       ...props,
       children: [
         children,
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_lucide_react4.ChevronDownIcon, { className: "size-4 opacity-50 shrink-0" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_lucide_react4.ChevronDownIcon, { "data-slot": "select-trigger-icon", className: "size-4 opacity-50 shrink-0" }) })
       ]
     }
   );
@@ -2195,23 +2196,51 @@ function SelectLabel({ className, ...props }) {
     }
   );
 }
-function SelectItem({
-  className,
-  children,
-  ...props
-}) {
+function SelectItem({ className, children, description, icon, ...props }) {
+  const descriptionId = React3.useId();
+  const hasDescription = description !== void 0 && description !== null;
+  const hasIcon = icon !== void 0 && icon !== null;
   return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
     SelectPrimitive.Item,
     {
       "data-slot": "select-item",
+      "aria-describedby": hasDescription ? descriptionId : void 0,
       className: cn(
-        "focus:bg-foreground/10 focus:text-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "group/select-item focus:bg-foreground/10 focus:text-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        (hasDescription || hasIcon) && "gap-3 py-2",
         className
       ),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "absolute right-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_lucide_react4.CheckIcon, { className: "size-4" }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SelectPrimitive.ItemText, { children })
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+          "span",
+          {
+            "data-slot": "select-item-indicator",
+            className: "absolute right-2 flex size-3.5 items-center justify-center",
+            children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_lucide_react4.CheckIcon, { className: "size-4" }) })
+          }
+        ),
+        hasIcon && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+          "span",
+          {
+            "data-slot": "select-item-icon",
+            "aria-hidden": "true",
+            className: "bg-muted text-foreground group-data-[state=checked]/select-item:bg-brand group-data-[state=checked]/select-item:text-brand-foreground flex size-8 shrink-0 items-center justify-center rounded-md transition-colors",
+            children: icon
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("span", { "data-slot": "select-item-body", className: "grid min-w-0 gap-0.5", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { "data-slot": "select-item-label", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(SelectPrimitive.ItemText, { children }) }),
+          hasDescription && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+            "span",
+            {
+              id: descriptionId,
+              "data-slot": "select-item-description",
+              className: "text-muted-foreground text-xs leading-snug",
+              children: description
+            }
+          )
+        ] })
       ]
     }
   );
@@ -2779,7 +2808,7 @@ function DropdownMenuSubContent({
 }
 
 // src/primitivos/Toast.tsx
-var React3 = __toESM(require("react"));
+var React4 = __toESM(require("react"));
 var ToastPrimitive = __toESM(require("@radix-ui/react-toast"));
 var import_class_variance_authority3 = require("class-variance-authority");
 var import_lucide_react8 = require("lucide-react");
@@ -2885,23 +2914,23 @@ function ToastClose({ className, ...props }) {
     }
   );
 }
-var ToastContext = React3.createContext(null);
+var ToastContext = React4.createContext(null);
 var toastSeq = 0;
 function gerarToastId() {
   toastSeq += 1;
   return `toast-${toastSeq}-${Date.now()}`;
 }
 function ToastComponentProvider({ children }) {
-  const [toasts, setToasts] = React3.useState([]);
-  const dismiss = React3.useCallback((id) => {
+  const [toasts, setToasts] = React4.useState([]);
+  const dismiss = React4.useCallback((id) => {
     setToasts((atual) => atual.filter((t) => t.id !== id));
   }, []);
-  const toast = React3.useCallback((data) => {
+  const toast = React4.useCallback((data) => {
     const id = gerarToastId();
     setToasts((atual) => [...atual, { ...data, id }]);
     return id;
   }, []);
-  const value = React3.useMemo(() => ({ toasts, toast, dismiss }), [toasts, toast, dismiss]);
+  const value = React4.useMemo(() => ({ toasts, toast, dismiss }), [toasts, toast, dismiss]);
   return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(ToastContext.Provider, { value, children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(ToastProvider, { children: [
     children,
     toasts.map((t) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(
@@ -2927,7 +2956,7 @@ function ToastComponentProvider({ children }) {
   ] }) });
 }
 function useToast() {
-  const context = React3.useContext(ToastContext);
+  const context = React4.useContext(ToastContext);
   if (!context) {
     throw new Error("useToast deve ser usado dentro de <ToastComponentProvider>");
   }
@@ -2935,17 +2964,17 @@ function useToast() {
 }
 
 // src/primitivos/AnimatedIcon.tsx
-var React4 = __toESM(require("react"));
+var React5 = __toESM(require("react"));
 var import_jsx_runtime31 = require("react/jsx-runtime");
 var semAssinatura = () => () => {
 };
 var lerSuporte = () => typeof IntersectionObserver === "undefined" ? "nao" : "sim";
 var lerSuporteServidor = () => "servidor";
 function useInViewActivation(alvo, enabled) {
-  const suporte = React4.useSyncExternalStore(semAssinatura, lerSuporte, lerSuporteServidor);
-  const [visto, setVisto] = React4.useState(false);
+  const suporte = React5.useSyncExternalStore(semAssinatura, lerSuporte, lerSuporteServidor);
+  const [visto, setVisto] = React5.useState(false);
   const observavel = enabled && suporte === "sim";
-  React4.useEffect(() => {
+  React5.useEffect(() => {
     if (!observavel || !alvo) return;
     const observador = new IntersectionObserver(
       ([entrada]) => {
@@ -2965,7 +2994,7 @@ function useInViewActivation(alvo, enabled) {
 }
 var FORMAS = "path, circle, line, polyline, polygon, rect, ellipse";
 function useNormalizedPathLength(alvo, enabled) {
-  React4.useLayoutEffect(() => {
+  React5.useLayoutEffect(() => {
     if (!enabled || !alvo) return;
     const formas = alvo.querySelectorAll(FORMAS);
     formas.forEach((forma) => forma.setAttribute("pathLength", "100"));
@@ -2986,8 +3015,8 @@ function AnimatedIcon({
   ref: refDoConsumidor,
   ...props
 }) {
-  const [no, setNo] = React4.useState(null);
-  const ref = React4.useCallback(
+  const [no, setNo] = React5.useState(null);
+  const ref = React5.useCallback(
     (alvo) => {
       setNo(alvo);
       atribuirRef(refDoConsumidor, alvo);
@@ -3819,7 +3848,7 @@ function Contact({
 }
 
 // src/blocos-app/AppShell.tsx
-var React5 = __toESM(require("react"));
+var React6 = __toESM(require("react"));
 var import_lucide_react12 = require("lucide-react");
 var import_jsx_runtime40 = require("react/jsx-runtime");
 function AppShell({ sidebar, topbar, children, className, larguraSidebar = "w-64" }) {
@@ -3852,7 +3881,7 @@ function AppShell({ sidebar, topbar, children, className, larguraSidebar = "w-64
   ] });
 }
 function MenuMobile({ sidebar }) {
-  const [aberto, setAberto] = React5.useState(false);
+  const [aberto, setAberto] = React6.useState(false);
   function fecharAoNavegar(event) {
     if (event.target instanceof Element && event.target.closest("a[href]")) setAberto(false);
   }
@@ -4021,11 +4050,11 @@ function PageHeader({ title, breadcrumb, actions, className }) {
 }
 
 // src/blocos-app/FormField.tsx
-var React6 = __toESM(require("react"));
+var React7 = __toESM(require("react"));
 var import_react_slot3 = require("@radix-ui/react-slot");
 var import_jsx_runtime45 = require("react/jsx-runtime");
 function FormField({ label, error, children, className, htmlFor }) {
-  const idGerado = React6.useId();
+  const idGerado = React7.useId();
   const controlId = htmlFor ?? idGerado;
   const errorId = `${controlId}-error`;
   const propsDoControle = {
@@ -4035,13 +4064,13 @@ function FormField({ label, error, children, className, htmlFor }) {
   };
   return /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)("div", { "data-slot": "form-field", className: cn("flex flex-col gap-1.5", className), children: [
     /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Label, { htmlFor: controlId, children: label }),
-    React6.isValidElement(children) ? /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(import_react_slot3.Slot, { ...propsDoControle, children }) : children,
+    React7.isValidElement(children) ? /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(import_react_slot3.Slot, { ...propsDoControle, children }) : children,
     error && /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("p", { id: errorId, role: "alert", className: "text-destructive text-xs font-medium", children: error })
   ] });
 }
 
 // src/blocos-app/CopyField.tsx
-var React7 = __toESM(require("react"));
+var React8 = __toESM(require("react"));
 var import_lucide_react14 = require("lucide-react");
 var import_jsx_runtime46 = require("react/jsx-runtime");
 var MENSAGEM = {
@@ -4058,11 +4087,11 @@ async function copiarTexto(texto) {
   }
 }
 function CopyField({ value, label, className, feedbackDurationMs = 2e3 }) {
-  const [estado, setEstado] = React7.useState("ocioso");
-  const inputRef = React7.useRef(null);
-  const timerRef = React7.useRef(void 0);
-  const inputId = React7.useId();
-  React7.useEffect(() => () => window.clearTimeout(timerRef.current), []);
+  const [estado, setEstado] = React8.useState("ocioso");
+  const inputRef = React8.useRef(null);
+  const timerRef = React8.useRef(void 0);
+  const inputId = React8.useId();
+  React8.useEffect(() => () => window.clearTimeout(timerRef.current), []);
   async function copiarValor() {
     window.clearTimeout(timerRef.current);
     const copiou = await copiarTexto(value);

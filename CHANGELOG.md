@@ -4,6 +4,13 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+### Adicionado
+
+- `SelectItem` aceita `description` e `icon`. A descrição aparece sob o rótulo e vira a descrição acessível da opção (`aria-describedby`); o ícone vai num ladrilho decorativo que acende em `brand` quando a opção está escolhida. Só o rótulo entra no `ItemText`, então o gatilho fechado continua mostrando só o nome. Item sem as duas props não muda.
+- Ganchos de estilo estáveis no Select: `data-slot` em `select-item-indicator`, `select-item-icon`, `select-item-body`, `select-item-label`, `select-item-description` e `select-trigger-icon`, para o consumidor tematizar sem depender da ordem dos filhos.
+
 ## [3.4.0-beta.0] — 2026-10-09
 
 A marca `<MF/>` vira contorno vetorial, com variantes, tons, animações e o pacote completo de arquivos. Versão de teste no dist-tag `next`: `latest` continua na 3.3.x.
