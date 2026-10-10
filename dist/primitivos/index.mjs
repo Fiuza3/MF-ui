@@ -52,7 +52,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "../chunk-YTSJF7V4.mjs";
+} from "../chunk-5MIOTMXS.mjs";
 import {
   Dialog,
   DialogClose,
@@ -107,6 +107,9 @@ import "../chunk-D4CBAES4.mjs";
 import {
   AnimatedIcon
 } from "../chunk-ECVJPYOC.mjs";
+import {
+  CssAnimatedIcon
+} from "../chunk-JGBDBQYY.mjs";
 import "../chunk-TE62FXIV.mjs";
 export {
   Accordion,
@@ -124,6 +127,7 @@ export {
   CardHeader,
   CardTitle,
   Checkbox,
+  CssAnimatedIcon,
   Dialog,
   DialogClose,
   DialogContent,

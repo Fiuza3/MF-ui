@@ -4,6 +4,15 @@ Todas as mudanças relevantes deste pacote são registradas aqui.
 
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
+## [3.4.0] — 2026-10-10
+
+Ícone animado sem JavaScript no navegador para o caso mais comum (hover). Nenhuma assinatura existente mudou.
+
+### Adicionado
+
+- `CssAnimatedIcon`: mesma marcação e mesmo `animated-icon.css` do `AnimatedIcon`, sem hooks e sem `"use client"`, para as animações que o CSS resolve sozinho (`pulse`, `nudge`, `spin`) nos gatilhos `hover` e `always`. Importado de `@mf/ui/primitivos`, roda em Server Component. No site, trocar o `AnimatedIcon` de ícones de hover por ele tira 9 KB gzip de toda rota: o Turbopack sobe o client component usado em muitas páginas para o chunk do layout. `draw` e `inview` continuam no `AnimatedIcon`, que precisa de JS.
+- Teste `chunks-dist`: falha se o chunk do `CssAnimatedIcon` ganhar diretiva de cliente.
+
 ## [3.3.3] — 2026-10-09
 
 O `AnimatedIcon` deixa de pesar em rotas que não o usam. Nenhuma assinatura mudou.

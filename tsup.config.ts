@@ -10,6 +10,9 @@ export default defineConfig({
     // Entrada própria: sem ela o AnimatedIcon cai no chunk compartilhado com Badge, Tooltip etc.
     // e vai para toda rota do consumidor, mesmo sem uso.
     "src/primitivos/AnimatedIcon.tsx",
+    // Entrada própria e sem "use client" no chunk: importado de "@mf/ui/primitivos",
+    // roda em Server Component sem mandar JS ao navegador.
+    "src/primitivos/CssAnimatedIcon.tsx",
     "src/blocos/index.ts",
     "src/blocos-app/index.ts",
   ],

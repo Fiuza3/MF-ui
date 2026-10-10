@@ -14,11 +14,12 @@ import * as TabsPrimitive from '@radix-ui/react-tabs';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 export { AnimatedIcon, AnimatedIconAnimation, AnimatedIconProps, AnimatedIconTrigger } from './AnimatedIcon.js';
+export { CssAnimatedIcon, CssAnimatedIconAnimation, CssAnimatedIconProps, CssAnimatedIconTrigger } from './CssAnimatedIcon.js';
 import 'lucide-react';
 
 declare const buttonVariants: (props?: ({
     variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
-    size?: "default" | "icon" | "xs" | "sm" | "lg" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined;
+    size?: "icon" | "default" | "xs" | "sm" | "lg" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 declare function Button({ className, variant, size, asChild, loading, disabled, children, ...props }: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;

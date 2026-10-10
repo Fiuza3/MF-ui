@@ -22,15 +22,6 @@ import {
   StatCard
 } from "./chunk-IHQZJJTE.mjs";
 import {
-  cores,
-  curvas,
-  duracoes,
-  familias,
-  pesos,
-  tokensDeCor,
-  tokensDeMotion
-} from "./chunk-IVHAI5QT.mjs";
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -84,7 +75,7 @@ import {
   badgeVariants,
   toastVariants,
   useToast
-} from "./chunk-YTSJF7V4.mjs";
+} from "./chunk-5MIOTMXS.mjs";
 import {
   Dialog,
   DialogClose,
@@ -140,8 +131,20 @@ import {
   AnimatedIcon
 } from "./chunk-ECVJPYOC.mjs";
 import {
+  CssAnimatedIcon
+} from "./chunk-JGBDBQYY.mjs";
+import {
   cn
 } from "./chunk-TE62FXIV.mjs";
+import {
+  cores,
+  curvas,
+  duracoes,
+  familias,
+  pesos,
+  tokensDeCor,
+  tokensDeMotion
+} from "./chunk-IVHAI5QT.mjs";
 
 // src/componentes/Logo.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -694,6 +697,7 @@ export {
   Checkbox,
   Contact,
   CopyField,
+  CssAnimatedIcon,
   DataTable,
   Dialog,
   DialogClose,
