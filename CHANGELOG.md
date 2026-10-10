@@ -10,7 +10,7 @@ O `AnimatedIcon` deixa de pesar em rotas que não o usam. Nenhuma assinatura mud
 
 ### Corrigido
 
-- `AnimatedIcon`: o build ESM o agrupava no mesmo chunk de `Badge`, `Textarea`, `Separator`, `Accordion`, `Tooltip`, `Select` e `Checkbox`. O bundler do consumidor faz tree-shaking por export, mas carrega o módulo inteiro assim que qualquer um desses primitivos é usado; no site, o código do `AnimatedIcon` (~6 KB gzip) passou a ir para TODAS as rotas, inclusive as sem nenhum ícone animado. O componente agora é entrada própria do tsup e sai num chunk isolado (`use client` preservado). Os exports de `src/index.ts` e `src/primitivos/index.ts` não mudaram.
+- `AnimatedIcon`: o build ESM o agrupava no mesmo chunk de `Badge`, `Textarea`, `Separator`, `Accordion`, `Tooltip`, `Select` e `Checkbox`. O bundler do consumidor faz tree-shaking por export, mas carrega o módulo inteiro assim que qualquer um desses primitivos é usado; no site, o código do `AnimatedIcon` (1,1 KB gzip, medido no chunk isolado) passou a ir para todas as rotas, inclusive as sem nenhum ícone animado. O componente agora é entrada própria do tsup e sai num chunk isolado (`use client` preservado). Os exports de `src/index.ts` e `src/primitivos/index.ts` não mudaram.
 
 ### Adicionado
 

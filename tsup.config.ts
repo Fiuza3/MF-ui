@@ -7,7 +7,7 @@ export default defineConfig({
     "src/index.ts",
     "src/tokens/index.ts",
     "src/primitivos/index.ts",
-    // Entrada propria: sem ela o AnimatedIcon cai no chunk compartilhado com Badge, Tooltip etc.
+    // Entrada própria: sem ela o AnimatedIcon cai no chunk compartilhado com Badge, Tooltip etc.
     // e vai para toda rota do consumidor, mesmo sem uso.
     "src/primitivos/AnimatedIcon.tsx",
     "src/blocos/index.ts",
