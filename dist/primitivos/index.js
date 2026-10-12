@@ -738,6 +738,7 @@ function TooltipContent({
 }
 
 // src/primitivos/Select.tsx
+var React = __toESM(require("react"));
 var SelectPrimitive = __toESM(require("@radix-ui/react-select"));
 var import_lucide_react4 = require("lucide-react");
 var import_jsx_runtime14 = require("react/jsx-runtime");
@@ -773,7 +774,7 @@ function SelectTrigger({
       ...props,
       children: [
         children,
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_lucide_react4.ChevronDownIcon, { className: "size-4 opacity-50 shrink-0" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_lucide_react4.ChevronDownIcon, { "data-slot": "select-trigger-icon", className: "size-4 opacity-50 shrink-0" }) })
       ]
     }
   );
@@ -850,23 +851,51 @@ function SelectLabel({ className, ...props }) {
     }
   );
 }
-function SelectItem({
-  className,
-  children,
-  ...props
-}) {
+function SelectItem({ className, children, description, icon, ...props }) {
+  const descriptionId = React.useId();
+  const hasDescription = description !== void 0 && description !== null;
+  const hasIcon = icon !== void 0 && icon !== null;
   return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
     SelectPrimitive.Item,
     {
       "data-slot": "select-item",
+      "aria-describedby": hasDescription ? descriptionId : void 0,
       className: cn(
-        "focus:bg-foreground/10 focus:text-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "group/select-item focus:bg-foreground/10 focus:text-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        (hasDescription || hasIcon) && "gap-3 py-2",
         className
       ),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "absolute right-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_lucide_react4.CheckIcon, { className: "size-4" }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SelectPrimitive.ItemText, { children })
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+          "span",
+          {
+            "data-slot": "select-item-indicator",
+            className: "absolute right-2 flex size-3.5 items-center justify-center",
+            children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_lucide_react4.CheckIcon, { className: "size-4" }) })
+          }
+        ),
+        hasIcon && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+          "span",
+          {
+            "data-slot": "select-item-icon",
+            "aria-hidden": "true",
+            className: "bg-muted text-foreground group-data-[state=checked]/select-item:bg-brand group-data-[state=checked]/select-item:text-brand-foreground flex size-8 shrink-0 items-center justify-center rounded-md transition-colors",
+            children: icon
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", { "data-slot": "select-item-body", className: "grid min-w-0 gap-0.5", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { "data-slot": "select-item-label", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SelectPrimitive.ItemText, { children }) }),
+          hasDescription && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+            "span",
+            {
+              id: descriptionId,
+              "data-slot": "select-item-description",
+              className: "text-muted-foreground text-xs leading-snug",
+              children: description
+            }
+          )
+        ] })
       ]
     }
   );
@@ -1434,7 +1463,7 @@ function DropdownMenuSubContent({
 }
 
 // src/primitivos/Toast.tsx
-var React = __toESM(require("react"));
+var React2 = __toESM(require("react"));
 var ToastPrimitive = __toESM(require("@radix-ui/react-toast"));
 var import_class_variance_authority3 = require("class-variance-authority");
 var import_lucide_react8 = require("lucide-react");
@@ -1540,23 +1569,23 @@ function ToastClose({ className, ...props }) {
     }
   );
 }
-var ToastContext = React.createContext(null);
+var ToastContext = React2.createContext(null);
 var toastSeq = 0;
 function gerarToastId() {
   toastSeq += 1;
   return `toast-${toastSeq}-${Date.now()}`;
 }
 function ToastComponentProvider({ children }) {
-  const [toasts, setToasts] = React.useState([]);
-  const dismiss = React.useCallback((id) => {
+  const [toasts, setToasts] = React2.useState([]);
+  const dismiss = React2.useCallback((id) => {
     setToasts((atual) => atual.filter((t) => t.id !== id));
   }, []);
-  const toast = React.useCallback((data) => {
+  const toast = React2.useCallback((data) => {
     const id = gerarToastId();
     setToasts((atual) => [...atual, { ...data, id }]);
     return id;
   }, []);
-  const value = React.useMemo(() => ({ toasts, toast, dismiss }), [toasts, toast, dismiss]);
+  const value = React2.useMemo(() => ({ toasts, toast, dismiss }), [toasts, toast, dismiss]);
   return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(ToastContext.Provider, { value, children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(ToastProvider, { children: [
     children,
     toasts.map((t) => /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
@@ -1582,7 +1611,7 @@ function ToastComponentProvider({ children }) {
   ] }) });
 }
 function useToast() {
-  const context = React.useContext(ToastContext);
+  const context = React2.useContext(ToastContext);
   if (!context) {
     throw new Error("useToast deve ser usado dentro de <ToastComponentProvider>");
   }
@@ -1590,17 +1619,17 @@ function useToast() {
 }
 
 // src/primitivos/AnimatedIcon.tsx
-var React2 = __toESM(require("react"));
+var React3 = __toESM(require("react"));
 var import_jsx_runtime23 = require("react/jsx-runtime");
 var semAssinatura = () => () => {
 };
 var lerSuporte = () => typeof IntersectionObserver === "undefined" ? "nao" : "sim";
 var lerSuporteServidor = () => "servidor";
 function useInViewActivation(alvo, enabled) {
-  const suporte = React2.useSyncExternalStore(semAssinatura, lerSuporte, lerSuporteServidor);
-  const [visto, setVisto] = React2.useState(false);
+  const suporte = React3.useSyncExternalStore(semAssinatura, lerSuporte, lerSuporteServidor);
+  const [visto, setVisto] = React3.useState(false);
   const observavel = enabled && suporte === "sim";
-  React2.useEffect(() => {
+  React3.useEffect(() => {
     if (!observavel || !alvo) return;
     const observador = new IntersectionObserver(
       ([entrada]) => {
@@ -1620,7 +1649,7 @@ function useInViewActivation(alvo, enabled) {
 }
 var FORMAS = "path, circle, line, polyline, polygon, rect, ellipse";
 function useNormalizedPathLength(alvo, enabled) {
-  React2.useLayoutEffect(() => {
+  React3.useLayoutEffect(() => {
     if (!enabled || !alvo) return;
     const formas = alvo.querySelectorAll(FORMAS);
     formas.forEach((forma) => forma.setAttribute("pathLength", "100"));
@@ -1641,8 +1670,8 @@ function AnimatedIcon({
   ref: refDoConsumidor,
   ...props
 }) {
-  const [no, setNo] = React2.useState(null);
-  const ref = React2.useCallback(
+  const [no, setNo] = React3.useState(null);
+  const ref = React3.useCallback(
     (alvo) => {
       setNo(alvo);
       atribuirRef(refDoConsumidor, alvo);

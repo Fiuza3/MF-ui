@@ -58,8 +58,12 @@ describe("globals.css e a unica fonte de valor", () => {
 
   it("nenhum hexadecimal de cor fora de globals.css", () => {
     const infratores: string[] = [];
+    // Exceção única: a paleta da marca. Ela pinta SVG/PNG/favicon renderizados
+    // fora de qualquer tema, onde var(--token) não existe, e por definição não
+    // muda entre claro e escuro. Todo o resto da marca lê BRAND_COLORS dali.
+    const paletaDaMarca = join("src", "brand", "palette.ts");
 
-    for (const caminho of ARQUIVOS) {
+    for (const caminho of ARQUIVOS.filter((c) => relative(process.cwd(), c) !== paletaDaMarca)) {
       const conteudo = readFileSync(caminho, "utf8");
       conteudo.split("\n").forEach((linha, i) => {
         const achados = linha.match(/#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?\b/g);

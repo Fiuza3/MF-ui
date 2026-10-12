@@ -1,7 +1,7 @@
 "use client";
 
-import { RATIO_ALTURA_LOGO, RATIO_AVANCO_LOGO, RATIO_PADDING_LOGO } from "./Logo";
-import { familias } from "../tokens/tipografia";
+import { alturaDoLogo, opacidadePadraoDosColchetes } from "./Logo";
+import { BrandMarkAnimated } from "./BrandMarkAnimated";
 
 export type LogoAnimadoProps = {
   tamanho?: number;
@@ -24,39 +24,16 @@ export function LogoAnimado({
   label = MARCA,
   className,
 }: LogoAnimadoProps) {
-  const cw = tamanho * RATIO_AVANCO_LOGO;
-  const altura = tamanho * RATIO_ALTURA_LOGO;
-  const padX = tamanho * RATIO_PADDING_LOGO;
-  const larguraTotal = padX + cw * 5;
-  const opColchetes = opacidadeColchetes ?? (compacto ? 0.28 : 0.58);
-
-  // Um único <text> "<MF/>" (colchetes via <tspan> com opacidade): a fonte cuida
-  // do espaçamento natural entre os glifos, igual ao logo original.
+  const brilho = onClick ? "group-hover/logo:[filter:drop-shadow(0_0_9px_var(--cyan-glow))]" : "";
   const svg = (
-    <svg
-      role="img"
-      aria-label={label}
-      viewBox={`0 0 ${larguraTotal} ${altura}`}
-      height={altura}
-      style={{ width: "auto", overflow: "visible" }}
-      xmlns="http://www.w3.org/2000/svg"
-      className={`transition-[filter] duration-300 ${onClick ? "group-hover/logo:[filter:drop-shadow(0_0_9px_var(--cyan-glow))]" : ""} ${className ?? ""}`}
-    >
-      <text
-        className="mf-entrada mf-entrada-fade"
-        x={padX}
-        y={altura / 2}
-        dominantBaseline="central"
-        fontFamily={familias.logo}
-        fontWeight={700}
-        fontSize={tamanho}
-        fill={cor}
-      >
-        <tspan fillOpacity={opColchetes}>{"<"}</tspan>
-        <tspan>MF</tspan>
-        <tspan fillOpacity={opColchetes}>{"/>"}</tspan>
-      </text>
-    </svg>
+    <BrandMarkAnimated
+      animation="assemble"
+      color={cor}
+      height={alturaDoLogo(tamanho)}
+      title={label}
+      bracketOpacity={opacidadeColchetes ?? opacidadePadraoDosColchetes(compacto)}
+      className={`transition-[filter] duration-300 ${brilho} ${className ?? ""}`}
+    />
   );
 
   if (onClick) {

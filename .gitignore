@@ -8,3 +8,7 @@ storybook-static/
 .env
 .env.*
 !.env.example
+
+# Saída derivada da marca: regenerada no build do Storybook e antes de publicar (pnpm brand)
+brand/zip/
+brand/animated/

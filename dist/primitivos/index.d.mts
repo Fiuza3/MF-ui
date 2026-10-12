@@ -19,7 +19,7 @@ import 'lucide-react';
 
 declare const buttonVariants: (props?: ({
     variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
-    size?: "icon" | "default" | "xs" | "sm" | "lg" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined;
+    size?: "default" | "icon" | "xs" | "sm" | "lg" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined;
 } & class_variance_authority_types.ClassProp) | undefined) => string;
 declare function Button({ className, variant, size, asChild, loading, disabled, children, ...props }: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
@@ -95,7 +95,13 @@ declare function SelectScrollUpButton({ className, ...props }: React.ComponentPr
 declare function SelectScrollDownButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>): react_jsx_runtime.JSX.Element;
 declare function SelectContent({ className, children, position, ...props }: React.ComponentProps<typeof SelectPrimitive.Content>): react_jsx_runtime.JSX.Element;
 declare function SelectLabel({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Label>): react_jsx_runtime.JSX.Element;
-declare function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>): react_jsx_runtime.JSX.Element;
+type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item> & {
+    /** Linha de apoio sob o rótulo. Vira a descrição acessível da opção e não vai para o gatilho. */
+    description?: React.ReactNode;
+    /** Ícone decorativo à esquerda; o ladrilho acende quando a opção está escolhida. */
+    icon?: React.ReactNode;
+};
+declare function SelectItem({ className, children, description, icon, ...props }: SelectItemProps): react_jsx_runtime.JSX.Element;
 declare function SelectSeparator({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>): react_jsx_runtime.JSX.Element;
 
 declare function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>): react_jsx_runtime.JSX.Element;

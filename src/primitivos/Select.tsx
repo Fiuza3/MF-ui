@@ -44,7 +44,7 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="size-4 opacity-50 shrink-0" />
+        <ChevronDownIcon data-slot="select-trigger-icon" className="size-4 opacity-50 shrink-0" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
@@ -125,26 +125,62 @@ function SelectLabel({ className, ...props }: React.ComponentProps<typeof Select
   );
 }
 
-function SelectItem({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item> & {
+  /** Linha de apoio sob o rótulo. Vira a descrição acessível da opção e não vai para o gatilho. */
+  description?: React.ReactNode;
+  /** Ícone decorativo à esquerda; o ladrilho acende quando a opção está escolhida. */
+  icon?: React.ReactNode;
+};
+
+// Só `children` entra no ItemText: é ele que o Radix copia para o gatilho
+// fechado. Descrição e ícone dentro dele fariam o gatilho mostrar tudo junto.
+function SelectItem({ className, children, description, icon, ...props }: SelectItemProps) {
+  const descriptionId = React.useId();
+  const hasDescription = description !== undefined && description !== null;
+  const hasIcon = icon !== undefined && icon !== null;
+
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
+      aria-describedby={hasDescription ? descriptionId : undefined}
       className={cn(
-        "focus:bg-foreground/10 focus:text-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "group/select-item focus:bg-foreground/10 focus:text-foreground [&_svg:not([class*='size-'])]:size-4 relative flex w-full cursor-default select-none items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        (hasDescription || hasIcon) && "gap-3 py-2",
         className,
       )}
       {...props}
     >
-      <span className="absolute right-2 flex size-3.5 items-center justify-center">
+      <span
+        data-slot="select-item-indicator"
+        className="absolute right-2 flex size-3.5 items-center justify-center"
+      >
         <SelectPrimitive.ItemIndicator>
           <CheckIcon className="size-4" />
         </SelectPrimitive.ItemIndicator>
       </span>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+      {hasIcon && (
+        <span
+          data-slot="select-item-icon"
+          aria-hidden="true"
+          className="bg-muted text-foreground group-data-[state=checked]/select-item:bg-brand group-data-[state=checked]/select-item:text-brand-foreground flex size-8 shrink-0 items-center justify-center rounded-md transition-colors"
+        >
+          {icon}
+        </span>
+      )}
+      <span data-slot="select-item-body" className="grid min-w-0 gap-0.5">
+        <span data-slot="select-item-label">
+          <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+        </span>
+        {hasDescription && (
+          <span
+            id={descriptionId}
+            data-slot="select-item-description"
+            className="text-muted-foreground text-xs leading-snug"
+          >
+            {description}
+          </span>
+        )}
+      </span>
     </SelectPrimitive.Item>
   );
 }
