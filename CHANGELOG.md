@@ -7,8 +7,10 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 ## [3.5.0-beta.1] — 2026-10-12
 
 ### Adicionado
+
 - Marca `<MF/>` vetorial: `BrandMark`, `BrandMarkAnimated`, `BrandMarkLive`; `Logo` e `LogoAnimado` passam a usar o vetor; pacote de arquivos da marca em `brand/`.
-- `SelectItem` aceita `description` e `icon`.
+- `SelectItem` aceita `description` e `icon`. A descrição aparece sob o rótulo e vira a descrição acessível da opção (`aria-describedby`); o ícone vai num ladrilho decorativo que acende em `brand` quando a opção está escolhida. Só o rótulo entra no `ItemText`, então o gatilho fechado continua mostrando só o nome. Item sem as duas props não muda.
+- Ganchos de estilo estáveis no Select: `data-slot` em `select-item-indicator`, `select-item-icon`, `select-item-body`, `select-item-label`, `select-item-description` e `select-trigger-icon`, para o consumidor tematizar sem depender da ordem dos filhos.
 
 ## [3.4.0] — 2026-10-10
 
